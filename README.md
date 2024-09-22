@@ -3,7 +3,6 @@
 ## University of Chicago Harris School of Public Policy
 ## Peter Ganong and Maggie Shi
 
-
 Welcome to the repository for PPHA 30538: Data and Programming in Python. This repository contains all materials related to the course, organized by lecture. 
 
 ## Repository Structure
@@ -69,7 +68,7 @@ There are two branches in this repository:
      ```
    - Navigate into the cloned repository folder:
      ```bash
-     cd ppha30538_fall2024
+     cd [repository name]
      ```
 
 3. **Switch branches**:
@@ -96,4 +95,3 @@ There are two branches in this repository:
      ```
 
 Feel free to reach out via EdDiscussion if you have any questions or run into any issues. Happy coding!
-
