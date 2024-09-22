@@ -41,7 +41,7 @@ There are two branches in this repository:
 2. **Clone the repository**:
    - Open GitHub Desktop.
    - Click on `File > Clone Repository`.
-   - Enter the repository URL or select it from your repositories.
+   - Enter the repository URL: https://github.com/uchicago-harris-dap/ppha30538_fall2024
    - Choose the location on your computer to save the repository and click `Clone`.
 
 3. **Switch between branches**:
@@ -64,11 +64,11 @@ There are two branches in this repository:
    - Open your terminal.
    - Run the following command to clone the repository:
      ```bash
-     git clone [repository URL]
+     git clone https://github.com/uchicago-harris-dap/ppha30538_fall2024
      ```
    - Navigate into the cloned repository folder:
      ```bash
-     cd [repository name]
+     cd ppha30538_fall2024
      ```
 
 3. **Switch branches**:
