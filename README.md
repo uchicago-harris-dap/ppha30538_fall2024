@@ -59,7 +59,6 @@ There are two branches in this repository:
 
 1. **Ensure you are logged in to GitHub**:
    - In your browser, navigate to [GitHub](https://github.com) and log in to your account.
-   - Make sure you have access to the `uchicago-harris-dap` organization.
 
 2. **Clone the repository**:
    - Open your terminal.
