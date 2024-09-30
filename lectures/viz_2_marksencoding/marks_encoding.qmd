@@ -1,0 +1,832 @@
+---
+title: "Visualization (Marks and Encoding)"
+author: "Peter Ganong and Maggie Shi"
+date: today
+date-format: long
+format: 
+    html:
+        echo: true
+        toc: true
+---
+
+# Global Health Data
+
+## Introducing global health data
+
+* We will be visualizing global health and population data for a number of countries, over the time period of 1955 to 2005. 
+
+* The data was collected by the [Gapminder Foundation](https://www.gapminder.org/) and shared in [Hans Rosling's fantastic TED talk](https://www.youtube.com/watch?v=hVimVzgtD6w). 
+
+* If you haven't seen the talk, we encourage you to watch it first! 
+
+* Roadmap: load data and review first five rows
+
+## Load data
+Let's first load the dataset from the [vega-datasets](https://github.com/vega/vega-datasets) collection into a Pandas data frame.
+
+```{python}
+import altair as alt
+from vega_datasets import data as vega_data
+```
+
+```{python}
+#| eval: false
+data = vega_data.gapminder()
+```
+ 
+<!-- Remark: I (Peter) couldn't get the command 
+data = vega_data.gapminder()
+to work. instead, I saved the data to local and I read it in from local. The code chunk which does this is set to echo false so it won't show up in the lecture notes-->
+
+```{python}
+#| echo: false
+import pandas as pd
+data = pd.read_json('data/gapminder.json')
+```
+
+```{python}
+data.shape
+```
+
+## `head()` + summary
+
+```{python}
+data.head(5)
+```
+
+For each `country` and `year` (in 5-year intervals), we have
+
+* fertility in terms of the number of children per woman (`fertility`)
+* life expectancy in years (`life_expect`)
+* total population (`pop`)
+* mysterious `cluster` -- what might this represent? We'll try and solve this mystery as we visualize the data!
+
+
+# Data types 
+
+## Data types: roadmap
+
+Pandas data frames come with types. When loading data not from pandas, explicitly name:
+
+- `'N'` indicates a *nominal* type (unordered, categorical data),
+- `'O'` indicates an *ordinal* type (rank-ordered data),
+- `'Q'` indicates a *quantitative* type (numerical data with meaningful magnitudes), and
+- `'T'` indicates a *temporal* type (date/time data)
+
+
+## Nominal (N)
+
+* *Nominal* data (also called *categorical* data) consist of category names. 
+* Ask *is value A the same or different than value B? (A = B)*, supporting statements like “A is equal to B” or “A is not equal to B”.
+    * In the dataset above, the `country` field is `N`ominal.
+* When visualizing nominal data we should readily be able to see if values are the same or different: position, color hue (blue, red, green), and shape can help. 
+    * Remark: using a `size` channel to encode nominal data might mislead us, suggesting rank-order or magnitude differences among values that do not exist!
+
+## Ordinal (O)
+
+* *Ordinal* data consist of values that have a specific ordering.
+* Ask: *does value A come before or after value B? (A < B)*, supporting statements like “A is less than B” or “A is greater than B”.
+    * In the dataset above, we can treat the `year` field as `O`rdinal.
+* When visualizing ordinal data, we should perceive a sense of rank-order. Position, size, or color value (brightness) might be appropriate.
+    * Remark: color hue (which is not perceptually ordered) would be less appropriate.
+
+## Quantitative (Q)
+
+* With *quantitative* data we can measure numerical differences among values. There are multiple sub-types of quantitative data:
+    * With *interval* data ask: *what is the distance to value A from value B? (A - B)*, supporting statements such as “A is 12 units away from B”.
+    * With *ratio* data can also ask:
+        * *how many are there of value A?* supporting statements such as "how many babies per parent?"
+        * *value A is what proportion of value B? (A / B)*, supporting statements such as “A is 10% of B” or “B is 7 times larger than A”. 
+    * In the dataset above, `year` is a quantitative interval field (depending on whose history of the world you prefer, there are many choices for the year "zero"), whereas `fertility` and `life_expect` are quantitative ratio fields (zero is meaningful for calculating proportions).
+* Vega-Lite represents quantitative data, but does not make a distinction between interval and ratio types.
+* Quantitative values can be visualized using position, size, or color value, among other channels. 
+
+
+## Quantitative (Q), continued
+* recap
+    * with *interval* data ask: *what is the distance to value A from value B? (A - B)*
+    * With *ratio* data can also ask:
+        * *how many are there of value A?* 
+        * *value A is what proportion of value B? (A / B)*,
+* Textbook: "An axis with a zero baseline is essential for proportional comparisons of ratio values, but can be safely omitted for interval comparisons."
+* Discussion question -- Why is it so important to include zeros for ratio data? Can you give a counter-example where omitting zeros on the plot would lead the reader to misleading conclusions? 
+
+
+## Temporal (T)
+
+* *Temporal* values measure time points or intervals. This type is a special case of quantitative values (timestamps) with rich semantics and conventions (i.e., the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar)). 
+* Example temporal values include date strings such as `“2019-01-04”` and `“Jan 04 2019”`, as well as standardized date-times such as the [ISO date-time format](https://en.wikipedia.org/wiki/ISO_8601): `“2019-01-04T17:50:35.643Z”`.
+* There are no temporal values in our global development dataset above, as the `year` field is simply encoded as an integer. 
+
+
+## Discussion question I
+
+What are examples of variables that are 
+
+* `N`ominal
+* `O`rdinal
+* `Q`uantitative
+
+Let's try to come up with at least three examples of each. For each example, state the comparison in a sentence.
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+Solution: the hard one here is nominal. 
+
+examples can be 
+* geographic units
+* different types of health services
+* different types of housing
+:::
+
+
+
+## Discussion question II
+
+Suppose we have a dataset of ages (10 years old, 20 years old, 10 years old, 30 years old). What would it mean for these data to be
+
+* `N`ominal
+* `O`rdinal
+* `Q`uantitative
+
+What comparisons are feasible with each data type?
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+solution: Just because a data field is represented using a number doesn't mean we have to treat it as a quantitative type! For example, we might interpret a set of ages (10 years old, 20 years old, etc) as 
+
+* nominal (underage or overage), 
+* ordinal (grouped by year), 
+* quantitative (calculate average age).
+:::
+
+
+## Revisit plot from beginning of prior lecture
+```{python}
+seattle = vega_data.seattle_weather()
+alt.Chart(seattle).mark_bar().encode(
+    x = 'month(date):O',
+    y = 'average(precipitation):Q'
+)
+```
+
+
+
+## In-class exercises
+
+What happens when...
+
+* Make `precipitation` ordinal
+* Revert. then make `date` temporal. There's a consequential but subtle change relative to the original plot. What is it?
+
+
+
+## data types: summary
+
+A single data series can have multiple meanings depending on data type
+
+- `'N'` indicates a *nominal* type (unordered, categorical data),
+- `'O'` indicates an *ordinal* type (rank-ordered data),
+- `'Q'` indicates a *quantitative* type (numerical data with meaningful magnitudes), and
+- `'T'` indicates a *temporal* type (date/time data)
+
+Explicitly specify the data type so that Altair/Vega know how to interpret it. If you don't specify a data type (as was the case in Lecture 1), Vega will guess. This can lead to undesired results!
+
+
+# Visual encoding
+
+## Visual encoding roadmap
+
+* Seven types of visual encoding
+* More on color
+
+## Seven ways of visual encoding
+
+> Within the plane a mark can be at the top or the bottom, to the right or the left. The eye perceives two independent dimensions along X and Y, which are distinguished orthogonally. A variation in light energy produces a third dimension in Z, which is independent of X and Y…
+
+> The eye is sensitive, along the Z dimension, to 6 independent visual variables, which can be superimposed on the planar figures: 
+
+> * the size of the marks
+* their value [brightness]
+* texture
+* color [hue]
+* orientation
+* shape. 
+
+> They can represent differences (≠), similarities (≡), a quantified order (Q), or a nonquantified order (O), and can express groups, hierarchies, or vertical movements.
+
+Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://medium.com/@mbostock/introducing-d3-scale-61980c51545f)
+
+
+## Seven ways of visual encoding in one image
+
+![Visual encoding](pictures/visual_encoding.jpg)
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*talk through a few aspects of this image. The examples are a bit gratuitous. Most of the information content is in the boxes in the first two columns
+
+The rows more or less rank different visual elements from most to least noticeable. Looking at the extremes, XY coordinates can convey both quantified and non-quantified order as well as whether two things are equal. at the other extreme, shape cannot tell you at all about order, it can just tell if you if two things are the same or different.*
+:::
+
+
+Free advice: don't try to use all seven ways of encoding information in a single plot. It will inevitably be overload.
+
+## More depth on color
+
+Language note: by `color`, we mean both brightness (which Bertin calls "value") and hue (which Bertin calls "color")
+
+Why choose color deliberately?
+
+* Using any software's default color palette is kind of like using comic sans font on a resume
+* Choosing the "right" colors will make it easier for you to convey meaning
+
+## Color palettes and their use cases
+
+Toggle back and forth to the [schemes](https://vega.github.io/vega/docs/schemes/) page: 
+
+***step 1***  Am I working with `N`ominal, unordered data or with ordered data (either `O`rdinal or `Q`uantitative)? 
+
+If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
+
+***step 2*** 
+
+| Palette type | Use case | 
+| --- | --- | 
+| Sequential Single-Hue |  | 
+| Sequential Multi-Hue | Use for higher contrast, but harder to judge quantitative proximity |
+| Diverging | Use if there is a midpoint (e.g. voting for `redblue`) |
+| Cyclical | Use if circular (e.g. time of day, month) |
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*flip back and forth between each of these palette types and the examples on the website. Be sure to click "View discrete" as well*
+:::
+
+
+## More advice on color choices
+
+* Use [colorbrewer2.org](https://colorbrewer2.org) to choose your color palettes. Click through to site. Options include subsetting to colors that are
+    * colorblind safe
+    * black and white printer (aka photocopy) safe
+
+* Harmonization
+    * *Within reports* You rarely produce a single plot in isolation. You usually produce several plots as part of a memo, a website, etc. Use consistent colors across plots.
+    * *Across reports* Many organizations have official palettes and plot templates. Good to ask if you are working for a big org if they have one.
+    
+
+## Visual encoding: summary
+
+* Bertin proposes seven different ways to encode visual information. His chart is a handy reference to what visual elements can encode different types of information.
+* Color is one of the easiest ways to convey meaning. Choose your palette based on whether you want to convey unordered or ordered data, whether you have a midpoint, and whether your ordered series is cyclical
+
+# Encoding channels
+
+## Encoding channels: roadmap
+
+- `x`
+- `y`
+- `size`
+- `color`
+- `opacity`
+- `shape`
+- `column`
+- `row`
+
+Caveats: 
+
+* there are a ton of slides in this section.
+* but each slide is simple. focus is on software. most discussion of principles deferred for the "Graphics Theory" section.
+
+## X
+
+```{python}
+data2000 = data.loc[data['year'] == 2000] #one year is more manageable
+alt.Chart(data2000).mark_point().encode(
+    alt.X('fertility:Q')
+)
+```
+
+## Y 
+```{python}
+alt.Chart(data2000).mark_point().encode(
+    alt.X('fertility:Q'),
+    alt.Y('cluster:O')
+)
+```
+
+In-class exercise: what happens if you swap the Q and the O types?
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+solution: 
+
+* treating fertility as a categorical variable means you get a separate
+category on the x-axis for every single value of fertility
+* treating cluster as a quantitative variable means you get extra grid marks
+:::
+
+
+
+## Do not require zero on axis range 
+```{python}
+zero_included = alt.Chart(data2000).mark_point().encode(
+    alt.X('fertility:Q', scale=alt.Scale(zero=False)),
+    alt.Y('life_expect:Q', scale=alt.Scale(zero=False))
+)
+zero_excluded = alt.Chart(data2000).mark_point().encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q')
+)
+zero_included | zero_excluded
+```
+
+Discussion question: which plot do you prefer (and why?)
+
+
+## `size`
+```{python}
+alt.Chart(data2000).mark_point().encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q')
+)
+```
+
+## `size` with 1000 pixels for largest dot
+```{python}
+alt.Chart(data2000).mark_point().encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000]))
+)
+```
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+alt.Scale(range=[0,1000]) indicates that the visual size of the marks, and is not in reference to anything in the underlying data 
+:::
+
+
+
+## add `color` and `size` with `filled=True`
+```{python}
+alt.Chart(data2000).mark_point(filled=True).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
+    alt.Color('cluster:N')
+)
+```
+
+## `opacity`
+```{python}
+alt.Chart(data2000).mark_point(filled=True).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
+    alt.Color('cluster:N'),
+    alt.OpacityValue(0.2)
+)
+```
+
+## `column` 
+```{python}
+alt.Chart(data2000).mark_point(filled=True).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
+    alt.Color('cluster:N'),
+    alt.OpacityValue(0.5),
+    alt.Tooltip('country:N'),
+    alt.Column('cluster:N')
+)
+```
+
+## adjust aspect ratio, move pop legend, remove color legend
+```{python}
+alt.Chart(data2000).mark_point(filled=True).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000]),
+             legend=alt.Legend(orient='bottom', titleOrient='left')),
+    alt.Color('cluster:N', legend=None),
+    alt.OpacityValue(0.5),
+    alt.Tooltip('country:N'),
+    alt.Column('cluster:N')
+).properties(width=135, height=135)
+```
+
+
+## in-class exercise
+
+The plot faceted by column doesn't fit on the page. Redo it instead faceted by row.
+
+Bonus: It still looks bad. What further change is needed?
+
+## Encoding channels: summary
+
+- `x`: Horizontal (x-axis) position of the mark.
+- `y`: Vertical (y-axis) position of the mark.
+- `size`: Size of the mark. May correspond to area or length, depending on the mark type.
+- `color`: Mark color, specified as a [legal CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
+- `opacity`: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque).
+- `shape`: Plotting symbol shape for `point` marks.
+- `column`: Facet the data into horizontally-aligned subplots.
+- `row`: Facet the data into vertically-aligned subplots.
+
+# Graphical marks
+
+## Graphical marks: roadmap
+
+Prior section used only `mark_point()`. Now will cover
+
+- `mark_point()`
+    - `mark_circle()`	
+    - `mark_square()` 
+    - `mark_tick()` 
+- `mark_bar()`
+- `mark_line()`  
+- `mark_area()` 
+
+
+Caveats: 
+
+* there are a ton of slides in this section.
+* but each slide is simple. focus is on software. most discussion of principles deferred for the "Graphics Theory" section.
+
+## `mark_point()`: add information using `alt.Shape()` 
+```{python}
+alt.Chart(data2000).mark_point().encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q', scale=alt.Scale(zero=False)),
+    alt.Shape('cluster:N')
+)
+```
+
+## `mark_point()`: format points using arguments
+```{python}
+alt.Chart(data2000).mark_point(filled=True, size=100).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q', scale=alt.Scale(zero=False)),
+    alt.Shape('cluster:N')
+)
+```
+
+## `mark_circle()` wrapper for `mark_point(filled=True)`
+```{python}
+#| eval: false
+alt.Chart(data2000).mark_circle(size=100).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q', scale=alt.Scale(zero=False)),
+    alt.Shape('cluster:N')
+)
+```
+
+## `mark_square()`
+```{python}
+alt.Chart(data2000).mark_square(size=100).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q', scale=alt.Scale(zero=False)),
+    alt.Shape('cluster:N')
+)
+```
+
+
+## `mark_tick()`
+
+* Useful for comparing values along a single dimension with minimal overlap. 
+* A *dot plot* drawn with tick marks is sometimes referred to as a *strip plot*.
+
+```{python}
+alt.Chart(data2000).mark_tick().encode(
+    alt.X('fertility:Q'),
+    alt.Y('cluster:N')
+)
+```
+
+## `mark_bar()`
+
+```{python}
+alt.Chart(data2000).mark_bar().encode(
+    alt.X('country:N'),
+    alt.Y('pop:Q')
+)
+```
+
+## use `alt.Color()` for a stacked bar plot
+
+```{python}
+alt.Chart(data2000).mark_bar().encode(
+    alt.X('cluster:N'),
+    alt.Y('pop:Q'),
+    alt.Color('country:N', legend=None) 
+)
+```
+
+Note: if we had instead set `alt.Y('pop:Q', stack=None)`, bars would have been overlapped with each other
+
+## `X2()` to show intervals
+
+```{python}
+alt.Chart(data2000).mark_bar().encode(
+    alt.X('min(life_expect):Q'),
+    alt.X2('max(life_expect):Q'),
+    alt.Y('cluster:N')
+)
+```
+
+
+## `mark_line()` 
+```{python}
+data_4a = data.loc[data['cluster'] == 2] #one cluster is more manageable
+alt.Chart(data_4a).mark_line().encode(
+    alt.X('year:O'),
+    alt.Y('fertility:Q'),
+    alt.Color('country:N')
+).properties(
+    width=400
+)
+```
+
+## how many lines? `Tooltip` instead of `legend`
+
+textbook advocates for having a plot with many more lines, no legend, and instead using `alt.Tooltip('country:N')`. This is technologically feasible but a bad idea. (Discuss: why?)
+
+::: {.notes .content-visible when-profile="speaker"}
+***NOTES:**
+Solution: plot is still illegible! too many lines. In addition, the tooltip is stupid, it only gives you a name when you mouse over the invisible dot, not when you mouse over the line
+:::
+
+```{python}
+alt.Chart(data).mark_line().encode(
+    alt.X('year:O'),
+    alt.Y('fertility:Q'),
+    alt.Color('country:N', legend=None),
+    alt.Tooltip('country:N')
+).properties(
+    width=400
+)
+```
+
+
+## `mark_line()` with cosmetic adjustments
+```{python}
+alt.Chart(data_4a).mark_line(
+    strokeWidth=3,
+    opacity=0.5,
+    interpolate='monotone'
+).encode(
+    alt.X('year:O'),
+    alt.Y('fertility:Q'),
+    alt.Color('country:N')
+).properties(
+    width=400
+)
+```
+
+
+## `mark_line()` with cosmetic adjustments
+```{python}
+data_4a_2y = data_4a[data_4a['year'].isin([1955, 2005])]
+alt.Chart(data_4a_2y).mark_line().encode(
+    alt.X('year:O'),
+    alt.Y('fertility:Q'),
+    alt.Color('country:N')
+).properties(
+    width=400
+)
+```
+
+## `mark_area()`
+
+```{python}
+dataUS = data.loc[data['country'] == 'United States']
+
+alt.Chart(dataUS).mark_area().encode(
+    alt.X('year:O'),
+    alt.Y('fertility:Q')
+)
+```
+
+## `mark_area()` with `interpolate='monotone'`
+
+```{python}
+alt.Chart(dataUS).mark_area(interpolate='monotone').encode(
+    alt.X('year:O'),
+    alt.Y('fertility:Q')
+)
+```
+
+## `mark_area()` with stacking
+
+```{python}
+dataNA = data[data['country'].isin(['United States', 'Mexico', 'Canada'])]
+alt.Chart(dataNA).mark_area().encode(
+    alt.X('year:O'),
+    alt.Y('pop:Q'),
+    alt.Color('country:N')
+)
+```
+
+
+## `mark_area()` with no stacking and opacity
+```{python}
+alt.Chart(dataNA).mark_area(opacity=0.5).encode(
+    alt.X('year:O'),
+    alt.Y('pop:Q', stack=None),
+    alt.Color('country:N')
+)
+```
+
+
+## `mark_area()` to show range
+```{python}
+alt.Chart(dataNA).mark_area().encode(
+    alt.X('year:O'),
+    alt.Y('min(fertility):Q'),
+    alt.Y2('max(fertility):Q')
+).properties(
+    width={"step": 40}
+)
+```
+
+We can see a larger range of values in 1995, from just under 4 to just under 7. By 2005, both the overall fertility values and the variability have declined, centered around 2 children per familty.
+
+
+## Syntax: `mark_area()` swap axes
+```{python}
+alt.Chart(dataNA).mark_area().encode(
+    alt.Y('year:O'),
+    alt.X('min(fertility):Q'),
+    alt.X2('max(fertility):Q')
+).properties(
+    width={"step": 40}
+)
+```
+
+
+## Graphical marks: summary
+
+Covered today
+
+- `mark_point()` - Scatter plot points with configurable shapes.
+    - `mark_circle()`	- Scatter plot points as filled circles.
+    - `mark_square()` - Scatter plot points as filled squares.
+    - `mark_tick()` - Vertical or horizontal tick marks.
+- `mark_bar()` -	Rectangular bars.
+- `mark_line()` - Connected line segments.
+- `mark_area()` - Filled areas defined by a top-line and a baseline.
+
+Not covered in lecture
+
+- `mark_rect()` - Filled rectangles, useful for heatmaps.
+- `mark_rule()` - Vertical or horizontal lines spanning the axis.
+- `mark_text()` - Scatter plot points represented by text.
+
+For a complete list, and links to examples, see the [Altair marks documentation](https://altair-viz.github.io/user_guide/marks/index.html).
+
+
+# Interactivity and publishing
+
+## Interactivity and publishing: roadmap
+
+* interactivity example
+* production quality
+* publishing
+
+
+##  `tooltip` I 
+- `tooltip`: Tooltip text to display upon mouse hover over the mark.
+- `order`: Mark ordering, determines line/area point order and drawing order.
+
+```{python}
+alt.Chart(data2000).mark_point(filled=True).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
+    alt.Color('cluster:N'),
+    alt.OpacityValue(0.5),
+    alt.Tooltip('country:N')
+)
+```
+
+As you mouse around you may notice that you can not select some of the points. For example, what happens when you try to select the country underneath India? To fix this problem, we can use the `order` encoding channel.
+
+##  `tooltip` II
+```{python}
+alt.Chart(data2000).mark_point(filled=True).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
+    alt.Color('cluster:N'),
+    alt.OpacityValue(0.5),
+    alt.Tooltip('country:N'),
+    alt.Order('pop:Q', sort='descending')
+)
+```
+
+
+## `tooltip` III 
+```{python}
+final_chart = alt.Chart(data2000).mark_point(filled=True).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
+    alt.Color('cluster:N'),
+    alt.OpacityValue(0.5),
+    alt.Order('pop:Q', sort='descending'),
+    tooltip = [
+        alt.Tooltip('country:N'),
+        alt.Tooltip('fertility:Q'),
+        alt.Tooltip('life_expect:Q')
+    ]   
+)
+final_chart
+```
+
+Discussion question -- using your newfound `tooltip` expertise, what does each cluster correspond to?
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+
+* 0 -- South Asia
+* 1 -- Europe
+* 2 -- Africa
+* 3 -- Americas
+* 4 -- East Asia
+* 5 -- Middle East
+:::
+
+## Production-quality interactive plot
+(no need to understand all the details)
+```{python}
+cars = vega_data.cars() 
+
+# create an interval selection over an x-axis encoding
+brush = alt.selection_interval(encodings=['x'])
+
+# determine opacity based on brush
+opacity = alt.condition(brush, alt.value(0.9), alt.value(0.1))
+
+# an overview histogram of cars per year
+# add the interval brush to select cars over time
+overview = alt.Chart(cars).mark_bar().encode(
+    alt.X('Year:O', timeUnit='year', # extract year unit, treat as ordinal
+      axis=alt.Axis(title=None, labelAngle=0) # no title, no label angle
+    ),
+    alt.Y('count()', title=None), # counts, no axis title
+    opacity=opacity
+).add_params(
+    brush      # add interval brush selection to the chart
+).properties(
+    width=400, # set the chart width to 400 pixels
+    height=50  # set the chart height to 50 pixels
+)
+
+# a detail scatterplot of horsepower vs. mileage
+# modulate point opacity based on the brush selection
+detail = alt.Chart(cars).mark_point().encode(
+    alt.X('Horsepower'),
+    alt.Y('Miles_per_Gallon'),
+    # set opacity based on brush selection
+    opacity=opacity
+).properties(width=400) # set chart width to match the first chart
+
+# vertically concatenate (vconcat) charts using the '&' operator
+overview & detail
+```
+
+
+## Publishing
+
+```{python}
+final_chart
+final_chart.save('output/chart.html')
+```
+```{python}
+#| eval: false
+final_chart.save('output/chart.png')
+```
+
+Remark: `chart.save()` is important for anything where you want your output to be reproducible in the future.
+
+Discussion q -- What is difference between "View Source" and "View Compiled Vega"?
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES**
+open the file. Click three dots at top. 
+
+**discussion q**
+View source is the vega-lite in JSON which is written by Altair
+
+Vega-lite is designed to be human intelligible, but it's not actually enough information for Vega to make a plot. So there's an additional "under the hood step" which goes from Vega-Lite to Vega
+**END NOTES**
+:::
+
+## Interactivity and publishing: summary
+
+* Altair can make some nice interactive plots! 
+* Especially useful for data exploration.
+* If you want to learn more about interactive plots in Altair, see chapter 6 in the textbook. However, we actually are going to use a different package (Shiny) to teach about how to make interactive plots.
+* Use `chart.save()` to write a plot to disk
