@@ -3,14 +3,16 @@
 ## University of Chicago Harris School of Public Policy
 ## Peter Ganong and Maggie Shi
 
-Welcome to the repository for PPHA 30538: Data and Programming in Python. This repository contains all materials related to the course, organized by lecture. 
+Welcome to the repository for PPHA 30538: Data and Programming in Python. 
 
 ## Repository Structure
 
 Each lecture will have its own folder with the following materials:
 - **Quarto code**: `.qmd` files that are the source of the lecture slides.
-- **Slides**: knitted PDF or HTML files that contain the slides used during the lecture.
 - **Supporting materials**: Any images, data files, or external resources referenced in the slides.
+- **Slides**: knitted PDF or HTML files that contain the slides used during the lecture.
+
+Each problem set will also have its own folder.
 
 ## Branches
 
