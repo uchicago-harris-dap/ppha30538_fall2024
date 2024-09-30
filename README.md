@@ -3,25 +3,27 @@
 ## University of Chicago Harris School of Public Policy
 ## Peter Ganong and Maggie Shi
 
-Welcome to the repository for PPHA 30538: Data and Programming in Python. This repository contains all materials related to the course, organized by lecture. 
+Welcome to the repository for PPHA 30538: Data and Programming in Python. 
 
 ## Repository Structure
 
 Each lecture will have its own folder with the following materials:
 - **Quarto code**: `.qmd` files that are the source of the lecture slides.
-- **Slides**: PDF or HTML files that contain the slides used during the lecture.
 - **Supporting materials**: Any images, data files, or external resources referenced in the slides.
+- **Slides**: knitted PDF or HTML files that contain the slides used during the lecture.
+
+Each problem set will also have its own folder.
 
 ## Branches
 
 There are two branches in this repository:
-- **`before_lecture`**: This branch contains the slides **without** answers to the in-class exercises and do-pair-shares.
-- **`after_lecture`**: This branch contains the same slides **with** the answers included.
+- **`main`**: This branch contains `qmd` of slides **without** answers to the in-class exercises and do-pair-shares.
+- **`after_lecture`**: This branch contains the knitted slides **with** the answers included.
 
 ### Workflow
 
 1. **Before the lecture**: 
-   - Switch to the `before_lecture` branch.
+   - Switch to the `main` branch.
    - Pull the latest version of the slides.
    
 2. **After the lecture**: 
@@ -41,12 +43,12 @@ There are two branches in this repository:
 2. **Clone the repository**:
    - Open GitHub Desktop.
    - Click on `File > Clone Repository`.
-   - Enter the repository URL: https://github.com/uchicago-harris-dap/ppha30538_fall2024
+   - Enter the repository URL: https://github.com/uchicago-harris-dap/ppha30538_fall2024.
    - Choose the location on your computer to save the repository and click `Clone`.
 
 3. **Switch between branches**:
    - In GitHub Desktop, go to the `Current Branch` menu at the top of the window.
-   - Select either `before_lecture` or `after_lecture` from the dropdown list to switch branches.
+   - Select either `meain` or `after_lecture` from the dropdown list to switch branches.
 
 4. **Check which branch you're on**:
    - The currently active branch is displayed at the top of the window in GitHub Desktop under the `Current Branch` menu.
@@ -72,9 +74,9 @@ There are two branches in this repository:
      ```
 
 3. **Switch branches**:
-   - To switch to the `before_lecture` branch:
+   - To switch to the `main` branch:
      ```bash
-     git checkout before_lecture
+     git checkout main
      ```
    - To switch to the `after_lecture` branch:
      ```bash
