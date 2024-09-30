@@ -47,7 +47,7 @@ There are two branches in this repository:
 
 3. **Switch between branches**:
    - In GitHub Desktop, go to the `Current Branch` menu at the top of the window.
-   - Select either `meain` or `after_lecture` from the dropdown list to switch branches.
+   - Select either `main` or `after_lecture` from the dropdown list to switch branches.
 
 4. **Check which branch you're on**:
    - The currently active branch is displayed at the top of the window in GitHub Desktop under the `Current Branch` menu.
