@@ -38,7 +38,6 @@ There are two branches in this repository:
    - Open GitHub Desktop.
    - Navigate to `File > Options` (on Windows) or `GitHub Desktop > Preferences` (on Mac).
    - Check the `Accounts` tab to make sure you're logged into your GitHub account.
-   - Make sure you have access to the `uchicago-harris-dap` organization in your account.
 
 2. **Clone the repository**:
    - Open GitHub Desktop.
