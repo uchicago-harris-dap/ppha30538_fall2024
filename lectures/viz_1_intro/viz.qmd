@@ -38,7 +38,7 @@ https://idl.uw.edu/visualization-curriculum/
 
 Our old friend `matplotlib` is "imperative" meaning that you tell the computer what to do. Implement the visualization in terms of for-loops, low-level drawing commands.
 
-Good graphics packages are *declarative*, we mean that you can provide a high-level specification of *what* you want the visualization. Three inputs 
+Good graphics packages are *declarative*, we mean that you can provide a high-level specification of *what* you want in the visualization. Three inputs 
 
 * data 
 * graphical marks 
@@ -78,8 +78,7 @@ Why did we choose Altair and not one of these?
 4. It doesn't make sense for your "main" plotting language in Python to be a crude port of something from R.
 
 ## Installation
-```{python}
-#| eval: false 
+```{bash}
 pip install altair
 pip install vega_datasets
 ```
