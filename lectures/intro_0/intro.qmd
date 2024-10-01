@@ -23,6 +23,32 @@ The native lecture slides and the PDF are posted on the course's student repo
 
 Search "student repo" on the canvas home page.
 
+## Introduction: Who A mI?
+:::: {.columns}
+
+::: {.column width="50%"}
+- Maggie Shi
+- Assistant Professor at Harris since 2023
+- PhD in Economics from Columbia, 2022
+- Health economist thinking about how to reduce waste in healthcare
+- Avid foodie and proud dog mom of Truffles 
+
+
+
+
+
+:::
+
+::: {.column width="50%"}
+\vspace{2ex}
+![](pictures/maggie.jpg){ width=60% fig-align="center"}
+![](pictures/maggie_research.png){ width=60% fig-align="center"}
+
+
+:::
+
+::::
+
 ## Roadmap: what you will learn
 
 -   Data extraction, visualization and communication, plus some tech skills
