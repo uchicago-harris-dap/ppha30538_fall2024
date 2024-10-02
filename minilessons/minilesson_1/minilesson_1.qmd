@@ -1,0 +1,113 @@
+---
+title: "Mini-Lesson 1: VSCode, Quarto, and Jupyter"
+author: "Ozzy Houck"
+format:
+  revealjs:
+    slide-number: true
+    chalkboard: false 
+    preview-links: auto
+execute:
+  eval: true
+  echo: true
+---
+
+## Downloading and Installing
+
+- VSCode: [https://code.visualstudio.com/](https://code.visualstudio.com/)
+- Quarto: [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/)
+- Jupyter: `pip install jupyter`
+
+```{python}
+#| echo: true
+#| eval: false
+pip install jupyter pandas altair
+```
+
+- Helpful startup guides:
+  - Installing VSCode on **[Mac](https://code.visualstudio.com/docs/languages/python)** and **[Windows](https://code.visualstudio.com/docs/languages/python)**
+  - Setting up **[python](https://code.visualstudio.com/docs/languages/python)** for VSCode 
+
+## Setting up Python in VSCode
+- Ctrl+Shift+P to open command palette (or `Cmd` on Mac)
+- Type "Python: Select Interpreter"
+- Choose the Python interpreter you want to use
+- In terminal, type `which pip` to make sure you are using the right Python version when installing packages with pip
+
+## Basics 
+<!-- How to comment --->
+<!-- Notice how both numbering methods work --->
+- How to use VSCode:
+  1. Open a folder the folder for your github repo in VSCode
+  1. Install the Python, Quarto, and Jupyter VSCode extensions
+
+- Quarto Syntax: 
+  1. Preamble: Format selection using YAML (like R Markdown)
+  2. Content: Markdown (like R markdown)
+  3. Code chunks: Python, R, etc. (like R markdown)
+
+## Compilation and Code Chunks 
+
+- Compilation
+  - Keyboard shortcut: Ctrl+Shift+K
+  - Render button in VSCode (top right corner)
+  - Command line: `quarto render document.qmd`
+    - Automatically compiles into output format from preamble
+
+- Code Chunk Options
+  - `echo: true` - Show code
+  - `eval: true` - Run code
+
+
+## Jupyter in VSCode
+
+- Interactive Python development
+- Run code chunks individually
+- View output in-line
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6]
+})
+print("Here is some output!")
+df.head(1)
+```
+
+## This Class: Repository Structure and Usage
+
+- Student repo contents:
+  1. `.qmd` files in lecture folders
+  2. Compiled HTML/PDF files
+  3. Data and figure folders
+
+- In-class workflow:
+  1. Open compiled HTML/PDF to follow along
+  2. Have `.qmd` open in VSCode for exercises
+  3. Use Jupyter for interactive coding
+
+<!--  Alternative YAML
+---
+  revealjs:
+    slide-number: true
+    chalkboard: false 
+    preview-links: auto
+    footer: "VSCode, Quarto, and Jupyter Workshop"
+  html:
+    toc: true
+    number-sections: true
+    html-math-method: katex
+  beamer:
+    theme: Madrid
+    colortheme: dolphin
+    fonttheme: structurebold
+    navigation: horizontal
+    section-titles: true
+  pdf:
+    documentclass: article
+    papersize: letter
+    toc: true
+    number-sections: true
+    colorlinks: true
+--- -->
