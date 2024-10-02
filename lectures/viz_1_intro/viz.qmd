@@ -44,7 +44,7 @@ Good graphics packages are *declarative*, we mean that you can provide a high-le
 * graphical marks 
 * encoding channels
 
-We are going to use Vega-Lite + Altair in this class, but this is also done by `seaborn`, `plotly`, `bokeh`, and `plotnine`.
+We are going to use Vega-Lite + Altair in this class.
 
 ## What is Vega, Vega-Lite, and Altair?
 
@@ -60,6 +60,12 @@ New vocabulary:
 * Vega-Lite is a more simple grammar
 * [JSON (JavaScript Object Notation)](https://en.wikipedia.org/wiki/JSON) is used to record Vega and Vega-Lite specifications
 * Altair is an API enabling Python to write Vega-Lite
+
+## The declarative approach w/ altair vs. imperative w/ matplotlib
+![](pictures/altair_v_matplotlib.png){ width=100% fig-align="center"}
+
+* When using a **declarative approach**, your Python code tells `altair` how you want to visualize the data and it writes Vega/Vega-lite to "draw" the graph
+* When using an **imperative approach**, your Python code tells `matplotlib` directly how to "draw" the graph 
 
 ## Other declarative graphics packages
 
@@ -83,6 +89,7 @@ pip install altair
 pip install vega_datasets
 ```
 
+
 ## My first plot -- image 
 ```{python}
 #| echo: false 
@@ -96,12 +103,6 @@ alt.Chart(df).mark_bar().encode(
 ```
 
 [source](https://vega.github.io/vega-lite/#example).
-
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES for peter only:**
-It (embarassingly) took me 15 minutes to make this plot. After trying many fancy things it turned out that I simply had spelled `precipitation` as `precitation` :-(
-**END NOTES**
-:::
 
 ## My first plot -- grammar
 ```{json}
@@ -118,11 +119,6 @@ It (embarassingly) took me 15 minutes to make this plot. After trying many fancy
 * This is designed to be readable for both a human and for Vega. Pretty cool!
 
 Discussion question: what does each line of text mean?
-
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*solution: I think this should be self-evident*
-:::
 
 ## Why the emphasis on grammar?
 * Packages for doing graphics and coding languages change over time
@@ -147,6 +143,7 @@ Roadmap:
 
 * Load package
 * Load data
+
 
 ## Imports and Renderer
 
@@ -264,8 +261,8 @@ alt.Chart(df).mark_point().encode(
 ## Bar plot
 ```{python}
 alt.Chart(df).mark_bar().encode(
-    x='average(precip)',
-    y='city'
+    alt.X('average(precip)'),
+    alt.Y('city')
 )
 ```
 
@@ -296,20 +293,7 @@ alt.Chart(df).mark_point(color='firebrick').encode(
 )
 ```
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES**
-beyond colors, other properties include 
 
-* whether it should be filled
-* opacity
-* thickness
-* type (shape)
-
-We will cover all of these in the next lecture
-
-Color names are the same as matplotlib: https://matplotlib.org/stable/gallery/color/named_colors.html
-**END NOTES**
-:::
 
 
 ## Customizing a visualization -- log scale
@@ -410,6 +394,7 @@ Note: this is just a preview, we will do a lot more on multiple views in lecture
 
 # Under the hood: JSON
 
+
 ## roadmap
 
 * Beauty of JSON
@@ -465,7 +450,7 @@ print(x.to_json())
 
 ## example 2: longer snippet from Altair
 ```{python}
-chart = alt.Chart().mark_bar().encode(
+chart = alt.Chart().mark_point().encode(
     alt.X('average(precipitation):Q'),
     alt.Y('city:O')
 )
@@ -474,7 +459,7 @@ print(chart.to_json())
 
 ## Example 3: add `df` to make the bar plot from earlier in lecture
 ```{python}
-chart = alt.Chart(df).mark_bar().encode(
+chart = alt.Chart(df).mark_point().encode(
     alt.X('average(precip)'),
     alt.Y('city')
 )
