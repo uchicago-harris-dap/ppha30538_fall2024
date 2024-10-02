@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Peter Ganong and Maggie Shi">
-<meta name="dcterms.date" content="2024-09-30">
+<meta name="dcterms.date" content="2024-10-02">
 
 <title>Visualization (Intro)</title>
 <style>
@@ -19,12 +19,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -49,17 +48,47 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="viz_files/libs/clipboard/clipboard.min.js"></script>
+<script src="viz_files/libs/clipboard/clipboard.min.js"></script>
 <script src="viz_files/libs/quarto-html/quarto.js"></script>
 <script src="viz_files/libs/quarto-html/popper.min.js"></script>
 <script src="viz_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="viz_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="viz_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -168,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 30, 2024</p>
+      <p class="date">October 2, 2024</p>
     </div>
   </div>
   
@@ -176,9 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-
 </header>
-
 
 <!--
     beamer:
@@ -231,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="other-declarative-graphics-packages" class="level2">
 <h2 class="anchored" data-anchor-id="other-declarative-graphics-packages">Other declarative graphics packages</h2>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
@@ -282,27 +309,27 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="my-first-plot-image" class="level2">
 <h2 class="anchored" data-anchor-id="my-first-plot-image">My first plot – image</h2>
-<div id="57ce08e4" class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 
 <style>
-  #altair-viz-36a3f5e08891442283c8615291b05ab1.vega-embed {
+  #altair-viz-6bd1349c4f7741189355a087ef24c7a8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-36a3f5e08891442283c8615291b05ab1.vega-embed details,
-  #altair-viz-36a3f5e08891442283c8615291b05ab1.vega-embed details summary {
+  #altair-viz-6bd1349c4f7741189355a087ef24c7a8.vega-embed details,
+  #altair-viz-6bd1349c4f7741189355a087ef24c7a8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-36a3f5e08891442283c8615291b05ab1"></div>
+<div id="altair-viz-6bd1349c4f7741189355a087ef24c7a8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-36a3f5e08891442283c8615291b05ab1") {
-      outputDiv = document.getElementById("altair-viz-36a3f5e08891442283c8615291b05ab1");
+    if (outputDiv.id !== "altair-viz-6bd1349c4f7741189355a087ef24c7a8") {
+      outputDiv = document.getElementById("altair-viz-6bd1349c4f7741189355a087ef24c7a8");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -399,7 +426,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="imports-and-renderer" class="level2">
 <h2 class="anchored" data-anchor-id="imports-and-renderer">Imports and Renderer</h2>
-<div id="28ec8c50" class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -408,100 +435,99 @@ pip install vega_datasets</code></pre>
 <section id="vega_datasets-formatted-for-pandas" class="level2">
 <h2 class="anchored" data-anchor-id="vega_datasets-formatted-for-pandas">Vega_datasets formatted for Pandas</h2>
 <p>We will often use datasets from the <a href="https://github.com/vega/vega-datasets">vega-datasets</a> repository. Some of these datasets are directly available as Pandas data frames:</p>
-<div id="00299f05" class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data <span class="im">as</span> vega_data</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> vega_data.cars()              </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cars.head()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
+
 <div>
 
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Name</th>
-<th data-quarto-table-cell-role="th">Miles_per_Gallon</th>
-<th data-quarto-table-cell-role="th">Cylinders</th>
-<th data-quarto-table-cell-role="th">Displacement</th>
-<th data-quarto-table-cell-role="th">Horsepower</th>
-<th data-quarto-table-cell-role="th">Weight_in_lbs</th>
-<th data-quarto-table-cell-role="th">Acceleration</th>
-<th data-quarto-table-cell-role="th">Year</th>
-<th data-quarto-table-cell-role="th">Origin</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>chevrolet chevelle malibu</td>
-<td>18.0</td>
-<td>8</td>
-<td>307.0</td>
-<td>130.0</td>
-<td>3504</td>
-<td>12.0</td>
-<td>1970-01-01</td>
-<td>USA</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>buick skylark 320</td>
-<td>15.0</td>
-<td>8</td>
-<td>350.0</td>
-<td>165.0</td>
-<td>3693</td>
-<td>11.5</td>
-<td>1970-01-01</td>
-<td>USA</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>plymouth satellite</td>
-<td>18.0</td>
-<td>8</td>
-<td>318.0</td>
-<td>150.0</td>
-<td>3436</td>
-<td>11.0</td>
-<td>1970-01-01</td>
-<td>USA</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>amc rebel sst</td>
-<td>16.0</td>
-<td>8</td>
-<td>304.0</td>
-<td>150.0</td>
-<td>3433</td>
-<td>12.0</td>
-<td>1970-01-01</td>
-<td>USA</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>ford torino</td>
-<td>17.0</td>
-<td>8</td>
-<td>302.0</td>
-<td>140.0</td>
-<td>3449</td>
-<td>10.5</td>
-<td>1970-01-01</td>
-<td>USA</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Miles_per_Gallon</th>
+      <th>Cylinders</th>
+      <th>Displacement</th>
+      <th>Horsepower</th>
+      <th>Weight_in_lbs</th>
+      <th>Acceleration</th>
+      <th>Year</th>
+      <th>Origin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>chevrolet chevelle malibu</td>
+      <td>18.0</td>
+      <td>8</td>
+      <td>307.0</td>
+      <td>130.0</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>1970-01-01</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>buick skylark 320</td>
+      <td>15.0</td>
+      <td>8</td>
+      <td>350.0</td>
+      <td>165.0</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>1970-01-01</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>plymouth satellite</td>
+      <td>18.0</td>
+      <td>8</td>
+      <td>318.0</td>
+      <td>150.0</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>1970-01-01</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>amc rebel sst</td>
+      <td>16.0</td>
+      <td>8</td>
+      <td>304.0</td>
+      <td>150.0</td>
+      <td>3433</td>
+      <td>12.0</td>
+      <td>1970-01-01</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ford torino</td>
+      <td>17.0</td>
+      <td>8</td>
+      <td>302.0</td>
+      <td>140.0</td>
+      <td>3449</td>
+      <td>10.5</td>
+      <td>1970-01-01</td>
+      <td>USA</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
 </section>
 <section id="vega_datasets-formatted-for-json" class="level2">
 <h2 class="anchored" data-anchor-id="vega_datasets-formatted-for-json">Vega_datasets formatted for JSON</h2>
-<div id="356a9246" class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#URL if you want </span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>vega_data.cars.url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -525,7 +551,7 @@ pip install vega_datasets</code></pre>
 <section id="weather-data" class="level2">
 <h2 class="anchored" data-anchor-id="weather-data">Weather Data</h2>
 <p>Statistical visualization in Altair begins with <a href="http://vita.had.co.nz/papers/tidy-data.html">“tidy”</a> data frames. Here, we’ll start by creating a simple data frame (<code>df</code>) containing the average precipitation (<code>precip</code>) for a given <code>city</code> and <code>month</code> :</p>
-<div id="7812d831" class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'city'</span>: [<span class="st">'Seattle'</span>, <span class="st">'Seattle'</span>, <span class="st">'Seattle'</span>, <span class="st">'New York'</span>, <span class="st">'New York'</span>, <span class="st">'New York'</span>, <span class="st">'Chicago'</span>, <span class="st">'Chicago'</span>, <span class="st">'Chicago'</span>],</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'month'</span>: [<span class="st">'Apr'</span>, <span class="st">'Aug'</span>, <span class="st">'Dec'</span>, <span class="st">'Apr'</span>, <span class="st">'Aug'</span>, <span class="st">'Dec'</span>, <span class="st">'Apr'</span>, <span class="st">'Aug'</span>, <span class="st">'Dec'</span>],</span>
@@ -534,76 +560,75 @@ pip install vega_datasets</code></pre>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
+
 <div>
 
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">city</th>
-<th data-quarto-table-cell-role="th">month</th>
-<th data-quarto-table-cell-role="th">precip</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Seattle</td>
-<td>Apr</td>
-<td>2.68</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Seattle</td>
-<td>Aug</td>
-<td>0.87</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Seattle</td>
-<td>Dec</td>
-<td>5.31</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>New York</td>
-<td>Apr</td>
-<td>3.94</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>New York</td>
-<td>Aug</td>
-<td>4.13</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>New York</td>
-<td>Dec</td>
-<td>3.58</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>Chicago</td>
-<td>Apr</td>
-<td>3.62</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>Chicago</td>
-<td>Aug</td>
-<td>3.98</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>Chicago</td>
-<td>Dec</td>
-<td>2.56</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>city</th>
+      <th>month</th>
+      <th>precip</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Seattle</td>
+      <td>Apr</td>
+      <td>2.68</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Seattle</td>
+      <td>Aug</td>
+      <td>0.87</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Seattle</td>
+      <td>Dec</td>
+      <td>5.31</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>New York</td>
+      <td>Apr</td>
+      <td>3.94</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>New York</td>
+      <td>Aug</td>
+      <td>4.13</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>New York</td>
+      <td>Dec</td>
+      <td>3.58</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Chicago</td>
+      <td>Apr</td>
+      <td>3.62</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Chicago</td>
+      <td>Aug</td>
+      <td>3.98</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Chicago</td>
+      <td>Dec</td>
+      <td>2.56</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -627,34 +652,34 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="the-chart-object" class="level2">
 <h2 class="anchored" data-anchor-id="the-chart-object">The <code>Chart</code> object</h2>
-<div id="6bfa2f80" class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-single-point" class="level2">
 <h2 class="anchored" data-anchor-id="a-single-point">A single point</h2>
-<div id="1047e3dd" class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_point()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-6f9c00f3a81e4fb18de9b5ec58f8da14.vega-embed {
+  #altair-viz-f411e99b0c7f41b7af787d8f7e3d2b83.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6f9c00f3a81e4fb18de9b5ec58f8da14.vega-embed details,
-  #altair-viz-6f9c00f3a81e4fb18de9b5ec58f8da14.vega-embed details summary {
+  #altair-viz-f411e99b0c7f41b7af787d8f7e3d2b83.vega-embed details,
+  #altair-viz-f411e99b0c7f41b7af787d8f7e3d2b83.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6f9c00f3a81e4fb18de9b5ec58f8da14"></div>
+<div id="altair-viz-f411e99b0c7f41b7af787d8f7e3d2b83"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6f9c00f3a81e4fb18de9b5ec58f8da14") {
-      outputDiv = document.getElementById("altair-viz-6f9c00f3a81e4fb18de9b5ec58f8da14");
+    if (outputDiv.id !== "altair-viz-f411e99b0c7f41b7af787d8f7e3d2b83") {
+      outputDiv = document.getElementById("altair-viz-f411e99b0c7f41b7af787d8f7e3d2b83");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -708,30 +733,30 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="one-point-per-city-on-y-axis" class="level2">
 <h2 class="anchored" data-anchor-id="one-point-per-city-on-y-axis">One point per city on y-axis</h2>
-<div id="de22dbd4" class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_point().encode(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  alt.Y(<span class="st">'city'</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-2243ef8ce22149d296ee4e2520477974.vega-embed {
+  #altair-viz-074aa2f5925c43fcba2056152be89dc8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2243ef8ce22149d296ee4e2520477974.vega-embed details,
-  #altair-viz-2243ef8ce22149d296ee4e2520477974.vega-embed details summary {
+  #altair-viz-074aa2f5925c43fcba2056152be89dc8.vega-embed details,
+  #altair-viz-074aa2f5925c43fcba2056152be89dc8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2243ef8ce22149d296ee4e2520477974"></div>
+<div id="altair-viz-074aa2f5925c43fcba2056152be89dc8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2243ef8ce22149d296ee4e2520477974") {
-      outputDiv = document.getElementById("altair-viz-2243ef8ce22149d296ee4e2520477974");
+    if (outputDiv.id !== "altair-viz-074aa2f5925c43fcba2056152be89dc8") {
+      outputDiv = document.getElementById("altair-viz-074aa2f5925c43fcba2056152be89dc8");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -784,7 +809,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="xy-coordinates" class="level2">
 <h2 class="anchored" data-anchor-id="xy-coordinates">xy coordinates</h2>
-<div id="8ae0fc84" class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_point().encode(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  alt.X(<span class="st">'precip'</span>),</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  alt.Y(<span class="st">'city'</span>)</span>
@@ -792,23 +817,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-5a38234477424d0db5f904a3ec04a0b2.vega-embed {
+  #altair-viz-a5b31649c8394532a5a73f053768bc52.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-5a38234477424d0db5f904a3ec04a0b2.vega-embed details,
-  #altair-viz-5a38234477424d0db5f904a3ec04a0b2.vega-embed details summary {
+  #altair-viz-a5b31649c8394532a5a73f053768bc52.vega-embed details,
+  #altair-viz-a5b31649c8394532a5a73f053768bc52.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-5a38234477424d0db5f904a3ec04a0b2"></div>
+<div id="altair-viz-a5b31649c8394532a5a73f053768bc52"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-5a38234477424d0db5f904a3ec04a0b2") {
-      outputDiv = document.getElementById("altair-viz-5a38234477424d0db5f904a3ec04a0b2");
+    if (outputDiv.id !== "altair-viz-a5b31649c8394532a5a73f053768bc52") {
+      outputDiv = document.getElementById("altair-viz-a5b31649c8394532a5a73f053768bc52");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -865,7 +890,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="data-transformation-aggregation" class="level2">
 <h2 class="anchored" data-anchor-id="data-transformation-aggregation">Data Transformation: Aggregation</h2>
-<div id="037f480f" class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_point().encode(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  alt.X(<span class="st">'average(precip)'</span>),</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  alt.Y(<span class="st">'city'</span>)</span>
@@ -873,23 +898,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-  #altair-viz-0e4abba7ab4646b6804eeedb661bdc1b.vega-embed {
+  #altair-viz-edf27b28043a4b84a6ff0f6012bc4900.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0e4abba7ab4646b6804eeedb661bdc1b.vega-embed details,
-  #altair-viz-0e4abba7ab4646b6804eeedb661bdc1b.vega-embed details summary {
+  #altair-viz-edf27b28043a4b84a6ff0f6012bc4900.vega-embed details,
+  #altair-viz-edf27b28043a4b84a6ff0f6012bc4900.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0e4abba7ab4646b6804eeedb661bdc1b"></div>
+<div id="altair-viz-edf27b28043a4b84a6ff0f6012bc4900"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0e4abba7ab4646b6804eeedb661bdc1b") {
-      outputDiv = document.getElementById("altair-viz-0e4abba7ab4646b6804eeedb661bdc1b");
+    if (outputDiv.id !== "altair-viz-edf27b28043a4b84a6ff0f6012bc4900") {
+      outputDiv = document.getElementById("altair-viz-edf27b28043a4b84a6ff0f6012bc4900");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -942,7 +967,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="bar-plot" class="level2">
 <h2 class="anchored" data-anchor-id="bar-plot">Bar plot</h2>
-<div id="80e8993a" class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_bar().encode(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'average(precip)'</span>,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'city'</span></span>
@@ -950,23 +975,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="11">
 
 <style>
-  #altair-viz-0f0bcf02002041b083910b0f9bb4c80f.vega-embed {
+  #altair-viz-87e22558b1744b6285d7ae4dccba6393.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0f0bcf02002041b083910b0f9bb4c80f.vega-embed details,
-  #altair-viz-0f0bcf02002041b083910b0f9bb4c80f.vega-embed details summary {
+  #altair-viz-87e22558b1744b6285d7ae4dccba6393.vega-embed details,
+  #altair-viz-87e22558b1744b6285d7ae4dccba6393.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0f0bcf02002041b083910b0f9bb4c80f"></div>
+<div id="altair-viz-87e22558b1744b6285d7ae4dccba6393"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0f0bcf02002041b083910b0f9bb4c80f") {
-      outputDiv = document.getElementById("altair-viz-0f0bcf02002041b083910b0f9bb4c80f");
+    if (outputDiv.id !== "altair-viz-87e22558b1744b6285d7ae4dccba6393") {
+      outputDiv = document.getElementById("altair-viz-87e22558b1744b6285d7ae4dccba6393");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1020,7 +1045,7 @@ pip install vega_datasets</code></pre>
 <section id="syntax-understanding-altairs-shorthands." class="level2">
 <h2 class="anchored" data-anchor-id="syntax-understanding-altairs-shorthands.">Syntax: Understanding Altair’s shorthands.</h2>
 <p>Three ways to say the same idea</p>
-<div id="2fca812e" class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what we will continue to use</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>alt.X(<span class="st">'average(precip)'</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1033,7 +1058,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="customizing-a-plot-colors-and-labels" class="level2">
 <h2 class="anchored" data-anchor-id="customizing-a-plot-colors-and-labels">Customizing a plot – colors and labels</h2>
-<div id="2b61b2c6" class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_point(color<span class="op">=</span><span class="st">'firebrick'</span>).encode(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  alt.X(<span class="st">'precip'</span>, axis<span class="op">=</span>alt.Axis(title<span class="op">=</span><span class="st">'Rain  (in)'</span>)),</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  alt.Y(<span class="st">'city'</span>, axis<span class="op">=</span>alt.Axis(title<span class="op">=</span><span class="st">'City'</span>)),</span>
@@ -1041,23 +1066,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="12">
 
 <style>
-  #altair-viz-2b6e516f079543eb861655709a77830d.vega-embed {
+  #altair-viz-1c2dbbe51e794bb8b71ed7e5d5c7c006.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2b6e516f079543eb861655709a77830d.vega-embed details,
-  #altair-viz-2b6e516f079543eb861655709a77830d.vega-embed details summary {
+  #altair-viz-1c2dbbe51e794bb8b71ed7e5d5c7c006.vega-embed details,
+  #altair-viz-1c2dbbe51e794bb8b71ed7e5d5c7c006.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2b6e516f079543eb861655709a77830d"></div>
+<div id="altair-viz-1c2dbbe51e794bb8b71ed7e5d5c7c006"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2b6e516f079543eb861655709a77830d") {
-      outputDiv = document.getElementById("altair-viz-2b6e516f079543eb861655709a77830d");
+    if (outputDiv.id !== "altair-viz-1c2dbbe51e794bb8b71ed7e5d5c7c006") {
+      outputDiv = document.getElementById("altair-viz-1c2dbbe51e794bb8b71ed7e5d5c7c006");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1110,7 +1135,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="customizing-a-visualization-log-scale" class="level2">
 <h2 class="anchored" data-anchor-id="customizing-a-visualization-log-scale">Customizing a visualization – log scale</h2>
-<div id="13ab4264" class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_point(color<span class="op">=</span><span class="st">'firebrick'</span>).encode(</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  alt.X(<span class="st">'precip'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">type</span><span class="op">=</span><span class="st">'log'</span>), axis<span class="op">=</span>alt.Axis(title<span class="op">=</span><span class="st">'Log-Scaled Values'</span>)),</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  alt.Y(<span class="st">'city'</span>, axis<span class="op">=</span>alt.Axis(title<span class="op">=</span><span class="st">'City'</span>)),</span>
@@ -1118,23 +1143,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="13">
 
 <style>
-  #altair-viz-f4ccf4190eda4d54adb3349fd5c07da1.vega-embed {
+  #altair-viz-a2e091764fe74afa8a6c69587a2f7870.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f4ccf4190eda4d54adb3349fd5c07da1.vega-embed details,
-  #altair-viz-f4ccf4190eda4d54adb3349fd5c07da1.vega-embed details summary {
+  #altair-viz-a2e091764fe74afa8a6c69587a2f7870.vega-embed details,
+  #altair-viz-a2e091764fe74afa8a6c69587a2f7870.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f4ccf4190eda4d54adb3349fd5c07da1"></div>
+<div id="altair-viz-a2e091764fe74afa8a6c69587a2f7870"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f4ccf4190eda4d54adb3349fd5c07da1") {
-      outputDiv = document.getElementById("altair-viz-f4ccf4190eda4d54adb3349fd5c07da1");
+    if (outputDiv.id !== "altair-viz-a2e091764fe74afa8a6c69587a2f7870") {
+      outputDiv = document.getElementById("altair-viz-a2e091764fe74afa8a6c69587a2f7870");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1212,7 +1237,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="mark_line" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line"><code>mark_line()</code></h2>
-<div id="22a9f015" class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_line().encode(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Year'</span>),</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'average(Miles_per_Gallon)'</span>)</span>
@@ -1220,23 +1245,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="14">
 
 <style>
-  #altair-viz-2b8b61460b504ddb863eef44d7f9508a.vega-embed {
+  #altair-viz-c880ac9d799c4748ae31fefbe6baf8b2.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2b8b61460b504ddb863eef44d7f9508a.vega-embed details,
-  #altair-viz-2b8b61460b504ddb863eef44d7f9508a.vega-embed details summary {
+  #altair-viz-c880ac9d799c4748ae31fefbe6baf8b2.vega-embed details,
+  #altair-viz-c880ac9d799c4748ae31fefbe6baf8b2.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2b8b61460b504ddb863eef44d7f9508a"></div>
+<div id="altair-viz-c880ac9d799c4748ae31fefbe6baf8b2"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2b8b61460b504ddb863eef44d7f9508a") {
-      outputDiv = document.getElementById("altair-viz-2b8b61460b504ddb863eef44d7f9508a");
+    if (outputDiv.id !== "altair-viz-c880ac9d799c4748ae31fefbe6baf8b2") {
+      outputDiv = document.getElementById("altair-viz-c880ac9d799c4748ae31fefbe6baf8b2");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1289,7 +1314,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="multiple-marks-the-long-way" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-marks-the-long-way">Multiple Marks – the long way</h2>
-<div id="ac252c7d" class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>line <span class="op">=</span> alt.Chart(cars).mark_line().encode(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Year'</span>),</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'average(Miles_per_Gallon)'</span>)</span>
@@ -1304,23 +1329,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="15">
 
 <style>
-  #altair-viz-64f6b5a517984853a36f009b8b6c155f.vega-embed {
+  #altair-viz-ee4cb1c430364d84a41c2f3743c6f606.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-64f6b5a517984853a36f009b8b6c155f.vega-embed details,
-  #altair-viz-64f6b5a517984853a36f009b8b6c155f.vega-embed details summary {
+  #altair-viz-ee4cb1c430364d84a41c2f3743c6f606.vega-embed details,
+  #altair-viz-ee4cb1c430364d84a41c2f3743c6f606.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-64f6b5a517984853a36f009b8b6c155f"></div>
+<div id="altair-viz-ee4cb1c430364d84a41c2f3743c6f606"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-64f6b5a517984853a36f009b8b6c155f") {
-      outputDiv = document.getElementById("altair-viz-64f6b5a517984853a36f009b8b6c155f");
+    if (outputDiv.id !== "altair-viz-ee4cb1c430364d84a41c2f3743c6f606") {
+      outputDiv = document.getElementById("altair-viz-ee4cb1c430364d84a41c2f3743c6f606");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1373,7 +1398,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="multiple-marks-the-short-way" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-marks-the-short-way">Multiple Marks – the short way</h2>
-<div id="a5da63a1" class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> alt.Chart(cars).mark_line().encode(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Year'</span>),</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'average(Miles_per_Gallon)'</span>)</span>
@@ -1383,23 +1408,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="16">
 
 <style>
-  #altair-viz-5ccb01138d0f491099f43b51816326b8.vega-embed {
+  #altair-viz-9223b7c030e54698b661badf6b9f8136.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-5ccb01138d0f491099f43b51816326b8.vega-embed details,
-  #altair-viz-5ccb01138d0f491099f43b51816326b8.vega-embed details summary {
+  #altair-viz-9223b7c030e54698b661badf6b9f8136.vega-embed details,
+  #altair-viz-9223b7c030e54698b661badf6b9f8136.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-5ccb01138d0f491099f43b51816326b8"></div>
+<div id="altair-viz-9223b7c030e54698b661badf6b9f8136"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-5ccb01138d0f491099f43b51816326b8") {
-      outputDiv = document.getElementById("altair-viz-5ccb01138d0f491099f43b51816326b8");
+    if (outputDiv.id !== "altair-viz-9223b7c030e54698b661badf6b9f8136") {
+      outputDiv = document.getElementById("altair-viz-9223b7c030e54698b661badf6b9f8136");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1452,7 +1477,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="multiple-marks-the-shortest-way" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-marks-the-shortest-way">Multiple Marks – the shortest way</h2>
-<div id="9e7b1936" class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_line(point<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Year'</span>),</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'average(Miles_per_Gallon)'</span>)</span>
@@ -1461,7 +1486,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="multiple-panels" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-panels">Multiple Panels</h2>
-<div id="f3752f64" class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>hp <span class="op">=</span> alt.Chart(cars).mark_line().encode(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Year'</span>),</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'average(Horsepower)'</span>)</span>
@@ -1471,23 +1496,23 @@ pip install vega_datasets</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="17">
 
 <style>
-  #altair-viz-ac498b488cea412cafbde18dbceafb25.vega-embed {
+  #altair-viz-dd1f06e4817e4e17bce1c93c7ecdca17.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-ac498b488cea412cafbde18dbceafb25.vega-embed details,
-  #altair-viz-ac498b488cea412cafbde18dbceafb25.vega-embed details summary {
+  #altair-viz-dd1f06e4817e4e17bce1c93c7ecdca17.vega-embed details,
+  #altair-viz-dd1f06e4817e4e17bce1c93c7ecdca17.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-ac498b488cea412cafbde18dbceafb25"></div>
+<div id="altair-viz-dd1f06e4817e4e17bce1c93c7ecdca17"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ac498b488cea412cafbde18dbceafb25") {
-      outputDiv = document.getElementById("altair-viz-ac498b488cea412cafbde18dbceafb25");
+    if (outputDiv.id !== "altair-viz-dd1f06e4817e4e17bce1c93c7ecdca17") {
+      outputDiv = document.getElementById("altair-viz-dd1f06e4817e4e17bce1c93c7ecdca17");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1593,7 +1618,7 @@ pip install vega_datasets</code></pre>
 <section id="example-1-snippet-from-altair" class="level2">
 <h2 class="anchored" data-anchor-id="example-1-snippet-from-altair">example 1: snippet from Altair</h2>
 <p>Altair can best be thought of as a language translator. It writes JSON for you. More specifically, it writes JSON which complies with the grammar rules laid out by Vega-Lite.</p>
-<div id="c0330853" class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#python altair object. will explain :Q in next lecture</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> alt.X(<span class="st">'average(precipitation):Q'</span>) </span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.to_json())                  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1608,7 +1633,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="example-2-longer-snippet-from-altair" class="level2">
 <h2 class="anchored" data-anchor-id="example-2-longer-snippet-from-altair">example 2: longer snippet from Altair</h2>
-<div id="fcf79d1b" class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart().mark_bar().encode(</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'average(precipitation):Q'</span>),</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'city:O'</span>)</span>
@@ -1651,7 +1676,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="example-3-add-df-to-make-the-bar-plot-from-earlier-in-lecture" class="level2">
 <h2 class="anchored" data-anchor-id="example-3-add-df-to-make-the-bar-plot-from-earlier-in-lecture">Example 3: add <code>df</code> to make the bar plot from earlier in lecture</h2>
-<div id="e72ddf25" class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(df).mark_bar().encode(</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'average(precip)'</span>),</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'city'</span>)</span>
@@ -1738,7 +1763,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="syntax-keys" class="level2">
 <h2 class="anchored" data-anchor-id="syntax-keys">syntax: <code>keys()</code></h2>
-<div id="9bdc9bfe" class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>chart_as_string <span class="op">=</span> chart.to_json()</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> json.loads(chart_as_string)</span>
@@ -1750,7 +1775,7 @@ pip install vega_datasets</code></pre>
 </section>
 <section id="extract-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="extract-dataset">extract dataset</h2>
-<div id="b5ffba4c" class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>chart.get(<span class="st">"datasets"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>{'data-8e72c2f67818e64f2c6d729f1a903405': [{'city': 'Seattle',
@@ -1810,15 +1835,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1850,50 +1872,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1903,17 +1886,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1925,245 +1899,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -2204,7 +1942,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 
