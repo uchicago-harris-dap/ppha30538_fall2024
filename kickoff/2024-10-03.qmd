@@ -22,7 +22,7 @@ format:
 \vspace{2ex}
     - See revised instructions in lecture 0
     - Also, 104 forks created as of Tuesday night so most folks are figuring it out. If you haven't yet, ask a friend
-- Questions about Visual studio and Quarto
+- Questions about Visual Studio Code and Quarto
 \vspace{2ex}
     - Ozzy posted a recording of mini-lesson from Wednesday's lab - see Canvas
     - And will repeat it in today's lab
