@@ -27,6 +27,12 @@ pip install jupyter pandas altair
   - Installing VSCode on **[Mac](https://code.visualstudio.com/docs/languages/python)** and **[Windows](https://code.visualstudio.com/docs/languages/python)**
   - Setting up **[python](https://code.visualstudio.com/docs/languages/python)** for VSCode 
 
+## Setting up Python in VSCode
+- Ctrl+Shift+P to open command palette (or `Cmd` on Mac)
+- Type "Python: Select Interpreter"
+- Choose the Python interpreter you want to use
+- In terminal, type `which pip` to make sure you are using the right Python version when installing packages with pip
+
 ## Basics 
 <!-- How to comment --->
 <!-- Notice how both numbering methods work --->
