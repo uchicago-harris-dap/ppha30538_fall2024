@@ -19,9 +19,35 @@ format:
 
 ## Following along
 
-The native lecture slides and the PDF are posted at on the Canvas site. 
+The native lecture slides and the PDF are posted on the course's student repo
 
-Search "student repo"
+Search "student repo" on the canvas home page.
+
+## Introduction: Who A mI?
+:::: {.columns}
+
+::: {.column width="50%"}
+- Maggie Shi
+- Assistant Professor at Harris since 2023
+- PhD in Economics from Columbia, 2022
+- Health economist thinking about how to reduce waste in healthcare
+- Avid foodie and proud dog mom of Truffles 
+
+
+
+
+
+:::
+
+::: {.column width="50%"}
+\vspace{2ex}
+![](pictures/maggie.jpg){ width=60% fig-align="center"}
+![](pictures/maggie_research.png){ width=60% fig-align="center"}
+
+
+:::
+
+::::
 
 ## Roadmap: what you will learn
 
@@ -30,11 +56,6 @@ Search "student repo"
     1.  Curriculum
     2.  Apply this knowledge to the public sector
 -   Course quirks
-\vspace{2ex}
-    -   teaching method
-    -   open source curriculum
-    -   self-sufficiency
-    -   contemporary & realistic over perfect & clean
 
 -   Is this course for me?
 
@@ -43,6 +64,7 @@ Search "student repo"
 
 * [Visualization Curriculum](https://idl.uw.edu/visualization-curriculum/intro.html)
 * [Introduction to Python for Geographic Data Analysis](https://pythongis.org)
+
 * Version control
 * Dashboards
 * Webscraping
@@ -72,7 +94,7 @@ Alerts and jams         & Waze \\ \hline
 
 -   There are a number of things that make this class different from other classes that you have taken at Harris
 -   Everything good---and everything frustrating---about this course stems from these quirks
--   We will tell you about the five quirks now, so you can decide if this course is for you.
+-   We will tell you about the four quirks now, so you can decide if this course is for you.
 
 ## Course Quirks
 
@@ -87,7 +109,6 @@ Alerts and jams         & Waze \\ \hline
 How we try to support you
 
 1.  Afternoon labs. 10 min quiz, 10 min mini lesson (most weeks), 60 min pair programming or group office hours (time to give and get help). 
-    * Quizzes will usually cover the first lecture of the week they happen and the second lecture of the prior week. The reason for this is that some students attend lab before they attend the second lecture of the week.
 2.  Awesome teaching assistants
 3.  Practice, practice, practice
 
@@ -173,6 +194,30 @@ How we try to support you
 
 
 
+## Teaching Team
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- Joaquin Pinto
+- Second-year MSCAPP student
+
+\vspace{2ex}
+![](pictures/joaquin.png){ width=50% fig-align="center"}
+
+
+
+:::
+
+::: {.column width="50%"}
+
+
+:::
+
+::::
+
+
+
 ## quirk 1 -- active participation required I
 
 -   We're looking forward to getting to know you!
@@ -185,6 +230,7 @@ How we try to support you
 
 ## quirk 1 -- active participation required II
 - Attendance
+\vspace{2ex}
     - sign-in sheet at lecture
     - Canvas quiz at lab 
     - TA audits of both lecture and lab
@@ -256,7 +302,7 @@ Lecture will **not** cover everything you need to know for problem sets! This is
 -   Post questions on Ed
 -   Ask questions of your peers at lab
 -   Ask questions of TAs
--   Set up a time to talk with us (will be during lab)
+-   Set up a time to talk with us (PG: at lab, MS: at office hours)
 
 ## quirk 4: contemporary & realistic over perfect & clean
 
@@ -275,7 +321,14 @@ Lecture will **not** cover everything you need to know for problem sets! This is
 
 ## Course Overview: Summary
 
--   This course is for you if you can devote substantial time to the class (quirk 1), want structure to learn open-source Python resources (quirk 2), are willing to struggle with the computer (quirk 3), and are willing to struggle with messy data (quirk 4).
+Quirks
+
+1.  teaching method -- intensive, hands-on support, active participation
+2.  open source curriculum
+3.  self sufficiency
+4.  contemporary & realistic over perfect & clean
+
+-   This course is for you if you have the time, grit, and interest.
 
 -   Any questions?
 
@@ -320,9 +373,9 @@ Acknowledgement: thanks to AI expert and MIT professor John Horton for helping u
 
 
 ## Settings where you may not use ChatGPT
-To make sure ChatGPT doesn't server as a susbstitute for learning, you *may not* using ChatGPT for these components:
+To make sure ChatGPT doesn't serve as a substitute for learning, you *may not* using ChatGPT for these components:
 
-* In-class solo exercises + do-pair-shares (can use to look up unfamilar concepts)
+* In-class solo exercises + do-pair-shares
 * Weekly quizzes at start of lab
 * Final exam (similar in style to quizzes)
 * Pair programming at lab
@@ -361,11 +414,11 @@ There may be some assignments where you will work in groups. Groups will be assi
 
 * Work with your classmates
 \vspace{2ex}
-    * Cite the individuals you collaborate directly with by including their names in the comments at the top of your assignment
+    * Cite the individuals you collaborate with (via google form)
 * Online sources
 \vspace{2ex}
-    * Cite all code you use with a URL, even a one-line snippet. 
-    * For AI tools provide the initial query string you used and an explanation of how you used the AI tool's response in writing your own response.
+    * Cite in a comment all code you use with a URL, even a one-line snippet. 
+    * For AI tools provide in a comment the initial query string you used and an explanation of how you used the AI tool's response in writing your own response.
 
 **Dealing with ambiguity**
 
@@ -404,23 +457,6 @@ If you are unsure of whether a specific action is consistent with this policy, a
 
 
 
-## Rhythms during lecture
-
-* You are welcome to just listen or also run the `.qmd` code in real-time. 
-* Even if you plan to listen, you still need to bring your laptop and pull the `.qmd` lecture slides. This is because we will have in-class exercises during lecture.
-* We ask that phones remain in your backpack. If you need to use your phone, please first step out of the classroom.
-
-## Rhythms during lecture
-* On the Github website, create a **fork** of the course [repo](https://github.com/uchicago-harris-dap/ppha30538_fall2024). 
-* Make sure that you uncheck the box "copy the `main` branch only" because you will use there are two branches : `before_lecture` and `after_lecture`
-\vspace{2ex}
-    - `before_lecture` excludes the answers to in-class exercises and do-pair-shares
-    - `after_lecture` is the complete notes
-    - We are separating this into two branches to avoid merge conflicts -- you will learn about these and how to resolve them in this class!
-* Go to your new fork and clone that repo to your computer
-* Before lecture: switch to the `before_lecture` branch and pull
-* After lecture: switch to the `after_lecture` branch and pull
-* Detailed instructions in `README.md` file on how to clone, switch branches, and pull
 
 ## Course mechanics: use Ed to ask questions.
 
@@ -430,14 +466,14 @@ If you are unsure of whether a specific action is consistent with this policy, a
 <!--1.  **Content** questions are technical questions posted to the teaching staff and other students. (Please keep in mind collaboration policies when asking about code or solutions.)
 2.  **Clarification** questions are posts to the teaching staff about logistical details (Is there really class on XYZ holiday or is that a mistake?) or questions about homework phrasing or typos (Should question 1a of the homework be asking for the number of NAs or the number of non-missing values?). Tag these questions as "clarification."-->
 
-1. **Public Pset Questions**
+1. **Public Questions**
 \vspace{2ex}
-    - Use the problem set-specific categories to keep questions organized and make sure you're not repeating a question. Best practice is to reference the problem set 
+    - Use the problem set-specific categories. Try to avoid repeating already-posted questions.
     - General: logistical details
 2. **Private Message**
 \vspace{2ex}
     - Recording/zoom requests
-    - Grading questions
+
 
 
 **Email discouraged.** Will in most cases get a response: "send a PM in Ed". However, if you have a confidential matter which cannot be shared with the teaching staff, then please email `ganong@uchicago.edu` or `m.shi@uchicago.edu` w "30538 confidential".
@@ -466,8 +502,29 @@ If you are unsure of whether a specific action is consistent with this policy, a
 - Combination of paired and solo 
 - Due at 5pm on Saturdays, solutions posted Sunday night
 - Debrief on Wednesday/Thursday of subsequent week
-- Four late coins.
+- A late coin extends the deadline by 24 hours. You have four late coins.
 \vspace{2ex}
     - Max one late coin per assignment because solutions posted Sunday night
     - After 24 hours you will receive a 0
 
+## Rhythms during lecture
+
+* You are welcome to just listen or also run the `.qmd` code in real-time. 
+* Even if you plan to listen, you still need to bring your laptop and pull the `.qmd` lecture slides. This is because we will have in-class exercises during lecture.
+* We ask that phones remain in your backpack. If you need to use your phone, please first step out of the classroom.
+
+## Rhythms during lecture -- in-class IT setup
+
+1. If you already cloned the course repo which Professor Ganong sent out on Sunday night, delete this clone (he was trying to be helpful, but failed...)
+2. On the Github website, create a **fork** of the course [repo](https://github.com/uchicago-harris-dap/ppha30538_fall2024). 
+\vspace{2ex}
+    * Make sure that you uncheck the box "copy the `main` branch only" because you will use there are two branches : `main` and `after_lecture`
+\vspace{2ex}
+        - `main` excludes the answers to in-class exercises and do-pair-shares
+        - `after_lecture` is the complete notes
+     * In response to question of why are you creating the fork, choose "for my own purposes"
+3. Go to your new fork and clone that repo to your computer
+
+Detailed instructions in `README.md` file on how to clone, switch branches, and pull
+
+<!--- We are separating this into two branches to avoid merge conflicts -- you will learn about these and how to resolve them in this class!-->
