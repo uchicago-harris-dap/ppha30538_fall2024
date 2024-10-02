@@ -6,6 +6,7 @@ format:
     slide-number: true
     chalkboard: false 
     preview-links: auto
+    footer: "VSCode, Quarto, and Jupyter Workshop"
 execute:
   eval: true
   echo: true
@@ -15,23 +16,12 @@ execute:
 
 - VSCode: [https://code.visualstudio.com/](https://code.visualstudio.com/)
 - Quarto: [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/)
-- Jupyter: `pip install jupyter`
-
-```{python}
-#| echo: true
-#| eval: false
-pip install jupyter pandas altair
-```
+- Jupyter: `pip install jupyter pandas altair`
 
 - Helpful startup guides:
   - Installing VSCode on **[Mac](https://code.visualstudio.com/docs/languages/python)** and **[Windows](https://code.visualstudio.com/docs/languages/python)**
   - Setting up **[python](https://code.visualstudio.com/docs/languages/python)** for VSCode 
 
-## Setting up Python in VSCode
-- Ctrl+Shift+P to open command palette (or `Cmd` on Mac)
-- Type "Python: Select Interpreter"
-- Choose the Python interpreter you want to use
-- In terminal, type `which pip` to make sure you are using the right Python version when installing packages with pip
 
 ## Basics 
 <!-- How to comment --->
@@ -44,6 +34,12 @@ pip install jupyter pandas altair
   1. Preamble: Format selection using YAML (like R Markdown)
   2. Content: Markdown (like R markdown)
   3. Code chunks: Python, R, etc. (like R markdown)
+
+## Setting up Python in VSCode
+- Ctrl+Shift+P to open command palette (or `Cmd` on Mac)
+- Type "Python: Select Interpreter"
+- Choose the Python interpreter you want to use
+- In terminal, type `which pip` to make sure you are using the right Python version when installing packages with pip
 
 ## Compilation and Code Chunks 
 
@@ -73,6 +69,9 @@ df = pd.DataFrame({
 })
 print("Here is some output!")
 df.head(1)
+
+df["new_col"] = df["A"] * 2
+df.head(2)
 ```
 
 ## This Class: Repository Structure and Usage
