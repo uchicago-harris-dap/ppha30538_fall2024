@@ -31,7 +31,7 @@ format:
 - Is JSON something we'll need to write or regularly refer to?
 \vspace{2ex}
     - No, it's mostly working in the background. But it's good to know how to read it since a lot of data is stored as JSON as well
-- What does it mean for Vega and Vega-lite to the "grammars"?
+- What does it mean for Vega and Vega-lite to be "grammars"?
 \vspace{2ex}
     - A grammar is a formal set of rules/structure for creating visualizations, where the structure of the code specifies what the visualization represents as opposed to just telling Python how to "draw" it.
     - A grammar isn't anything specific to Python 
