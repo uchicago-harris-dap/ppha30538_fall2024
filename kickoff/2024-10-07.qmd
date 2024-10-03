@@ -1,0 +1,24 @@
+---
+title: "Kickoff (Tue/Thurs Sections)"
+author: "Peter Ganong and Maggie Shi"
+date: October 7, 2024
+date-format: long
+format: 
+    beamer:
+        aspectratio: 169
+        theme: default
+        header-includes: \renewcommand{\tightlist}{\setlength{\itemsep}{3ex}\setlength{\parskip}{0pt}}
+            \setbeamertemplate{footline}[frame number]
+            \usepackage{fvextra}
+            \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+            \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+---
+
+### MUD cards: about you!
+- Really fun to get to know a little more about you through MUD cards
+- Diversity of professional backgrounds! Some examples of note: geopolitical risk management, AmeriCorps, film industry + actors, criminal justice, want to do PhDs, 
+- Diversity of interests! Some examples of note: playing tuba, owner of 2 pet bunnies, "legendarily bad at darts," knows 5 languages, running a marathon later this month, a short story (mystery and fantasy) author, favorite foods include green curry, boba tea
+
+### MUD cards: general questions
+- Recording lectures: (policy TBD)
+- How to study for lab quizzes: xxx
