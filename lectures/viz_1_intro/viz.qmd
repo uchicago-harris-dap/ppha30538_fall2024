@@ -89,6 +89,8 @@ pip install altair
 pip install vega_datasets
 ```
 
+<!-- PG to SSS/GGG a huge number of students thought that this was a command that they run in th python interpreter rather than a command that they run at the terminal. need more detail/explanation.-->
+
 
 ## My first plot -- image 
 ```{python}
@@ -103,6 +105,8 @@ alt.Chart(df).mark_bar().encode(
 ```
 
 [source](https://vega.github.io/vega-lite/#example).
+
+
 
 ## My first plot -- grammar
 ```{json}
@@ -119,6 +123,7 @@ alt.Chart(df).mark_bar().encode(
 * This is designed to be readable for both a human and for Vega. Pretty cool!
 
 Discussion question: what does each line of text mean?
+
 
 ## Why the emphasis on grammar?
 * Packages for doing graphics and coding languages change over time
@@ -319,6 +324,19 @@ Make a bar plot showing the **lowest** rainfall for each city in the dataset.
 
 Hint: Altair's aggregation methods are [here](https://altair-viz.github.io/user_guide/encodings/index.html#aggregation-functions)
 
+<!-- ZZZ delete before posting QMD -->
+## Data Transformation: Do-pair-share solution
+
+Make a bar plot showing the **lowest** rainfall for each city in the dataset
+
+```{python}
+alt.Chart(df).mark_bar().encode(
+    x='min(precip)',
+    y='city'
+)
+```
+
+
 # Multiple Views 
 
 ## Multiple Views: roadmap
@@ -486,6 +504,21 @@ chart.get("datasets")
 
 1. extract `chart`'s encoding.
 2. extract just the encoding for `x`
+
+
+<!-- ZZZ delete before posting QMD -->
+
+## in-class exercise: solution
+```{python}
+chart.get("encoding")
+```
+
+
+```{python}
+chart.get("encoding").get("x")
+```
+
+
 
 
 ## summary
