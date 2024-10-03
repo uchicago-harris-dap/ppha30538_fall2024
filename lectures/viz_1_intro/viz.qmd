@@ -89,6 +89,8 @@ pip install altair
 pip install vega_datasets
 ```
 
+<!-- PG to SSS/GGG a huge number of students thought that this was a command that they run in th python interpreter rather than a command that they run at the terminal. need more detail/explanation.-->
+
 
 ## My first plot -- image 
 ```{python}
@@ -104,11 +106,7 @@ alt.Chart(df).mark_bar().encode(
 
 [source](https://vega.github.io/vega-lite/#example).
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES for peter only:**
-It (embarassingly) took me 15 minutes to make this plot. After trying many fancy things it turned out that I simply had spelled `precipitation` as `precitation` :-(
-**END NOTES**
-:::
+
 
 ## My first plot -- grammar
 ```{json}
@@ -126,10 +124,7 @@ It (embarassingly) took me 15 minutes to make this plot. After trying many fancy
 
 Discussion question: what does each line of text mean?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*solution: I think this should be self-evident*
-:::
+
 
 ## Why the emphasis on grammar?
 * Packages for doing graphics and coding languages change over time
@@ -304,20 +299,7 @@ alt.Chart(df).mark_point(color='firebrick').encode(
 )
 ```
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES**
-beyond colors, other properties include 
 
-* whether it should be filled
-* opacity
-* thickness
-* type (shape)
-
-We will cover all of these in the next lecture
-
-Color names are the same as matplotlib: https://matplotlib.org/stable/gallery/color/named_colors.html
-**END NOTES**
-:::
 
 
 ## Customizing a visualization -- log scale
@@ -342,6 +324,7 @@ alt.Chart(df).mark_point(color='firebrick').encode(
 Make a bar plot showing the **lowest** rainfall for each city in the dataset.
 
 Hint: Altair's aggregation methods are [here](https://altair-viz.github.io/user_guide/encodings/index.html#aggregation-functions)
+
 
 ## Data Transformation: Do-pair-share solution
 
@@ -523,23 +506,7 @@ chart.get("datasets")
 1. extract `chart`'s encoding.
 2. extract just the encoding for `x`
 
-## Data Transformation: Do-pair-share solution
 
-Make a bar plot showing the **lowest** rainfall for each city in the dataset
-
-```{python}
-alt.Chart(df).mark_bar().encode(
-    x='min(precip)',
-    y='city'
-)
-```
-
-# Multiple Views 
-
-## Multiple Views: roadmap
-@@ -515,19 +502,6 @@ chart.get("datasets")
-1. extract `chart`'s encoding.
-2. extract just the encoding for `x`
 
 
 ## in-class exercise: solution
