@@ -24,8 +24,8 @@ format:
     - Also, 104 forks created as of Tuesday night so most folks are figuring it out. If you haven't yet, ask a friend
 - Questions about Visual Studio Code and Quarto
 \vspace{2ex}
-    - Ozzy posted a recording of mini-lesson from Wednesday's lab - see Canvas
-    - And will repeat it in today's lab
+    - Ozzy posted a recording of mini-lesson from Wednesday's lab - see Canvas. The minilesson will also be repeated in today's lab.kj
+- Lab Quiz Note: The quiz will only be available during the first 10 minutes of lab.
 
 ### MUD cards: content 
 - Is JSON something we'll need to write or regularly refer to?
