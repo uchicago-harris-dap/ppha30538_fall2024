@@ -324,18 +324,6 @@ Make a bar plot showing the **lowest** rainfall for each city in the dataset.
 
 Hint: Altair's aggregation methods are [here](https://altair-viz.github.io/user_guide/encodings/index.html#aggregation-functions)
 
-<!-- ZZZ delete before posting QMD -->
-## Data Transformation: Do-pair-share solution
-
-Make a bar plot showing the **lowest** rainfall for each city in the dataset
-
-```{python}
-alt.Chart(df).mark_bar().encode(
-    x='min(precip)',
-    y='city'
-)
-```
-
 
 # Multiple Views 
 
@@ -504,21 +492,6 @@ chart.get("datasets")
 
 1. extract `chart`'s encoding.
 2. extract just the encoding for `x`
-
-
-<!-- ZZZ delete before posting QMD -->
-
-## in-class exercise: solution
-```{python}
-chart.get("encoding")
-```
-
-
-```{python}
-chart.get("encoding").get("x")
-```
-
-
 
 
 ## summary
