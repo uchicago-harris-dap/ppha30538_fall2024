@@ -80,7 +80,9 @@ Pandas data frames come with types. When loading data not from pandas, explicitl
 * Ask *is value A the same or different than value B? (A = B)*, supporting statements like “A is equal to B” or “A is not equal to B”.
     * In the dataset above, the `country` field is `N`ominal.
 * When visualizing nominal data we should readily be able to see if values are the same or different: position, color hue (blue, red, green), and shape can help. 
-    * Remark: using a `size` channel to encode nominal data might mislead us, suggesting rank-order or magnitude differences among values that do not exist!
+
+<!--PG to GGG/SSS This comment doesn't make sense here because we haven't even covered what the size channel is yet
+    * Remark: using a `size` channel to encode nominal data might mislead us, suggesting rank-order or magnitude differences among values that do not exist!-->
 
 ## Ordinal (O)
 
@@ -97,20 +99,25 @@ Pandas data frames come with types. When loading data not from pandas, explicitl
     * With *ratio* data can also ask:
         * *how many are there of value A?* supporting statements such as "how many babies per parent?"
         * *value A is what proportion of value B? (A / B)*, supporting statements such as “A is 10% of B” or “B is 7 times larger than A”. 
-    * In the dataset above, `year` is a quantitative interval field (depending on whose history of the world you prefer, there are many choices for the year "zero"), whereas `fertility` and `life_expect` are quantitative ratio fields (zero is meaningful for calculating proportions).
 * Vega-Lite represents quantitative data, but does not make a distinction between interval and ratio types.
 * Quantitative values can be visualized using position, size, or color value, among other channels. 
 
 
-## Quantitative (Q), continued
-* recap
-    * with *interval* data ask: *what is the distance to value A from value B? (A - B)*
-    * With *ratio* data can also ask:
-        * *how many are there of value A?* 
-        * *value A is what proportion of value B? (A / B)*,
+## Quantitative (Q) and zeros
+* One way to check if you're working with *ratio* and *interval* data: **does zero mean anything?**
 * Textbook: "An axis with a zero baseline is essential for proportional comparisons of ratio values, but can be safely omitted for interval comparisons."
-* Discussion question -- Why is it so important to include zeros for ratio data? Can you give a counter-example where omitting zeros on the plot would lead the reader to misleading conclusions? 
+* In the dataset above:
+    * `year` is a quantitative interval field: depending on whose history of the world you prefer, there are many choices for the year "zero"
+        * We're either in year 2024 (Gregorian), 5784 (Hebrew), or 1445 (Islamic calendar)
+    * `fertility` and `life_expect` are quantitative ratio fields: zero is meaningful for calculating proportions
+* Discussion question -- Why is it so important to include zeros for ratio data? Can you give an example where omitting zeros on the plot would lead the reader to misleading conclusions? 
 
+
+## Example of a potentially misleading plot by omitting zeros
+
+![USAToday](pictures/usa-today.jpg)
+
+via [Statistics How To](https://www.statisticshowto.com/probability-and-statistics/descriptive-statistics/misleading-graphs/)
 
 ## Temporal (T)
 
@@ -129,17 +136,6 @@ What are examples of variables that are
 
 Let's try to come up with at least three examples of each. For each example, state the comparison in a sentence.
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-Solution: the hard one here is nominal. 
-
-examples can be 
-* geographic units
-* different types of health services
-* different types of housing
-:::
-
-
 
 ## Discussion question II
 
@@ -151,14 +147,6 @@ Suppose we have a dataset of ages (10 years old, 20 years old, 10 years old, 30 
 
 What comparisons are feasible with each data type?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-solution: Just because a data field is represented using a number doesn't mean we have to treat it as a quantitative type! For example, we might interpret a set of ages (10 years old, 20 years old, etc) as 
-
-* nominal (underage or overage), 
-* ordinal (grouped by year), 
-* quantitative (calculate average age).
-:::
 
 
 ## Revisit plot from beginning of prior lecture
@@ -178,7 +166,6 @@ What happens when...
 
 * Make `precipitation` ordinal
 * Revert. then make `date` temporal. There's a consequential but subtle change relative to the original plot. What is it?
-
 
 
 ## data types: summary
@@ -222,13 +209,6 @@ Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://me
 
 ![Visual encoding](pictures/visual_encoding.jpg)
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*talk through a few aspects of this image. The examples are a bit gratuitous. Most of the information content is in the boxes in the first two columns
-
-The rows more or less rank different visual elements from most to least noticeable. Looking at the extremes, XY coordinates can convey both quantified and non-quantified order as well as whether two things are equal. at the other extreme, shape cannot tell you at all about order, it can just tell if you if two things are the same or different.*
-:::
-
 
 Free advice: don't try to use all seven ways of encoding information in a single plot. It will inevitably be overload.
 
@@ -257,11 +237,6 @@ If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
 | Sequential Multi-Hue | Use for higher contrast, but harder to judge quantitative proximity |
 | Diverging | Use if there is a midpoint (e.g. voting for `redblue`) |
 | Cyclical | Use if circular (e.g. time of day, month) |
-
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*flip back and forth between each of these palette types and the examples on the website. Be sure to click "View discrete" as well*
-:::
 
 
 ## More advice on color choices
@@ -317,15 +292,6 @@ alt.Chart(data2000).mark_point().encode(
 
 In-class exercise: what happens if you swap the Q and the O types?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-solution: 
-
-* treating fertility as a categorical variable means you get a separate
-category on the x-axis for every single value of fertility
-* treating cluster as a quantitative variable means you get extra grid marks
-:::
-
 
 
 ## Do not require zero on axis range 
@@ -342,6 +308,15 @@ zero_included | zero_excluded
 ```
 
 Discussion question: which plot do you prefer (and why?)
+
+
+
+## Observations about whether to include zero
+
+* If you include zero, there is a lot of wasted white space. The data are compressed into a small area. This is best if the message you want to send is that fertility varies by a factor of nearly 8 from the highest to lowest while life expectancy varies much less (from 80 to 50)
+* If you exclude zero, it is much easier to see the negative relationship between life expectancy and fertility. This is best if that is the message you want to send.
+
+
 
 
 ## `size`
@@ -361,12 +336,6 @@ alt.Chart(data2000).mark_point().encode(
     alt.Size('pop:Q', scale=alt.Scale(range=[0,1000]))
 )
 ```
-
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-alt.Scale(range=[0,1000]) indicates that the visual size of the marks, and is not in reference to anything in the underlying data 
-:::
-
 
 
 ## add `color` and `size` with `filled=True`
@@ -423,6 +392,7 @@ alt.Chart(data2000).mark_point(filled=True).encode(
 The plot faceted by column doesn't fit on the page. Redo it instead faceted by row.
 
 Bonus: It still looks bad. What further change is needed?
+
 
 ## Encoding channels: summary
 
@@ -553,10 +523,7 @@ alt.Chart(data_4a).mark_line().encode(
 
 textbook advocates for having a plot with many more lines, no legend, and instead using `alt.Tooltip('country:N')`. This is technologically feasible but a bad idea. (Discuss: why?)
 
-::: {.notes .content-visible when-profile="speaker"}
-***NOTES:**
-Solution: plot is still illegible! too many lines. In addition, the tooltip is stupid, it only gives you a name when you mouse over the invisible dot, not when you mouse over the line
-:::
+
 
 ```{python}
 alt.Chart(data).mark_line().encode(
@@ -747,16 +714,6 @@ final_chart
 
 Discussion question -- using your newfound `tooltip` expertise, what does each cluster correspond to?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-
-* 0 -- South Asia
-* 1 -- Europe
-* 2 -- Africa
-* 3 -- Americas
-* 4 -- East Asia
-* 5 -- Middle East
-:::
 
 ## Production-quality interactive plot
 (no need to understand all the details)
@@ -813,16 +770,7 @@ Remark: `chart.save()` is important for anything where you want your output to b
 
 Discussion q -- What is difference between "View Source" and "View Compiled Vega"?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES**
-open the file. Click three dots at top. 
 
-**discussion q**
-View source is the vega-lite in JSON which is written by Altair
-
-Vega-lite is designed to be human intelligible, but it's not actually enough information for Vega to make a plot. So there's an additional "under the hood step" which goes from Vega-Lite to Vega
-**END NOTES**
-:::
 
 ## Interactivity and publishing: summary
 
