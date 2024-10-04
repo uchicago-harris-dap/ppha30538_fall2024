@@ -408,16 +408,40 @@ Ozzy Houck
 <section id="downloading-and-installing" class="slide level2">
 <h2>Downloading and Installing</h2>
 <ul>
+<<<<<<< Updated upstream
 <li><p>VSCode: <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p></li>
 <li><p>Quarto: <a href="https://quarto.org/docs/get-started/">https://quarto.org/docs/get-started/</a></p></li>
 <li><p>Jupyter: <code>pip install jupyter pandas altair</code></p></li>
 <li><p>Helpful startup guides:</p>
+=======
+<li>VSCode: <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
+<li>Quarto: <a href="https://quarto.org/docs/get-started/">https://quarto.org/docs/get-started/</a></li>
+<li>Jupyter: <code>pip install jupyter</code></li>
+</ul>
+<div id="34d4ee05" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>pip install jupyter pandas altair</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Helpful startup guides:
+>>>>>>> Stashed changes
 <ul>
 <li>Installing VSCode on <strong><a href="https://code.visualstudio.com/docs/languages/python">Mac</a></strong> and <strong><a href="https://code.visualstudio.com/docs/languages/python">Windows</a></strong></li>
 <li>Setting up <strong><a href="https://code.visualstudio.com/docs/languages/python">python</a></strong> for VSCode</li>
 </ul></li>
 </ul>
 </section>
+<<<<<<< Updated upstream
+=======
+<section id="setting-up-python-in-vscode" class="slide level2">
+<h2>Setting up Python in VSCode</h2>
+<ul>
+<li>Ctrl+Shift+P to open command palette (or <code>Cmd</code> on Mac)</li>
+<li>Type “Python: Select Interpreter”</li>
+<li>Choose the Python interpreter you want to use</li>
+<li>In terminal, type <code>which pip</code> to make sure you are using the right Python version when installing packages with pip</li>
+</ul>
+</section>
+>>>>>>> Stashed changes
 <section id="basics" class="slide level2">
 <h2>Basics</h2>
 <!-- How to comment --->
@@ -471,6 +495,7 @@ Ozzy Houck
 <li>Run code chunks individually</li>
 <li>View output in-line</li>
 </ul>
+<<<<<<< Updated upstream
 <div id="66804868" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href=""></a></span>
@@ -483,6 +508,17 @@ Ozzy Houck
 <span id="cb1-9"><a href=""></a></span>
 <span id="cb1-10"><a href=""></a>df[<span class="st">"new_col"</span>] <span class="op">=</span> df[<span class="st">"A"</span>] <span class="op">*</span> <span class="dv">2</span></span>
 <span id="cb1-11"><a href=""></a>df.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<div id="712e65a4" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-4"><a href=""></a>    <span class="st">'A'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb2-5"><a href=""></a>    <span class="st">'B'</span>: [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span>
+<span id="cb2-6"><a href=""></a>})</span>
+<span id="cb2-7"><a href=""></a><span class="bu">print</span>(<span class="st">"Here is some output!"</span>)</span>
+<span id="cb2-8"><a href=""></a>df.head(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> Stashed changes
 <div class="cell-output cell-output-stdout">
 <pre><code>Here is some output!</code></pre>
 </div>
