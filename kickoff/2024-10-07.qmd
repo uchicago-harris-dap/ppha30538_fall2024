@@ -22,3 +22,12 @@ format:
 ### MUD cards: general questions
 - Recording lectures: (policy TBD)
 - How to study for lab quizzes: xxx
+
+### First Problem Set: troubleshooting
+- **Realistic over perfect and clean**: some hiccups with submission formatting - thank you for your patience as we converge on submission processes
+- **Self-sufficiency**
+\vspace{2ex}
+    - Online resources: we strongly encourage the use of Google/ChatGPT for troubleshooting tech issues. The teaching team may not have encouraged your particular problem before, but likely someone on the internet has.
+    - Help us help you: on Ed or at office hours, describe *in as much detail as possible* what your issue is, what you've tried, and why it seemed to not work, rather than just "I don't know how to do this."
+    - Use your peers: if you notice in lab or from Ed that other students seemed to have gotten past the step at which you are stuck, ask them for help!
+    
