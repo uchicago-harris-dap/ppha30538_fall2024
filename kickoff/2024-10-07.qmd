@@ -16,12 +16,16 @@ format:
 
 ### MUD cards: about you!
 - Really fun to get to know a little more about you through MUD cards
-- Diversity of professional backgrounds! Some examples of note: geopolitical risk management, AmeriCorps, film industry + actors, criminal justice, want to do PhDs, 
-- Diversity of interests! Some examples of note: playing tuba, owner of 2 pet bunnies, "legendarily bad at darts," knows 5 languages, running a marathon later this month, a short story (mystery and fantasy) author, favorite foods include green curry, boba tea
+- Diversity of professional backgrounds! Some examples of note: geopolitical risk management, AmeriCorps, film industry background, actor, criminal justice, want to do PhDs
+- Diversity of interests! Some examples of note: playing tuba, owner of 2 pet bunnies, "legendarily bad at darts," knows 5 languages, running a marathon later this month, a short story (mystery and fantasy) author, favorite foods include green curry and boba tea
 
 ### MUD cards: general questions
-- Recording lectures: (policy TBD)
-- How to study for lab quizzes: xxx
+- How to study for lab quizzes: based directly on lecture
+    - Pay attention to lecture and engage with in-class exercises
+    - Know how to read and interpret Python functions relevant to lecture
+    - You won't be asked to memorize syntax, but rather look at a chunk of code and explain what it does or find a bug in it
+- Final project parameters: will be released some time this week
+- Recording lectures: XXX (policy TBD)
 
 ### PS1 Recap
 - **Realistic over perfect and clean**: some hiccups with submission - thank you for your patience as we converge on submission processes
