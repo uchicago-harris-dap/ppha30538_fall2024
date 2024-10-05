@@ -23,11 +23,15 @@ format:
 - Recording lectures: (policy TBD)
 - How to study for lab quizzes: xxx
 
-### First Problem Set: troubleshooting
-- **Realistic over perfect and clean**: some hiccups with submission formatting - thank you for your patience as we converge on submission processes
+### PS1 Recap
+- **Realistic over perfect and clean**: some hiccups with submission - thank you for your patience as we converge on submission processes
 - **Self-sufficiency**
 \vspace{2ex}
-    - Online resources: we strongly encourage the use of Google/ChatGPT for troubleshooting tech issues. The teaching team may not have encouraged your particular problem before, but likely someone on the internet has.
     - Help us help you: on Ed or at office hours, describe *in as much detail as possible* what your issue is, what you've tried, and why it seemed to not work, rather than just "I don't know how to do this."
     - Use your peers: if you notice in lab or from Ed that other students seemed to have gotten past the step at which you are stuck, ask them for help!
     
+### EdDiscussion Shoutouts
+- Lively discussions on Ed on problem set, troubleshooting, etc. - this is great
+- Reminder: up to 2% extra credit for answering questions or posting useful info
+![](pictures/eddiscussion_1.png){width=70%}
+![](pictures/eddiscussion_2.png){width=70%}
