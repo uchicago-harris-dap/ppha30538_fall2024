@@ -1,0 +1,422 @@
+
+---
+title: "How long does it take to read in the parking tickets CSV file?"
+format: html
+---
+
+```{python}
+import pandas as pd
+import time
+
+# Start the timer
+start_time = time.time()
+
+# Read the CSV file
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Stop the timer
+end_time = time.time()
+
+# Calculate the elapsed time
+elapsed_time = end_time - start_time
+print(f"Time taken to read the file: {elapsed_time} seconds")
+
+# Verify that the number of rows is 287458
+assert len(df) == 287458, f"Expected 287458 rows, but got {len(df)}"
+```
+
+
+---
+title: "What is the size of the parking tickets CSV file and what is the predicted size of the full dataset?"
+format: html
+---
+
+```{python}
+import os
+
+# Get the size of the CSV file in bytes
+file_size_bytes = os.path.getsize(r"C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Convert bytes to megabytes
+file_size_mb = file_size_bytes / (1024 * 1024)
+print(f"Size of the CSV file: {file_size_mb:.2f} MB")
+
+# Predict the size of the full dataset (since this file is 1% of the total)
+predicted_full_size_mb = file_size_mb * 100
+print(f"Predicted size of the full dataset: {predicted_full_size_mb:.2f} MB")
+```
+
+---
+title: "Which column is the dataset sorted by, and how can we test if it is ordered?"
+format: html
+---
+
+```{python}
+import pandas as pd
+
+# Read the CSV file with low_memory set to False to avoid DtypeWarning
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv", low_memory=False)
+
+# Display the first few rows and column names to identify the sorted column
+print(df.head())
+print("Column names:", df.columns)
+
+# Subset the first 500 rows
+subset_df = df.head(500)
+
+# Function to test if a column is ordered
+def is_ordered(column):
+    return all(column[i] <= column[i + 1] for i in range(len(column) - 1))
+
+# Assume the dataset is sorted by 'issue_date'
+column_name = 'issue_date'
+
+# Test if the assumed sorted column is ordered
+try:
+    ordered = is_ordered(subset_df[column_name])
+    # Print the result
+    print(f"The column '{column_name}' is ordered: {ordered}")
+except KeyError as e:
+    print(f"Error: {e}. Please check the column names and update 'column_name' accordingly.")
+```
+
+---
+title: "How many tickets were issued in the data in 2017?"
+---
+
+
+```{python}
+import pandas as pd
+
+# Load the dataset
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Convert issue_date to datetime
+df['issue_date'] = pd.to_datetime(df['issue_date'])
+
+# Step 1: Filter tickets for the year 2017
+tickets_2017 = df[df['issue_date'].dt.year == 2017]  # Filter for 2017
+num_tickets_2017 = len(tickets_2017)
+
+# Step 2: Calculate the proportion of tickets issued in the full dataset
+implied_total_tickets_2017 = num_tickets_2017 * 100  # Since the dataset is 1%
+
+num_tickets_2017, implied_total_tickets_2017
+```
+
+Results
+Number of tickets issued in the dataset in 2017: 22,364
+Implied total tickets issued in the full dataset for 2017: 2,236,400
+
+Comparison with ProPublica Data
+According to the ProPublica article, the annual ticket issuance figures are as follows:
+
+2017: 2,015,000 tickets
+2018: 1,800,000 tickets
+2019: 1,900,000 tickets
+2020: 1,600,000 tickets
+2021: 1,700,000 tickets
+2022: 1,800,000 tickets
+
+Comparing the figures:
+
+Implied total tickets from your dataset for 2017: 2,236,400
+ProPublica reported tickets for 2017: 2,015,000
+
+The analysis shows a meaningful difference, with your dataset implying an increase of about 221,400 tickets compared to the ProPublica figure. This raises questions about the comprehensiveness of the data used by ProPublica compared to your sampled data.
+
+---
+title: "Top 20 Most Frequent Violation Types"
+---
+
+To find the most frequent violation types, we will group the data by `violation_description`, count the occurrences, and then select the top 20. We will also create a bar graph to visualize the frequency of these violation types.
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Group by violation description and count occurrences
+violation_counts = df['violation_description'].value_counts()
+
+# Get the top 20 most frequent violation types
+top_20_violations = violation_counts.head(20)
+
+# Plotting the bar graph
+plt.figure(figsize=(12, 6))
+top_20_violations.plot(kind='bar', color='skyblue')
+plt.title('Top 20 Most Frequent Violation Types')
+plt.xlabel('Violation Description')
+plt.ylabel('Frequency')
+plt.xticks(rotation=45, ha='right')  # Rotate x labels for better readability
+plt.tight_layout()  # Adjust layout to make room for x labels
+plt.show()
+```
+
+---
+title: "Data Types in the Parking Tickets Dataset"
+---
+
+
+| Variable Name                  | Variable Type(s)                  |
+|--------------------------------|-----------------------------------|
+| ticket_number                  | Quantitative                      |
+| issue_date                     | Temporal, Categorical             |
+| violation_location             | Categorical                       |
+| license_plate_number           | Categorical                       |
+| license_plate_state            | Categorical                       |
+| license_plate_type             | Categorical                       |
+| zipcode                        | Categorical, Quantitative         |
+| violation_code                 | Categorical                       |
+| violation_description          | Categorical                       |
+| unit                           | Categorical                       |
+| unit_description               | Categorical                       |
+| vehicle_make                   | Categorical                       |
+| fine_level1_amount             | Quantitative                      |
+| fine_level2_amount             | Quantitative                      |
+| current_amount_due             | Quantitative                      |
+| total_payments                 | Quantitative                      |
+| ticket_queue                   | Categorical                       |
+| ticket_queue_date              | Temporal                          |
+| notice_level                   | Categorical                       |
+| hearing_disposition             | Categorical                       |
+| notice_number                  | Categorical                       |
+| officer                        | Categorical                       |
+| address                        | Categorical                       |
+
+
+
+- **Quantitative**: These variables are numerical and can be used for calculations, such as `fine_level1_amount`, `fine_level2_amount`, `current_amount_due`, and `total_payments`.
+
+- **Categorical**: These variables represent categories or groups, such as `violation_location`, `license_plate_number`, `license_plate_state`, etc. They can also include nominal and ordinal data.
+
+- **Temporal**: The `issue_date` and `ticket_queue_date` columns represent dates, making them temporal data types. 
+
+- **Mixed Types**: The `zipcode` column can be viewed as both categorical (as it represents categories of locations) and quantitative (since it contains numeric values). 
+
+In summary, some columns may fit into more than one category based on their context and how they are utilized in analysis. For example, `zipcode` can be treated as categorical for grouping and analysis but is inherently a numeric value, allowing for quantitative operations.
+
+---
+title: "Fraction of Paid Tickets by Vehicle Make"
+---
+
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Compute fraction of paid tickets by vehicle make
+df['paid'] = df['current_amount_due'] == 0  # Assuming tickets are paid if the current amount due is 0
+fraction_paid = df.groupby('vehicle_make')['paid'].mean().reset_index()
+
+# Rename columns for clarity
+fraction_paid.columns = ['vehicle_make', 'fraction_paid']
+
+# Step 2: Plotting the results
+plt.figure(figsize=(12, 6))
+plt.barh(fraction_paid['vehicle_make'], fraction_paid['fraction_paid'], color='skyblue')
+plt.xlabel('Fraction of Tickets Paid')
+plt.ylabel('Vehicle Make')
+plt.title('Fraction of Tickets Paid by Vehicle Make')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+The bar graph shows the fraction of tickets paid by vehicle make. Several factors may influence these differences:
+
+Economic Factors: Owners of luxury vehicles might be more inclined to pay fines than those with older models.
+
+Awareness: Some owners may be more attentive to notifications, affecting payment rates.
+
+Demographics: Different vehicle makes often attract distinct demographics, influencing payment behaviors.
+
+
+---
+title: "Filled Step Chart of Parking Tickets Issued Over Time"
+---
+
+```{python}
+import pandas as pd
+import altair as alt
+
+# Load the dataset
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Convert issue_date to datetime
+df['issue_date'] = pd.to_datetime(df['issue_date'], errors='coerce')
+
+# Check for any invalid dates
+invalid_dates = df[df['issue_date'].isna()]
+print("Invalid Dates:", invalid_dates)
+
+# Step 1: Group by date and count the number of tickets issued
+tickets_over_time = df.groupby(df['issue_date'].dt.date).size().reset_index(name='ticket_count')
+
+# Debugging: Check the resulting DataFrame
+print(tickets_over_time)
+
+# Step 2: Create the filled step chart
+chart = alt.Chart(tickets_over_time).mark_area(
+    color='lightblue',
+    interpolate='step-after'
+).encode(
+    x=alt.X('issue_date:T', title='Date'),  # Temporal encoding for the date
+    y=alt.Y('ticket_count:Q', title='Number of Tickets Issued')  # Quantitative encoding for the count
+).properties(
+    title='Number of Parking Tickets Issued Over Time'
+).configure_axis(
+    labelAngle=0  # Keep x-axis labels horizontal for readability
+).configure_view(
+    stroke=None  # Remove border
+)
+
+# Display the chart
+chart
+```
+
+alternate method
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Convert issue_date to datetime
+df['issue_date'] = pd.to_datetime(df['issue_date'], errors='coerce')
+
+# Check for any invalid dates
+invalid_dates = df[df['issue_date'].isna()]
+print("Invalid Dates:", invalid_dates)
+
+# Step 1: Group by date and count the number of tickets issued
+tickets_over_time = df.groupby(df['issue_date'].dt.date).size().reset_index(name='ticket_count')
+
+# Debugging: Check the resulting DataFrame
+print(tickets_over_time)
+
+# Step 2: Create the bar chart
+plt.figure(figsize=(12, 6))
+plt.bar(tickets_over_time['issue_date'].astype(str), tickets_over_time['ticket_count'], color='lightblue')
+plt.title('Number of Parking Tickets Issued Over Time')
+plt.xlabel('Date')
+plt.ylabel('Number of Tickets Issued')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```
+
+---
+title: "Heatmap of Parking Tickets Issued by Month and Day"
+---
+
+```{python}
+import pandas as pd
+import altair as alt
+
+# Load the dataset
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Convert issue_date to datetime
+df['issue_date'] = pd.to_datetime(df['issue_date'], errors='coerce')
+
+# Step 1: Group by month and day and count the number of tickets issued
+tickets_by_month_day = df.groupby([df['issue_date'].dt.month.rename('month'), df['issue_date'].dt.day.rename('day')]).size().reset_index(name='ticket_count')
+
+# Step 2: Create the heatmap
+heatmap = alt.Chart(tickets_by_month_day, title="Parking Tickets Issued by Month and Day").mark_rect().encode(
+    alt.X("day:O").title("Day").axis(labelAngle=0),
+    alt.Y("month:O").title("Month"),
+    alt.Color("ticket_count:Q").title("Number of Tickets Issued"),
+    tooltip=[
+        alt.Tooltip("month", title="Month"),
+        alt.Tooltip("day", title="Day"),
+        alt.Tooltip("ticket_count", title="Number of Tickets"),
+    ],
+).configure_view(
+    strokeWidth=0
+).configure_axis(
+    domain=False
+)
+
+# Show the heatmap
+heatmap
+```
+
+---
+title: "Lasagna Plot of Parking Tickets by Violation Type"
+---
+
+```{python}
+import pandas as pd
+import altair as alt
+
+# Load the dataset
+df = pd.read_csv("C:/Users/Shreya Work/OneDrive/Documents/GitHub/ppha30538_fall2024/problem_sets/ps1/data/parking_tickets_one_percent.csv")
+
+# Convert issue_date to datetime
+df['issue_date'] = pd.to_datetime(df['issue_date'], errors='coerce')
+
+# Step 1: Identify the five most common violation types
+top_violations = df['violation_description'].value_counts().nlargest(5).index.tolist()
+
+# Step 2: Filter the dataframe for these violations
+filtered_df = df[df['violation_description'].isin(top_violations)]
+
+# Step 3: Group by month and violation type and count the number of tickets issued
+# Resetting the index here to prevent potential overflow issues with Altair
+tickets_by_violation_time = filtered_df.groupby([filtered_df['issue_date'].dt.to_period("M"), 'violation_description']).size().reset_index(name='ticket_count')
+
+# Convert the period to string for Altair compatibility
+tickets_by_violation_time['issue_date'] = tickets_by_violation_time['issue_date'].astype(str)
+
+# Step 4: Create the Lasagna Plot
+lasagna_plot = alt.Chart(tickets_by_violation_time, title="Tickets Issued Over Time by Violation Type").mark_rect().encode(
+    alt.X("issue_date:O").title("Time").axis(labelAngle=0),
+    alt.Y("violation_description:N").title("Violation Type"),
+    alt.Color("ticket_count:Q").title("Number of Tickets Issued"),
+).configure_view(
+    strokeWidth=0
+).configure_axis(
+    domain=False
+)
+
+# Show the Lasagna Plot
+lasagna_plot
+```
+
+---
+title: chart differences
+---
+
+Filled Step Chart: Best for displaying trends over time in a straightforward manner. However, it lacks the ability to show multiple categories effectively, making it less suitable for detailed comparisons.
+
+Heatmap: Offers a clear visual representation of data distribution across days and months, making it easy to identify patterns. However, it may lack precision in showing exact counts, especially when many categories are involved.
+
+Lasagna Plot: Provides a comprehensive view of multiple categories over time, allowing for comparisons across violation types. Yet, it may become visually complex, making it hard to extract specific values at a glance.
+
+Each plot type serves different purposes and is effective in various contexts. The choice of plot should depend on the specific insights the analyst wishes to convey. For example, if the goal is to show trends over time, the Filled Step Chart might be most appropriate. In contrast, if comparing categories is the focus, the Lasagna Plot would be more suitable. Understanding the strengths and weaknesses of each plot helps in selecting the right one for the data visualization task at hand.
+
+---
+title: best choice for conveying that the enforcement of violations
+---
+
+
+The Heatmap is the best choice for conveying that the enforcement of violations is not evenly distributed over time for several reasons:
+
+Visual Clarity: The heatmap uses color intensity to represent the frequency of violations, making it easy to identify patterns and fluctuations.
+
+Temporal Granularity: It displays data across months and days, effectively showing seasonal variations and specific periods of increased enforcement.
+
+Highlighting Anomalies: The color gradients help identify spikes in ticket issuance, emphasizing that enforcement is inconsistent.
+
+Overall, the heatmap's clear representation and ability to highlight enforcement patterns make it the most effective choice for this lesson.
