@@ -1,5 +1,5 @@
 ---
-title: "Kickoff (Tue/Thurs Sections)"
+title: "Kickoff "
 author: "Peter Ganong and Maggie Shi"
 date: October 7, 2024
 date-format: long
@@ -14,7 +14,61 @@ format:
             \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
 ---
 
-### MUD cards: about you!
+### Pulling this week's material -- `main` branch
+
+![Sync fork](pictures/sync_main.png)
+
+### Pulling this week's material -- `after_lecture` branch
+
+![Switch branches](pictures/switch_branches.png)
+
+Then hit "sync fork again"
+
+Finally, pull the changes from the remote repo to your local repo ("pull" is git jargon which we will cover in detail in a few more weeks. in github desktop this is called "sync"ing)
+
+### MUD cards: about you professional (Professor Ganong)
+
+- I loved reading these cards this weekend.
+
+- Professional
+    - Three current or former teachers in the class 
+    - Sustainable public transport system
+    - Chinese port acquisitions
+    - "PC game boy"
+    - A huge number of you have internships or research projects where you are already using DAP skills -- awesome! Excited to hear more about these
+
+- "Observed the same things when I worked at the Mayor's Office this summer in Chicago"
+
+### MUD cards: about you personal (Professor Ganong)
+
+- Violinist in the University Symphony Orchestra
+
+. . .
+
+- Has two kids
+
+. . .
+
+- Mechanical pencil collection
+
+. . .
+
+- Semi-professional Chinese dancer
+
+. . .
+
+- Singers: jazz, hip-hop
+
+. . .
+
+- Once got a concussion from getting hit in the head by a fish
+
+. . .
+
+- One of you claims to have lived here for a winter and still says that they love the weather in Chicago
+
+
+### MUD cards: about you! (Professor Shi)
 - Really fun to get to know a little more about you through MUD cards
 - Diversity of professional backgrounds! Some examples of note: geopolitical risk management, AmeriCorps, film industry background, actor, criminal justice, want to do PhDs
 - Diversity of interests! Some examples of note: playing tuba, owner of 2 pet bunnies, "legendarily bad at darts," knows 5 languages, running a marathon later this month, a short story (mystery and fantasy) author, favorite foods include green curry and boba tea
