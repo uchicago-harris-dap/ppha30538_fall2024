@@ -1,0 +1,318 @@
+---
+title: "30538 Problem Sets 1: Parking Tickets Solutions"
+author: "Peter Ganong, Maggie Shi, and Ozzy Houck"
+date: "2024-09-30"
+format: 
+    html:
+        code-overflow: wrap
+execute:
+  eval: true 
+  echo: true 
+---
+
+1. **PS1:** Due Sat Oct 5 at 5:00PM Central. Worth 50 points. 
+
+We use (`*`) to indicate a problem that we think might be time consuming. 
+
+Steps to submit (5 points on PS1 and 10 points on PS2)
+
+1. "This submission is my work alone and complies with the 30538 integrity
+policy." Add your initials to indicate your agreement: \*\*\_\_\*\*
+2. "I have uploaded the names of anyone I worked with on the problem set **[here](https://docs.google.com/forms/d/1-zzHx762odGlpVWtgdIC55vqF-j3gqdAp6Pno1rIGK0/edit)**"  \*\*\_\_\*\* (1 point)
+3. Late coins used this pset: \*\*\_\_\*\* Late coins left after submission: \*\*\_\_\*\*
+4. Knit your `ps1.qmd` to make `ps1.pdf`. 
+    * The PDF should not be more than 25 pages. Use `head()` and re-size figures when appropriate. 
+5. Push  `ps1.qmd` and `ps1.pdf` to your github repo. It is fine to use Github Desktop.
+6. Submit `ps1.pdf` via Gradescope (4 points) 
+7. Tag your submission in Gradescope
+
+# Background 
+
+Read **[this](https://features.propublica.org/driven-into-debt/chicago-ticket-debt-bankruptcy/)** 
+article and **[this](https://www.propublica.org/article/chicago-vehicle-sticker-law-ticket-price-hike-black-drivers-debt)** shorter article. If you are curious to learn more, **[this](https://www.propublica.org/series/driven-into-debt)** 
+page has all of the articles that ProPublica has done on this topic. 
+
+# PS1
+
+## Read in one percent sample (15 Points)
+
+1.  To help you get started, we pushed a file to the course repo called `parking_tickets_one_percent.csv` which gives you a one percent sample of tickets. We constructed the sample by selecting ticket numbers that end in `01`. How long does it take to read in this file?  (Find a function to measure how long it takes the command to run. Note that everytime you run, there will be some difference in how long the code takes to run). Add an `assert` statement which verifies that there are 287458 rows.
+
+    ```{python}
+    import pandas as pd
+    import time
+    import warnings
+    warnings.filterwarnings('ignore')
+
+    def read_parking_tickets(file_path):
+        start_time = time.time()
+        df = pd.read_csv(file_path)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        assert len(df) == 287458, "The number of rows is not as expected."
+        print(f"Time taken to read the file: {elapsed_time:.2f} seconds")
+        return df
+
+    # Example usage
+    file_path = 'data/parking_tickets_one_percent.csv'
+    df = read_parking_tickets(file_path)
+    ```
+
+1. Using a function in the `os` library calculate how many megabytes is the CSV file? Using math, how large would you predict the full data set is?  
+
+```{python}
+#| message: false
+    import os
+    def get_file_size(file_path):
+        file_size = os.path.getsize(file_path) / (1024 * 1024)  # Convert bytes to megabytes
+        return file_size
+    def get_file_size_mb(file_path):
+        file_size_bytes = os.path.getsize(file_path)
+
+
+    # Example usage
+    file_size = get_file_size(file_path)
+    print(f"File size: {file_size:.2f} MB")
+
+    # Predict the full dataset size
+    one_percent_size = file_size
+    full_dataset_size = one_percent_size * 100
+    print(f"Predicted full dataset size: {full_dataset_size:.2f} MB")
+```
+
+3.  The rows on the dataset are ordered or sorted by a certain column by default. Which column? Then, subset the dataset to the first 500 rows and write a function that tests if the column is ordered. 
+
+
+```{python}
+
+# visually inspect the data and see that issue_date is ordered 
+print(df.head())
+
+def is_increasing(data, column):
+
+    data[column] = pd.to_datetime(data[column]) 
+
+    is_increasing = data[column].is_monotonic_increasing
+
+    return is_increasing
+
+# make sure issue_date is a datetime
+df['issue_date'] = pd.to_datetime(df['issue_date'])
+increasing_check = is_increasing(df.head(500), "issue_date")
+print(increasing_check)
+```
+
+## Cleaning the data and benchmarking (15 Points)
+
+1.  How many tickets were issued in the data in 2017? How many tickets does that imply were issued in the full data in 2017? How many tickets are issued each year according to the ProPublica article? Do you think that there is a meaningful difference?
+
+```{python}
+df_2017 = df[df['issue_date'].dt.year == 2017]
+print(df_2017.shape)
+```
+
+**Solution:** There are 22k tickets in 2017 which implies that 2.2 million tickets were issued in 2017. The article mentions 3 million tickets which is a significant difference.
+
+2.  Pooling the data across all years what are the top 20 most frequent violation types? Make a bar graph to show the frequency of these ticket types. Format the graph such that the violation descriptions are legible and no words are cut off.
+
+```{python}
+import altair as alt
+
+# Count the frequencies of violation types in 1000s
+violation_counts = df['violation_description'].value_counts().reset_index()
+violation_counts.columns = ['Violation Description', 'Frequency']
+violation_counts['Frequency (1000s)'] = violation_counts['Frequency'] / 1000
+
+# make violation description title case
+violation_counts['Violation Description'] = violation_counts['Violation Description'].str.title()
+
+# Get the top 20 violation types
+top_20_violations = violation_counts.nlargest(20, 'Frequency (1000s)')
+
+# Plot the frequencies
+alt.Chart(top_20_violations).mark_bar().encode(
+    x='Frequency (1000s):Q', # Q means quantitative
+    y=alt.Y('Violation Description:N', sort='-x')
+).properties(
+    title='Top 20 Most Frequent Violations',
+    width=500,
+    height=300
+).configure_axis( # Configure the axis so that the labels are not cut off
+    labelFontSize=8,
+    labelLimit=400
+)
+```
+
+## Visual Encoding (15 Points)
+
+1. In lecture 2, we discussed how Altair thinks about categorizing data series into four different types. Which data type or types would you associate with each column in the data frame? Your response should take the form of a markdown table where each row corresponds to one of the variables in the parking tickets dataset, the first column is the variable name and the second column is the variable type or types. If you argue that a column might be associated with than one type, explain why in writing below the table.
+
+**Solution:** 
+
+| Variable Name | Altair Data Type |
+| --- | --- |
+| ticket_number | Nominal Ordinal |
+| issue_date | Temporal |
+| violation_location | Nominal |
+| license_plate_number | Nominal |
+| license_plate_state | Nominal |
+| license_plate_type | Nominal |
+| zipcode | Nominal or Quantitative |
+| violation_code | Nominal |
+| violation_description | Nominal |
+| unit | Quantitative |
+| unit_description | Nominal |
+| vehicle_make | Nominal |
+| fine_level1_amount | Quantitative |
+| fine_level2_amount | Quantitative |
+| current_amount_due | Quantitative |
+| total_payments | Quantitative |
+| ticket_queue | Nominal |
+| ticket_queue_date | Temporal |
+| notice_level | Ordinal |
+| hearing_disposition | Nominal |
+| notice_number | Nominal or Ordinal |
+| officer | Nominal |
+| address | Nominal |
+| date | Temporal |
+
+While written as a number, ticket_number seems to be used for identification and so it will most likely be useful as a nominal data type. However, if the ticket_number can be used to tell us which order tickets were written it could be ordinal. The same argument holds for notice_number.
+
+zipcodes are most often used as nominal data types, but they can also be used as quantitative data types if you are using the geographic information that is encoded in the zipcode numbering.
+
+2. Compute the fraction of time that tickets issued to each vehicle make are marked as paid. Show the results as a bar graph. Why do you think that some vehicle makes are more or less likely to have paid tickets?
+
+```{python}
+
+# Compute the frequency of tickets for each vehicle make
+ticket_freq = df['vehicle_make'].value_counts()
+
+# Compute the fraction of time that tickets issued to each vehicle make are marked as paid
+paid_tickets = df[df['ticket_queue'] == 'Paid'].groupby('vehicle_make').size()
+paid_fraction = paid_tickets / ticket_freq
+
+# Sort by fraction paid
+paid_fraction = paid_fraction.sort_values(ascending=False).reset_index()
+print(paid_fraction.head())
+paid_fraction.columns = ['vehicle_make', 'fraction_paid']  # Rename the columns for the plot
+
+# Plot the top 20 vehicle makes by fraction of tickets paid
+alt.Chart(paid_fraction.head(20)).mark_bar().encode(
+    alt.X('vehicle_make:N', title = "Vehicle Make", sort = '-y'),  # N: nominal data type
+    alt.Y('fraction_paid:Q', title = "Fraction Paid")  # Q: quantitative data type
+).properties(
+    title='Fraction of Tickets Paid by Vehicle Make',
+    width=500,
+    height=300
+)
+
+```
+
+**Solution:** Vehicle makes with the highest fraction paid also look like they are more expensive brands. Car brand is likely a proxy for income and wealth which would affect the ability to pay tickets.
+
+3. Make a plot for the number of tickets issued over time by adapting the [Filled Step Chart](https://altair-viz.github.io/gallery/filled_step_chart.html) example online. Go back to Bertin's taxonomy of visual encoding, which we discussed in lecture. What visual encoding channel or channels does this use?
+```{python}
+# make sure issue_date is a datetime
+df['issue_date'] = pd.to_datetime(df['issue_date'])
+
+# aggregate to the month level
+df['date'] = df['issue_date'].dt.strftime('%Y-%m')
+tickets_by_date = df.groupby('date').size().reset_index()
+tickets_by_date.columns = ['Date', 'Number of Tickets per Month']
+
+alt.Chart(tickets_by_date).mark_area(
+    color="lightblue",
+    interpolate='step-after',
+    line=True
+).encode(
+    x='Date:T',
+    y='Number of Tickets per Month:Q'
+)
+```
+
+**Solution:**  The Number of tickets issued is decreasing over time and looks like it is seasonal.
+The visual encoding channel is line.
+
+1. Make a plot for the number of tickets issued by month and day by adapting the [Annual Weather Heatmap](https://altair-viz.github.io/gallery/annual_weather_heatmap.html) example online. What visual encoding channel or channels does this use?
+```{python}
+# want to look at by calandar day for all years
+df['date'] = df['issue_date'].dt.strftime('%m-%d')
+
+# count the number of tickets issued each day
+daily_tickets = df.groupby('date').size().reset_index()
+daily_tickets.columns = ['date', 'num_tickets']
+
+alt.Chart(daily_tickets, title="Number of Tickets in Chicago").mark_rect().encode(
+    alt.X("date(date):O").title("Day").axis(format="%e", labelAngle=0),
+    alt.Y("month(date):O").title("Month"),
+    alt.Color("max(num_tickets)").title(None),
+    tooltip=[
+        alt.Tooltip("monthdate(date)", title="Date"),
+        alt.Tooltip("max(num_tickets)", title="Number of Tickets"),
+    ],
+).configure_view(
+    step=13,
+    strokeWidth=0
+).configure_axis(
+    domain=False
+)
+```
+
+**Solution:** Christmas and 4th of july have very few tickets issued
+more tickets at the start of the month
+visual encoding channel is color
+
+4. Subset to the five most common types of violations. Make a plot for the number of tickets issued over time by adapting the [Lasagna Plot](https://altair-viz.github.io/gallery/lasagna_plot.html) example online. What visual encoding channel or channels does this use?
+
+```{python}
+
+# index at the end only keeps the names of the violations
+five_most_common = df['violation_description'].value_counts().head(5).index
+
+five_most_common_df = df[df['violation_description'].isin(five_most_common)].copy()
+
+# again aggregate to the month level
+five_most_common_df.loc[:, 'date'] = five_most_common_df['issue_date'].dt.strftime('%Y-%m')
+
+# make violation description title case
+five_most_common_df['violation_description'] = five_most_common_df['violation_description'].str.title()
+
+# again aggregate to the month level
+five_most_common_df['date'] = five_most_common_df['issue_date'].dt.strftime('%Y-%m')
+five_most_common_df = five_most_common_df.groupby(['date', 'violation_description']).size().reset_index()
+five_most_common_df.columns = ['date', 'violation_description', 'num_tickets']
+
+color_condition = alt.condition(
+    "month(datum.value) == 1 && date(datum.value) == 1",
+    alt.value("black"),
+    alt.value(None),
+)
+
+alt.Chart(five_most_common_df, width=300, height=100).transform_filter(
+    alt.datum.symbol != "GOOG"
+).mark_rect().encode(
+    alt.X("yearmonth(date):O")
+        .title("Time")
+        .axis(
+            format="%Y",
+            labelAngle=0,
+            labelOverlap=False,
+            labelColor=color_condition,
+            tickColor=color_condition,
+        ),
+    alt.Y("violation_description:N").title(None),
+    alt.Color("sum(num_tickets)").title("Num Tickets per Month")
+).configure_axis( # Configure the axis so that the labels are not cut off
+    labelFontSize=8,
+    labelLimit=400
+)
+
+```
+
+5. Compare and contrast the plots you made for the prior three questions. What are the pros and cons of each plot? 
+
+**Solution:** The line plot is easy to read and interpret and sucessefully shows the overall trend over time. However, it doesn't give details for what is driving the trend and what the composition of tickets is like. The heat map does a good job at showing the seasonality of tickets and prompts us to ask interesting quiestions like, "why are there more tickets at the start of each month" and "why does April seem to be a high ticket month?". The downside it that it is very busy and takes some time to interpret. It also flattens the data to the calandar year level which might mask interesting trends across years. The Lasagna plot shows us some interesting facts about the most common ticket types which motivate potentially interesting questions. However, it is the hardest of the three to quickly interpret and only shows the top 5 ticket types which may not be the most policy relevant. 
+
+6. Suppose that the lesson you want a reader to take away is that the enforcement of violations is not evenly distributed over time? Which plot is best and why?
+
+**Solution:** The heat plot does the best job of showing that tickets are not given evenly across the year. This tells us that either the violation rate or the enforcement rate (or both!) varies over time. This plot can be used to motivate further questions or be used in conjuction with other analysis to make the case that enforecement changes over the year and why that might be.
