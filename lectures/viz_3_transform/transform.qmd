@@ -158,10 +158,6 @@ alt.Chart(movies_url).mark_bar().encode(
 
 Discussion question -- Why is "how to sorting the order of bars" such a great problem to submit to ChatGPT?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*solution: because you can easily check it's work to see if it did what you wanted*
-:::
 
 ## Interquartile range
 
@@ -197,10 +193,6 @@ alt.Chart(movies_url).mark_point().encode(
 )
 ```
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*solution: some films have impossible release dates*
-:::
 
 ## do-pair-share 
 
@@ -316,16 +308,6 @@ alt.Chart(movies_url).mark_bar().transform_aggregate(
 
 Discussion question -- If prior two code blocks have identical output, which version is better (and why)?
 
-
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*solution:
-The former is "better" since it is easier to read.
-
-But if you as a programmer ever want to troubleshoot what's going on, it is useful for you to know what's happening under the hood. And the second code block reveals that clearly*
-:::
-
-
 ## `window`: case study: who are the top 20 grossing directors of all time?
 
 *Start by summing `Worldwide_Gross` for each director, and then plotting in descending order. 
@@ -406,11 +388,6 @@ alt.Chart(movies_url).mark_bar().transform_filter(
 Steven Spielberg has been quite successful in his career! However, showing sums might favor directors who have had longer careers, and so have made more movies and thus more money. 
 
 What happens if we change the choice of aggregate operation? Who is the most successful director in terms of  `average` gross per film? Modify the aggregate transform above!
-
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*solution: get David Yates (last four Harry Potter movies) and also James Cameron (titanic, avatar)*
-:::
 
 
 ## `window`: cumulative distribution function of running time
