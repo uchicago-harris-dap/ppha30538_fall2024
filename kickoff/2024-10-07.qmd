@@ -119,13 +119,12 @@ Finally, pull the changes from the remote repo to your local repo ("pull" is git
 ### Other Admin Announcements
 \vspace{2ex}
 - Lab quizzes are based directly on lecture
-\vspace{2ex}
     - Pay attention to lecture and engage with in-class exercises
     - Know how to read and interpret Python functions relevant to lecture
     - You won't be asked to memorize syntax, but rather look at a chunk of code and explain what it does or find a bug in it
 - Final project parameters will be released some time this week
-- Problem set 2 is live and due at end of *next* week
-\vspace{2ex}
+- Problem set 1 solutions are live
+- Problem set 2 is live and due at end of *next* week (Sat Oct 19)
     - It is on visualization and altair
     - Give yourself time to do it -- longer than PS1
 
