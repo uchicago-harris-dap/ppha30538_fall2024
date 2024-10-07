@@ -139,8 +139,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#visual-encoding" id="toc-visual-encoding" class="nav-link" data-scroll-target="#visual-encoding">Visual encoding</a>
   <ul class="collapse">
   <li><a href="#visual-encoding-roadmap" id="toc-visual-encoding-roadmap" class="nav-link" data-scroll-target="#visual-encoding-roadmap">Visual encoding roadmap</a></li>
-  <li><a href="#seven-ways-of-visual-encoding-i" id="toc-seven-ways-of-visual-encoding-i" class="nav-link" data-scroll-target="#seven-ways-of-visual-encoding-i">Seven ways of visual encoding I</a></li>
-  <li><a href="#seven-ways-of-visual-encoding-ii" id="toc-seven-ways-of-visual-encoding-ii" class="nav-link" data-scroll-target="#seven-ways-of-visual-encoding-ii">Seven ways of visual encoding II</a></li>
   <li><a href="#seven-ways-of-visual-encoding-in-one-image" id="toc-seven-ways-of-visual-encoding-in-one-image" class="nav-link" data-scroll-target="#seven-ways-of-visual-encoding-in-one-image">Seven ways of visual encoding in one image</a></li>
   <li><a href="#more-depth-on-color" id="toc-more-depth-on-color" class="nav-link" data-scroll-target="#more-depth-on-color">More depth on color</a></li>
   <li><a href="#color-palettes-and-their-use-cases" id="toc-color-palettes-and-their-use-cases" class="nav-link" data-scroll-target="#color-palettes-and-their-use-cases">Color palettes and their use cases</a></li>
@@ -155,8 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#do-not-require-zero-on-axis-range" id="toc-do-not-require-zero-on-axis-range" class="nav-link" data-scroll-target="#do-not-require-zero-on-axis-range">Do not require zero on axis range</a></li>
   <li><a href="#observations-about-whether-to-include-zero" id="toc-observations-about-whether-to-include-zero" class="nav-link" data-scroll-target="#observations-about-whether-to-include-zero">Observations about whether to include zero</a></li>
   <li><a href="#size" id="toc-size" class="nav-link" data-scroll-target="#size"><code>size</code></a></li>
-  <li><a href="#size-with-1000-pixels-for-largest-dot" id="toc-size-with-1000-pixels-for-largest-dot" class="nav-link" data-scroll-target="#size-with-1000-pixels-for-largest-dot"><code>size</code> with 1000 pixels for largest dot</a></li>
-  <li><a href="#add-color-and-size-with-filledtrue" id="toc-add-color-and-size-with-filledtrue" class="nav-link" data-scroll-target="#add-color-and-size-with-filledtrue">add <code>color</code> and <code>size</code> with <code>filled=True</code></a></li>
+  <li><a href="#add-color-and-size-with-filledtrue-and-range01000" id="toc-add-color-and-size-with-filledtrue-and-range01000" class="nav-link" data-scroll-target="#add-color-and-size-with-filledtrue-and-range01000">add <code>color</code> and <code>size</code> with <code>filled=True</code> and <code>range=[0,1000]</code></a></li>
   <li><a href="#opacity" id="toc-opacity" class="nav-link" data-scroll-target="#opacity"><code>opacity</code></a></li>
   <li><a href="#column" id="toc-column" class="nav-link" data-scroll-target="#column"><code>column</code></a></li>
   <li><a href="#adjust-aspect-ratio-move-pop-legend-remove-color-legend" id="toc-adjust-aspect-ratio-move-pop-legend-remove-color-legend" class="nav-link" data-scroll-target="#adjust-aspect-ratio-move-pop-legend-remove-color-legend">adjust aspect ratio, move pop legend, remove color legend</a></li>
@@ -169,18 +166,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#graphical-marks-roadmap" id="toc-graphical-marks-roadmap" class="nav-link" data-scroll-target="#graphical-marks-roadmap">Graphical marks: roadmap</a></li>
   <li><a href="#mark_point-add-information-using-alt.shape" id="toc-mark_point-add-information-using-alt.shape" class="nav-link" data-scroll-target="#mark_point-add-information-using-alt.shape"><code>mark_point()</code>: add information using <code>alt.Shape()</code></a></li>
   <li><a href="#mark_point-format-points-using-arguments" id="toc-mark_point-format-points-using-arguments" class="nav-link" data-scroll-target="#mark_point-format-points-using-arguments"><code>mark_point()</code>: format points using arguments</a></li>
-  <li><a href="#mark_circle-wrapper-for-mark_pointfilledtrue" id="toc-mark_circle-wrapper-for-mark_pointfilledtrue" class="nav-link" data-scroll-target="#mark_circle-wrapper-for-mark_pointfilledtrue"><code>mark_circle()</code> wrapper for <code>mark_point(filled=True)</code></a></li>
   <li><a href="#mark_square" id="toc-mark_square" class="nav-link" data-scroll-target="#mark_square"><code>mark_square()</code></a></li>
   <li><a href="#mark_tick" id="toc-mark_tick" class="nav-link" data-scroll-target="#mark_tick"><code>mark_tick()</code></a></li>
   <li><a href="#mark_bar" id="toc-mark_bar" class="nav-link" data-scroll-target="#mark_bar"><code>mark_bar()</code></a></li>
   <li><a href="#use-alt.color-for-a-stacked-bar-plot" id="toc-use-alt.color-for-a-stacked-bar-plot" class="nav-link" data-scroll-target="#use-alt.color-for-a-stacked-bar-plot">use <code>alt.Color()</code> for a stacked bar plot</a></li>
   <li><a href="#x2-to-show-intervals" id="toc-x2-to-show-intervals" class="nav-link" data-scroll-target="#x2-to-show-intervals"><code>X2()</code> to show intervals</a></li>
   <li><a href="#mark_line" id="toc-mark_line" class="nav-link" data-scroll-target="#mark_line"><code>mark_line()</code></a></li>
-  <li><a href="#how-many-lines-tooltip-instead-of-legend" id="toc-how-many-lines-tooltip-instead-of-legend" class="nav-link" data-scroll-target="#how-many-lines-tooltip-instead-of-legend">how many lines? <code>Tooltip</code> instead of <code>legend</code></a></li>
   <li><a href="#mark_line-with-cosmetic-adjustments" id="toc-mark_line-with-cosmetic-adjustments" class="nav-link" data-scroll-target="#mark_line-with-cosmetic-adjustments"><code>mark_line()</code> with cosmetic adjustments</a></li>
   <li><a href="#mark_line-with-cosmetic-adjustments-1" id="toc-mark_line-with-cosmetic-adjustments-1" class="nav-link" data-scroll-target="#mark_line-with-cosmetic-adjustments-1"><code>mark_line()</code> with cosmetic adjustments</a></li>
   <li><a href="#mark_area" id="toc-mark_area" class="nav-link" data-scroll-target="#mark_area"><code>mark_area()</code></a></li>
-  <li><a href="#mark_area-with-interpolatemonotone" id="toc-mark_area-with-interpolatemonotone" class="nav-link" data-scroll-target="#mark_area-with-interpolatemonotone"><code>mark_area()</code> with <code>interpolate='monotone'</code></a></li>
   <li><a href="#mark_area-with-stacking" id="toc-mark_area-with-stacking" class="nav-link" data-scroll-target="#mark_area-with-stacking"><code>mark_area()</code> with stacking</a></li>
   <li><a href="#mark_area-with-no-stacking-and-opacity" id="toc-mark_area-with-no-stacking-and-opacity" class="nav-link" data-scroll-target="#mark_area-with-no-stacking-and-opacity"><code>mark_area()</code> with no stacking and opacity</a></li>
   <li><a href="#mark_area-to-show-range" id="toc-mark_area-to-show-range" class="nav-link" data-scroll-target="#mark_area-to-show-range"><code>mark_area()</code> to show range</a></li>
@@ -251,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data <span class="im">as</span> vega_data</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>alt.renderers.enable(<span class="st">'png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="92">
 <pre><code>RendererRegistry.enable('png')</code></pre>
 </div>
 </div>
@@ -263,7 +257,7 @@ data = vega_data.gapminder()
 to work. instead, I saved the data to local and I read it in from local. The code chunk which does this is set to echo false so it won't show up in the lecture notes-->
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="94">
 <pre><code>(682, 6)</code></pre>
 </div>
 </div>
@@ -272,7 +266,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <h2 class="anchored" data-anchor-id="head-summary"><code>head()</code> + summary</h2>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="95">
 
 <div>
 
@@ -468,7 +462,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month(date):O'</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">'average(precipitation):Q'</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="96">
 <p><img src="marks_encoding_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
 </div>
@@ -490,7 +484,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month(date):O'</span>,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">'average(precipitation):O'</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="97">
 <p><img src="marks_encoding_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
@@ -503,7 +497,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month(date):T'</span>,</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">'average(precipitation):Q'</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="98">
 <p><img src="marks_encoding_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
 </div>
 </div>
@@ -535,32 +529,6 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <li>More on color</li>
 </ul>
 </section>
-<section id="seven-ways-of-visual-encoding-i" class="level2">
-<h2 class="anchored" data-anchor-id="seven-ways-of-visual-encoding-i">Seven ways of visual encoding I</h2>
-<p>Source: Jacques Bertin in Semiology of Graphics (1967), via <a href="https://medium.com/@mbostock/introducing-d3-scale-61980c51545f">source</a></p>
-<blockquote class="blockquote">
-<p>Within the plane a mark can be at the top or the bottom, to the right or the left. The eye perceives two independent dimensions along X and Y, which are distinguished orthogonally. A variation in light energy produces a third dimension in Z, which is independent of X and Y…</p>
-</blockquote>
-</section>
-<section id="seven-ways-of-visual-encoding-ii" class="level2">
-<h2 class="anchored" data-anchor-id="seven-ways-of-visual-encoding-ii">Seven ways of visual encoding II</h2>
-<blockquote class="blockquote">
-<p>The eye is sensitive, along the Z dimension, to 6 independent visual variables, which can be superimposed on the planar figures:</p>
-</blockquote>
-<blockquote class="blockquote">
-<ul>
-<li>the size of the marks</li>
-<li>their value [brightness]</li>
-<li>texture</li>
-<li>color [hue]</li>
-<li>orientation</li>
-<li>shape.</li>
-</ul>
-</blockquote>
-<blockquote class="blockquote">
-<p>They can represent differences (≠), similarities (≡), a quantified order (Q), or a nonquantified order (O), and can express groups, hierarchies, or vertical movements.</p>
-</blockquote>
-</section>
 <section id="seven-ways-of-visual-encoding-in-one-image" class="level2">
 <h2 class="anchored" data-anchor-id="seven-ways-of-visual-encoding-in-one-image">Seven ways of visual encoding in one image</h2>
 <div class="quarto-figure quarto-figure-center">
@@ -569,6 +537,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <p></p><figcaption class="figure-caption">Visual encoding</figcaption><p></p>
 </figure>
 </div>
+<p>Source: Jacques Bertin in Semiology of Graphics (1967), via <a href="https://medium.com/@mbostock/introducing-d3-scale-61980c51545f">source</a></p>
 <p>Free advice: don’t try to use all seven ways of encoding information in a single plot. It will inevitably be overload.</p>
 </section>
 <section id="more-depth-on-color" class="level2">
@@ -651,7 +620,6 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <li><code>size</code></li>
 <li><code>color</code></li>
 <li><code>opacity</code></li>
-<li><code>shape</code></li>
 <li><code>column</code></li>
 <li><code>row</code></li>
 </ul>
@@ -663,7 +631,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="99">
 <p><img src="marks_encoding_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
@@ -675,11 +643,10 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:O'</span>)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="100">
 <p><img src="marks_encoding_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>In-class exercise: what happens if you swap the Q and the O types?</p>
 </section>
 <section id="do-not-require-zero-on-axis-range" class="level2">
 <h2 class="anchored" data-anchor-id="do-not-require-zero-on-axis-range">Do not require zero on axis range</h2>
@@ -693,7 +660,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>))</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>zero_included <span class="op">|</span> zero_excluded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="101">
 <p><img src="marks_encoding_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
 </div>
 </div>
@@ -716,85 +683,72 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="102">
 <p><img src="marks_encoding_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
-<section id="size-with-1000-pixels-for-largest-dot" class="level2">
-<h2 class="anchored" data-anchor-id="size-with-1000-pixels-for-largest-dot"><code>size</code> with 1000 pixels for largest dot</h2>
+<section id="add-color-and-size-with-filledtrue-and-range01000" class="level2">
+<h2 class="anchored" data-anchor-id="add-color-and-size-with-filledtrue-and-range01000">add <code>color</code> and <code>size</code> with <code>filled=True</code> and <code>range=[0,1000]</code></h2>
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>]))</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>])),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="103">
 <p><img src="marks_encoding_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-<section id="add-color-and-size-with-filledtrue" class="level2">
-<h2 class="anchored" data-anchor-id="add-color-and-size-with-filledtrue">add <code>color</code> and <code>size</code> with <code>filled=True</code></h2>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>])),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<p><img src="marks_encoding_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="opacity" class="level2">
 <h2 class="anchored" data-anchor-id="opacity"><code>opacity</code></h2>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>])),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    alt.OpacityValue(<span class="fl">0.5</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="104">
+<p><img src="marks_encoding_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="column" class="level2">
+<h2 class="anchored" data-anchor-id="column"><code>column</code></h2>
 <div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>])),</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    alt.OpacityValue(<span class="fl">0.2</span>)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    alt.OpacityValue(<span class="fl">0.5</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(<span class="st">'country:N'</span>),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    alt.Column(<span class="st">'cluster:N'</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="105">
 <p><img src="marks_encoding_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-<section id="column" class="level2">
-<h2 class="anchored" data-anchor-id="column"><code>column</code></h2>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>])),</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>),</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    alt.OpacityValue(<span class="fl">0.5</span>),</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(<span class="st">'country:N'</span>),</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    alt.Column(<span class="st">'cluster:N'</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<p><img src="marks_encoding_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="adjust-aspect-ratio-move-pop-legend-remove-color-legend" class="level2">
 <h2 class="anchored" data-anchor-id="adjust-aspect-ratio-move-pop-legend-remove-color-legend">adjust aspect ratio, move pop legend, remove color legend</h2>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>]),</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span>alt.Legend(orient<span class="op">=</span><span class="st">'bottom'</span>, titleOrient<span class="op">=</span><span class="st">'left'</span>)),</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>, legend<span class="op">=</span><span class="va">None</span>),</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    alt.OpacityValue(<span class="fl">0.5</span>),</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(<span class="st">'country:N'</span>),</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    alt.Column(<span class="st">'cluster:N'</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">135</span>, height<span class="op">=</span><span class="dv">135</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<p><img src="marks_encoding_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>]),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span>alt.Legend(orient<span class="op">=</span><span class="st">'bottom'</span>, titleOrient<span class="op">=</span><span class="st">'left'</span>)),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>, legend<span class="op">=</span><span class="va">None</span>),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    alt.OpacityValue(<span class="fl">0.5</span>),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(<span class="st">'country:N'</span>),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    alt.Column(<span class="st">'cluster:N'</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">135</span>, height<span class="op">=</span><span class="dv">135</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="106">
+<p><img src="marks_encoding_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
@@ -810,19 +764,19 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <li>substitute <code>Row</code> for <code>Column</code></li>
 <li>delete <code>orient='bottom'</code></li>
 </ul>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>]),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span>alt.Legend(orient<span class="op">=</span><span class="st">'bottom'</span>, titleOrient<span class="op">=</span><span class="st">'left'</span>)),</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>, legend<span class="op">=</span><span class="va">None</span>),</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    alt.OpacityValue(<span class="fl">0.5</span>),</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(<span class="st">'country:N'</span>),</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    alt.Row(<span class="st">'cluster:N'</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">135</span>, height<span class="op">=</span><span class="dv">135</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<p><img src="marks_encoding_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    alt.Size(<span class="st">'pop:Q'</span>, scale<span class="op">=</span>alt.Scale(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1000</span>]),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span>alt.Legend(titleOrient<span class="op">=</span><span class="st">'left'</span>)),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'cluster:N'</span>, legend<span class="op">=</span><span class="va">None</span>),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    alt.OpacityValue(<span class="fl">0.5</span>),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(<span class="st">'country:N'</span>),</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    alt.Row(<span class="st">'cluster:N'</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">135</span>, height<span class="op">=</span><span class="dv">135</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="107">
+<p><img src="marks_encoding_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <!-- ZZZ end deletion -->
@@ -834,8 +788,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <li><code>y</code>: Vertical (y-axis) position of the mark.</li>
 <li><code>size</code>: Size of the mark. May correspond to area or length, depending on the mark type.</li>
 <li><code>color</code>: Mark color, specified as a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value">legal CSS color</a>.</li>
-<li><code>opacity</code>: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque).</li>
-<li><code>shape</code>: Plotting symbol shape for <code>point</code> marks.</li>
+<li><code>opacity</code>: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque)</li>
 <li><code>column</code>: Facet the data into horizontally-aligned subplots.</li>
 <li><code>row</code>: Facet the data into vertically-aligned subplots.</li>
 </ul>
@@ -849,8 +802,6 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <ul>
 <li><code>mark_point()</code>
 <ul>
-<li><code>mark_circle()</code><br>
-</li>
 <li><code>mark_square()</code></li>
 <li><code>mark_tick()</code></li>
 </ul></li>
@@ -859,61 +810,44 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </li>
 <li><code>mark_area()</code></li>
 </ul>
-<p>Caveats:</p>
-<ul>
-<li>there are a ton of slides in this section.</li>
-<li>but each slide is simple. focus is on software.</li>
-</ul>
+<p>Warning: there are a ton of slides in this section. But each slide is simple. focus is on software.</p>
 </section>
 <section id="mark_point-add-information-using-alt.shape" class="level2">
 <h2 class="anchored" data-anchor-id="mark_point-add-information-using-alt.shape"><code>mark_point()</code>: add information using <code>alt.Shape()</code></h2>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    alt.Shape(<span class="st">'cluster:N'</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<p><img src="marks_encoding_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    alt.Shape(<span class="st">'cluster:N'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="108">
+<p><img src="marks_encoding_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_point-format-points-using-arguments" class="level2">
 <h2 class="anchored" data-anchor-id="mark_point-format-points-using-arguments"><code>mark_point()</code>: format points using arguments</h2>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>, size<span class="op">=</span><span class="dv">100</span>).encode(</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    alt.Shape(<span class="st">'cluster:N'</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<p><img src="marks_encoding_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-<section id="mark_circle-wrapper-for-mark_pointfilledtrue" class="level2">
-<h2 class="anchored" data-anchor-id="mark_circle-wrapper-for-mark_pointfilledtrue"><code>mark_circle()</code> wrapper for <code>mark_point(filled=True)</code></h2>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_circle(size<span class="op">=</span><span class="dv">100</span>).encode(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    alt.Shape(<span class="st">'cluster:N'</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
-<p><img src="marks_encoding_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>, size<span class="op">=</span><span class="dv">100</span>).encode(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    alt.Shape(<span class="st">'cluster:N'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="109">
+<p><img src="marks_encoding_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_square" class="level2">
 <h2 class="anchored" data-anchor-id="mark_square"><code>mark_square()</code></h2>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_square(size<span class="op">=</span><span class="dv">100</span>).encode(</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    alt.Shape(<span class="st">'cluster:N'</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<p><img src="marks_encoding_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_square(size<span class="op">=</span><span class="dv">100</span>).encode(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    alt.Shape(<span class="st">'cluster:N'</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="110">
+<p><img src="marks_encoding_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
@@ -923,204 +857,189 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <li>Useful for comparing values along a single dimension with minimal overlap.</li>
 <li>A <em>dot plot</em> drawn with tick marks is sometimes referred to as a <em>strip plot</em>.</li>
 </ul>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_tick().encode(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:N'</span>)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
-<p><img src="marks_encoding_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_tick().encode(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:N'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="111">
+<p><img src="marks_encoding_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_bar" class="level2">
 <h2 class="anchored" data-anchor-id="mark_bar"><code>mark_bar()</code></h2>
-<div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'country:N'</span>),</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<p><img src="marks_encoding_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+<p>You know how to do this already! This is just a prelude to the next slide.</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'country:N'</span>),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="112">
+<p><img src="marks_encoding_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="use-alt.color-for-a-stacked-bar-plot" class="level2">
 <h2 class="anchored" data-anchor-id="use-alt.color-for-a-stacked-bar-plot">use <code>alt.Color()</code> for a stacked bar plot</h2>
-<div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'cluster:N'</span>),</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>),</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>, legend<span class="op">=</span><span class="va">None</span>) </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
-<p><img src="marks_encoding_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'cluster:N'</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>, legend<span class="op">=</span><span class="va">None</span>) </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="113">
+<p><img src="marks_encoding_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Note: if we had instead set <code>alt.Y('pop:Q', stack=None)</code>, bars would have been overlapped with each other</p>
 </section>
 <section id="x2-to-show-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="x2-to-show-intervals"><code>X2()</code> to show intervals</h2>
-<div class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'min(life_expect):Q'</span>),</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    alt.X2(<span class="st">'max(life_expect):Q'</span>),</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:N'</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
-<p><img src="marks_encoding_files/figure-html/cell-27-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'min(life_expect):Q'</span>),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    alt.X2(<span class="st">'max(life_expect):Q'</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:N'</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="114">
+<p><img src="marks_encoding_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_line" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line"><code>mark_line()</code></h2>
-<div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data_4a <span class="op">=</span> data.loc[data[<span class="st">'cluster'</span>] <span class="op">==</span> <span class="dv">2</span>] <span class="co">#one cluster is more manageable</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_4a).mark_line().encode(</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<p><img src="marks_encoding_files/figure-html/cell-28-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>data_c2 <span class="op">=</span> data.loc[data[<span class="st">'cluster'</span>] <span class="op">==</span> <span class="dv">2</span>] <span class="co">#one cluster is more manageable</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_c2).mark_line().encode(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="115">
+<p><img src="marks_encoding_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-</section>
-<section id="how-many-lines-tooltip-instead-of-legend" class="level2">
-<h2 class="anchored" data-anchor-id="how-many-lines-tooltip-instead-of-legend">how many lines? <code>Tooltip</code> instead of <code>legend</code></h2>
-<p>textbook advocates for having a plot with many more lines, no legend, and instead using <code>alt.Tooltip('country:N')</code>. This is technologically feasible but a bad idea. (Discuss: why?)</p>
-<div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data).mark_line().encode(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>, legend<span class="op">=</span><span class="va">None</span>),</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(<span class="st">'country:N'</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
-<p><img src="marks_encoding_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data).mark_line().encode(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>, legend<span class="op">=</span><span class="va">None</span>),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(<span class="st">'country:N'</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="116">
+<p><img src="marks_encoding_files/figure-html/cell-27-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_line-with-cosmetic-adjustments" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line-with-cosmetic-adjustments"><code>mark_line()</code> with cosmetic adjustments</h2>
-<div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_4a).mark_line(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    strokeWidth<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    interpolate<span class="op">=</span><span class="st">'monotone'</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>).encode(</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
-<p><img src="marks_encoding_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_c2).mark_line(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    strokeWidth<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    interpolate<span class="op">=</span><span class="st">'monotone'</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="117">
+<p><img src="marks_encoding_files/figure-html/cell-28-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_line-with-cosmetic-adjustments-1" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line-with-cosmetic-adjustments-1"><code>mark_line()</code> with cosmetic adjustments</h2>
-<div class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data_4a_2y <span class="op">=</span> data_4a[data_4a[<span class="st">'year'</span>].isin([<span class="dv">1955</span>, <span class="dv">2005</span>])]</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_4a_2y).mark_line().encode(</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
-<p><img src="marks_encoding_files/figure-html/cell-31-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>data_c2_2y <span class="op">=</span> data_c2[data_c2[<span class="st">'year'</span>].isin([<span class="dv">1955</span>, <span class="dv">2005</span>])]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_c2_2y).mark_line().encode(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="118">
+<p><img src="marks_encoding_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_area" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area"><code>mark_area()</code></h2>
-<div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>dataUS <span class="op">=</span> data.loc[data[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'United States'</span>]</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataUS).mark_area().encode(</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
-<p><img src="marks_encoding_files/figure-html/cell-32-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-<section id="mark_area-with-interpolatemonotone" class="level2">
-<h2 class="anchored" data-anchor-id="mark_area-with-interpolatemonotone"><code>mark_area()</code> with <code>interpolate='monotone'</code></h2>
-<div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataUS).mark_area(interpolate<span class="op">=</span><span class="st">'monotone'</span>).encode(</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
-<p><img src="marks_encoding_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dataUS <span class="op">=</span> data.loc[data[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'United States'</span>]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataUS).mark_area().encode(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="119">
+<p><img src="marks_encoding_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_area-with-stacking" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-with-stacking"><code>mark_area()</code> with stacking</h2>
-<div class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>dataNA <span class="op">=</span> data[data[<span class="st">'country'</span>].isin([<span class="st">'United States'</span>, <span class="st">'Mexico'</span>, <span class="st">'Canada'</span>])]</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>),</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
-<p><img src="marks_encoding_files/figure-html/cell-34-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dataNA <span class="op">=</span> data[data[<span class="st">'country'</span>].isin([<span class="st">'United States'</span>, <span class="st">'Mexico'</span>, <span class="st">'Canada'</span>])]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="120">
+<p><img src="marks_encoding_files/figure-html/cell-31-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_area-with-no-stacking-and-opacity" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-with-no-stacking-and-opacity"><code>mark_area()</code> with no stacking and opacity</h2>
-<div class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area(opacity<span class="op">=</span><span class="fl">0.5</span>).encode(</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>, stack<span class="op">=</span><span class="va">None</span>),</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
-<p><img src="marks_encoding_files/figure-html/cell-35-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area(opacity<span class="op">=</span><span class="fl">0.5</span>).encode(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>, stack<span class="op">=</span><span class="va">None</span>),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'country:N'</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="121">
+<p><img src="marks_encoding_files/figure-html/cell-32-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mark_area-to-show-range" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-to-show-range"><code>mark_area()</code> to show range</h2>
-<div class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'min(fertility):Q'</span>),</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    alt.Y2(<span class="st">'max(fertility):Q'</span>)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span>{<span class="st">"step"</span>: <span class="dv">40</span>}</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="34">
-<p><img src="marks_encoding_files/figure-html/cell-36-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'min(fertility):Q'</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    alt.Y2(<span class="st">'max(fertility):Q'</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span>{<span class="st">"step"</span>: <span class="dv">40</span>}</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="122">
+<p><img src="marks_encoding_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>We can see a larger range of values in 1995, from just under 4 to just under 7. By 2005, both the overall fertility values and the variability have declined, centered around 2 children per familty.</p>
 </section>
 <section id="syntax-mark_area-swap-axes" class="level2">
 <h2 class="anchored" data-anchor-id="syntax-mark_area-swap-axes">Syntax: <code>mark_area()</code> swap axes</h2>
-<div class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'year:O'</span>),</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'min(fertility):Q'</span>),</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    alt.X2(<span class="st">'max(fertility):Q'</span>)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span>{<span class="st">"step"</span>: <span class="dv">40</span>}</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="35">
-<p><img src="marks_encoding_files/figure-html/cell-37-output-1.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'year:O'</span>),</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'min(fertility):Q'</span>),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    alt.X2(<span class="st">'max(fertility):Q'</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span>{<span class="st">"step"</span>: <span class="dv">40</span>}</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="123">
+<p><img src="marks_encoding_files/figure-html/cell-34-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
