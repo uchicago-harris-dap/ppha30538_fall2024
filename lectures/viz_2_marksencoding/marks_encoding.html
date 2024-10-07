@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Peter Ganong and Maggie Shi">
-<meta name="dcterms.date" content="2024-10-02">
+<meta name="dcterms.date" content="2024-10-07">
 
 <title>Visualization (Marks and Encoding)</title>
 <style>
@@ -19,12 +19,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -49,17 +48,47 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="marks_encoding_files/libs/clipboard/clipboard.min.js"></script>
+<script src="marks_encoding_files/libs/clipboard/clipboard.min.js"></script>
 <script src="marks_encoding_files/libs/quarto-html/quarto.js"></script>
 <script src="marks_encoding_files/libs/quarto-html/popper.min.js"></script>
 <script src="marks_encoding_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="marks_encoding_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="marks_encoding_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -188,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 2, 2024</p>
+      <p class="date">October 7, 2024</p>
     </div>
   </div>
   
@@ -196,9 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-
 </header>
-
 
 <section id="global-health-data" class="level1">
 <h1>Global Health Data</h1>
@@ -214,17 +241,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-data">Load data</h2>
 <p>Let’s first load the dataset from the <a href="https://github.com/vega/vega-datasets">vega-datasets</a> collection into a Pandas data frame.</p>
-<div id="779eed1e" class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data <span class="im">as</span> vega_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="08323a7f" class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> vega_data.gapminder()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- Remark: I (Peter) couldn't get the command 
 data = vega_data.gapminder()
 to work. instead, I saved the data to local and I read it in from local. The code chunk which does this is set to echo false so it won't show up in the lecture notes-->
-<div id="c8299bfb" class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>(682, 6)</code></pre>
@@ -233,73 +260,72 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="head-summary" class="level2">
 <h2 class="anchored" data-anchor-id="head-summary"><code>head()</code> + summary</h2>
-<div id="abd0cde5" class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="43">
+
 <div>
 
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th">country</th>
-<th data-quarto-table-cell-role="th">cluster</th>
-<th data-quarto-table-cell-role="th">pop</th>
-<th data-quarto-table-cell-role="th">life_expect</th>
-<th data-quarto-table-cell-role="th">fertility</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1955</td>
-<td>Afghanistan</td>
-<td>0</td>
-<td>7971931</td>
-<td>43.88</td>
-<td>7.42</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1960</td>
-<td>Afghanistan</td>
-<td>0</td>
-<td>8622466</td>
-<td>45.03</td>
-<td>7.38</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>1965</td>
-<td>Afghanistan</td>
-<td>0</td>
-<td>9565147</td>
-<td>46.13</td>
-<td>7.35</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1970</td>
-<td>Afghanistan</td>
-<td>0</td>
-<td>10752971</td>
-<td>47.08</td>
-<td>7.40</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1975</td>
-<td>Afghanistan</td>
-<td>0</td>
-<td>12157386</td>
-<td>47.55</td>
-<td>7.54</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>year</th>
+      <th>country</th>
+      <th>cluster</th>
+      <th>pop</th>
+      <th>life_expect</th>
+      <th>fertility</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1955</td>
+      <td>Afghanistan</td>
+      <td>0</td>
+      <td>7971931</td>
+      <td>43.88</td>
+      <td>7.42</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1960</td>
+      <td>Afghanistan</td>
+      <td>0</td>
+      <td>8622466</td>
+      <td>45.03</td>
+      <td>7.38</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1965</td>
+      <td>Afghanistan</td>
+      <td>0</td>
+      <td>9565147</td>
+      <td>46.13</td>
+      <td>7.35</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1970</td>
+      <td>Afghanistan</td>
+      <td>0</td>
+      <td>10752971</td>
+      <td>47.08</td>
+      <td>7.40</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1975</td>
+      <td>Afghanistan</td>
+      <td>0</td>
+      <td>12157386</td>
+      <td>47.55</td>
+      <td>7.54</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -388,7 +414,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pictures/usa-today.jpg" class="img-fluid figure-img"></p>
-<figcaption>USAToday</figcaption>
+<p></p><figcaption class="figure-caption">USAToday</figcaption><p></p>
 </figure>
 </div>
 <p>via <a href="https://www.statisticshowto.com/probability-and-statistics/descriptive-statistics/misleading-graphs/">Statistics How To</a></p>
@@ -423,7 +449,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="revisit-plot-from-beginning-of-prior-lecture" class="level2">
 <h2 class="anchored" data-anchor-id="revisit-plot-from-beginning-of-prior-lecture">Revisit plot from beginning of prior lecture</h2>
-<div id="1541487a" class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>seattle <span class="op">=</span> vega_data.seattle_weather()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(seattle).mark_bar().encode(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month(date):O'</span>,</span>
@@ -432,23 +458,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="44">
 
 <style>
-  #altair-viz-d49cfa1b9da94c499c41b9db7e69b5a1.vega-embed {
+  #altair-viz-13fc60ea96cb478ab3dfdd06ea755ad5.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d49cfa1b9da94c499c41b9db7e69b5a1.vega-embed details,
-  #altair-viz-d49cfa1b9da94c499c41b9db7e69b5a1.vega-embed details summary {
+  #altair-viz-13fc60ea96cb478ab3dfdd06ea755ad5.vega-embed details,
+  #altair-viz-13fc60ea96cb478ab3dfdd06ea755ad5.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d49cfa1b9da94c499c41b9db7e69b5a1"></div>
+<div id="altair-viz-13fc60ea96cb478ab3dfdd06ea755ad5"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d49cfa1b9da94c499c41b9db7e69b5a1") {
-      outputDiv = document.getElementById("altair-viz-d49cfa1b9da94c499c41b9db7e69b5a1");
+    if (outputDiv.id !== "altair-viz-13fc60ea96cb478ab3dfdd06ea755ad5") {
+      outputDiv = document.getElementById("altair-viz-13fc60ea96cb478ab3dfdd06ea755ad5");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -556,7 +582,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pictures/visual_encoding.jpg" class="img-fluid figure-img"></p>
-<figcaption>Visual encoding</figcaption>
+<p></p><figcaption class="figure-caption">Visual encoding</figcaption><p></p>
 </figure>
 </div>
 <p>Free advice: don’t try to use all seven ways of encoding information in a single plot. It will inevitably be overload.</p>
@@ -576,7 +602,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <p><strong><em>step 1</em></strong> Am I working with <code>N</code>ominal, unordered data or with ordered data (either <code>O</code>rdinal or <code>Q</code>uantitative)?</p>
 <p>If <code>N</code>ominal, unordered data, use categorical palettes. Otherwise, proceed.</p>
 <p><strong><em>step 2</em></strong></p>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
@@ -652,7 +678,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="x" class="level2">
 <h2 class="anchored" data-anchor-id="x">X</h2>
-<div id="a7c1bbda" class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data2000 <span class="op">=</span> data.loc[data[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2000</span>] <span class="co">#one year is more manageable</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>)</span>
@@ -660,23 +686,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="45">
 
 <style>
-  #altair-viz-14f7c0bb3f5c4e3fb2aa52a601e83a46.vega-embed {
+  #altair-viz-ef62a68a6aea48c8a00299b0278ac7cd.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-14f7c0bb3f5c4e3fb2aa52a601e83a46.vega-embed details,
-  #altair-viz-14f7c0bb3f5c4e3fb2aa52a601e83a46.vega-embed details summary {
+  #altair-viz-ef62a68a6aea48c8a00299b0278ac7cd.vega-embed details,
+  #altair-viz-ef62a68a6aea48c8a00299b0278ac7cd.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-14f7c0bb3f5c4e3fb2aa52a601e83a46"></div>
+<div id="altair-viz-ef62a68a6aea48c8a00299b0278ac7cd"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-14f7c0bb3f5c4e3fb2aa52a601e83a46") {
-      outputDiv = document.getElementById("altair-viz-14f7c0bb3f5c4e3fb2aa52a601e83a46");
+    if (outputDiv.id !== "altair-viz-ef62a68a6aea48c8a00299b0278ac7cd") {
+      outputDiv = document.getElementById("altair-viz-ef62a68a6aea48c8a00299b0278ac7cd");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -729,7 +755,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="y" class="level2">
 <h2 class="anchored" data-anchor-id="y">Y</h2>
-<div id="6d2ea5e3" class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:O'</span>)</span>
@@ -737,23 +763,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="46">
 
 <style>
-  #altair-viz-afee490706e04421b671c5e515f2c608.vega-embed {
+  #altair-viz-173679f3489c41f18e18bb095dfa0d14.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-afee490706e04421b671c5e515f2c608.vega-embed details,
-  #altair-viz-afee490706e04421b671c5e515f2c608.vega-embed details summary {
+  #altair-viz-173679f3489c41f18e18bb095dfa0d14.vega-embed details,
+  #altair-viz-173679f3489c41f18e18bb095dfa0d14.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-afee490706e04421b671c5e515f2c608"></div>
+<div id="altair-viz-173679f3489c41f18e18bb095dfa0d14"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-afee490706e04421b671c5e515f2c608") {
-      outputDiv = document.getElementById("altair-viz-afee490706e04421b671c5e515f2c608");
+    if (outputDiv.id !== "altair-viz-173679f3489c41f18e18bb095dfa0d14") {
+      outputDiv = document.getElementById("altair-viz-173679f3489c41f18e18bb095dfa0d14");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -807,36 +833,36 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="do-not-require-zero-on-axis-range" class="level2">
 <h2 class="anchored" data-anchor-id="do-not-require-zero-on-axis-range">Do not require zero on axis range</h2>
-<div id="4436273b" class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>zero_included <span class="op">=</span> alt.Chart(data2000).mark_point().encode(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>zero_excluded <span class="op">=</span> alt.Chart(data2000).mark_point().encode(</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>))</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>zero_included <span class="op">|</span> zero_excluded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="47">
 
 <style>
-  #altair-viz-f74d467289854aeea305c4b24ce6fc2a.vega-embed {
+  #altair-viz-c52908e6d0b44aa9a049a9388c168510.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f74d467289854aeea305c4b24ce6fc2a.vega-embed details,
-  #altair-viz-f74d467289854aeea305c4b24ce6fc2a.vega-embed details summary {
+  #altair-viz-c52908e6d0b44aa9a049a9388c168510.vega-embed details,
+  #altair-viz-c52908e6d0b44aa9a049a9388c168510.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f74d467289854aeea305c4b24ce6fc2a"></div>
+<div id="altair-viz-c52908e6d0b44aa9a049a9388c168510"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f74d467289854aeea305c4b24ce6fc2a") {
-      outputDiv = document.getElementById("altair-viz-f74d467289854aeea305c4b24ce6fc2a");
+    if (outputDiv.id !== "altair-viz-c52908e6d0b44aa9a049a9388c168510") {
+      outputDiv = document.getElementById("altair-viz-c52908e6d0b44aa9a049a9388c168510");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -882,7 +908,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "hconcat": [{"mark": {"type": "point"}, "encoding": {"x": {"field": "fertility", "scale": {"zero": false}, "type": "quantitative"}, "y": {"field": "life_expect", "scale": {"zero": false}, "type": "quantitative"}}}, {"mark": {"type": "point"}, "encoding": {"x": {"field": "fertility", "type": "quantitative"}, "y": {"field": "life_expect", "type": "quantitative"}}}], "data": {"name": "data-7ba21f88da56082f9219bdb57a26f683"}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-7ba21f88da56082f9219bdb57a26f683": [{"year": 2000, "country": "Afghanistan", "cluster": 0, "pop": 19542982, "life_expect": 54.73, "fertility": 7.53}, {"year": 2000, "country": "Argentina", "cluster": 3, "pop": 37070774, "life_expect": 74.22, "fertility": 2.59}, {"year": 2000, "country": "Australia", "cluster": 4, "pop": 19017963, "life_expect": 79.72, "fertility": 1.77}, {"year": 2000, "country": "Austria", "cluster": 1, "pop": 8010428, "life_expect": 78.49, "fertility": 1.3599999999999999}, {"year": 2000, "country": "Bahamas", "cluster": 3, "pop": 325014, "life_expect": 71.25, "fertility": 2.1}, {"year": 2000, "country": "Bangladesh", "cluster": 0, "pop": 129193327, "life_expect": 65.47, "fertility": 3.22}, {"year": 2000, "country": "Barbados", "cluster": 3, "pop": 264657, "life_expect": 74.74, "fertility": 1.78}, {"year": 2000, "country": "Belgium", "cluster": 1, "pop": 10264343, "life_expect": 78.04, "fertility": 1.6600000000000001}, {"year": 2000, "country": "Bolivia", "cluster": 3, "pop": 8592656, "life_expect": 66.53, "fertility": 3.99}, {"year": 2000, "country": "Brazil", "cluster": 3, "pop": 175873720, "life_expect": 71.18, "fertility": 2.26}, {"year": 2000, "country": "Canada", "cluster": 3, "pop": 30683313, "life_expect": 79.36, "fertility": 1.49}, {"year": 2000, "country": "Chile", "cluster": 3, "pop": 15351799, "life_expect": 76.93, "fertility": 1.99}, {"year": 2000, "country": "China", "cluster": 4, "pop": 1264099069, "life_expect": 71.33, "fertility": 1.63}, {"year": 2000, "country": "Colombia", "cluster": 3, "pop": 39215135, "life_expect": 74.23, "fertility": 2.5700000000000003}, {"year": 2000, "country": "Costa Rica", "cluster": 3, "pop": 3979193, "life_expect": 77.9, "fertility": 2.41}, {"year": 2000, "country": "Croatia", "cluster": 1, "pop": 4548434, "life_expect": 74.65, "fertility": 1.47}, {"year": 2000, "country": "Cuba", "cluster": 3, "pop": 11105791, "life_expect": 77.01, "fertility": 1.58}, {"year": 2000, "country": "Dominican Republic", "cluster": 3, "pop": 8540791, "life_expect": 73.66, "fertility": 2.86}, {"year": 2000, "country": "Ecuador", "cluster": 3, "pop": 12626507, "life_expect": 74.46, "fertility": 3.1}, {"year": 2000, "country": "Egypt", "cluster": 5, "pop": 71371371, "life_expect": 68.54, "fertility": 3.44}, {"year": 2000, "country": "El Salvador", "cluster": 3, "pop": 5958482, "life_expect": 73.07, "fertility": 3.14}, {"year": 2000, "country": "Finland", "cluster": 1, "pop": 5176209, "life_expect": 78.04, "fertility": 1.73}, {"year": 2000, "country": "France", "cluster": 1, "pop": 58665453, "life_expect": 79.19, "fertility": 1.88}, {"year": 2000, "country": "Georgia", "cluster": 1, "pop": 4265172, "life_expect": 70.68, "fertility": 1.6}, {"year": 2000, "country": "Germany", "cluster": 1, "pop": 81551677, "life_expect": 78.39, "fertility": 1.38}, {"year": 2000, "country": "Greece", "cluster": 1, "pop": 11038109, "life_expect": 78.44, "fertility": 1.33}, {"year": 2000, "country": "Grenada", "cluster": 3, "pop": 107432, "life_expect": 71.97, "fertility": 2.58}, {"year": 2000, "country": "Haiti", "cluster": 3, "pop": 8360225, "life_expect": 57.43, "fertility": 4.39}, {"year": 2000, "country": "Hong Kong, China", "cluster": 4, "pop": 6731195, "life_expect": 80.75, "fertility": 1.03}, {"year": 2000, "country": "Iceland", "cluster": 1, "pop": 281462, "life_expect": 80.35, "fertility": 2.07}, {"year": 2000, "country": "India", "cluster": 0, "pop": 1059633675, "life_expect": 62.94, "fertility": 3.35}, {"year": 2000, "country": "Indonesia", "cluster": 4, "pop": 214072421, "life_expect": 67.24, "fertility": 2.54}, {"year": 2000, "country": "Iran", "cluster": 5, "pop": 65544383, "life_expect": 71.94, "fertility": 2.02}, {"year": 2000, "country": "Iraq", "cluster": 5, "pop": 24628858, "life_expect": 68.64, "fertility": 4.95}, {"year": 2000, "country": "Ireland", "cluster": 1, "pop": 3768950, "life_expect": 76.77, "fertility": 1.8900000000000001}, {"year": 2000, "country": "Israel", "cluster": 5, "pop": 6116958, "life_expect": 78.87, "fertility": 2.95}, {"year": 2000, "country": "Italy", "cluster": 1, "pop": 56966397, "life_expect": 79.64, "fertility": 1.25}, {"year": 2000, "country": "Jamaica", "cluster": 3, "pop": 2612205, "life_expect": 74.64, "fertility": 2.21}, {"year": 2000, "country": "Japan", "cluster": 4, "pop": 126803861, "life_expect": 81.57, "fertility": 1.37}, {"year": 2000, "country": "Kenya", "cluster": 2, "pop": 30851606, "life_expect": 54.83, "fertility": 5.14}, {"year": 2000, "country": "Lebanon", "cluster": 5, "pop": 4320642, "life_expect": 74.82, "fertility": 2.5}, {"year": 2000, "country": "Mexico", "cluster": 3, "pop": 97873442, "life_expect": 74.21, "fertility": 2.7199999999999998}, {"year": 2000, "country": "Netherlands", "cluster": 1, "pop": 15899135, "life_expect": 78.28, "fertility": 1.72}, {"year": 2000, "country": "New Zealand", "cluster": 4, "pop": 3855266, "life_expect": 78.39, "fertility": 1.98}, {"year": 2000, "country": "Nigeria", "cluster": 2, "pop": 122851984, "life_expect": 54.63, "fertility": 6.12}, {"year": 2000, "country": "North Korea", "cluster": 4, "pop": 23367059, "life_expect": 63.9, "fertility": 1.97}, {"year": 2000, "country": "Norway", "cluster": 1, "pop": 4491202, "life_expect": 78.9, "fertility": 1.85}, {"year": 2000, "country": "Pakistan", "cluster": 0, "pop": 154369924, "life_expect": 61.04, "fertility": 5.26}, {"year": 2000, "country": "Peru", "cluster": 3, "pop": 26654439, "life_expect": 74.61, "fertility": 2.85}, {"year": 2000, "country": "Philippines", "cluster": 4, "pop": 77958223, "life_expect": 70.31, "fertility": 3.71}, {"year": 2000, "country": "Poland", "cluster": 1, "pop": 38504431, "life_expect": 73.9, "fertility": 1.37}, {"year": 2000, "country": "Portugal", "cluster": 1, "pop": 10300626, "life_expect": 76.84, "fertility": 1.54}, {"year": 2000, "country": "Rwanda", "cluster": 2, "pop": 8109989, "life_expect": 50.51, "fertility": 5.92}, {"year": 2000, "country": "Saudi Arabia", "cluster": 5, "pop": 21547390, "life_expect": 70.37, "fertility": 4.12}, {"year": 2000, "country": "South Africa", "cluster": 2, "pop": 46813266, "life_expect": 55.58, "fertility": 2.41}, {"year": 2000, "country": "South Korea", "cluster": 4, "pop": 46788591, "life_expect": 76.34, "fertility": 1.42}, {"year": 2000, "country": "Spain", "cluster": 1, "pop": 40741651, "life_expect": 79.47, "fertility": 1.22}, {"year": 2000, "country": "Switzerland", "cluster": 1, "pop": 7182059, "life_expect": 80.3, "fertility": 1.49}, {"year": 2000, "country": "Turkey", "cluster": 1, "pop": 64113547, "life_expect": 74.73, "fertility": 2.51}, {"year": 2000, "country": "United Kingdom", "cluster": 1, "pop": 58850043, "life_expect": 77.97, "fertility": 1.6400000000000001}, {"year": 2000, "country": "United States", "cluster": 3, "pop": 282398554, "life_expect": 77.03, "fertility": 2.05}, {"year": 2000, "country": "Venezuela", "cluster": 3, "pop": 24427729, "life_expect": 74.17, "fertility": 2.8200000000000003}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "hconcat": [{"mark": {"type": "point"}, "encoding": {"x": {"field": "fertility", "type": "quantitative"}, "y": {"field": "life_expect", "type": "quantitative"}}}, {"mark": {"type": "point"}, "encoding": {"x": {"field": "fertility", "scale": {"zero": false}, "type": "quantitative"}, "y": {"field": "life_expect", "scale": {"zero": false}, "type": "quantitative"}}}], "data": {"name": "data-7ba21f88da56082f9219bdb57a26f683"}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-7ba21f88da56082f9219bdb57a26f683": [{"year": 2000, "country": "Afghanistan", "cluster": 0, "pop": 19542982, "life_expect": 54.73, "fertility": 7.53}, {"year": 2000, "country": "Argentina", "cluster": 3, "pop": 37070774, "life_expect": 74.22, "fertility": 2.59}, {"year": 2000, "country": "Australia", "cluster": 4, "pop": 19017963, "life_expect": 79.72, "fertility": 1.77}, {"year": 2000, "country": "Austria", "cluster": 1, "pop": 8010428, "life_expect": 78.49, "fertility": 1.3599999999999999}, {"year": 2000, "country": "Bahamas", "cluster": 3, "pop": 325014, "life_expect": 71.25, "fertility": 2.1}, {"year": 2000, "country": "Bangladesh", "cluster": 0, "pop": 129193327, "life_expect": 65.47, "fertility": 3.22}, {"year": 2000, "country": "Barbados", "cluster": 3, "pop": 264657, "life_expect": 74.74, "fertility": 1.78}, {"year": 2000, "country": "Belgium", "cluster": 1, "pop": 10264343, "life_expect": 78.04, "fertility": 1.6600000000000001}, {"year": 2000, "country": "Bolivia", "cluster": 3, "pop": 8592656, "life_expect": 66.53, "fertility": 3.99}, {"year": 2000, "country": "Brazil", "cluster": 3, "pop": 175873720, "life_expect": 71.18, "fertility": 2.26}, {"year": 2000, "country": "Canada", "cluster": 3, "pop": 30683313, "life_expect": 79.36, "fertility": 1.49}, {"year": 2000, "country": "Chile", "cluster": 3, "pop": 15351799, "life_expect": 76.93, "fertility": 1.99}, {"year": 2000, "country": "China", "cluster": 4, "pop": 1264099069, "life_expect": 71.33, "fertility": 1.63}, {"year": 2000, "country": "Colombia", "cluster": 3, "pop": 39215135, "life_expect": 74.23, "fertility": 2.5700000000000003}, {"year": 2000, "country": "Costa Rica", "cluster": 3, "pop": 3979193, "life_expect": 77.9, "fertility": 2.41}, {"year": 2000, "country": "Croatia", "cluster": 1, "pop": 4548434, "life_expect": 74.65, "fertility": 1.47}, {"year": 2000, "country": "Cuba", "cluster": 3, "pop": 11105791, "life_expect": 77.01, "fertility": 1.58}, {"year": 2000, "country": "Dominican Republic", "cluster": 3, "pop": 8540791, "life_expect": 73.66, "fertility": 2.86}, {"year": 2000, "country": "Ecuador", "cluster": 3, "pop": 12626507, "life_expect": 74.46, "fertility": 3.1}, {"year": 2000, "country": "Egypt", "cluster": 5, "pop": 71371371, "life_expect": 68.54, "fertility": 3.44}, {"year": 2000, "country": "El Salvador", "cluster": 3, "pop": 5958482, "life_expect": 73.07, "fertility": 3.14}, {"year": 2000, "country": "Finland", "cluster": 1, "pop": 5176209, "life_expect": 78.04, "fertility": 1.73}, {"year": 2000, "country": "France", "cluster": 1, "pop": 58665453, "life_expect": 79.19, "fertility": 1.88}, {"year": 2000, "country": "Georgia", "cluster": 1, "pop": 4265172, "life_expect": 70.68, "fertility": 1.6}, {"year": 2000, "country": "Germany", "cluster": 1, "pop": 81551677, "life_expect": 78.39, "fertility": 1.38}, {"year": 2000, "country": "Greece", "cluster": 1, "pop": 11038109, "life_expect": 78.44, "fertility": 1.33}, {"year": 2000, "country": "Grenada", "cluster": 3, "pop": 107432, "life_expect": 71.97, "fertility": 2.58}, {"year": 2000, "country": "Haiti", "cluster": 3, "pop": 8360225, "life_expect": 57.43, "fertility": 4.39}, {"year": 2000, "country": "Hong Kong, China", "cluster": 4, "pop": 6731195, "life_expect": 80.75, "fertility": 1.03}, {"year": 2000, "country": "Iceland", "cluster": 1, "pop": 281462, "life_expect": 80.35, "fertility": 2.07}, {"year": 2000, "country": "India", "cluster": 0, "pop": 1059633675, "life_expect": 62.94, "fertility": 3.35}, {"year": 2000, "country": "Indonesia", "cluster": 4, "pop": 214072421, "life_expect": 67.24, "fertility": 2.54}, {"year": 2000, "country": "Iran", "cluster": 5, "pop": 65544383, "life_expect": 71.94, "fertility": 2.02}, {"year": 2000, "country": "Iraq", "cluster": 5, "pop": 24628858, "life_expect": 68.64, "fertility": 4.95}, {"year": 2000, "country": "Ireland", "cluster": 1, "pop": 3768950, "life_expect": 76.77, "fertility": 1.8900000000000001}, {"year": 2000, "country": "Israel", "cluster": 5, "pop": 6116958, "life_expect": 78.87, "fertility": 2.95}, {"year": 2000, "country": "Italy", "cluster": 1, "pop": 56966397, "life_expect": 79.64, "fertility": 1.25}, {"year": 2000, "country": "Jamaica", "cluster": 3, "pop": 2612205, "life_expect": 74.64, "fertility": 2.21}, {"year": 2000, "country": "Japan", "cluster": 4, "pop": 126803861, "life_expect": 81.57, "fertility": 1.37}, {"year": 2000, "country": "Kenya", "cluster": 2, "pop": 30851606, "life_expect": 54.83, "fertility": 5.14}, {"year": 2000, "country": "Lebanon", "cluster": 5, "pop": 4320642, "life_expect": 74.82, "fertility": 2.5}, {"year": 2000, "country": "Mexico", "cluster": 3, "pop": 97873442, "life_expect": 74.21, "fertility": 2.7199999999999998}, {"year": 2000, "country": "Netherlands", "cluster": 1, "pop": 15899135, "life_expect": 78.28, "fertility": 1.72}, {"year": 2000, "country": "New Zealand", "cluster": 4, "pop": 3855266, "life_expect": 78.39, "fertility": 1.98}, {"year": 2000, "country": "Nigeria", "cluster": 2, "pop": 122851984, "life_expect": 54.63, "fertility": 6.12}, {"year": 2000, "country": "North Korea", "cluster": 4, "pop": 23367059, "life_expect": 63.9, "fertility": 1.97}, {"year": 2000, "country": "Norway", "cluster": 1, "pop": 4491202, "life_expect": 78.9, "fertility": 1.85}, {"year": 2000, "country": "Pakistan", "cluster": 0, "pop": 154369924, "life_expect": 61.04, "fertility": 5.26}, {"year": 2000, "country": "Peru", "cluster": 3, "pop": 26654439, "life_expect": 74.61, "fertility": 2.85}, {"year": 2000, "country": "Philippines", "cluster": 4, "pop": 77958223, "life_expect": 70.31, "fertility": 3.71}, {"year": 2000, "country": "Poland", "cluster": 1, "pop": 38504431, "life_expect": 73.9, "fertility": 1.37}, {"year": 2000, "country": "Portugal", "cluster": 1, "pop": 10300626, "life_expect": 76.84, "fertility": 1.54}, {"year": 2000, "country": "Rwanda", "cluster": 2, "pop": 8109989, "life_expect": 50.51, "fertility": 5.92}, {"year": 2000, "country": "Saudi Arabia", "cluster": 5, "pop": 21547390, "life_expect": 70.37, "fertility": 4.12}, {"year": 2000, "country": "South Africa", "cluster": 2, "pop": 46813266, "life_expect": 55.58, "fertility": 2.41}, {"year": 2000, "country": "South Korea", "cluster": 4, "pop": 46788591, "life_expect": 76.34, "fertility": 1.42}, {"year": 2000, "country": "Spain", "cluster": 1, "pop": 40741651, "life_expect": 79.47, "fertility": 1.22}, {"year": 2000, "country": "Switzerland", "cluster": 1, "pop": 7182059, "life_expect": 80.3, "fertility": 1.49}, {"year": 2000, "country": "Turkey", "cluster": 1, "pop": 64113547, "life_expect": 74.73, "fertility": 2.51}, {"year": 2000, "country": "United Kingdom", "cluster": 1, "pop": 58850043, "life_expect": 77.97, "fertility": 1.6400000000000001}, {"year": 2000, "country": "United States", "cluster": 3, "pop": 282398554, "life_expect": 77.03, "fertility": 2.05}, {"year": 2000, "country": "Venezuela", "cluster": 3, "pop": 24427729, "life_expect": 74.17, "fertility": 2.8200000000000003}]}}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -897,7 +923,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="size" class="level2">
 <h2 class="anchored" data-anchor-id="size"><code>size</code></h2>
-<div id="c0c9ba6b" class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -906,23 +932,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="48">
 
 <style>
-  #altair-viz-11aad13b539c49d989d61e5c09317aca.vega-embed {
+  #altair-viz-35d1b4d7c0d34aceaf155a6a5795ada0.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-11aad13b539c49d989d61e5c09317aca.vega-embed details,
-  #altair-viz-11aad13b539c49d989d61e5c09317aca.vega-embed details summary {
+  #altair-viz-35d1b4d7c0d34aceaf155a6a5795ada0.vega-embed details,
+  #altair-viz-35d1b4d7c0d34aceaf155a6a5795ada0.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-11aad13b539c49d989d61e5c09317aca"></div>
+<div id="altair-viz-35d1b4d7c0d34aceaf155a6a5795ada0"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-11aad13b539c49d989d61e5c09317aca") {
-      outputDiv = document.getElementById("altair-viz-11aad13b539c49d989d61e5c09317aca");
+    if (outputDiv.id !== "altair-viz-35d1b4d7c0d34aceaf155a6a5795ada0") {
+      outputDiv = document.getElementById("altair-viz-35d1b4d7c0d34aceaf155a6a5795ada0");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -975,7 +1001,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="size-with-1000-pixels-for-largest-dot" class="level2">
 <h2 class="anchored" data-anchor-id="size-with-1000-pixels-for-largest-dot"><code>size</code> with 1000 pixels for largest dot</h2>
-<div id="1081d84a" class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -984,23 +1010,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="49">
 
 <style>
-  #altair-viz-4a2e6bfa75a34b4bb6f0457790877af2.vega-embed {
+  #altair-viz-229f68d176154887be1ac12db972f494.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-4a2e6bfa75a34b4bb6f0457790877af2.vega-embed details,
-  #altair-viz-4a2e6bfa75a34b4bb6f0457790877af2.vega-embed details summary {
+  #altair-viz-229f68d176154887be1ac12db972f494.vega-embed details,
+  #altair-viz-229f68d176154887be1ac12db972f494.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-4a2e6bfa75a34b4bb6f0457790877af2"></div>
+<div id="altair-viz-229f68d176154887be1ac12db972f494"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-4a2e6bfa75a34b4bb6f0457790877af2") {
-      outputDiv = document.getElementById("altair-viz-4a2e6bfa75a34b4bb6f0457790877af2");
+    if (outputDiv.id !== "altair-viz-229f68d176154887be1ac12db972f494") {
+      outputDiv = document.getElementById("altair-viz-229f68d176154887be1ac12db972f494");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1053,7 +1079,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="add-color-and-size-with-filledtrue" class="level2">
 <h2 class="anchored" data-anchor-id="add-color-and-size-with-filledtrue">add <code>color</code> and <code>size</code> with <code>filled=True</code></h2>
-<div id="2dbc20e6" class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1063,23 +1089,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="50">
 
 <style>
-  #altair-viz-d25476f8cf4e46bdb78ed78ec60ba6b6.vega-embed {
+  #altair-viz-2724d0be59024a11897cef0aeb3cdb16.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d25476f8cf4e46bdb78ed78ec60ba6b6.vega-embed details,
-  #altair-viz-d25476f8cf4e46bdb78ed78ec60ba6b6.vega-embed details summary {
+  #altair-viz-2724d0be59024a11897cef0aeb3cdb16.vega-embed details,
+  #altair-viz-2724d0be59024a11897cef0aeb3cdb16.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d25476f8cf4e46bdb78ed78ec60ba6b6"></div>
+<div id="altair-viz-2724d0be59024a11897cef0aeb3cdb16"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d25476f8cf4e46bdb78ed78ec60ba6b6") {
-      outputDiv = document.getElementById("altair-viz-d25476f8cf4e46bdb78ed78ec60ba6b6");
+    if (outputDiv.id !== "altair-viz-2724d0be59024a11897cef0aeb3cdb16") {
+      outputDiv = document.getElementById("altair-viz-2724d0be59024a11897cef0aeb3cdb16");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1132,7 +1158,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="opacity" class="level2">
 <h2 class="anchored" data-anchor-id="opacity"><code>opacity</code></h2>
-<div id="9e367011" class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1143,23 +1169,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="51">
 
 <style>
-  #altair-viz-0aa58b81f955468cb487d6ae103e5fe5.vega-embed {
+  #altair-viz-a8b5bed6803743158ecdd5a1c4b8766c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0aa58b81f955468cb487d6ae103e5fe5.vega-embed details,
-  #altair-viz-0aa58b81f955468cb487d6ae103e5fe5.vega-embed details summary {
+  #altair-viz-a8b5bed6803743158ecdd5a1c4b8766c.vega-embed details,
+  #altair-viz-a8b5bed6803743158ecdd5a1c4b8766c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0aa58b81f955468cb487d6ae103e5fe5"></div>
+<div id="altair-viz-a8b5bed6803743158ecdd5a1c4b8766c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0aa58b81f955468cb487d6ae103e5fe5") {
-      outputDiv = document.getElementById("altair-viz-0aa58b81f955468cb487d6ae103e5fe5");
+    if (outputDiv.id !== "altair-viz-a8b5bed6803743158ecdd5a1c4b8766c") {
+      outputDiv = document.getElementById("altair-viz-a8b5bed6803743158ecdd5a1c4b8766c");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1212,7 +1238,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="column" class="level2">
 <h2 class="anchored" data-anchor-id="column"><code>column</code></h2>
-<div id="7a9af680" class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1225,23 +1251,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="52">
 
 <style>
-  #altair-viz-c5a1a9b72fbf441aa2cc2a3c8d34fbc8.vega-embed {
+  #altair-viz-5fe582928c0d4fb0976e736560e88db8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c5a1a9b72fbf441aa2cc2a3c8d34fbc8.vega-embed details,
-  #altair-viz-c5a1a9b72fbf441aa2cc2a3c8d34fbc8.vega-embed details summary {
+  #altair-viz-5fe582928c0d4fb0976e736560e88db8.vega-embed details,
+  #altair-viz-5fe582928c0d4fb0976e736560e88db8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c5a1a9b72fbf441aa2cc2a3c8d34fbc8"></div>
+<div id="altair-viz-5fe582928c0d4fb0976e736560e88db8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c5a1a9b72fbf441aa2cc2a3c8d34fbc8") {
-      outputDiv = document.getElementById("altair-viz-c5a1a9b72fbf441aa2cc2a3c8d34fbc8");
+    if (outputDiv.id !== "altair-viz-5fe582928c0d4fb0976e736560e88db8") {
+      outputDiv = document.getElementById("altair-viz-5fe582928c0d4fb0976e736560e88db8");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1294,7 +1320,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="adjust-aspect-ratio-move-pop-legend-remove-color-legend" class="level2">
 <h2 class="anchored" data-anchor-id="adjust-aspect-ratio-move-pop-legend-remove-color-legend">adjust aspect ratio, move pop legend, remove color legend</h2>
-<div id="9189d232" class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1308,23 +1334,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="53">
 
 <style>
-  #altair-viz-00a67a0f22354115b40d4606e2cd23f8.vega-embed {
+  #altair-viz-cbd0bd6694564526b23a894b85455b9f.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-00a67a0f22354115b40d4606e2cd23f8.vega-embed details,
-  #altair-viz-00a67a0f22354115b40d4606e2cd23f8.vega-embed details summary {
+  #altair-viz-cbd0bd6694564526b23a894b85455b9f.vega-embed details,
+  #altair-viz-cbd0bd6694564526b23a894b85455b9f.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-00a67a0f22354115b40d4606e2cd23f8"></div>
+<div id="altair-viz-cbd0bd6694564526b23a894b85455b9f"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-00a67a0f22354115b40d4606e2cd23f8") {
-      outputDiv = document.getElementById("altair-viz-00a67a0f22354115b40d4606e2cd23f8");
+    if (outputDiv.id !== "altair-viz-cbd0bd6694564526b23a894b85455b9f") {
+      outputDiv = document.getElementById("altair-viz-cbd0bd6694564526b23a894b85455b9f");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1420,7 +1446,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_point-add-information-using-alt.shape" class="level2">
 <h2 class="anchored" data-anchor-id="mark_point-add-information-using-alt.shape"><code>mark_point()</code>: add information using <code>alt.Shape()</code></h2>
-<div id="4bab9606" class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
@@ -1429,23 +1455,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="54">
 
 <style>
-  #altair-viz-351cdcc2d6a3416f9eecb48da89914a5.vega-embed {
+  #altair-viz-117fe8561b6c4c668e4520c80bf337ac.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-351cdcc2d6a3416f9eecb48da89914a5.vega-embed details,
-  #altair-viz-351cdcc2d6a3416f9eecb48da89914a5.vega-embed details summary {
+  #altair-viz-117fe8561b6c4c668e4520c80bf337ac.vega-embed details,
+  #altair-viz-117fe8561b6c4c668e4520c80bf337ac.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-351cdcc2d6a3416f9eecb48da89914a5"></div>
+<div id="altair-viz-117fe8561b6c4c668e4520c80bf337ac"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-351cdcc2d6a3416f9eecb48da89914a5") {
-      outputDiv = document.getElementById("altair-viz-351cdcc2d6a3416f9eecb48da89914a5");
+    if (outputDiv.id !== "altair-viz-117fe8561b6c4c668e4520c80bf337ac") {
+      outputDiv = document.getElementById("altair-viz-117fe8561b6c4c668e4520c80bf337ac");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1498,7 +1524,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_point-format-points-using-arguments" class="level2">
 <h2 class="anchored" data-anchor-id="mark_point-format-points-using-arguments"><code>mark_point()</code>: format points using arguments</h2>
-<div id="e8d60018" class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>, size<span class="op">=</span><span class="dv">100</span>).encode(</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
@@ -1507,23 +1533,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="55">
 
 <style>
-  #altair-viz-fcc0fbf266984d20ad737d2088f6af72.vega-embed {
+  #altair-viz-f8d6bfed69d94fd5b91eebdc2c2a063d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-fcc0fbf266984d20ad737d2088f6af72.vega-embed details,
-  #altair-viz-fcc0fbf266984d20ad737d2088f6af72.vega-embed details summary {
+  #altair-viz-f8d6bfed69d94fd5b91eebdc2c2a063d.vega-embed details,
+  #altair-viz-f8d6bfed69d94fd5b91eebdc2c2a063d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-fcc0fbf266984d20ad737d2088f6af72"></div>
+<div id="altair-viz-f8d6bfed69d94fd5b91eebdc2c2a063d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fcc0fbf266984d20ad737d2088f6af72") {
-      outputDiv = document.getElementById("altair-viz-fcc0fbf266984d20ad737d2088f6af72");
+    if (outputDiv.id !== "altair-viz-f8d6bfed69d94fd5b91eebdc2c2a063d") {
+      outputDiv = document.getElementById("altair-viz-f8d6bfed69d94fd5b91eebdc2c2a063d");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1576,7 +1602,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_circle-wrapper-for-mark_pointfilledtrue" class="level2">
 <h2 class="anchored" data-anchor-id="mark_circle-wrapper-for-mark_pointfilledtrue"><code>mark_circle()</code> wrapper for <code>mark_point(filled=True)</code></h2>
-<div id="8592e259" class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_circle(size<span class="op">=</span><span class="dv">100</span>).encode(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
@@ -1586,7 +1612,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_square" class="level2">
 <h2 class="anchored" data-anchor-id="mark_square"><code>mark_square()</code></h2>
-<div id="cbe9b455" class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_square(size<span class="op">=</span><span class="dv">100</span>).encode(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
@@ -1595,23 +1621,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="56">
 
 <style>
-  #altair-viz-f926e85086ac43ccbb3cbf9129fabee9.vega-embed {
+  #altair-viz-6fe06597c510419a8edd20b4951bfd79.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f926e85086ac43ccbb3cbf9129fabee9.vega-embed details,
-  #altair-viz-f926e85086ac43ccbb3cbf9129fabee9.vega-embed details summary {
+  #altair-viz-6fe06597c510419a8edd20b4951bfd79.vega-embed details,
+  #altair-viz-6fe06597c510419a8edd20b4951bfd79.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f926e85086ac43ccbb3cbf9129fabee9"></div>
+<div id="altair-viz-6fe06597c510419a8edd20b4951bfd79"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f926e85086ac43ccbb3cbf9129fabee9") {
-      outputDiv = document.getElementById("altair-viz-f926e85086ac43ccbb3cbf9129fabee9");
+    if (outputDiv.id !== "altair-viz-6fe06597c510419a8edd20b4951bfd79") {
+      outputDiv = document.getElementById("altair-viz-6fe06597c510419a8edd20b4951bfd79");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1668,7 +1694,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <li>Useful for comparing values along a single dimension with minimal overlap.</li>
 <li>A <em>dot plot</em> drawn with tick marks is sometimes referred to as a <em>strip plot</em>.</li>
 </ul>
-<div id="28602362" class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_tick().encode(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:N'</span>)</span>
@@ -1676,23 +1702,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="57">
 
 <style>
-  #altair-viz-286d2b28a8df4eb9a1fd7796ef81d7ba.vega-embed {
+  #altair-viz-60a636f5fed04356838639a5c96e2cd7.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-286d2b28a8df4eb9a1fd7796ef81d7ba.vega-embed details,
-  #altair-viz-286d2b28a8df4eb9a1fd7796ef81d7ba.vega-embed details summary {
+  #altair-viz-60a636f5fed04356838639a5c96e2cd7.vega-embed details,
+  #altair-viz-60a636f5fed04356838639a5c96e2cd7.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-286d2b28a8df4eb9a1fd7796ef81d7ba"></div>
+<div id="altair-viz-60a636f5fed04356838639a5c96e2cd7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-286d2b28a8df4eb9a1fd7796ef81d7ba") {
-      outputDiv = document.getElementById("altair-viz-286d2b28a8df4eb9a1fd7796ef81d7ba");
+    if (outputDiv.id !== "altair-viz-60a636f5fed04356838639a5c96e2cd7") {
+      outputDiv = document.getElementById("altair-viz-60a636f5fed04356838639a5c96e2cd7");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1745,7 +1771,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_bar" class="level2">
 <h2 class="anchored" data-anchor-id="mark_bar"><code>mark_bar()</code></h2>
-<div id="1023b3eb" class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'country:N'</span>),</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>)</span>
@@ -1753,23 +1779,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="58">
 
 <style>
-  #altair-viz-e13397ea519d42a09ce0ef60e39044bc.vega-embed {
+  #altair-viz-eca5180fa7e8437381917520fada9872.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e13397ea519d42a09ce0ef60e39044bc.vega-embed details,
-  #altair-viz-e13397ea519d42a09ce0ef60e39044bc.vega-embed details summary {
+  #altair-viz-eca5180fa7e8437381917520fada9872.vega-embed details,
+  #altair-viz-eca5180fa7e8437381917520fada9872.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e13397ea519d42a09ce0ef60e39044bc"></div>
+<div id="altair-viz-eca5180fa7e8437381917520fada9872"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e13397ea519d42a09ce0ef60e39044bc") {
-      outputDiv = document.getElementById("altair-viz-e13397ea519d42a09ce0ef60e39044bc");
+    if (outputDiv.id !== "altair-viz-eca5180fa7e8437381917520fada9872") {
+      outputDiv = document.getElementById("altair-viz-eca5180fa7e8437381917520fada9872");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1822,7 +1848,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="use-alt.color-for-a-stacked-bar-plot" class="level2">
 <h2 class="anchored" data-anchor-id="use-alt.color-for-a-stacked-bar-plot">use <code>alt.Color()</code> for a stacked bar plot</h2>
-<div id="04aafae0" class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'cluster:N'</span>),</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>),</span>
@@ -1831,23 +1857,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="59">
 
 <style>
-  #altair-viz-f9f25394f0764036b4b437a229c5d7fd.vega-embed {
+  #altair-viz-dad05f71bc57418d98e31fc275dac12f.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f9f25394f0764036b4b437a229c5d7fd.vega-embed details,
-  #altair-viz-f9f25394f0764036b4b437a229c5d7fd.vega-embed details summary {
+  #altair-viz-dad05f71bc57418d98e31fc275dac12f.vega-embed details,
+  #altair-viz-dad05f71bc57418d98e31fc275dac12f.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f9f25394f0764036b4b437a229c5d7fd"></div>
+<div id="altair-viz-dad05f71bc57418d98e31fc275dac12f"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f9f25394f0764036b4b437a229c5d7fd") {
-      outputDiv = document.getElementById("altair-viz-f9f25394f0764036b4b437a229c5d7fd");
+    if (outputDiv.id !== "altair-viz-dad05f71bc57418d98e31fc275dac12f") {
+      outputDiv = document.getElementById("altair-viz-dad05f71bc57418d98e31fc275dac12f");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1901,7 +1927,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="x2-to-show-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="x2-to-show-intervals"><code>X2()</code> to show intervals</h2>
-<div id="1bdb669f" class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'min(life_expect):Q'</span>),</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    alt.X2(<span class="st">'max(life_expect):Q'</span>),</span>
@@ -1910,23 +1936,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="60">
 
 <style>
-  #altair-viz-e353cea1b6e84e529c0d5e10c86add94.vega-embed {
+  #altair-viz-eae04053aa3f4d45ba374581fd75b379.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e353cea1b6e84e529c0d5e10c86add94.vega-embed details,
-  #altair-viz-e353cea1b6e84e529c0d5e10c86add94.vega-embed details summary {
+  #altair-viz-eae04053aa3f4d45ba374581fd75b379.vega-embed details,
+  #altair-viz-eae04053aa3f4d45ba374581fd75b379.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e353cea1b6e84e529c0d5e10c86add94"></div>
+<div id="altair-viz-eae04053aa3f4d45ba374581fd75b379"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e353cea1b6e84e529c0d5e10c86add94") {
-      outputDiv = document.getElementById("altair-viz-e353cea1b6e84e529c0d5e10c86add94");
+    if (outputDiv.id !== "altair-viz-eae04053aa3f4d45ba374581fd75b379") {
+      outputDiv = document.getElementById("altair-viz-eae04053aa3f4d45ba374581fd75b379");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1979,7 +2005,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_line" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line"><code>mark_line()</code></h2>
-<div id="0b621dc7" class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data_4a <span class="op">=</span> data.loc[data[<span class="st">'cluster'</span>] <span class="op">==</span> <span class="dv">2</span>] <span class="co">#one cluster is more manageable</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_4a).mark_line().encode(</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
@@ -1991,23 +2017,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="61">
 
 <style>
-  #altair-viz-7f86dc80529b4579b687b30b98a75639.vega-embed {
+  #altair-viz-7eac1044d9fd49ee91140efd32251401.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7f86dc80529b4579b687b30b98a75639.vega-embed details,
-  #altair-viz-7f86dc80529b4579b687b30b98a75639.vega-embed details summary {
+  #altair-viz-7eac1044d9fd49ee91140efd32251401.vega-embed details,
+  #altair-viz-7eac1044d9fd49ee91140efd32251401.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7f86dc80529b4579b687b30b98a75639"></div>
+<div id="altair-viz-7eac1044d9fd49ee91140efd32251401"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7f86dc80529b4579b687b30b98a75639") {
-      outputDiv = document.getElementById("altair-viz-7f86dc80529b4579b687b30b98a75639");
+    if (outputDiv.id !== "altair-viz-7eac1044d9fd49ee91140efd32251401") {
+      outputDiv = document.getElementById("altair-viz-7eac1044d9fd49ee91140efd32251401");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2061,7 +2087,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <section id="how-many-lines-tooltip-instead-of-legend" class="level2">
 <h2 class="anchored" data-anchor-id="how-many-lines-tooltip-instead-of-legend">how many lines? <code>Tooltip</code> instead of <code>legend</code></h2>
 <p>textbook advocates for having a plot with many more lines, no legend, and instead using <code>alt.Tooltip('country:N')</code>. This is technologically feasible but a bad idea. (Discuss: why?)</p>
-<div id="873d1daa" class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data).mark_line().encode(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
@@ -2073,23 +2099,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="62">
 
 <style>
-  #altair-viz-17e89c2bb30b4a1b9f6fa70ef9e33137.vega-embed {
+  #altair-viz-f00e5fde5a3345c9a50313ba97a17a68.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-17e89c2bb30b4a1b9f6fa70ef9e33137.vega-embed details,
-  #altair-viz-17e89c2bb30b4a1b9f6fa70ef9e33137.vega-embed details summary {
+  #altair-viz-f00e5fde5a3345c9a50313ba97a17a68.vega-embed details,
+  #altair-viz-f00e5fde5a3345c9a50313ba97a17a68.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-17e89c2bb30b4a1b9f6fa70ef9e33137"></div>
+<div id="altair-viz-f00e5fde5a3345c9a50313ba97a17a68"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-17e89c2bb30b4a1b9f6fa70ef9e33137") {
-      outputDiv = document.getElementById("altair-viz-17e89c2bb30b4a1b9f6fa70ef9e33137");
+    if (outputDiv.id !== "altair-viz-f00e5fde5a3345c9a50313ba97a17a68") {
+      outputDiv = document.getElementById("altair-viz-f00e5fde5a3345c9a50313ba97a17a68");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2142,7 +2168,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_line-with-cosmetic-adjustments" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line-with-cosmetic-adjustments"><code>mark_line()</code> with cosmetic adjustments</h2>
-<div id="0e290d4c" class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_4a).mark_line(</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    strokeWidth<span class="op">=</span><span class="dv">3</span>,</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
@@ -2157,23 +2183,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="63">
 
 <style>
-  #altair-viz-47e23a35adfe4332aa483105c3086ff1.vega-embed {
+  #altair-viz-6bfce6451e9a4672867496d1e7241036.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-47e23a35adfe4332aa483105c3086ff1.vega-embed details,
-  #altair-viz-47e23a35adfe4332aa483105c3086ff1.vega-embed details summary {
+  #altair-viz-6bfce6451e9a4672867496d1e7241036.vega-embed details,
+  #altair-viz-6bfce6451e9a4672867496d1e7241036.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-47e23a35adfe4332aa483105c3086ff1"></div>
+<div id="altair-viz-6bfce6451e9a4672867496d1e7241036"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-47e23a35adfe4332aa483105c3086ff1") {
-      outputDiv = document.getElementById("altair-viz-47e23a35adfe4332aa483105c3086ff1");
+    if (outputDiv.id !== "altair-viz-6bfce6451e9a4672867496d1e7241036") {
+      outputDiv = document.getElementById("altair-viz-6bfce6451e9a4672867496d1e7241036");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2226,7 +2252,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_line-with-cosmetic-adjustments-1" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line-with-cosmetic-adjustments-1"><code>mark_line()</code> with cosmetic adjustments</h2>
-<div id="b4f53d53" class="cell" data-execution_count="27">
+<div class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>data_4a_2y <span class="op">=</span> data_4a[data_4a[<span class="st">'year'</span>].isin([<span class="dv">1955</span>, <span class="dv">2005</span>])]</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_4a_2y).mark_line().encode(</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
@@ -2238,23 +2264,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="64">
 
 <style>
-  #altair-viz-f9fee9b49ecf4b61b84e1c8bc6a9aa93.vega-embed {
+  #altair-viz-b08ce62f043841bd8621599585bb6dbe.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f9fee9b49ecf4b61b84e1c8bc6a9aa93.vega-embed details,
-  #altair-viz-f9fee9b49ecf4b61b84e1c8bc6a9aa93.vega-embed details summary {
+  #altair-viz-b08ce62f043841bd8621599585bb6dbe.vega-embed details,
+  #altair-viz-b08ce62f043841bd8621599585bb6dbe.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f9fee9b49ecf4b61b84e1c8bc6a9aa93"></div>
+<div id="altair-viz-b08ce62f043841bd8621599585bb6dbe"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f9fee9b49ecf4b61b84e1c8bc6a9aa93") {
-      outputDiv = document.getElementById("altair-viz-f9fee9b49ecf4b61b84e1c8bc6a9aa93");
+    if (outputDiv.id !== "altair-viz-b08ce62f043841bd8621599585bb6dbe") {
+      outputDiv = document.getElementById("altair-viz-b08ce62f043841bd8621599585bb6dbe");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2307,7 +2333,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_area" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area"><code>mark_area()</code></h2>
-<div id="cdcfb515" class="cell" data-execution_count="28">
+<div class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dataUS <span class="op">=</span> data.loc[data[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'United States'</span>]</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataUS).mark_area().encode(</span>
@@ -2317,23 +2343,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="65">
 
 <style>
-  #altair-viz-21abbaf4ff55455cb1552f30f5d61d72.vega-embed {
+  #altair-viz-70a4af711df14f9382a4cc3f6c2381cb.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-21abbaf4ff55455cb1552f30f5d61d72.vega-embed details,
-  #altair-viz-21abbaf4ff55455cb1552f30f5d61d72.vega-embed details summary {
+  #altair-viz-70a4af711df14f9382a4cc3f6c2381cb.vega-embed details,
+  #altair-viz-70a4af711df14f9382a4cc3f6c2381cb.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-21abbaf4ff55455cb1552f30f5d61d72"></div>
+<div id="altair-viz-70a4af711df14f9382a4cc3f6c2381cb"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-21abbaf4ff55455cb1552f30f5d61d72") {
-      outputDiv = document.getElementById("altair-viz-21abbaf4ff55455cb1552f30f5d61d72");
+    if (outputDiv.id !== "altair-viz-70a4af711df14f9382a4cc3f6c2381cb") {
+      outputDiv = document.getElementById("altair-viz-70a4af711df14f9382a4cc3f6c2381cb");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2386,7 +2412,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_area-with-interpolatemonotone" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-with-interpolatemonotone"><code>mark_area()</code> with <code>interpolate='monotone'</code></h2>
-<div id="29f72012" class="cell" data-execution_count="29">
+<div class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataUS).mark_area(interpolate<span class="op">=</span><span class="st">'monotone'</span>).encode(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>)</span>
@@ -2394,23 +2420,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="66">
 
 <style>
-  #altair-viz-1cf1558443944bd793d5ef6a8f562b47.vega-embed {
+  #altair-viz-d172dff1f70846a0b67d29490e52923e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-1cf1558443944bd793d5ef6a8f562b47.vega-embed details,
-  #altair-viz-1cf1558443944bd793d5ef6a8f562b47.vega-embed details summary {
+  #altair-viz-d172dff1f70846a0b67d29490e52923e.vega-embed details,
+  #altair-viz-d172dff1f70846a0b67d29490e52923e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-1cf1558443944bd793d5ef6a8f562b47"></div>
+<div id="altair-viz-d172dff1f70846a0b67d29490e52923e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1cf1558443944bd793d5ef6a8f562b47") {
-      outputDiv = document.getElementById("altair-viz-1cf1558443944bd793d5ef6a8f562b47");
+    if (outputDiv.id !== "altair-viz-d172dff1f70846a0b67d29490e52923e") {
+      outputDiv = document.getElementById("altair-viz-d172dff1f70846a0b67d29490e52923e");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2463,7 +2489,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_area-with-stacking" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-with-stacking"><code>mark_area()</code> with stacking</h2>
-<div id="e72ebbb9" class="cell" data-execution_count="30">
+<div class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dataNA <span class="op">=</span> data[data[<span class="st">'country'</span>].isin([<span class="st">'United States'</span>, <span class="st">'Mexico'</span>, <span class="st">'Canada'</span>])]</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
@@ -2473,23 +2499,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="67">
 
 <style>
-  #altair-viz-9c068bb45435491aa7bbea31d662b229.vega-embed {
+  #altair-viz-0510353a86184564a24aec327a8dc4c7.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-9c068bb45435491aa7bbea31d662b229.vega-embed details,
-  #altair-viz-9c068bb45435491aa7bbea31d662b229.vega-embed details summary {
+  #altair-viz-0510353a86184564a24aec327a8dc4c7.vega-embed details,
+  #altair-viz-0510353a86184564a24aec327a8dc4c7.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-9c068bb45435491aa7bbea31d662b229"></div>
+<div id="altair-viz-0510353a86184564a24aec327a8dc4c7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-9c068bb45435491aa7bbea31d662b229") {
-      outputDiv = document.getElementById("altair-viz-9c068bb45435491aa7bbea31d662b229");
+    if (outputDiv.id !== "altair-viz-0510353a86184564a24aec327a8dc4c7") {
+      outputDiv = document.getElementById("altair-viz-0510353a86184564a24aec327a8dc4c7");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2542,7 +2568,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_area-with-no-stacking-and-opacity" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-with-no-stacking-and-opacity"><code>mark_area()</code> with no stacking and opacity</h2>
-<div id="39db8973" class="cell" data-execution_count="31">
+<div class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area(opacity<span class="op">=</span><span class="fl">0.5</span>).encode(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>, stack<span class="op">=</span><span class="va">None</span>),</span>
@@ -2551,23 +2577,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="68">
 
 <style>
-  #altair-viz-c1102d45bd144549959b705c4b810e2b.vega-embed {
+  #altair-viz-956f021c38a044babadea894af8a2cc1.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c1102d45bd144549959b705c4b810e2b.vega-embed details,
-  #altair-viz-c1102d45bd144549959b705c4b810e2b.vega-embed details summary {
+  #altair-viz-956f021c38a044babadea894af8a2cc1.vega-embed details,
+  #altair-viz-956f021c38a044babadea894af8a2cc1.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c1102d45bd144549959b705c4b810e2b"></div>
+<div id="altair-viz-956f021c38a044babadea894af8a2cc1"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c1102d45bd144549959b705c4b810e2b") {
-      outputDiv = document.getElementById("altair-viz-c1102d45bd144549959b705c4b810e2b");
+    if (outputDiv.id !== "altair-viz-956f021c38a044babadea894af8a2cc1") {
+      outputDiv = document.getElementById("altair-viz-956f021c38a044babadea894af8a2cc1");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2620,7 +2646,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="mark_area-to-show-range" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-to-show-range"><code>mark_area()</code> to show range</h2>
-<div id="efaa538d" class="cell" data-execution_count="32">
+<div class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'min(fertility):Q'</span>),</span>
@@ -2631,23 +2657,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="69">
 
 <style>
-  #altair-viz-47af889156c54aefa2570f7123366a43.vega-embed {
+  #altair-viz-393c7983b0cc4872993b24873adac5e2.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-47af889156c54aefa2570f7123366a43.vega-embed details,
-  #altair-viz-47af889156c54aefa2570f7123366a43.vega-embed details summary {
+  #altair-viz-393c7983b0cc4872993b24873adac5e2.vega-embed details,
+  #altair-viz-393c7983b0cc4872993b24873adac5e2.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-47af889156c54aefa2570f7123366a43"></div>
+<div id="altair-viz-393c7983b0cc4872993b24873adac5e2"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-47af889156c54aefa2570f7123366a43") {
-      outputDiv = document.getElementById("altair-viz-47af889156c54aefa2570f7123366a43");
+    if (outputDiv.id !== "altair-viz-393c7983b0cc4872993b24873adac5e2") {
+      outputDiv = document.getElementById("altair-viz-393c7983b0cc4872993b24873adac5e2");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2701,7 +2727,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="syntax-mark_area-swap-axes" class="level2">
 <h2 class="anchored" data-anchor-id="syntax-mark_area-swap-axes">Syntax: <code>mark_area()</code> swap axes</h2>
-<div id="3e78f626" class="cell" data-execution_count="33">
+<div class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'year:O'</span>),</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'min(fertility):Q'</span>),</span>
@@ -2712,23 +2738,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="70">
 
 <style>
-  #altair-viz-f71f1f5b9380484dbd1b71e114bc9413.vega-embed {
+  #altair-viz-4d4f7527e7134b4b97e8c552ffb0001e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f71f1f5b9380484dbd1b71e114bc9413.vega-embed details,
-  #altair-viz-f71f1f5b9380484dbd1b71e114bc9413.vega-embed details summary {
+  #altair-viz-4d4f7527e7134b4b97e8c552ffb0001e.vega-embed details,
+  #altair-viz-4d4f7527e7134b4b97e8c552ffb0001e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f71f1f5b9380484dbd1b71e114bc9413"></div>
+<div id="altair-viz-4d4f7527e7134b4b97e8c552ffb0001e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f71f1f5b9380484dbd1b71e114bc9413") {
-      outputDiv = document.getElementById("altair-viz-f71f1f5b9380484dbd1b71e114bc9413");
+    if (outputDiv.id !== "altair-viz-4d4f7527e7134b4b97e8c552ffb0001e") {
+      outputDiv = document.getElementById("altair-viz-4d4f7527e7134b4b97e8c552ffb0001e");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2818,7 +2844,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <li><code>tooltip</code>: Tooltip text to display upon mouse hover over the mark.</li>
 <li><code>order</code>: Mark ordering, determines line/area point order and drawing order.</li>
 </ul>
-<div id="03d0011e" class="cell" data-execution_count="34">
+<div class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -2830,23 +2856,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="71">
 
 <style>
-  #altair-viz-8af0cbd4e4174c84859d3428f8c74dd1.vega-embed {
+  #altair-viz-28d47183d72f44a69906663731cc179a.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8af0cbd4e4174c84859d3428f8c74dd1.vega-embed details,
-  #altair-viz-8af0cbd4e4174c84859d3428f8c74dd1.vega-embed details summary {
+  #altair-viz-28d47183d72f44a69906663731cc179a.vega-embed details,
+  #altair-viz-28d47183d72f44a69906663731cc179a.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8af0cbd4e4174c84859d3428f8c74dd1"></div>
+<div id="altair-viz-28d47183d72f44a69906663731cc179a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8af0cbd4e4174c84859d3428f8c74dd1") {
-      outputDiv = document.getElementById("altair-viz-8af0cbd4e4174c84859d3428f8c74dd1");
+    if (outputDiv.id !== "altair-viz-28d47183d72f44a69906663731cc179a") {
+      outputDiv = document.getElementById("altair-viz-28d47183d72f44a69906663731cc179a");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2900,7 +2926,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="tooltip-ii" class="level2">
 <h2 class="anchored" data-anchor-id="tooltip-ii"><code>tooltip</code> II</h2>
-<div id="fb043848" class="cell" data-execution_count="35">
+<div class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -2913,23 +2939,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="72">
 
 <style>
-  #altair-viz-032e0f78f29a496e9a78f15c026f7278.vega-embed {
+  #altair-viz-5d934d87770c4007b2b1839bc56d1b25.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-032e0f78f29a496e9a78f15c026f7278.vega-embed details,
-  #altair-viz-032e0f78f29a496e9a78f15c026f7278.vega-embed details summary {
+  #altair-viz-5d934d87770c4007b2b1839bc56d1b25.vega-embed details,
+  #altair-viz-5d934d87770c4007b2b1839bc56d1b25.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-032e0f78f29a496e9a78f15c026f7278"></div>
+<div id="altair-viz-5d934d87770c4007b2b1839bc56d1b25"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-032e0f78f29a496e9a78f15c026f7278") {
-      outputDiv = document.getElementById("altair-viz-032e0f78f29a496e9a78f15c026f7278");
+    if (outputDiv.id !== "altair-viz-5d934d87770c4007b2b1839bc56d1b25") {
+      outputDiv = document.getElementById("altair-viz-5d934d87770c4007b2b1839bc56d1b25");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2982,7 +3008,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="tooltip-iii" class="level2">
 <h2 class="anchored" data-anchor-id="tooltip-iii"><code>tooltip</code> III</h2>
-<div id="e9ebcc47" class="cell" data-execution_count="36">
+<div class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>final_chart <span class="op">=</span> alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -3000,23 +3026,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="73">
 
 <style>
-  #altair-viz-f80ba9d91fb647abb266ade39927dc91.vega-embed {
+  #altair-viz-3bf0142db073455583866b647a51f7e8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f80ba9d91fb647abb266ade39927dc91.vega-embed details,
-  #altair-viz-f80ba9d91fb647abb266ade39927dc91.vega-embed details summary {
+  #altair-viz-3bf0142db073455583866b647a51f7e8.vega-embed details,
+  #altair-viz-3bf0142db073455583866b647a51f7e8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f80ba9d91fb647abb266ade39927dc91"></div>
+<div id="altair-viz-3bf0142db073455583866b647a51f7e8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f80ba9d91fb647abb266ade39927dc91") {
-      outputDiv = document.getElementById("altair-viz-f80ba9d91fb647abb266ade39927dc91");
+    if (outputDiv.id !== "altair-viz-3bf0142db073455583866b647a51f7e8") {
+      outputDiv = document.getElementById("altair-viz-3bf0142db073455583866b647a51f7e8");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -3071,7 +3097,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <section id="production-quality-interactive-plot" class="level2">
 <h2 class="anchored" data-anchor-id="production-quality-interactive-plot">Production-quality interactive plot</h2>
 <p>(no need to understand all the details)</p>
-<div id="74e13c59" class="cell" data-execution_count="37">
+<div class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> vega_data.cars() </span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create an interval selection over an x-axis encoding</span></span>
@@ -3109,23 +3135,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="74">
 
 <style>
-  #altair-viz-784cc5558d7a40e0ab1ec0947e7288e6.vega-embed {
+  #altair-viz-ada6acebbc6a4d96bfce5432fe63386b.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-784cc5558d7a40e0ab1ec0947e7288e6.vega-embed details,
-  #altair-viz-784cc5558d7a40e0ab1ec0947e7288e6.vega-embed details summary {
+  #altair-viz-ada6acebbc6a4d96bfce5432fe63386b.vega-embed details,
+  #altair-viz-ada6acebbc6a4d96bfce5432fe63386b.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-784cc5558d7a40e0ab1ec0947e7288e6"></div>
+<div id="altair-viz-ada6acebbc6a4d96bfce5432fe63386b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-784cc5558d7a40e0ab1ec0947e7288e6") {
-      outputDiv = document.getElementById("altair-viz-784cc5558d7a40e0ab1ec0947e7288e6");
+    if (outputDiv.id !== "altair-viz-ada6acebbc6a4d96bfce5432fe63386b") {
+      outputDiv = document.getElementById("altair-viz-ada6acebbc6a4d96bfce5432fe63386b");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -3178,11 +3204,11 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="publishing" class="level2">
 <h2 class="anchored" data-anchor-id="publishing">Publishing</h2>
-<div id="a50cef1d" class="cell" data-execution_count="38">
+<div class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>final_chart</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>final_chart.save(<span class="st">'output/chart.html'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e7a40c26" class="cell" data-execution_count="39">
+<div class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>final_chart.save(<span class="st">'output/chart.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Remark: <code>chart.save()</code> is important for anything where you want your output to be reproducible in the future.</p>
@@ -3228,15 +3254,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -3268,50 +3291,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -3321,17 +3305,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -3343,245 +3318,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -3622,7 +3361,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 
