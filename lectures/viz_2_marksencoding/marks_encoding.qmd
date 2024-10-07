@@ -322,12 +322,12 @@ In-class exercise: what happens if you swap the Q and the O types?
 ## Do not require zero on axis range 
 ```{python}
 zero_included = alt.Chart(data2000).mark_point().encode(
-    alt.X('fertility:Q', scale=alt.Scale(zero=False)),
-    alt.Y('life_expect:Q', scale=alt.Scale(zero=False))
-)
-zero_excluded = alt.Chart(data2000).mark_point().encode(
     alt.X('fertility:Q'),
     alt.Y('life_expect:Q')
+)
+zero_excluded = alt.Chart(data2000).mark_point().encode(
+    alt.X('fertility:Q', scale=alt.Scale(zero=False)),
+    alt.Y('life_expect:Q', scale=alt.Scale(zero=False))
 )
 zero_included | zero_excluded
 ```
