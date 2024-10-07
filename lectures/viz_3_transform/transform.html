@@ -1,0 +1,2333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Peter Ganong and Maggie Shi">
+<meta name="dcterms.date" content="2024-10-07">
+
+<title>Visualization (Data Transformation)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="transform_files/libs/clipboard/clipboard.min.js"></script>
+<script src="transform_files/libs/quarto-html/quarto.js"></script>
+<script src="transform_files/libs/quarto-html/popper.min.js"></script>
+<script src="transform_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="transform_files/libs/quarto-html/anchor.min.js"></script>
+<link href="transform_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="transform_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="transform_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="transform_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="transform_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">introduction</a>
+  <ul class="collapse">
+  <li><a href="#roadmap" id="toc-roadmap" class="nav-link" data-scroll-target="#roadmap">roadmap</a></li>
+  <li><a href="#putting-this-lecture-in-context" id="toc-putting-this-lecture-in-context" class="nav-link" data-scroll-target="#putting-this-lecture-in-context">putting this lecture in context</a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">load packages</a></li>
+  <li><a href="#movies-dataset" id="toc-movies-dataset" class="nav-link" data-scroll-target="#movies-dataset">movies dataset</a></li>
+  <li><a href="#head" id="toc-head" class="nav-link" data-scroll-target="#head"><code>head()</code></a></li>
+  </ul></li>
+  <li><a href="#scatter-plots-and-binning" id="toc-scatter-plots-and-binning" class="nav-link" data-scroll-target="#scatter-plots-and-binning">Scatter plots and binning</a>
+  <ul class="collapse">
+  <li><a href="#scatter-plots-and-binning-roadmap" id="toc-scatter-plots-and-binning-roadmap" class="nav-link" data-scroll-target="#scatter-plots-and-binning-roadmap">Scatter plots and binning: roadmap</a></li>
+  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link" data-scroll-target="#scatter-plot">scatter plot</a></li>
+  <li><a href="#scatter-plot-add-bintrue" id="toc-scatter-plot-add-bintrue" class="nav-link" data-scroll-target="#scatter-plot-add-bintrue">scatter plot – add <code>bin=True</code></a></li>
+  <li><a href="#scatter-plot-20-bins" id="toc-scatter-plot-20-bins" class="nav-link" data-scroll-target="#scatter-plot-20-bins">scatter plot – 20 bins</a></li>
+  </ul></li>
+  <li><a href="#aggregation" id="toc-aggregation" class="nav-link" data-scroll-target="#aggregation">Aggregation</a>
+  <ul class="collapse">
+  <li><a href="#aggregation-roadmap" id="toc-aggregation-roadmap" class="nav-link" data-scroll-target="#aggregation-roadmap">Aggregation: roadmap</a></li>
+  <li><a href="#average" id="toc-average" class="nav-link" data-scroll-target="#average"><code>average()</code></a></li>
+  <li><a href="#average-with-sort..." id="toc-average-with-sort..." class="nav-link" data-scroll-target="#average-with-sort..."><code>average()</code> with <code>sort(...)</code></a></li>
+  <li><a href="#interquartile-range" id="toc-interquartile-range" class="nav-link" data-scroll-target="#interquartile-range">Interquartile range</a></li>
+  <li><a href="#case-study-when-are-the-highest-grossing-films" id="toc-case-study-when-are-the-highest-grossing-films" class="nav-link" data-scroll-target="#case-study-when-are-the-highest-grossing-films">Case study: when are the highest grossing films?</a></li>
+  <li><a href="#a-first-pass" id="toc-a-first-pass" class="nav-link" data-scroll-target="#a-first-pass">a first pass</a></li>
+  <li><a href="#do-pair-share" id="toc-do-pair-share" class="nav-link" data-scroll-target="#do-pair-share">do-pair-share</a></li>
+  <li><a href="#do-pair-share-solution" id="toc-do-pair-share-solution" class="nav-link" data-scroll-target="#do-pair-share-solution">do-pair-share solution</a></li>
+  <li><a href="#more-on-time-units" id="toc-more-on-time-units" class="nav-link" data-scroll-target="#more-on-time-units">more on time units</a></li>
+  <li><a href="#aggregation-summary" id="toc-aggregation-summary" class="nav-link" data-scroll-target="#aggregation-summary">Aggregation: summary</a></li>
+  </ul></li>
+  <li><a href="#advanced-data-transformation" id="toc-advanced-data-transformation" class="nav-link" data-scroll-target="#advanced-data-transformation">Advanced data transformation</a>
+  <ul class="collapse">
+  <li><a href="#advanced-data-transformation-roadmap" id="toc-advanced-data-transformation-roadmap" class="nav-link" data-scroll-target="#advanced-data-transformation-roadmap">Advanced data transformation: roadmap</a></li>
+  <li><a href="#advanced-data-transformation-connection-to-packages-you-might-already-know" id="toc-advanced-data-transformation-connection-to-packages-you-might-already-know" class="nav-link" data-scroll-target="#advanced-data-transformation-connection-to-packages-you-might-already-know">Advanced data transformation: connection to packages you might already know</a></li>
+  <li><a href="#connection-to-prior-material" id="toc-connection-to-prior-material" class="nav-link" data-scroll-target="#connection-to-prior-material">connection to prior material</a></li>
+  <li><a href="#calculate-case-study-redux-what-time-of-year-do-us-movies-make-money-abroad" id="toc-calculate-case-study-redux-what-time-of-year-do-us-movies-make-money-abroad" class="nav-link" data-scroll-target="#calculate-case-study-redux-what-time-of-year-do-us-movies-make-money-abroad"><code>calculate</code> case study redux: what time of year do US movies make money abroad?</a></li>
+  <li><a href="#filter-show-just-movies-before-1970" id="toc-filter-show-just-movies-before-1970" class="nav-link" data-scroll-target="#filter-show-just-movies-before-1970"><code>filter</code> show just movies before 1970</a></li>
+  <li><a href="#do-pair-share-1" id="toc-do-pair-share-1" class="nav-link" data-scroll-target="#do-pair-share-1">Do-pair-share</a></li>
+  <li><a href="#do-pair-share-solution-1" id="toc-do-pair-share-solution-1" class="nav-link" data-scroll-target="#do-pair-share-solution-1">Do-pair-share solution</a></li>
+  <li><a href="#aggregate-recap-from-earlier-in-lecture" id="toc-aggregate-recap-from-earlier-in-lecture" class="nav-link" data-scroll-target="#aggregate-recap-from-earlier-in-lecture"><code>aggregate</code> recap from earlier in lecture</a></li>
+  <li><a href="#aggregate-whats-happening-under-the-hood" id="toc-aggregate-whats-happening-under-the-hood" class="nav-link" data-scroll-target="#aggregate-whats-happening-under-the-hood"><code>aggregate</code> what’s happening under the hood</a></li>
+  <li><a href="#window-case-study-who-are-the-top-20-grossing-directors-of-all-time" id="toc-window-case-study-who-are-the-top-20-grossing-directors-of-all-time" class="nav-link" data-scroll-target="#window-case-study-who-are-the-top-20-grossing-directors-of-all-time"><code>window</code>: case study: who are the top 20 grossing directors of all time?</a></li>
+  <li><a href="#window-in-class-exercise" id="toc-window-in-class-exercise" class="nav-link" data-scroll-target="#window-in-class-exercise"><code>window</code>: in-class exercise</a></li>
+  <li><a href="#window-cumulative-distribution-function-of-running-time" id="toc-window-cumulative-distribution-function-of-running-time" class="nav-link" data-scroll-target="#window-cumulative-distribution-function-of-running-time"><code>window</code>: cumulative distribution function of running time</a></li>
+  <li><a href="#advanced-data-transformation-summary" id="toc-advanced-data-transformation-summary" class="nav-link" data-scroll-target="#advanced-data-transformation-summary">Advanced data transformation: summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Visualization (Data Transformation)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Peter Ganong and Maggie Shi </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 7, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<!--
+    beamer:
+        echo: true
+        aspectratio: 169
+        theme: default
+        toc: true
+        header-includes: \renewcommand{\tightlist}{\setlength{\itemsep}{5ex}\setlength{\parskip}{0pt}}
+            \setbeamertemplate{footline}[frame number] 
+            -->
+<section id="introduction" class="level1">
+<h1>introduction</h1>
+<section id="roadmap" class="level2">
+<h2 class="anchored" data-anchor-id="roadmap">roadmap</h2>
+<ul>
+<li>putting this lecture in context</li>
+<li><code>movies</code> dataset
+<ul>
+<li>load data</li>
+<li><code>shape</code></li>
+<li><code>head()</code></li>
+</ul></li>
+</ul>
+<p>(no summary at end of this section)</p>
+</section>
+<section id="putting-this-lecture-in-context" class="level2">
+<h2 class="anchored" data-anchor-id="putting-this-lecture-in-context">putting this lecture in context</h2>
+<ul>
+<li>Fundamental problem in data visualization – in most cases, you do not want to show every single data point in your dataset.</li>
+<li>Instead, you want to extract patterns which you (the analyst) think are interesting. This is exactly what this lecture is about is</li>
+<li>In this lecture we will explore methods for <em>transforming</em> data, focusing on aggregation to summarize multiple records.</li>
+<li>One nice thing about Altair is that it nudges you to aggregate.
+<ul>
+<li>One example of this is that if you try to make a plot with 10,000 dots, it will give you an error <code>MaxRowsError: The number of rows in your dataset is greater than the maximum allowed (5000).</code></li>
+<li>Help file: “This is not because Altair cannot handle larger datasets, but it is because it is important for the user to think carefully about how large datasets are handled.”</li>
+<li>More details <a href="https://altair-viz.github.io/user_guide/large_datasets.html">here</a></li>
+</ul></li>
+<li>If you are following in the textbook, this lecture mostly follows Chapter 3 in the data visualization book (skip parts of section 3.2, which we will then come back to in lectures 4 and 5)</li>
+</ul>
+</section>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">load packages</h2>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="movies-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="movies-dataset">movies dataset</h2>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>movies_url <span class="op">=</span> <span class="st">'https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> pd.read_json(movies_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>movies.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>(3201, 16)</code></pre>
+</div>
+</div>
+<p>With 3201 movies, we are going to need to do some transformation if we want to uncover any patterns in the data!</p>
+</section>
+<section id="head" class="level2">
+<h2 class="anchored" data-anchor-id="head"><code>head()</code></h2>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>movies.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>US Gross</th>
+      <th>Worldwide Gross</th>
+      <th>US DVD Sales</th>
+      <th>Production Budget</th>
+      <th>Release Date</th>
+      <th>MPAA Rating</th>
+      <th>Running Time min</th>
+      <th>Distributor</th>
+      <th>Source</th>
+      <th>Major Genre</th>
+      <th>Creative Type</th>
+      <th>Director</th>
+      <th>Rotten Tomatoes Rating</th>
+      <th>IMDB Rating</th>
+      <th>IMDB Votes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>The Land Girls</td>
+      <td>146083.0</td>
+      <td>146083.0</td>
+      <td>NaN</td>
+      <td>8000000.0</td>
+      <td>Jun 12 1998</td>
+      <td>R</td>
+      <td>NaN</td>
+      <td>Gramercy</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>6.1</td>
+      <td>1071.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>First Love, Last Rites</td>
+      <td>10876.0</td>
+      <td>10876.0</td>
+      <td>NaN</td>
+      <td>300000.0</td>
+      <td>Aug 07 1998</td>
+      <td>R</td>
+      <td>NaN</td>
+      <td>Strand</td>
+      <td>None</td>
+      <td>Drama</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>6.9</td>
+      <td>207.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I Married a Strange Person</td>
+      <td>203134.0</td>
+      <td>203134.0</td>
+      <td>NaN</td>
+      <td>250000.0</td>
+      <td>Aug 28 1998</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>Lionsgate</td>
+      <td>None</td>
+      <td>Comedy</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>6.8</td>
+      <td>865.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Let's Talk About Sex</td>
+      <td>373615.0</td>
+      <td>373615.0</td>
+      <td>NaN</td>
+      <td>300000.0</td>
+      <td>Sep 11 1998</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>Fine Line</td>
+      <td>None</td>
+      <td>Comedy</td>
+      <td>None</td>
+      <td>None</td>
+      <td>13.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Slam</td>
+      <td>1009819.0</td>
+      <td>1087521.0</td>
+      <td>NaN</td>
+      <td>1000000.0</td>
+      <td>Oct 09 1998</td>
+      <td>R</td>
+      <td>NaN</td>
+      <td>Trimark</td>
+      <td>Original Screenplay</td>
+      <td>Drama</td>
+      <td>Contemporary Fiction</td>
+      <td>None</td>
+      <td>62.0</td>
+      <td>3.4</td>
+      <td>165.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="scatter-plots-and-binning" class="level1">
+<h1>Scatter plots and binning</h1>
+<section id="scatter-plots-and-binning-roadmap" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plots-and-binning-roadmap">Scatter plots and binning: roadmap</h2>
+<ul>
+<li>scatter plots</li>
+<li>binning</li>
+</ul>
+</section>
+<section id="scatter-plot" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plot">scatter plot</h2>
+<ul>
+<li>Rotten Tomatoes ratings are determined by taking “thumbs up” and “thumbs down” judgments from film critics and calculating the percentage of positive reviews.</li>
+<li>IMDB ratings are formed by averaging scores (ranging from 1 to 10) provided by the site’s users.</li>
+</ul>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_circle().encode(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Rotten_Tomatoes_Rating:Q'</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB_Rating:Q'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<style>
+  #altair-viz-7b1b80987c0c49028b5d687ef860c48d.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-7b1b80987c0c49028b5d687ef860c48d.vega-embed details,
+  #altair-viz-7b1b80987c0c49028b5d687ef860c48d.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-7b1b80987c0c49028b5d687ef860c48d"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-7b1b80987c0c49028b5d687ef860c48d") {
+      outputDiv = document.getElementById("altair-viz-7b1b80987c0c49028b5d687ef860c48d");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "circle"}, "encoding": {"x": {"field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="scatter-plot-add-bintrue" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plot-add-bintrue">scatter plot – add <code>bin=True</code></h2>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_circle().encode(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Rotten_Tomatoes_Rating:Q'</span>, <span class="bu">bin</span><span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB_Rating:Q'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+
+<style>
+  #altair-viz-7cb26c792d57410c972450026700720d.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-7cb26c792d57410c972450026700720d.vega-embed details,
+  #altair-viz-7cb26c792d57410c972450026700720d.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-7cb26c792d57410c972450026700720d"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-7cb26c792d57410c972450026700720d") {
+      outputDiv = document.getElementById("altair-viz-7cb26c792d57410c972450026700720d");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "circle"}, "encoding": {"x": {"bin": true, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="scatter-plot-20-bins" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plot-20-bins">scatter plot – 20 bins</h2>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_circle().encode(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Rotten_Tomatoes_Rating:Q'</span>, <span class="bu">bin</span><span class="op">=</span>alt.BinParams(maxbins<span class="op">=</span><span class="dv">20</span>)),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB_Rating:Q'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<style>
+  #altair-viz-3e9877e1403c46c4a82d574d0b68184b.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-3e9877e1403c46c4a82d574d0b68184b.vega-embed details,
+  #altair-viz-3e9877e1403c46c4a82d574d0b68184b.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-3e9877e1403c46c4a82d574d0b68184b"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-3e9877e1403c46c4a82d574d0b68184b") {
+      outputDiv = document.getElementById("altair-viz-3e9877e1403c46c4a82d574d0b68184b");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "circle"}, "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+</section>
+<section id="aggregation" class="level1">
+<h1>Aggregation</h1>
+<section id="aggregation-roadmap" class="level2">
+<h2 class="anchored" data-anchor-id="aggregation-roadmap">Aggregation: roadmap</h2>
+<p>In previous lectures, we actually already saw aggregation via <code>average()</code> and <code>min()</code>. We just didn’t talk explicitly about that step. Now, we examine it more carefully.</p>
+<ul>
+<li><code>average()</code></li>
+<li>interquartile range</li>
+<li>do-pair-share</li>
+</ul>
+<p>The Altair documentation includes the <a href="https://altair-viz.github.io/user_guide/encodings/index.html#aggregation-functions">full set of available aggregation functions</a>.</p>
+</section>
+<section id="average" class="level2">
+<h2 class="anchored" data-anchor-id="average"><code>average()</code></h2>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().encode(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'average(Rotten_Tomatoes_Rating):Q'</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Major_Genre:N'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<style>
+  #altair-viz-e4777a01898a4b238b92b202ffb75302.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-e4777a01898a4b238b92b202ffb75302.vega-embed details,
+  #altair-viz-e4777a01898a4b238b92b202ffb75302.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-e4777a01898a4b238b92b202ffb75302"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-e4777a01898a4b238b92b202ffb75302") {
+      outputDiv = document.getElementById("altair-viz-e4777a01898a4b238b92b202ffb75302");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"aggregate": "average", "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "Major_Genre", "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>This plot is fine, but hard to interpret takeaways quickly</p>
+<p>What should we do? Sort the bars. What’s the best way to figure out how? Ask <a href="https://chatgpt.com/share/67027f83-5c0c-800a-8253-3c4b4f074dce">ChatGPT</a>.</p>
+</section>
+<section id="average-with-sort..." class="level2">
+<h2 class="anchored" data-anchor-id="average-with-sort..."><code>average()</code> with <code>sort(...)</code></h2>
+<p>Now it’s clear which movie types are most and least popular</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Attribution: ChatGPT</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Query: I have the following bar chart code in Altair [...] </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># I want to sort the bars by the X encoding (average rotten tomatoes rating). How can I do that?</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().encode(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'average(Rotten_Tomatoes_Rating):Q'</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Major_Genre:N'</span>, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        sort<span class="op">=</span>alt.EncodingSortField(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            op<span class="op">=</span><span class="st">'average'</span>, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            field<span class="op">=</span><span class="st">'Rotten_Tomatoes_Rating'</span>, </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            order<span class="op">=</span><span class="st">'descending'</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+
+<style>
+  #altair-viz-7fc9e22c76154d82ae427546ed1f84b2.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-7fc9e22c76154d82ae427546ed1f84b2.vega-embed details,
+  #altair-viz-7fc9e22c76154d82ae427546ed1f84b2.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-7fc9e22c76154d82ae427546ed1f84b2"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-7fc9e22c76154d82ae427546ed1f84b2") {
+      outputDiv = document.getElementById("altair-viz-7fc9e22c76154d82ae427546ed1f84b2");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"aggregate": "average", "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "Major_Genre", "sort": {"field": "Rotten_Tomatoes_Rating", "op": "average", "order": "descending"}, "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>Discussion question – Why is “how to sorting the order of bars” such a great problem to submit to ChatGPT?</p>
+<div class="notes">
+<p><strong>NOTES:</strong> <em>solution: because you can easily check it’s work to see if it did what you wanted</em></p>
+</div>
+</section>
+<section id="interquartile-range" class="level2">
+<h2 class="anchored" data-anchor-id="interquartile-range">Interquartile range</h2>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().encode(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'q1(Rotten_Tomatoes_Rating):Q'</span>),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    alt.X2(<span class="st">'q3(Rotten_Tomatoes_Rating):Q'</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Major_Genre:N'</span>, sort<span class="op">=</span>alt.EncodingSortField(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        op<span class="op">=</span><span class="st">'median'</span>, field<span class="op">=</span><span class="st">'Rotten_Tomatoes_Rating'</span>, order<span class="op">=</span><span class="st">'descending'</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+
+<style>
+  #altair-viz-75eed3545bcc4b6baca24ebdda22af9c.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-75eed3545bcc4b6baca24ebdda22af9c.vega-embed details,
+  #altair-viz-75eed3545bcc4b6baca24ebdda22af9c.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-75eed3545bcc4b6baca24ebdda22af9c"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-75eed3545bcc4b6baca24ebdda22af9c") {
+      outputDiv = document.getElementById("altair-viz-75eed3545bcc4b6baca24ebdda22af9c");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"aggregate": "q1", "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "x2": {"aggregate": "q3", "field": "Rotten_Tomatoes_Rating"}, "y": {"field": "Major_Genre", "sort": {"field": "Rotten_Tomatoes_Rating", "op": "median", "order": "descending"}, "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="case-study-when-are-the-highest-grossing-films" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-when-are-the-highest-grossing-films">Case study: when are the highest grossing films?</h2>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>movies_gross <span class="op">=</span> movies[[<span class="st">'US Gross'</span>, <span class="st">'Release Date'</span>]]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>movies_gross.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>US Gross</th>
+      <th>Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>146083.0</td>
+      <td>Jun 12 1998</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10876.0</td>
+      <td>Aug 07 1998</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>203134.0</td>
+      <td>Aug 28 1998</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>373615.0</td>
+      <td>Sep 11 1998</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1009819.0</td>
+      <td>Oct 09 1998</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="a-first-pass" class="level2">
+<h2 class="anchored" data-anchor-id="a-first-pass">a first pass</h2>
+<p>obviously we need to aggregate.</p>
+<p>also: what bug in the data does this plot reveal?</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_point().encode(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Release_Date:T'</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'US_Gross:Q'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+
+<style>
+  #altair-viz-2697bb75b6f24b388173d70265d2a133.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-2697bb75b6f24b388173d70265d2a133.vega-embed details,
+  #altair-viz-2697bb75b6f24b388173d70265d2a133.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-2697bb75b6f24b388173d70265d2a133"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-2697bb75b6f24b388173d70265d2a133") {
+      outputDiv = document.getElementById("altair-viz-2697bb75b6f24b388173d70265d2a133");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "point"}, "encoding": {"x": {"field": "Release_Date", "type": "temporal"}, "y": {"field": "US_Gross", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<div class="notes">
+<p><strong>NOTES:</strong> <em>solution: some films have impossible release dates</em></p>
+</div>
+</section>
+<section id="do-pair-share" class="level2">
+<h2 class="anchored" data-anchor-id="do-pair-share">do-pair-share</h2>
+<p>What time of year are the highest grossing films released? Aggregate both the x- and the y-variables.</p>
+<p>Hint: if you aren’t sure how to aggregate the x-variable, go back to the first visualization lecture as an example.</p>
+<ol type="1">
+<li><p><em>Do</em> – make a plot on your own</p></li>
+<li><p><em>Pair</em> – compare your results with person next to you</p></li>
+<li><p><em>Share</em> – discuss results as a class</p></li>
+</ol>
+<!-- ZZZ: delete before posting -->
+</section>
+<section id="do-pair-share-solution" class="level2">
+<h2 class="anchored" data-anchor-id="do-pair-share-solution">do-pair-share solution</h2>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_area().encode(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'month(Release_Date):T'</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'median(US_Gross):Q'</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+
+<style>
+  #altair-viz-b8c057e976a848a9bd5714150e83162d.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-b8c057e976a848a9bd5714150e83162d.vega-embed details,
+  #altair-viz-b8c057e976a848a9bd5714150e83162d.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-b8c057e976a848a9bd5714150e83162d"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-b8c057e976a848a9bd5714150e83162d") {
+      outputDiv = document.getElementById("altair-viz-b8c057e976a848a9bd5714150e83162d");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "area"}, "encoding": {"x": {"field": "Release_Date", "timeUnit": "month", "type": "temporal"}, "y": {"aggregate": "median", "field": "US_Gross", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>Answer: summer and holiday season</p>
+</section>
+<section id="more-on-time-units" class="level2">
+<h2 class="anchored" data-anchor-id="more-on-time-units">more on time units</h2>
+<ul>
+<li><code>year</code></li>
+<li><code>quarter</code></li>
+<li><code>month</code></li>
+<li><code>date</code> (numeric day in month)</li>
+<li><code>day</code> (day of the week)</li>
+<li><code>hours</code></li>
+<li><code>yearmonth</code></li>
+<li><code>hoursminutes</code></li>
+</ul>
+<!-- ZZZ: end deletion before posting -->
+</section>
+<section id="aggregation-summary" class="level2">
+<h2 class="anchored" data-anchor-id="aggregation-summary">Aggregation: summary</h2>
+<ul>
+<li>Quantitative beyond <code>count()</code> and <code>average()</code>
+<ul>
+<li>Distribution: <code>min()</code>, <code>q1()</code>, <code>median()</code>, <code>q3()</code>, <code>max()</code></li>
+<li>Dispersion: <code>variance()</code>, <code>stdev()</code>, <code>distinct()</code></li>
+<li>Bootstrap confidence intervals: <code>ci0()</code>, <code>ci1()</code></li>
+</ul></li>
+<li>Dates: see prior slide</li>
+</ul>
+</section>
+</section>
+<section id="advanced-data-transformation" class="level1">
+<h1>Advanced data transformation</h1>
+<section id="advanced-data-transformation-roadmap" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-data-transformation-roadmap">Advanced data transformation: roadmap</h2>
+<ul>
+<li><code>transform_calculate()</code></li>
+<li><code>transform_filter()</code></li>
+<li>do-pair-share</li>
+<li><code>transform_aggregate()</code></li>
+<li><code>transform_window()</code></li>
+</ul>
+<p>These are all written in the <a href="https://vega.github.io/vega/docs/expressions/">Vega expression language</a>.</p>
+</section>
+<section id="advanced-data-transformation-connection-to-packages-you-might-already-know" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-data-transformation-connection-to-packages-you-might-already-know">Advanced data transformation: connection to packages you might already know</h2>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vega</th>
+<th><code>pandas</code> equivalent</th>
+<th>R <code>dplyr</code> equivalent (<code>df %&gt;% ...</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>transform_calculate()</code></td>
+<td><code>df['new_col']</code></td>
+<td><code>mutate()</code></td>
+</tr>
+<tr class="even">
+<td><code>transform_filter(cond)</code></td>
+<td><code>df.loc[cond]</code></td>
+<td><code>filter(cond)</code></td>
+</tr>
+<tr class="odd">
+<td><code>transform_aggregate(groupby(...))</code></td>
+<td><code>df.groupby('A').agg('mean')</code></td>
+<td><code>group_by(A) |&gt; summarise(mean(...))</code></td>
+</tr>
+<tr class="even">
+<td><code>transform_window(sum())</code></td>
+<td><code>df['values'].cumsum()</code></td>
+<td><code>mutate(cumsum())</code></td>
+</tr>
+</tbody>
+</table>
+<p>One way to think of these verbs is that they are fundamental to any data analysis project and so in any/every language you learn, you need to know how to do these.</p>
+</section>
+<section id="connection-to-prior-material" class="level2">
+<h2 class="anchored" data-anchor-id="connection-to-prior-material">connection to prior material</h2>
+<p>You already know how to do these all in <code>pandas</code> and in <code>dplyr</code> so it is not conceptually new.</p>
+<p>Why bother doing it in Altair/Vega?</p>
+<ul>
+<li><strong>Exploratory data analysis</strong> can be done faster</li>
+<li><strong>Under the hood</strong> Using Vega, go straight from JSON to a plot without going through <code>pandas</code> or Python at all.
+<ul>
+<li>Simple <a href="https://vega.github.io/editor/#/examples/vega-lite/bar_aggregate">example</a></li>
+<li>Side note: Vega keeps a nice gallery of examples <a href="https://vega.github.io/editor/#/examples/">here</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="calculate-case-study-redux-what-time-of-year-do-us-movies-make-money-abroad" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-case-study-redux-what-time-of-year-do-us-movies-make-money-abroad"><code>calculate</code> case study redux: what time of year do US movies make money abroad?</h2>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_area().transform_calculate(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    NonUS_Gross<span class="op">=</span><span class="st">'datum.Worldwide_Gross - datum.US_Gross'</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'month(Release_Date):T'</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'median(NonUS_Gross):Q'</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<style>
+  #altair-viz-24a377af01ea44f79d5ba90aa810e596.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-24a377af01ea44f79d5ba90aa810e596.vega-embed details,
+  #altair-viz-24a377af01ea44f79d5ba90aa810e596.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-24a377af01ea44f79d5ba90aa810e596"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-24a377af01ea44f79d5ba90aa810e596") {
+      outputDiv = document.getElementById("altair-viz-24a377af01ea44f79d5ba90aa810e596");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "area"}, "encoding": {"x": {"field": "Release_Date", "timeUnit": "month", "type": "temporal"}, "y": {"aggregate": "median", "field": "NonUS_Gross", "type": "quantitative"}}, "transform": [{"calculate": "datum.Worldwide_Gross - datum.US_Gross", "as": "NonUS_Gross"}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<ul>
+<li><code>datum</code> is how you reference the underlying dataset within a transformation expression</li>
+<li><code>transform_calculate()</code> uses expressions for writing basic formulas
+<ul>
+<li>Math functions: <code>min()</code>, <code>random()</code>, <code>round()</code></li>
+<li>Statistical functions: <code>sampleNormal()</code>, <code>sampleUniform()</code></li>
+<li>Date-time functions: <code>date()</code>, <code>year()</code>, <code>month()</code></li>
+<li>String functions: <code>length()</code>, <code>lower()</code>,<code>substring()</code></li>
+<li>Full list <a href="https://vega.github.io/vega/docs/expressions/">here</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="filter-show-just-movies-before-1970" class="level2">
+<h2 class="anchored" data-anchor-id="filter-show-just-movies-before-1970"><code>filter</code> show just movies before 1970</h2>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_circle().encode(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Rotten_Tomatoes_Rating:Q'</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB_Rating:Q'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>).transform_filter(<span class="st">'year(datum.Release_Date) &lt; 1970'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+
+<style>
+  #altair-viz-b65c8b3d7c6444da8ebb23290469e546.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-b65c8b3d7c6444da8ebb23290469e546.vega-embed details,
+  #altair-viz-b65c8b3d7c6444da8ebb23290469e546.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-b65c8b3d7c6444da8ebb23290469e546"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-b65c8b3d7c6444da8ebb23290469e546") {
+      outputDiv = document.getElementById("altair-viz-b65c8b3d7c6444da8ebb23290469e546");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "circle"}, "encoding": {"x": {"field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "transform": [{"filter": "year(datum.Release_Date) < 1970"}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="do-pair-share-1" class="level2">
+<h2 class="anchored" data-anchor-id="do-pair-share-1">Do-pair-share</h2>
+<ul>
+<li>Make two plots that compare ratings before and after 1970
+<ul>
+<li>Plot before and after 1970 on one plot, and create a categorical variable to indicate whether an observation is from before or after 1970. Color the mark depending on the value of that categorical variable.</li>
+<li>Append together two plots: a scatter plot of ratings before 1970 and after 1970</li>
+</ul></li>
+<li>Which do you prefer and why?</li>
+</ul>
+<!-- ZZZ delete solution below -->
+</section>
+<section id="do-pair-share-solution-1" class="level2">
+<h2 class="anchored" data-anchor-id="do-pair-share-solution-1">Do-pair-share solution</h2>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_circle().transform_calculate(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    pre1970<span class="op">=</span><span class="st">'year(datum.Release_Date) &lt; 1970'</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Rotten_Tomatoes_Rating:Q'</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB_Rating:Q'</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    alt.Color(<span class="st">'pre1970:N'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+
+<style>
+  #altair-viz-12333e71d7144108a3f918248ea995d2.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-12333e71d7144108a3f918248ea995d2.vega-embed details,
+  #altair-viz-12333e71d7144108a3f918248ea995d2.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-12333e71d7144108a3f918248ea995d2"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-12333e71d7144108a3f918248ea995d2") {
+      outputDiv = document.getElementById("altair-viz-12333e71d7144108a3f918248ea995d2");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "circle"}, "encoding": {"color": {"field": "pre1970", "type": "nominal"}, "x": {"field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "transform": [{"calculate": "year(datum.Release_Date) < 1970", "as": "pre1970"}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>before <span class="op">=</span> alt.Chart(movies_url).mark_circle().encode(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Rotten_Tomatoes_Rating:Q'</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB_Rating:Q'</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>).transform_filter(<span class="st">'year(datum.Release_Date) &lt; 1970'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>after <span class="op">=</span> alt.Chart(movies_url).mark_circle().encode(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Rotten_Tomatoes_Rating:Q'</span>),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'IMDB_Rating:Q'</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>).transform_filter(<span class="st">'year(datum.Release_Date) &gt; 1970'</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>before <span class="op">|</span> after</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+
+<style>
+  #altair-viz-518614a5f90b415898ff28241216b948.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-518614a5f90b415898ff28241216b948.vega-embed details,
+  #altair-viz-518614a5f90b415898ff28241216b948.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-518614a5f90b415898ff28241216b948"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-518614a5f90b415898ff28241216b948") {
+      outputDiv = document.getElementById("altair-viz-518614a5f90b415898ff28241216b948");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "hconcat": [{"mark": {"type": "circle"}, "encoding": {"x": {"field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "transform": [{"filter": "year(datum.Release_Date) < 1970"}]}, {"mark": {"type": "circle"}, "encoding": {"x": {"field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "transform": [{"filter": "year(datum.Release_Date) > 1970"}]}], "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>The second plot is better - the first one is too crowded and many of the post-1970 points are blocked.</p>
+<!-- ZZZ end deletion -->
+</section>
+<section id="aggregate-recap-from-earlier-in-lecture" class="level2">
+<h2 class="anchored" data-anchor-id="aggregate-recap-from-earlier-in-lecture"><code>aggregate</code> recap from earlier in lecture</h2>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().encode(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'average(Rotten_Tomatoes_Rating):Q'</span>),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Major_Genre:N'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+
+<style>
+  #altair-viz-7388ef2779b74899a55964393ae3595c.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-7388ef2779b74899a55964393ae3595c.vega-embed details,
+  #altair-viz-7388ef2779b74899a55964393ae3595c.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-7388ef2779b74899a55964393ae3595c"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-7388ef2779b74899a55964393ae3595c") {
+      outputDiv = document.getElementById("altair-viz-7388ef2779b74899a55964393ae3595c");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"aggregate": "average", "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "Major_Genre", "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="aggregate-whats-happening-under-the-hood" class="level2">
+<h2 class="anchored" data-anchor-id="aggregate-whats-happening-under-the-hood"><code>aggregate</code> what’s happening under the hood</h2>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().transform_aggregate(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    groupby<span class="op">=</span>[<span class="st">'Major_Genre'</span>],</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    Average_Rating<span class="op">=</span><span class="st">'average(Rotten_Tomatoes_Rating)'</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Average_Rating:Q'</span>),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Major_Genre:N'</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+
+<style>
+  #altair-viz-332409a5c11d454b9eb002248198387f.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-332409a5c11d454b9eb002248198387f.vega-embed details,
+  #altair-viz-332409a5c11d454b9eb002248198387f.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-332409a5c11d454b9eb002248198387f"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-332409a5c11d454b9eb002248198387f") {
+      outputDiv = document.getElementById("altair-viz-332409a5c11d454b9eb002248198387f");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "Average_Rating", "type": "quantitative"}, "y": {"field": "Major_Genre", "type": "nominal"}}, "transform": [{"aggregate": [{"op": "average", "field": "Rotten_Tomatoes_Rating", "as": "Average_Rating"}], "groupby": ["Major_Genre"]}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>Discussion question – If prior two code blocks have identical output, which version is better (and why)?</p>
+<div class="notes">
+<p><strong>NOTES:</strong> *solution: The former is “better” since it is easier to read.</p>
+<p>But if you as a programmer ever want to troubleshoot what’s going on, it is useful for you to know what’s happening under the hood. And the second code block reveals that clearly*</p>
+</div>
+</section>
+<section id="window-case-study-who-are-the-top-20-grossing-directors-of-all-time" class="level2">
+<h2 class="anchored" data-anchor-id="window-case-study-who-are-the-top-20-grossing-directors-of-all-time"><code>window</code>: case study: who are the top 20 grossing directors of all time?</h2>
+<p>*Start by summing <code>Worldwide_Gross</code> for each director, and then plotting in descending order.</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().transform_aggregate(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    Gross<span class="op">=</span><span class="st">'sum(Worldwide_Gross)'</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    groupby<span class="op">=</span>[<span class="st">'Director'</span>]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Gross:Q'</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Director:N'</span>, sort<span class="op">=</span>alt.EncodingSortField(</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        op<span class="op">=</span><span class="st">'max'</span>, field<span class="op">=</span><span class="st">'Gross'</span>, order<span class="op">=</span><span class="st">'descending'</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+
+<style>
+  #altair-viz-2711f5ec250e4f57ad02d00dfcfed6fd.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-2711f5ec250e4f57ad02d00dfcfed6fd.vega-embed details,
+  #altair-viz-2711f5ec250e4f57ad02d00dfcfed6fd.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-2711f5ec250e4f57ad02d00dfcfed6fd"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-2711f5ec250e4f57ad02d00dfcfed6fd") {
+      outputDiv = document.getElementById("altair-viz-2711f5ec250e4f57ad02d00dfcfed6fd");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "Gross", "type": "quantitative"}, "y": {"field": "Director", "sort": {"field": "Gross", "op": "max", "order": "descending"}, "type": "nominal"}}, "transform": [{"aggregate": [{"op": "sum", "field": "Worldwide_Gross", "as": "Gross"}], "groupby": ["Director"]}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>That’s a lot of directors! Let’s restrict to the top 20</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().transform_aggregate(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    Gross<span class="op">=</span><span class="st">'sum(Worldwide_Gross)'</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    groupby<span class="op">=</span>[<span class="st">'Director'</span>]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>).transform_window(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    Rank<span class="op">=</span><span class="st">'rank()'</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">=</span>[alt.SortField(<span class="st">'Gross'</span>, order<span class="op">=</span><span class="st">'descending'</span>)]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>).transform_filter(</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'datum.Rank &lt;= 20'</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Gross:Q'</span>),</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Director:N'</span>, sort<span class="op">=</span>alt.EncodingSortField(</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        op<span class="op">=</span><span class="st">'max'</span>, field<span class="op">=</span><span class="st">'Gross'</span>, order<span class="op">=</span><span class="st">'descending'</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+
+<style>
+  #altair-viz-91a0fd3bacbb414a8a9d78f43f510970.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-91a0fd3bacbb414a8a9d78f43f510970.vega-embed details,
+  #altair-viz-91a0fd3bacbb414a8a9d78f43f510970.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-91a0fd3bacbb414a8a9d78f43f510970"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-91a0fd3bacbb414a8a9d78f43f510970") {
+      outputDiv = document.getElementById("altair-viz-91a0fd3bacbb414a8a9d78f43f510970");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "Gross", "type": "quantitative"}, "y": {"field": "Director", "sort": {"field": "Gross", "op": "max", "order": "descending"}, "type": "nominal"}}, "transform": [{"aggregate": [{"op": "sum", "field": "Worldwide_Gross", "as": "Gross"}], "groupby": ["Director"]}, {"window": [{"op": "rank", "field": "", "as": "Rank"}], "sort": [{"field": "Gross", "order": "descending"}]}, {"filter": "datum.Rank <= 20"}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p><code>null</code> is not a director, so let’s remove that.</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().transform_aggregate(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    Gross<span class="op">=</span><span class="st">'sum(Worldwide_Gross)'</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    groupby<span class="op">=</span>[<span class="st">'Director'</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>).transform_window(</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    Rank<span class="op">=</span><span class="st">'rank()'</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">=</span>[alt.SortField(<span class="st">'Gross'</span>, order<span class="op">=</span><span class="st">'descending'</span>)]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>).transform_filter(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'datum.Rank &lt;= 20'</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>).transform_filter(</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'datum.Director != null'</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Gross:Q'</span>),</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Director:N'</span>, sort<span class="op">=</span>alt.EncodingSortField(</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        op<span class="op">=</span><span class="st">'max'</span>, field<span class="op">=</span><span class="st">'Gross'</span>, order<span class="op">=</span><span class="st">'descending'</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+
+<style>
+  #altair-viz-88b4d0422ea24293bc02fbe0a366feb7.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-88b4d0422ea24293bc02fbe0a366feb7.vega-embed details,
+  #altair-viz-88b4d0422ea24293bc02fbe0a366feb7.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-88b4d0422ea24293bc02fbe0a366feb7"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-88b4d0422ea24293bc02fbe0a366feb7") {
+      outputDiv = document.getElementById("altair-viz-88b4d0422ea24293bc02fbe0a366feb7");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "Gross", "type": "quantitative"}, "y": {"field": "Director", "sort": {"field": "Gross", "op": "max", "order": "descending"}, "type": "nominal"}}, "transform": [{"aggregate": [{"op": "sum", "field": "Worldwide_Gross", "as": "Gross"}], "groupby": ["Director"]}, {"window": [{"op": "rank", "field": "", "as": "Rank"}], "sort": [{"field": "Gross", "order": "descending"}]}, {"filter": "datum.Rank <= 20"}, {"filter": "datum.Director != null"}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p><strong>Question</strong>: How many directors are displayed now?</p>
+<!-- ZZZ solution to delete: 19 -->
+<p>We need to remove <code>null</code> <em>before</em> ranking and filtering. Our final graph:</p>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_bar().transform_filter(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'datum.Director != null'</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>).transform_aggregate(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    Gross<span class="op">=</span><span class="st">'sum(Worldwide_Gross)'</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    groupby<span class="op">=</span>[<span class="st">'Director'</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>).transform_window(</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    Rank<span class="op">=</span><span class="st">'rank()'</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">=</span>[alt.SortField(<span class="st">'Gross'</span>, order<span class="op">=</span><span class="st">'descending'</span>)]</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>).transform_filter(</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'datum.Rank &lt; 20'</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Gross:Q'</span>),</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Director:N'</span>, sort<span class="op">=</span>alt.EncodingSortField(</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>        op<span class="op">=</span><span class="st">'max'</span>, field<span class="op">=</span><span class="st">'Gross'</span>, order<span class="op">=</span><span class="st">'descending'</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+
+<style>
+  #altair-viz-71ab5ce1e92545bc915405e37ee08167.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-71ab5ce1e92545bc915405e37ee08167.vega-embed details,
+  #altair-viz-71ab5ce1e92545bc915405e37ee08167.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-71ab5ce1e92545bc915405e37ee08167"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-71ab5ce1e92545bc915405e37ee08167") {
+      outputDiv = document.getElementById("altair-viz-71ab5ce1e92545bc915405e37ee08167");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "Gross", "type": "quantitative"}, "y": {"field": "Director", "sort": {"field": "Gross", "op": "max", "order": "descending"}, "type": "nominal"}}, "transform": [{"filter": "datum.Director != null"}, {"aggregate": [{"op": "sum", "field": "Worldwide_Gross", "as": "Gross"}], "groupby": ["Director"]}, {"window": [{"op": "rank", "field": "", "as": "Rank"}], "sort": [{"field": "Gross", "order": "descending"}]}, {"filter": "datum.Rank < 20"}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="window-in-class-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="window-in-class-exercise"><code>window</code>: in-class exercise</h2>
+<p>Steven Spielberg has been quite successful in his career! However, showing sums might favor directors who have had longer careers, and so have made more movies and thus more money.</p>
+<p>What happens if we change the choice of aggregate operation? Who is the most successful director in terms of <code>average</code> gross per film? Modify the aggregate transform above!</p>
+<div class="notes">
+<p><strong>NOTES:</strong> <em>solution: get David Yates (last four Harry Potter movies) and also James Cameron (titanic, avatar)</em></p>
+</div>
+</section>
+<section id="window-cumulative-distribution-function-of-running-time" class="level2">
+<h2 class="anchored" data-anchor-id="window-cumulative-distribution-function-of-running-time"><code>window</code>: cumulative distribution function of running time</h2>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(movies_url).mark_line(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  interpolate<span class="op">=</span><span class="st">'step-before'</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>).transform_filter(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'datum.Running_Time_min != null'</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>).transform_aggregate(</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    groupby<span class="op">=</span>[<span class="st">'Running_Time_min'</span>],</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    Count<span class="op">=</span><span class="st">'count()'</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>).transform_window(</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    Cumulative_Sum<span class="op">=</span><span class="st">'sum(Count)'</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">=</span>[alt.SortField(<span class="st">'Running_Time_min'</span>, order<span class="op">=</span><span class="st">'ascending'</span>)]</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'Running_Time_min:Q'</span>, axis<span class="op">=</span>alt.Axis(title<span class="op">=</span><span class="st">'Duration (min)'</span>)),</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'Cumulative_Sum:Q'</span>, axis<span class="op">=</span>alt.Axis(title<span class="op">=</span><span class="st">'Cumulative Count of Films'</span>))</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+
+<style>
+  #altair-viz-b59d535cff6341a4abe12b2e3d67df0b.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-b59d535cff6341a4abe12b2e3d67df0b.vega-embed details,
+  #altair-viz-b59d535cff6341a4abe12b2e3d67df0b.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-b59d535cff6341a4abe12b2e3d67df0b"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-b59d535cff6341a4abe12b2e3d67df0b") {
+      outputDiv = document.getElementById("altair-viz-b59d535cff6341a4abe12b2e3d67df0b");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": {"type": "line", "interpolate": "step-before"}, "encoding": {"x": {"axis": {"title": "Duration (min)"}, "field": "Running_Time_min", "type": "quantitative"}, "y": {"axis": {"title": "Cumulative Count of Films"}, "field": "Cumulative_Sum", "type": "quantitative"}}, "transform": [{"filter": "datum.Running_Time_min != null"}, {"aggregate": [{"op": "count", "as": "Count"}], "groupby": ["Running_Time_min"]}, {"window": [{"op": "sum", "field": "Count", "as": "Cumulative_Sum"}], "sort": [{"field": "Running_Time_min", "order": "ascending"}]}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="advanced-data-transformation-summary" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-data-transformation-summary">Advanced data transformation: summary</h2>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vega</th>
+<th>Pandas equivalent</th>
+<th><code>dplyr</code> equivalent (<code>df %&gt;% ...</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>transform_calculate()</code></td>
+<td><code>df['new_col']</code></td>
+<td><code>mutate()</code></td>
+</tr>
+<tr class="even">
+<td><code>transform_filter(cond)</code></td>
+<td><code>df.loc[cond]</code></td>
+<td><code>filter(cond)</code></td>
+</tr>
+<tr class="odd">
+<td><code>transform_aggregate(groupby(...))</code></td>
+<td><code>df.groupby('A').agg('mean')</code></td>
+<td><code>group_by(A) |&gt; summarise(mean(...))</code></td>
+</tr>
+<tr class="even">
+<td><code>transform_window(sum())</code></td>
+<td><code>df['values'].cumsum()</code></td>
+<td><code>mutate(cumsum())</code></td>
+</tr>
+</tbody>
+</table>
+<p>Finally, Altair actually has 19 transformation methods (and counting…) and we have only covered four of them. Read about the rest of them <a href="https://altair-viz.github.io/user_guide/transform/index.html">here</a>.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
