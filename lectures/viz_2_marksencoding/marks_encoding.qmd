@@ -6,7 +6,6 @@ date-format: long
 format: 
     html:
         echo: true
-        #toc: true
    
 ---
 <!--
@@ -40,6 +39,7 @@ Let's first load the dataset from the [vega-datasets](https://github.com/vega/ve
 ```{python}
 import altair as alt
 from vega_datasets import data as vega_data
+#alt.renderers.enable('png')
 ```
 
 ```{python}
@@ -47,9 +47,6 @@ from vega_datasets import data as vega_data
 data = vega_data.gapminder()
 ```
  
-<!-- Remark: I (Peter) couldn't get the command 
-data = vega_data.gapminder()
-to work. instead, I saved the data to local and I read it in from local. The code chunk which does this is set to echo false so it won't show up in the lecture notes-->
 
 ```{python}
 #| echo: false
@@ -97,7 +94,9 @@ Pandas data frames come with types. When loading data not from pandas, explicitl
 * Ask *is value A the same or different than value B? (A = B)*, supporting statements like “A is equal to B” or “A is not equal to B”.
     * In the dataset above, the `country` field is `N`ominal.
 * When visualizing nominal data we should readily be able to see if values are the same or different: position, color hue (blue, red, green), and shape can help. 
-    * Remark: using a `size` channel to encode nominal data might mislead us, suggesting rank-order or magnitude differences among values that do not exist!
+
+<!--PG to GGG/SSS This comment doesn't make sense here because we haven't even covered what the size channel is yet
+    * Remark: using a `size` channel to encode nominal data might mislead us, suggesting rank-order or magnitude differences among values that do not exist!-->
 
 ## Ordinal (O)
 
@@ -115,19 +114,19 @@ Pandas data frames come with types. When loading data not from pandas, explicitl
         * *how many are there of value A?* supporting statements such as "how many babies per parent?"
         * *value A is what proportion of value B? (A / B)*, supporting statements such as “A is 10% of B” or “B is 7 times larger than A”. 
     * In the dataset above, `year` is a quantitative interval field (depending on whose history of the world you prefer, there are many choices for the year "zero"), whereas `fertility` and `life_expect` are quantitative ratio fields (zero is meaningful for calculating proportions).
-\vspace{-2ex}
 * Vega-Lite represents quantitative data, but does not make a distinction between interval and ratio types.
 * Quantitative values can be visualized using position, size, or color value, among other channels. 
 
 
-## Quantitative (Q), continued
-* recap
-    * with *interval* data ask: *what is the distance to value A from value B? (A - B)*
-    * With *ratio* data can also ask:
-        * *how many are there of value A?* 
-        * *value A is what proportion of value B? (A / B)*,
+## Quantitative (Q) and zeros
+* One way to check if you're working with *ratio* and *interval* data: **does zero mean anything?**
 * Textbook: "An axis with a zero baseline is essential for proportional comparisons of ratio values, but can be safely omitted for interval comparisons."
-* Discussion question -- Why is it so important to include zeros for ratio data? Can you give a counter-example where omitting zeros on the plot would lead the reader to misleading conclusions? 
+* In the dataset above:
+    * `year` is a quantitative interval field: depending on whose history of the world you prefer, there are many choices for the year "zero"
+        * We're either in year 2024 (Gregorian), 5784 (Hebrew), or 1445 (Islamic calendar)
+    * `fertility` and `life_expect` are quantitative ratio fields: zero is meaningful for calculating proportions
+* Discussion question -- Why is it so important to include zeros for ratio data? Can you give an example where omitting zeros on the plot would lead the reader to misleading conclusions? 
+
 
 ## Temporal (T)
 
@@ -146,6 +145,7 @@ What are examples of variables that are
 
 Let's try to come up with at least three examples of each. For each example, state the comparison in a sentence.
 
+
 ## Discussion question II
 
 Suppose we have a dataset of ages (10 years old, 20 years old, 10 years old, 30 years old). What would it mean for these data to be
@@ -155,6 +155,7 @@ Suppose we have a dataset of ages (10 years old, 20 years old, 10 years old, 30 
 * `Q`uantitative
 
 What comparisons are feasible with each data type?
+
 
 
 ## Revisit plot from beginning of prior lecture
@@ -176,6 +177,7 @@ What happens when...
 * Revert. then make `date` temporal. There's a consequential but subtle change relative to the original plot. What is it?
 
 
+
 ## data types: summary
 
 A single data series can have multiple meanings depending on data type
@@ -195,32 +197,13 @@ Explicitly specify the data type so that Altair/Vega know how to interpret it. I
 * Seven types of visual encoding
 * More on color
 
-## Seven ways of visual encoding I
-
-
-Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://medium.com/@mbostock/introducing-d3-scale-61980c51545f)
-
-> Within the plane a mark can be at the top or the bottom, to the right or the left. The eye perceives two independent dimensions along X and Y, which are distinguished orthogonally. A variation in light energy produces a third dimension in Z, which is independent of X and Y…
-
-
-## Seven ways of visual encoding II
-
-> The eye is sensitive, along the Z dimension, to 6 independent visual variables, which can be superimposed on the planar figures: 
-
-> * the size of the marks
-* their value [brightness]
-* texture
-* color [hue]
-* orientation
-* shape. 
-
-> They can represent differences (≠), similarities (≡), a quantified order (Q), or a nonquantified order (O), and can express groups, hierarchies, or vertical movements.
-
-
 
 ## Seven ways of visual encoding in one image
 
 ![Visual encoding](pictures/visual_encoding.jpg){height="85%"}
+
+Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://medium.com/@mbostock/introducing-d3-scale-61980c51545f)
+
 
 
 Free advice: don't try to use all seven ways of encoding information in a single plot. It will inevitably be overload.
@@ -252,6 +235,7 @@ If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
 | Cyclical | Use if circular (e.g. time of day, month) |
 
 
+
 ## More advice on color choices
 
 * Use [colorbrewer2.org](https://colorbrewer2.org) to choose your color palettes. Click through to site. Options include subsetting to colors that are
@@ -274,14 +258,13 @@ If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
 
 We now are going to learn how to implement Bertin's vision in Altair.
 
-- x
-- y
-- size
-- color
-- opacity
-- shape
-- column
-- row
+- `x`
+- `y`
+- `size`
+- `color`
+- `opacity`
+- `column`
+- `row`
 
 ## X
 
@@ -299,8 +282,6 @@ alt.Chart(data2000).mark_point().encode(
     alt.Y('cluster:O')
 )
 ```
-
-In-class exercise: what happens if you swap the Q and the O types?
 
 
 
@@ -332,7 +313,7 @@ alt.Chart(data2000).mark_point().encode(
 
 
 
-## add `color` and `size` with `filled=True`
+## add `color` and `size` with `filled=True` and `range=[0,1000]`
 ```{python}
 alt.Chart(data2000).mark_point(filled=True).encode(
     alt.X('fertility:Q'),
@@ -341,7 +322,6 @@ alt.Chart(data2000).mark_point(filled=True).encode(
     alt.Color('cluster:N')
 )
 ```
-`alt.Scale` defines the scale of the legend, and is not in reference to anything in the data
 
 ## `opacity`
 ```{python}
@@ -362,6 +342,7 @@ alt.Chart(data2000).mark_point(filled=True).encode(
     alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
     alt.Color('cluster:N'),
     alt.OpacityValue(0.5),
+    alt.Tooltip('country:N'),
     alt.Column('cluster:N')
 )
 ```
@@ -375,6 +356,7 @@ alt.Chart(data2000).mark_point(filled=True).encode(
              legend=alt.Legend(orient='bottom', titleOrient='left')),
     alt.Color('cluster:N', legend=None),
     alt.OpacityValue(0.5),
+    alt.Tooltip('country:N'),
     alt.Column('cluster:N')
 ).properties(width=135, height=135)
 ```
@@ -389,14 +371,13 @@ Bonus: It still looks bad. What further change is needed?
 
 ## Encoding channels: summary
 
-- `alt.X`: Horizontal (x-axis) position of the mark.
-- `alt.Y`: Vertical (y-axis) position of the mark.
-- `alt.Size`: Size of the mark. May correspond to area or length, depending on the mark type.
-- `alt.Color`: Mark color, specified as a [legal CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-- `alt.Opacity`: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque).
-- `alt.Shape`: Plotting symbol shape for `point` marks.
-- `alt.Column`: Facet the data into horizontally-aligned subplots.
-- `alt.Row`: Facet the data into vertically-aligned subplots.
+- `x`: Horizontal (x-axis) position of the mark.
+- `y`: Vertical (y-axis) position of the mark.
+- `size`: Size of the mark. May correspond to area or length, depending on the mark type.
+- `color`: Mark color, specified as a [legal CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
+- `opacity`: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque)
+- `column`: Facet the data into horizontally-aligned subplots.
+- `row`: Facet the data into vertically-aligned subplots.
 
 # Graphical marks
 
@@ -405,18 +386,13 @@ Bonus: It still looks bad. What further change is needed?
 Prior section used only `mark_point()`. Now will cover
 
 - `mark_point()`
-    - `mark_circle()`	
     - `mark_square()` 
     - `mark_tick()` 
 - `mark_bar()`
 - `mark_line()`  
 - `mark_area()` 
 
-
-Caveats: 
-
-* there are a ton of slides in this section.
-* but each slide is simple. focus is on software. 
+Warning: there are a ton of slides in this section. B2ut each slide is simple. focus is on software. 
 
 ## `mark_point()`: add information using `alt.Shape()` 
 ```{python}
@@ -430,15 +406,6 @@ alt.Chart(data2000).mark_point().encode(
 ## `mark_point()`: format points using arguments
 ```{python}
 alt.Chart(data2000).mark_point(filled=True, size=100).encode(
-    alt.X('fertility:Q'),
-    alt.Y('life_expect:Q', scale=alt.Scale(zero=False)),
-    alt.Shape('cluster:N')
-)
-```
-
-## `mark_circle()` wrapper for `mark_point(filled=True)`
-```{python}
-alt.Chart(data2000).mark_circle(size=100).encode(
     alt.X('fertility:Q'),
     alt.Y('life_expect:Q', scale=alt.Scale(zero=False)),
     alt.Shape('cluster:N')
@@ -469,6 +436,8 @@ alt.Chart(data2000).mark_tick().encode(
 
 ## `mark_bar()`
 
+You know how to do this already! This is just a prelude to the next slide.
+
 ```{python}
 alt.Chart(data2000).mark_bar().encode(
     alt.X('country:N'),
@@ -486,6 +455,7 @@ alt.Chart(data2000).mark_bar().encode(
 )
 ```
 
+Note: if we had instead set `alt.Y('pop:Q', stack=None)`, bars would have been overlapped with each other
 
 ## `X2()` to show intervals
 
@@ -500,8 +470,8 @@ alt.Chart(data2000).mark_bar().encode(
 
 ## `mark_line()` 
 ```{python}
-data_4a = data.loc[data['cluster'] == 2] #one cluster is more manageable
-alt.Chart(data_4a).mark_line().encode(
+data_c2 = data.loc[data['cluster'] == 2] #one cluster is more manageable
+alt.Chart(data_c2).mark_line().encode(
     alt.X('year:O'),
     alt.Y('fertility:Q'),
     alt.Color('country:N')
@@ -509,10 +479,6 @@ alt.Chart(data_4a).mark_line().encode(
     width=400
 )
 ```
-
-## how many lines? `Tooltip` instead of `legend`
-
-textbook advocates for having a plot with many more lines, no legend, and instead using `alt.Tooltip('country:N')`. This is technologically feasible but a bad idea. (Discuss: why?)
 
 ```{python}
 alt.Chart(data).mark_line().encode(
@@ -528,7 +494,7 @@ alt.Chart(data).mark_line().encode(
 
 ## `mark_line()` with cosmetic adjustments
 ```{python}
-alt.Chart(data_4a).mark_line(
+alt.Chart(data_c2).mark_line(
     strokeWidth=3,
     opacity=0.5,
     interpolate='monotone'
@@ -544,8 +510,8 @@ alt.Chart(data_4a).mark_line(
 
 ## `mark_line()` with cosmetic adjustments
 ```{python}
-data_4a_2y = data_4a[data_4a['year'].isin([1955, 2005])]
-alt.Chart(data_4a_2y).mark_line().encode(
+data_c2_2y = data_c2[data_c2['year'].isin([1955, 2005])]
+alt.Chart(data_c2_2y).mark_line().encode(
     alt.X('year:O'),
     alt.Y('fertility:Q'),
     alt.Color('country:N')
@@ -560,15 +526,6 @@ alt.Chart(data_4a_2y).mark_line().encode(
 dataUS = data.loc[data['country'] == 'United States']
 
 alt.Chart(dataUS).mark_area().encode(
-    alt.X('year:O'),
-    alt.Y('fertility:Q')
-)
-```
-
-## `mark_area()` with `interpolate='monotone'`
-
-```{python}
-alt.Chart(dataUS).mark_area(interpolate='monotone').encode(
     alt.X('year:O'),
     alt.Y('fertility:Q')
 )
