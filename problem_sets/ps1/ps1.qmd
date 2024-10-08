@@ -1,0 +1,299 @@
+---
+title: "ps1"
+format:
+  html:
+    code-fold: true
+jupyter: python3
+---
+
+## Question 1
+### 1
+```{python}
+import time
+import pandas as pd
+
+# Start the timer
+start_time = time.time()
+
+# Read the CSV file
+df = pd.read_csv('data/parking_tickets_one_percent.csv')
+
+# Stop the timer and calculate duration
+duration = time.time() - start_time
+print(f"Time taken to read the file: {duration:.2f} seconds")
+
+# Assert statement to verify the number of rows
+assert len(df) == 287458, f"Expected 287458 rows, but got {len(df)}"
+```
+
+### 2
+```{python}
+import os
+import math
+
+# Get the size of the sample file in bytes
+file_size_bytes = os.path.getsize('data/parking_tickets_one_percent.csv')
+
+# Convert to megabytes
+file_size_mb = file_size_bytes / (1024 * 1024)
+print(f"File size of 1% sample: {file_size_mb:.2f} MB")
+
+# Use math to calculate the full dataset size (since the sample is 1% of the total dataset)
+predicted_full_size_mb = file_size_mb * 100
+print(f"Predicted full dataset size: {predicted_full_size_mb} MB")
+```
+
+
+### 3
+```{python}
+ordered_col_name = "issue_date"
+print(f"Upon inspection, the dataset is sorted by column {ordered_col_name}.")
+
+# Convert this "issue_date" column to datetime object
+df[ordered_col_name] = pd.to_datetime(df[ordered_col_name])
+
+# Subsetting the first 500 rows
+subset_df = df.head(500)
+
+# Function to check if a column is ordered
+def is_column_ordered(df, column):
+  '''
+  Check whether a column is ordered
+
+  Args:
+    1) df: dataframe
+    2) column: column to check
+  '''
+
+  # return df[column].is_monotonic
+
+# Test if "issue_date" is ordered
+is_ordered = is_column_ordered(subset_df, ordered_col_name)
+print(f"Is the column '{ordered_col_name}' ordered? {is_ordered}")
+```
+
+## Question 2
+### 1
+```{python}
+n_tickets_sample = len(df[df['issue_date'].dt.year == 2017])
+print(f"There are in total {n_tickets_sample} in the data in 2017")
+
+n_tickets = n_tickets_sample * 100
+print(f"This implies that there may be in total {n_tickets} in the full data in 2017.")
+
+print("According to the ProPublica article, more than 3 million tickets were issueed each year for parking, vehicle compliance, and automated traffic camera violations")
+
+print("Yes, there is a meaningful difference: The difference between your estimate (2.24 million) and the ProPublica figure (3 million) is around 760,000 tickets, which represents approximately a 25% difference. Given that the ProPublica data covers a broad range of years and mentions more than 3 million tickets per year, this discrepancy could be due to variations in ticket issuance rates year by year. However, a 25% difference is substantial enough to warrant attention and may suggest either: A lower ticket issuance rate specifically in 2017; 2) Incomplete or non-representative sampling in your dataset.")
+
+```
+
+
+### 2
+```{python}
+import matplotlib.pyplot as plt
+
+# Plotting the bar graph
+plt.figure(figsize=(10, 6))
+df['violation_description'].value_counts().nlargest(20).plot(kind='bar')
+
+# Formatting the graph
+plt.title('Top 20 Most Frequent Violation Types', fontsize=16)
+plt.xlabel('Violation Description', fontsize=12)
+plt.ylabel('Frequency', fontsize=12)
+plt.xticks(rotation=45, ha='right', fontsize=10)  # Adjust x-ticks for readability
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```
+
+
+## Question 3
+### 1
+
+| **Variable Name**          | **Data Type(s)**       |
+|----------------------------|------------------------|
+| `ticket_number`             | Nominal (N)            |
+| `issue_date`                | Temporal (T)           |
+| `violation_location`        | Nominal (N)            |
+| `license_plate_number`      | Nominal (N)            |
+| `license_plate_state`       | Nominal (N)            |
+| `license_plate_type`        | Nominal (N)            |
+| `zipcode`                   | Nominal (N)            |
+| `violation_code`            | Nominal (N) |
+| `violation_description`     | Nominal (N)            |
+| `unit`                      | Nominal (N)            |
+| `unit_description`          | Nominal (N)            |
+| `vehicle_make`              | Nominal (N)            |
+| `fine_level1_amount`        | Quantitative (Q)       |
+| `fine_level2_amount`        | Quantitative (Q)       |
+| `current_amount_due`        | Quantitative (Q)       |
+| `total_payments`            | Quantitative (Q)       |
+| `ticket_queue`              | Nominal (N)            |
+| `ticket_queue_date`         | Temporal (T)           |
+| `notice_level`              | Ordinal (O)            |
+| `hearing_disposition`       | Nominal (N)            |
+| `notice_number`             | Nominal (N)            |
+| `officer`                   | Nominal (N)            |
+| `address`                   | Nominal (N)            |
+
+### 2
+```{python}
+# Calculate fraction of tickets marked as paid for each vehicle make
+paid_fraction = df[['vehicle_make', 'ticket_queue']].groupby('vehicle_make')['ticket_queue'].apply(lambda x: (x == 'Paid').mean()).sort_values(ascending=False)
+
+# Plotting the results
+plt.figure(figsize=(10, 6))
+paid_fraction.plot(kind='bar')
+
+# Formatting the graph
+plt.title('Fraction of Tickets Marked as Paid for Each Vehicle Make', fontsize=16)
+plt.xlabel('Vehicle Make', fontsize=12)
+plt.ylabel('Fraction of Paid Tickets', fontsize=12)
+plt.xticks(rotation=45, ha='right', fontsize=10)  # Adjust x-ticks for readability
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```
+I think this could be related to **wealth correlation**. Specifically, owners of luxury or expensive vehicles might be more likely to pay their tickets promptly, as they may have more financial resources to do so.
+
+
+### 3
+```{python}
+import altair as alt
+
+# Group data by day or month to count the number of tickets issued over time
+tickets_over_time = df.groupby(df['issue_date'].dt.date).size().reset_index(name='count')
+
+# Convert 'issue_date' to string to avoid serialization issues
+tickets_over_time['issue_date'] = tickets_over_time['issue_date'].astype(str)
+
+# Create the filled step chart with Altair
+chart = alt.Chart(tickets_over_time).mark_area(
+    color="lightblue",
+    interpolate='step-after',
+    line=True
+).encode(
+    x='issue_date:T',  # Temporal encoding for the date
+    y='count:Q'  # Quantitative encoding for the count of tickets
+).properties(
+    title='Number of Parking Tickets Issued Over Time'
+)
+
+chart.show()
+```
+
+### 4
+```{python}
+# Extract month and day for the heatmap
+df['month'] = df['issue_date'].dt.month
+df['day'] = df['issue_date'].dt.day
+
+# Group data by month and day to get the number of tickets issued on each day
+tickets_per_day = df.groupby(['month', 'day']).size().reset_index(name='count')
+
+# Create the heatmap using Altair
+heatmap = alt.Chart(tickets_per_day, title="Tickets Issued by Month and Day").mark_rect().encode(
+    alt.X("day:O", title="Day"),
+    alt.Y("month:O", title="Month"),
+    alt.Color("count:Q", title="Number of Tickets"),
+    tooltip=[
+        alt.Tooltip("month:O", title="Month"),
+        alt.Tooltip("day:O", title="Day"),
+        alt.Tooltip("count:Q", title="Number of Tickets"),
+    ]
+).properties(
+    width=600,  # Set chart width
+    height=400  # Set chart height
+).configure_view(
+    step=13,
+    strokeWidth=0
+).configure_axis(
+    domain=False,
+    grid=False
+)
+
+# Show the heatmap
+heatmap.show()
+```
+
+### 5
+```{python}
+# Subset to the five most common violation types
+top_violations = df['violation_description'].value_counts().nlargest(5).index
+df_subset = df[df['violation_description'].isin(top_violations)]
+
+# Group data by violation type and time (e.g., month/year) to get the number of tickets issued
+df_subset['yearmonth'] = df_subset['issue_date'].dt.to_period('M')  # Year and month
+tickets_by_time = df_subset.groupby(['violation_description', 'yearmonth']).size().reset_index(name='count')
+
+# Convert 'yearmonth' back to datetime for Altair
+tickets_by_time['yearmonth'] = tickets_by_time['yearmonth'].dt.to_timestamp()
+
+# Create the Lasagna Plot using Altair
+color_condition = alt.condition(
+    "month(datum.yearmonth) == 1 && date(datum.yearmonth) == 1",
+    alt.value("black"),
+    alt.value(None),
+)
+
+lasagna_plot = alt.Chart(tickets_by_time).mark_rect().encode(
+    alt.X("yearmonth:T")
+        .title("Time")
+        .axis(
+            format="%Y-%m",  # Format as year and month
+            labelAngle=0,
+            labelOverlap=False,
+            labelColor=color_condition,
+            tickColor=color_condition,
+        ),
+    alt.Y("violation_description:N").title(None),
+    alt.Color("count:Q").title("Number of Tickets")
+).properties(
+    width=600,  # Set chart width
+    height=200  # Set chart height
+)
+
+# Show the plot
+lasagna_plot.show()
+```
+
+### 6
+1. Filled Step Chart
+  - Pros:
+    1. Good for time series analysis (easy to visualize changes)
+    2. Appropriate for continuous data
+    3. The step pattern makes it easy to understand when and how of pattern changes over time.
+  - Cons:
+    1. There is no breakdown by category (focusing only on the overall number).
+    2. Not suitable for comparing days or months. 
+
+2. Annual Weather Heatmap
+  - Pros:
+  	1. Great for spotting seasonality
+    2. Detailed day-by-day view
+    3. Good color intensity, which helps identify “hot spots” of activities
+  - Cons:
+    1. Difficult to compare categories
+    2. Overwhelming for large datasets (especially when having too many data points)
+
+3. Lasagna Plot
+  - Pros:
+    1. Good for comparing categories
+    2. Good color intensity, which helps identify “hot spots” of activities
+    3. Combines both time trends and category comparisons
+  - Cons
+    1. More complex to interpret
+    2. Potential for oversaturation (with too many categories or too much data)
+
+### 7
+If the main goal is to show that the enforcement of violations is not evenly distributed over time, Lasagna Plot would be the best choice. 
+
+First, it shows both time and categories. The lasagna plot doesn’t just show overall ticket issuance. It allows you to see how different violation types are enforced differently over time. This is key when the lesson is about uneven distribution.
+
+Second, it shows category-level details. If some types of violations are enforced more rigorously at specific times, the lasagna plot will make this clear.
+
+Finally, the use of color allows for quick identification of time periods with heightened enforcement activity for specific types of violations, making unevenness clear at both a temporal and categorical level.
+
+

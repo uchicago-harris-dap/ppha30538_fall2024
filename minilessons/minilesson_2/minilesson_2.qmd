@@ -1,0 +1,123 @@
+---
+title: "Mini-Lesson 2: Reproducible Example (Reprex)"
+author: "Akbar Saputra"
+format:
+  revealjs:
+    slide-number: true
+    chalkboard: false 
+    preview-links: auto
+    footer: "Reproducible Example (Reprex)"
+execute:
+  eval: true
+  echo: true
+---
+
+## Intro
+
+Have you ever helped a relative fix their computer problem *over the phone*?
+
+That’s how it feels to answer a programming question based on a prose narrative.
+\
+\
+Show us the code. **Use reprex**.
+
+## What is Reproducible Example (Reprex)?
+
+A **reproducible example (reprex)** is a simplified piece of code designed to help others understand and troubleshoot an issue quickly. Reprex involves:
+
+- code that **actually runs**
+- code that **I don’t have to run**
+- code that **I can easily run**
+
+## How to create reprex
+
+1. **Isolate the part of your code** where the issue happens.
+2. **Remove unrelated parts** to keep things simple.
+3. **Use dummy data**, instead of using real files or large datasets.
+4. Make sure **all variables and data are defined**.
+
+**or**, we can use package like `reprexpy` or `reprexlite`.
+\
+\
+We're starting to move from `.qmd` to `.py`
+
+## Know where the error is!
+
+![](img/error.png)
+
+**Your terminal or output panel has all the information.**
+
+<span style="font-size: 90%">
+Can't see your terminal? Go to Terminal > New Terminal in VSCode menu bar.
+</span>
+
+## Bad example
+
+```{python}
+#| eval: false
+paid_fraction = paid_fraction.sort_values(ascending=False).reset_index()
+print(paid_fraction.head())
+paid_fraction.columns = ['vehicle_make', 'fraction_paid']
+```
+\
+
+<span style="font-size: 75%">
+<ul>
+<li> <code>paid_fraction</code> is not defined (we don't know what it contains) </li>
+<li> <code>print()</code> is not necessary </li>
+<li> Not clear where (and what) the error is </li>
+</ul>
+</span>
+
+## Good example (using reprex)
+
+```{python}
+#| eval: false
+import pandas as pd
+df = pd.DataFrame({ "vehicle_make": ["LEXU", "FORD"],
+                    "ticket_queue": ["Paid", "Paid"]})
+
+ticket_freq = df['vehicle_make'].value_counts()
+paid_tickets = df[df['ticket_queue'] == 'Paid'].groupby('vehicle_make').size()
+paid_fraction = dict(paid_tickets / ticket_freq)
+
+# The following line produces error:
+# AttributeError: 'dict' object has no attribute 'sort_values'
+paid_fraction = paid_fraction.sort_values(ascending=False).reset_index()
+```
+
+<span style="font-size: 75%">
+<ul>
+<li> all variables and data are defined </li>
+<li> focus on where the bug is </li>
+<li> contain only necessary things </li>
+<li> <strong>BUT, doesn't mean you copy the entire code!</strong></li>
+</ul>
+</span>
+
+# Thank you!
+
+<!--  Alternative YAML
+---
+  revealjs:
+    slide-number: true
+    chalkboard: false 
+    preview-links: auto
+    footer: "VSCode, Quarto, and Jupyter Workshop"
+  html:
+    toc: true
+    number-sections: true
+    html-math-method: katex
+  beamer:
+    theme: Madrid
+    colortheme: dolphin
+    fonttheme: structurebold
+    navigation: horizontal
+    section-titles: true
+  pdf:
+    documentclass: article
+    papersize: letter
+    toc: true
+    number-sections: true
+    colorlinks: true
+--- -->

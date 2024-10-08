@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Akbar Saputra">
+<meta name="dcterms.date" content="2024-10-04">
+
+<title>Problem Set 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="pset_template_files/libs/clipboard/clipboard.min.js"></script>
+<script src="pset_template_files/libs/quarto-html/quarto.js"></script>
+<script src="pset_template_files/libs/quarto-html/popper.min.js"></script>
+<script src="pset_template_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="pset_template_files/libs/quarto-html/anchor.min.js"></script>
+<link href="pset_template_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="pset_template_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="pset_template_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="pset_template_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="pset_template_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Problem Set 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Akbar Saputra </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 4, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="3404d44b" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the following code will turn off any Python warnings in your code output</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><strong>PS1:</strong> Due Sat Oct 5 at 5:00PM Central. Worth 50 points.</li>
+</ol>
+<p>We use (<code>*</code>) to indicate a problem that we think might be time consuming.</p>
+<p>Steps to submit (5 points on PS1)</p>
+<ol type="1">
+<li>“This submission is my work alone and complies with the 30538 integrity policy.” Add your initials to indicate your agreement: **__**</li>
+<li>“I have uploaded the names of anyone I worked with on the problem set <strong><a href="https://docs.google.com/forms/d/1-zzHx762odGlpVWtgdIC55vqF-j3gqdAp6Pno1rIGK0/edit">here</a></strong>” **__** (1 point)</li>
+<li>Late coins used this pset: **__** Late coins left after submission: **__**</li>
+<li>Knit your <code>ps1.qmd</code>
+<ul>
+<li>The PDF should not be more than 25 pages. Use <code>head()</code> and re-size figures when appropriate.</li>
+</ul></li>
+<li>Submit to Gradescope (4 points)</li>
+<li>Tag your submission in Gradescope</li>
+</ol>
+<section id="read-in-one-percent-sample-15-points" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-one-percent-sample-15-points">Read in one percent sample (15 Points)</h2>
+<ol type="1">
+<li></li>
+<li></li>
+<li></li>
+</ol>
+</section>
+<section id="cleaning-the-data-and-benchmarking-15-points" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning-the-data-and-benchmarking-15-points">Cleaning the data and benchmarking (15 Points)</h2>
+<ol type="1">
+<li></li>
+<li></li>
+</ol>
+</section>
+<section id="visual-encoding-15-points" class="level2">
+<h2 class="anchored" data-anchor-id="visual-encoding-15-points">Visual Encoding (15 Points)</h2>
+<ol type="1">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+</section>
+<section id="q1" class="level1">
+<h1>Q1</h1>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">(1)</h2>
+<div id="25e9c1af" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>csv_file <span class="op">=</span> <span class="st">"data/parking_tickets_one_percent.csv"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(csv_file)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>elapsed_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Time taken to read the file: </span><span class="sc">{</span>elapsed_time<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(df) <span class="op">==</span> <span class="dv">287458</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of rows is </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">, expected 287458"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time taken to read the file: 1.2432587146759033 seconds
+Number of rows is 287458, expected 287458</code></pre>
+</div>
+</div>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">(2)</h2>
+<div id="87ecea07" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>file_size <span class="op">=</span> os.path.getsize(csv_file) <span class="op">/</span> <span class="dv">1024</span> <span class="op">/</span> <span class="dv">1024</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The size of the CSV file is </span><span class="sc">{</span>file_size<span class="sc">:.2f}</span><span class="ss"> MB"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Since the CSV file contains 1% sample, the full dataset will be 100 times of it</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>full_dataset_size <span class="op">=</span> file_size <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The estimated size of the full dataset is </span><span class="sc">{</span>full_dataset_size<span class="sc">:.2f}</span><span class="ss"> MB"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The size of the CSV file is 80.05 MB
+The estimated size of the full dataset is 8005.41 MB</code></pre>
+</div>
+</div>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">(3)</h2>
+<div id="2f02dda7" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_sub <span class="op">=</span> df.loc[<span class="dv">0</span>:<span class="dv">499</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> df_sub.columns:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    old_entry <span class="op">=</span> df_sub[col][<span class="dv">0</span>]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sorted</span> <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">500</span>):</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        new_entry <span class="op">=</span> df_sub[col][row]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">type</span>(new_entry) <span class="op">!=</span> <span class="bu">type</span>(old_entry):</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            old_entry <span class="op">=</span> <span class="bu">str</span>(old_entry)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            new_entry <span class="op">=</span> <span class="bu">str</span>(new_entry)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> new_entry <span class="op">&gt;=</span> old_entry:</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>            old_entry <span class="op">=</span> new_entry</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">sorted</span> <span class="op">=</span> <span class="va">False</span> </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">sorted</span>:</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> is sorted"</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> is not sorted at row </span><span class="sc">{</span>row<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unnamed: 0 is sorted
+ticket_number is not sorted at row 1
+issue_date is sorted
+violation_location is not sorted at row 1
+license_plate_number is not sorted at row 1
+license_plate_state is not sorted at row 18
+license_plate_type is not sorted at row 10
+zipcode is not sorted at row 2
+violation_code is not sorted at row 4
+violation_description is not sorted at row 2
+unit is not sorted at row 3
+unit_description is not sorted at row 19
+vehicle_make is not sorted at row 1
+fine_level1_amount is not sorted at row 5
+fine_level2_amount is not sorted at row 5
+current_amount_due is not sorted at row 3
+total_payments is not sorted at row 2
+ticket_queue is not sorted at row 2
+ticket_queue_date is not sorted at row 1
+notice_level is not sorted at row 2
+hearing_disposition is not sorted at row 15
+notice_number is not sorted at row 1
+officer is not sorted at row 1
+address is not sorted at row 1</code></pre>
+</div>
+</div>
+<p>NOTE: I think the question’s wording can be improved. Here, it seems like students are expected to find the sorted column by eyeballing the dataset, then subset the dataset and write a function to find sorted columns in the subset. It’s like they’re two separate process.</p>
+</section>
+</section>
+<section id="q2" class="level1">
+<h1>Q2</h1>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">(1)</h2>
+<div id="48790fa2" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"issue_year"</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">"issue_date"</span>].<span class="bu">str</span>[:<span class="dv">4</span>])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tickets_in_2017 <span class="op">=</span> <span class="bu">len</span>(df[df[<span class="st">"issue_year"</span>] <span class="op">==</span> <span class="dv">2017</span>])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"In this dataset, </span><span class="sc">{</span>tickets_in_2017<span class="sc">}</span><span class="ss"> tickets are issued in 2017"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Thus, it is estimated that </span><span class="sc">{</span>tickets_in_2017 <span class="op">*</span> <span class="dv">100</span><span class="sc">}</span><span class="ss"> /sers/akbar/Documents/Study/FundamentalsofDeepLearning/PS_1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> df.groupby(<span class="st">"issue_year"</span>).size()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary.reset_index(name<span class="op">=</span><span class="st">"count"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>In this dataset, 22364 tickets are issued in 2017
+Thus, it is estimated that 2236400 /sers/akbar/Documents/Study/FundamentalsofDeepLearning/PS_1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf
+    issue_year  count
+0         2007  29252
+1         2008  28713
+2         2009  27335
+3         2010  25324
+4         2011  24898
+5         2012  24406
+6         2013  25983
+7         2014  24552
+8         2015  24227
+9         2016  22643
+10        2017  22364
+11        2018   7761</code></pre>
+</div>
+</div>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4">(2)</h2>
+<div id="af138dd0" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>violation_summary <span class="op">=</span> df.groupby(<span class="st">"violation_code"</span>).size()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>violation_summary <span class="op">=</span> violation_summary.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>top_20 <span class="op">=</span> violation_summary.head(<span class="dv">20</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_20)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_20.reset_index(name<span class="op">=</span><span class="st">"count"</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>violation_summary <span class="op">=</span> df.groupby(<span class="st">"violation_description"</span>).size()</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>violation_summary <span class="op">=</span> violation_summary.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>violation_summary <span class="op">=</span> violation_summary.reset_index(name<span class="op">=</span><span class="st">"count"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>violation_summary <span class="op">=</span> violation_summary.head(<span class="dv">20</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(violation_summary)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>alt.Chart(violation_summary).mark_bar().encode(</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'violation_description:N'</span>, sort<span class="op">=</span><span class="st">'-y'</span>, title<span class="op">=</span><span class="st">"Violation Description"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>            axis<span class="op">=</span>alt.Axis(</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                    labelAngle<span class="op">=</span><span class="dv">45</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                    labelAlign<span class="op">=</span><span class="st">'left'</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                    labelLimit<span class="op">=</span><span class="dv">300</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count:Q'</span>, title<span class="op">=</span><span class="st">"Frequency"</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>violation_code
+0976160F    44811
+0964040B    32082
+0964090E    23683
+0964190A    20600
+0964150B    19753
+0964190     18756
+0976160A    16853
+0964125B    14246
+0964080A    11965
+0964125     10758
+0964190B     9736
+0964080B     8640
+0964100A     6104
+0964140B     6004
+0964170A     4789
+0976160B     3072
+0964110A     2904
+0964100G     2191
+0964130      2050
+0964050J     2034
+dtype: int64
+   violation_code  count
+0        0976160F  44811
+1        0964040B  32082
+2        0964090E  23683
+3        0964190A  20600
+4        0964150B  19753
+5         0964190  18756
+6        0976160A  16853
+7        0964125B  14246
+8        0964080A  11965
+9         0964125  10758
+10       0964190B   9736
+11       0964080B   8640
+12       0964100A   6104
+13       0964140B   6004
+14       0964170A   4789
+15       0976160B   3072
+16       0964110A   2904
+17       0964100G   2191
+18        0964130   2050
+19       0964050J   2034
+                                violation_description  count
+0            EXPIRED PLATES OR TEMPORARY REGISTRATION  44811
+1                                     STREET CLEANING  28712
+2                          RESIDENTIAL PERMIT PARKING  23683
+3            EXP. METER NON-CENTRAL BUSINESS DISTRICT  20600
+4                 PARKING/STANDING PROHIBITED ANYTIME  19753
+5                           EXPIRED METER OR OVERSTAY  18756
+6                       REAR AND FRONT PLATE REQUIRED  15829
+7   NO CITY STICKER VEHICLE UNDER/EQUAL TO 16,000 ...  14246
+8                                   RUSH HOUR PARKING  11965
+9                 NO CITY STICKER OR IMPROPER DISPLAY  10773
+10            EXPIRED METER CENTRAL BUSINESS DISTRICT   9736
+11                NO STANDING/PARKING TIME RESTRICTED   8640
+12                         WITHIN 15' OF FIRE HYDRANT   6104
+13           PARK OR STAND IN BUS/TAXI/CARRIAGE STAND   6004
+14           TRUCK,RV,BUS, OR TAXI RESIDENTIAL STREET   4789
+15                   STREET CLEANING OR SPECIAL EVENT   3370
+16                         DOUBLE PARKING OR STANDING   2904
+17            EXPIRED PLATE OR TEMPORARY REGISTRATION   2720
+18                        STOP SIGN OR TRAFFIC SIGNAL   2191
+19                                PARK OR BLOCK ALLEY   2050</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+
+<style>
+  #altair-viz-17c8ad5c1dc643228f9418c7e6599a43.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-17c8ad5c1dc643228f9418c7e6599a43.vega-embed details,
+  #altair-viz-17c8ad5c1dc643228f9418c7e6599a43.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-17c8ad5c1dc643228f9418c7e6599a43"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-17c8ad5c1dc643228f9418c7e6599a43") {
+      outputDiv = document.getElementById("altair-viz-17c8ad5c1dc643228f9418c7e6599a43");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-27afc7ee9a3e4f9cb3b215ed5352d7db"}, "mark": {"type": "bar"}, "encoding": {"x": {"axis": {"labelAlign": "left", "labelAngle": 45, "labelLimit": 300}, "field": "violation_description", "sort": "-y", "title": "Violation Description", "type": "nominal"}, "y": {"field": "count", "title": "Frequency", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-27afc7ee9a3e4f9cb3b215ed5352d7db": [{"violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 44811}, {"violation_description": "STREET CLEANING", "count": 28712}, {"violation_description": "RESIDENTIAL PERMIT PARKING", "count": 23683}, {"violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 20600}, {"violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 19753}, {"violation_description": "EXPIRED METER OR OVERSTAY", "count": 18756}, {"violation_description": "REAR AND FRONT PLATE REQUIRED", "count": 15829}, {"violation_description": "NO CITY STICKER VEHICLE UNDER/EQUAL TO 16,000 LBS.", "count": 14246}, {"violation_description": "RUSH HOUR PARKING", "count": 11965}, {"violation_description": "NO CITY STICKER OR IMPROPER DISPLAY", "count": 10773}, {"violation_description": "EXPIRED METER CENTRAL BUSINESS DISTRICT", "count": 9736}, {"violation_description": "NO STANDING/PARKING TIME RESTRICTED", "count": 8640}, {"violation_description": "WITHIN 15' OF FIRE HYDRANT", "count": 6104}, {"violation_description": "PARK OR STAND IN BUS/TAXI/CARRIAGE STAND", "count": 6004}, {"violation_description": "TRUCK,RV,BUS, OR TAXI RESIDENTIAL STREET", "count": 4789}, {"violation_description": "STREET CLEANING OR SPECIAL EVENT", "count": 3370}, {"violation_description": "DOUBLE PARKING OR STANDING", "count": 2904}, {"violation_description": "EXPIRED PLATE OR TEMPORARY REGISTRATION", "count": 2720}, {"violation_description": "STOP SIGN OR TRAFFIC SIGNAL", "count": 2191}, {"violation_description": "PARK OR BLOCK ALLEY", "count": 2050}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+</section>
+<section id="q3" class="level1">
+<h1>Q3</h1>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5">(2)</h2>
+<div id="04190886" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head(<span class="dv">20</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'is_paid'</span>] <span class="op">=</span> df[<span class="st">'ticket_queue'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">'Paid'</span> <span class="cf">else</span> <span class="dv">0</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>paid_summary <span class="op">=</span> df.groupby([<span class="st">'vehicle_make'</span>,<span class="st">'is_paid'</span>]).size().reset_index()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>paid_summary.columns <span class="op">=</span> [<span class="st">'vehicle_make'</span>, <span class="st">'is_paid'</span>, <span class="st">'count'</span>]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>paid_count <span class="op">=</span> paid_summary.groupby(<span class="st">'vehicle_make'</span>).agg(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    total_tickets<span class="op">=</span>(<span class="st">'count'</span>, <span class="st">'sum'</span>),  <span class="co"># Total tickets for each vehicle make</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    paid_tickets<span class="op">=</span>(<span class="st">'is_paid'</span>, <span class="kw">lambda</span> x: (x <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>())  <span class="co"># Count of tickets marked as paid</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>paid_count[<span class="st">'fraction_paid'</span>] <span class="op">=</span> paid_count[<span class="st">'paid_tickets'</span>] <span class="op">/</span> paid_count[<span class="st">'total_tickets'</span>]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the result</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(paid_count[[<span class="st">'total_tickets'</span>, <span class="st">'paid_tickets'</span>, <span class="st">'fraction_paid'</span>]])</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># paid_summary['fraction_paid'] = summary['sum'] / summary['count']</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># paid_summary = df.groupby("vehicle_make","ticket_queue").size()</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># print(paid_summary)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Unnamed: 0  ticket_number           issue_date  violation_location  \
+0            1     51482901.0  2007-01-01 01:25:00     5762 N AVONDALE   
+1            2     50681501.0  2007-01-01 01:51:00     2724 W FARRAGUT   
+2            3     51579701.0  2007-01-01 02:22:00        1748 W ESTES   
+3            4     51262201.0  2007-01-01 02:35:00     4756 N SHERIDAN   
+4            5     51898001.0  2007-01-01 03:50:00     7134 S CAMPBELL   
+5            6     50681401.0  2007-01-01 04:10:00      2227 W FOSTERT   
+6            7     51226001.0  2007-01-01 04:36:00      1411 S KOSTNER   
+7            8     51376701.0  2007-01-01 05:40:00      6954 S ASHLAND   
+8            9     51262301.0  2007-01-01 06:00:00    2630 N CANNON DR   
+9           10     51226201.0  2007-01-01 08:35:00  4401 W 28TH STREET   
+10          11     51367201.0  2007-01-01 08:48:00     1936 N RIDGEWAY   
+11          12     51574901.0  2007-01-01 09:40:00    6252 S HERMITAGE   
+12          13     51536501.0  2007-01-01 10:48:00         3630 W EDDY   
+13          14     52432501.0  2007-01-01 10:50:00    3240 W ROOSEVELT   
+14          15     51262101.0  2007-01-01 10:51:00     4325 N BROADWAY   
+15          16     53558001.0  2007-01-01 12:12:00       175 E PEARSON   
+16          17     51536001.0  2007-01-01 12:20:00  4838 N SPRINGFIELD   
+17          18     51492401.0  2007-01-01 12:51:00           60 W ERIE   
+18          19     50482401.0  2007-01-01 14:05:00       10000 W OHARE   
+19          20     51224901.0  2007-01-01 14:20:00      2139 W COULTER   
+
+                                 license_plate_number license_plate_state  \
+0   d41ee9a4cb0676e641399ad14aaa20d06f2c6896de6366...                  IL   
+1   3395fd3f71f18f9ea4f0a8e1f13bf0aa15052fc8e5605a...                  IL   
+2   302cb9c55f63ff828d7315c5589d97f1f8144904d66eb3...                  IL   
+3   94d018f52c7990cea326d1810a3278e2c6b1e8b44f3c52...                  IL   
+4   876dd3a95179f4f1d720613f6e32a5a7b86b0e6f988bf4...                  IL   
+5   5fb25a5bb6bbd314256af6d536a878760d31f99c77d541...                  IL   
+6   603e09c12c607a2ecfdc8062d4120edd10b2f5499d76fb...                  IL   
+7   a0c68892489c2f0225b02705c0ae6cc0e310f02139cdc6...                  IL   
+8   bdc8d83699eac183cc254fa3cb34a2839ae3edcb4d3eb3...                  IL   
+9   f65a21b9250fc93a2a03b6b74645b9eef8522cfb24acad...                  IL   
+10  d18eee43ba4f5a8b4cf1a78962949c317cee64e0dc8aa3...                  IL   
+11  b8427309c6e0783b395fbbc573b8dc61f1c9f786fb30d2...                  IL   
+12  d6c6fc02d457a9306033f65847962f4f198c80d2827136...                  IL   
+13  4595015d66a50232b4b31464282ec2b0824454649d7933...                  IL   
+14  33f570a3f9850393f316b97d476452faf76846ab6588e5...                  IL   
+15  9f6a68c4ea1690b41990808bf6406e219e9add18e8c657...                  IL   
+16  603e09c12c607a2ecfdc8062d4120edd10b2f5499d76fb...                  IL   
+17  5147d8991daea472782aa614b4dd7685d034f7345a8150...                  OH   
+18  284af4ef7336f802883aeda111eca898a5d9eec5862192...                  IL   
+19  1fd35a9684ff8a3e7ee672f29a8e129db22fb21bc1cab4...                  IL   
+
+   license_plate_type      zipcode violation_code  \
+0                 PAS  606184118.0       0964090E   
+1                 PAS  606454911.0       0964090E   
+2                 PAS  604116803.0       0964150B   
+3                 PAS  606601345.0       0976160F   
+4                 PAS  606291432.0       0964100A   
+5                 PAS      60652.0        0964060   
+6                 PAS          NaN       0976160A   
+7                 PAS      60637.0       0964140B   
+8                 PAS  601745717.0        0964060   
+9                 TRK          NaN       0964150B   
+10                PAS  606391628.0       0976160F   
+11                TMP          NaN       0976160F   
+12                PAS  606414014.0       0976160F   
+13                PAS  607073414.0       0964050J   
+14                PAS      60613.0        0964125   
+15                LIV  606161615.0       0964100A   
+16                PAS          NaN       0976160A   
+17                PAS      44102.0       0964200B   
+18                PAS  605232353.0       0964020B   
+19                PAS  606392915.0       0976160F   
+
+                       violation_description  ...  current_amount_due  \
+0                 RESIDENTIAL PERMIT PARKING  ...                 0.0   
+1                 RESIDENTIAL PERMIT PARKING  ...                 0.0   
+2        PARKING/STANDING PROHIBITED ANYTIME  ...               122.0   
+3   EXPIRED PLATES OR TEMPORARY REGISTRATION  ...                 0.0   
+4                 WITHIN 15' OF FIRE HYDRANT  ...                 0.0   
+5                          3-7 AM SNOW ROUTE  ...                 0.0   
+6              REAR AND FRONT PLATE REQUIRED  ...                50.0   
+7   PARK OR STAND IN BUS/TAXI/CARRIAGE STAND  ...                 0.0   
+8                          3-7 AM SNOW ROUTE  ...                 0.0   
+9        PARKING/STANDING PROHIBITED ANYTIME  ...                50.0   
+10  EXPIRED PLATES OR TEMPORARY REGISTRATION  ...                 0.0   
+11  EXPIRED PLATES OR TEMPORARY REGISTRATION  ...                 0.0   
+12  EXPIRED PLATES OR TEMPORARY REGISTRATION  ...                 0.0   
+13                     DISABLED PARKING ZONE  ...                 0.0   
+14       NO CITY STICKER OR IMPROPER DISPLAY  ...                 0.0   
+15                WITHIN 15' OF FIRE HYDRANT  ...                 0.0   
+16             REAR AND FRONT PLATE REQUIRED  ...                50.0   
+17                     OUTSIDE METERED SPACE  ...                 0.0   
+18                          OBSTRUCT ROADWAY  ...                 0.0   
+19  EXPIRED PLATES OR TEMPORARY REGISTRATION  ...                 0.0   
+
+   total_payments ticket_queue  ticket_queue_date  notice_level  \
+0           50.00         Paid         2007-03-20          DETR   
+1           50.00         Paid         2007-01-31          VIOL   
+2            0.00       Notice         2007-02-28          SEIZ   
+3           50.00         Paid         2007-01-11           NaN   
+4          100.00         Paid         2007-04-25          DETR   
+5           30.00         Paid         2007-01-31          VIOL   
+6            0.00       Define         2007-01-04           NaN   
+7          180.00         Paid         2007-11-06          FINL   
+8           30.00         Paid         2007-01-18          VIOL   
+9            0.00       Define         2007-01-05           NaN   
+10          50.00         Paid         2015-12-30          SEIZ   
+11          50.00         Paid         2007-01-12           NaN   
+12         201.68         Paid         2008-12-08          SEIZ   
+13         200.00         Paid         2007-08-07          VIOL   
+14         240.00         Paid         2007-08-31          SEIZ   
+15         100.00         Paid         2008-03-26          DETR   
+16           0.00       Define         2007-01-04           NaN   
+17          25.00         Paid         2007-09-05          DETR   
+18          75.00         Paid         2007-02-20          DETR   
+19         100.00         Paid         2008-12-08          SEIZ   
+
+    hearing_disposition  notice_number officer  \
+0                Liable   5.080059e+09   17266   
+1                   NaN   5.079876e+09   10799   
+2                   NaN   5.037862e+09   17253   
+3                   NaN   5.075310e+09    3307   
+4                   NaN   5.073568e+09   16820   
+5                   NaN   5.079933e+09   16443   
+6                   NaN   0.000000e+00    7321   
+7                   NaN   5.043866e+09   12791   
+8                   NaN   5.079882e+09   16973   
+9                   NaN   0.000000e+00   18588   
+10                  NaN   5.079886e+09   13237   
+11                  NaN   0.000000e+00   11194   
+12                  NaN   5.093028e+09   10253   
+13                  NaN   5.085807e+09    5921   
+14                  NaN   5.078013e+09   17904   
+15               Liable   5.090322e+09    T188   
+16                  NaN   0.000000e+00    3920   
+17                  NaN   5.086190e+09    4002   
+18                  NaN   5.079911e+09   30109   
+19                  NaN   5.056951e+09    7041   
+
+                            address issue_year  
+0      5700 n avondale, chicago, il       2007  
+1      2700 w farragut, chicago, il       2007  
+2         1700 w estes, chicago, il       2007  
+3      4700 n sheridan, chicago, il       2007  
+4      7100 s campbell, chicago, il       2007  
+5       2200 w fostert, chicago, il       2007  
+6       1400 s kostner, chicago, il       2007  
+7       6900 s ashland, chicago, il       2007  
+8     2600 n cannon dr, chicago, il       2007  
+9   4400 w 28th street, chicago, il       2007  
+10     1900 n ridgeway, chicago, il       2007  
+11    6200 s hermitage, chicago, il       2007  
+12         3600 w eddy, chicago, il       2007  
+13    3200 w roosevelt, chicago, il       2007  
+14     4300 n broadway, chicago, il       2007  
+15       100 e pearson, chicago, il       2007  
+16  4800 n springfield, chicago, il       2007  
+17            1 w erie, chicago, il       2007  
+18       10000 w ohare, chicago, il       2007  
+19      2100 w coulter, chicago, il       2007  
+
+[20 rows x 25 columns]
+              total_tickets  paid_tickets  fraction_paid
+vehicle_make                                            
+ACUR                   3866             1       0.000259
+ALFA                      8             1       0.125000
+AMER                      3             1       0.333333
+APRL                     12             1       0.083333
+ASTO                      6             1       0.166667
+...                     ...           ...            ...
+WORH                     36             1       0.027778
+WSTR                      1             0       0.000000
+YAMA                    133             1       0.007519
+YUGO                      2             1       0.500000
+ZNEN                      2             1       0.500000
+
+[133 rows x 3 columns]</code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
