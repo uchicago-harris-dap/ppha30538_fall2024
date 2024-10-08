@@ -139,18 +139,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-data">Load data</h2>
 <p>Let’s first load the dataset from the <a href="https://github.com/vega/vega-datasets">vega-datasets</a> collection into a Pandas data frame.</p>
-<div id="6120cd34" class="cell" data-execution_count="1">
+<div id="306392ab" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data <span class="im">as</span> vega_data</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#alt.renderers.enable('png')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1535065f" class="cell" data-execution_count="2">
+<div id="118c6e2f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> vega_data.gapminder()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- Remark: I (Peter) couldn't get the command 
 data = vega_data.gapminder()
 to work. instead, I saved the data to local and I read it in from local. The code chunk which does this is set to echo false so it won't show up in the lecture notes-->
-<div id="1b61d655" class="cell" data-execution_count="4">
+<div id="da2a9ee3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>(682, 6)</code></pre>
@@ -159,7 +159,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="head-summary" class="level2">
 <h2 class="anchored" data-anchor-id="head-summary"><code>head()</code> + summary</h2>
-<div id="09de8e69" class="cell" data-execution_count="5">
+<div id="fe7ef97d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -351,7 +351,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="revisit-plot-from-beginning-of-prior-lecture" class="level2">
 <h2 class="anchored" data-anchor-id="revisit-plot-from-beginning-of-prior-lecture">Revisit plot from beginning of prior lecture</h2>
-<div id="d6ee7a06" class="cell" data-execution_count="6">
+<div id="147177ec" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>seattle <span class="op">=</span> vega_data.seattle_weather()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(seattle).mark_bar().encode(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month(date):O'</span>,</span>
@@ -360,23 +360,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 <style>
-  #altair-viz-6c17b69dcaf945a09fb14fe8ad8dd0f8.vega-embed {
+  #altair-viz-88553f88a6b5401fa962838ff4adc7a8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6c17b69dcaf945a09fb14fe8ad8dd0f8.vega-embed details,
-  #altair-viz-6c17b69dcaf945a09fb14fe8ad8dd0f8.vega-embed details summary {
+  #altair-viz-88553f88a6b5401fa962838ff4adc7a8.vega-embed details,
+  #altair-viz-88553f88a6b5401fa962838ff4adc7a8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6c17b69dcaf945a09fb14fe8ad8dd0f8"></div>
+<div id="altair-viz-88553f88a6b5401fa962838ff4adc7a8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6c17b69dcaf945a09fb14fe8ad8dd0f8") {
-      outputDiv = document.getElementById("altair-viz-6c17b69dcaf945a09fb14fe8ad8dd0f8");
+    if (outputDiv.id !== "altair-viz-88553f88a6b5401fa962838ff4adc7a8") {
+      outputDiv = document.getElementById("altair-viz-88553f88a6b5401fa962838ff4adc7a8");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -438,7 +438,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="in-class-exercises-solution-precipitation-ordinal" class="level2">
 <h2 class="anchored" data-anchor-id="in-class-exercises-solution-precipitation-ordinal">In-class exercises: solution precipitation ordinal</h2>
-<div id="efbddcc6" class="cell" data-execution_count="7">
+<div id="9586b194" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>seattle <span class="op">=</span> vega_data.seattle_weather()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(seattle).mark_bar().encode(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month(date):O'</span>,</span>
@@ -447,23 +447,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <style>
-  #altair-viz-b0128d1a997f42c096b00adac98cb935.vega-embed {
+  #altair-viz-8f4bdfc37d65492cb009ee51c6b9d564.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-b0128d1a997f42c096b00adac98cb935.vega-embed details,
-  #altair-viz-b0128d1a997f42c096b00adac98cb935.vega-embed details summary {
+  #altair-viz-8f4bdfc37d65492cb009ee51c6b9d564.vega-embed details,
+  #altair-viz-8f4bdfc37d65492cb009ee51c6b9d564.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-b0128d1a997f42c096b00adac98cb935"></div>
+<div id="altair-viz-8f4bdfc37d65492cb009ee51c6b9d564"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b0128d1a997f42c096b00adac98cb935") {
-      outputDiv = document.getElementById("altair-viz-b0128d1a997f42c096b00adac98cb935");
+    if (outputDiv.id !== "altair-viz-8f4bdfc37d65492cb009ee51c6b9d564") {
+      outputDiv = document.getElementById("altair-viz-8f4bdfc37d65492cb009ee51c6b9d564");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -516,7 +516,7 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </section>
 <section id="in-class-exercises-solution-date-temporal" class="level2">
 <h2 class="anchored" data-anchor-id="in-class-exercises-solution-date-temporal">In-class exercises: solution date temporal</h2>
-<div id="8ed6a822" class="cell" data-execution_count="8">
+<div id="cecb1ff9" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>seattle <span class="op">=</span> vega_data.seattle_weather()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(seattle).mark_bar().encode(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month(date):T'</span>,</span>
@@ -525,23 +525,23 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 <div class="cell-output cell-output-display" data-execution_count="7">
 
 <style>
-  #altair-viz-882a84b897a54bfaabfeca930d13a8da.vega-embed {
+  #altair-viz-2cab312b4ee545539655ec98e1a2f21c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-882a84b897a54bfaabfeca930d13a8da.vega-embed details,
-  #altair-viz-882a84b897a54bfaabfeca930d13a8da.vega-embed details summary {
+  #altair-viz-2cab312b4ee545539655ec98e1a2f21c.vega-embed details,
+  #altair-viz-2cab312b4ee545539655ec98e1a2f21c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-882a84b897a54bfaabfeca930d13a8da"></div>
+<div id="altair-viz-2cab312b4ee545539655ec98e1a2f21c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-882a84b897a54bfaabfeca930d13a8da") {
-      outputDiv = document.getElementById("altair-viz-882a84b897a54bfaabfeca930d13a8da");
+    if (outputDiv.id !== "altair-viz-2cab312b4ee545539655ec98e1a2f21c") {
+      outputDiv = document.getElementById("altair-viz-2cab312b4ee545539655ec98e1a2f21c");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -628,8 +628,6 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </figure>
 </div>
 <p>Source: Jacques Bertin in Semiology of Graphics (1967), via <a href="https://medium.com/@mbostock/introducing-d3-scale-61980c51545f">source</a></p>
-<p>*talk through a few aspects of this image. The examples are a bit gratuitous. Most of the information content is in the boxes in the first two columns</p>
-<p>The rows more or less rank different visual elements from most to least noticeable. Looking at the extremes, XY coordinates can convey both quantified and non-quantified order as well as whether two things are equal. at the other extreme, shape cannot tell you at all about order, it can just tell if you if two things are the same or different.* :::</p>
 <p>Free advice: don’t try to use all seven ways of encoding information in a single plot. It will inevitably be overload.</p>
 </section>
 <section id="more-depth-on-color" class="level2">
@@ -701,121 +699,6 @@ to work. instead, I saved the data to local and I read it in from local. The cod
 </ul>
 </section>
 </section>
-<section id="visual-encoding-1" class="level1">
-<h1>Visual encoding</h1>
-<section id="visual-encoding-roadmap-1" class="level2">
-<h2 class="anchored" data-anchor-id="visual-encoding-roadmap-1">Visual encoding roadmap</h2>
-<ul>
-<li>Seven types of visual encoding</li>
-<li>More on color</li>
-</ul>
-</section>
-<section id="seven-ways-of-visual-encoding" class="level2">
-<h2 class="anchored" data-anchor-id="seven-ways-of-visual-encoding">Seven ways of visual encoding</h2>
-<blockquote class="blockquote">
-<p>Within the plane a mark can be at the top or the bottom, to the right or the left. The eye perceives two independent dimensions along X and Y, which are distinguished orthogonally. A variation in light energy produces a third dimension in Z, which is independent of X and Y…</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The eye is sensitive, along the Z dimension, to 6 independent visual variables, which can be superimposed on the planar figures:</p>
-</blockquote>
-<blockquote class="blockquote">
-<ul>
-<li>the size of the marks</li>
-<li>their value [brightness]</li>
-<li>texture</li>
-<li>color [hue]</li>
-<li>orientation</li>
-<li>shape.</li>
-</ul>
-</blockquote>
-<blockquote class="blockquote">
-<p>They can represent differences (≠), similarities (≡), a quantified order (Q), or a nonquantified order (O), and can express groups, hierarchies, or vertical movements.</p>
-</blockquote>
-<p>Source: Jacques Bertin in Semiology of Graphics (1967), via <a href="https://medium.com/@mbostock/introducing-d3-scale-61980c51545f">source</a></p>
-</section>
-<section id="seven-ways-of-visual-encoding-in-one-image-1" class="level2">
-<h2 class="anchored" data-anchor-id="seven-ways-of-visual-encoding-in-one-image-1">Seven ways of visual encoding in one image</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="pictures/visual_encoding.jpg" class="img-fluid figure-img"></p>
-<figcaption>Visual encoding</figcaption>
-</figure>
-</div>
-<!-- ZZZ talk through a few aspects of this image. The examples are a bit gratuitous. Most of the information content is in the boxes in the first two columns
-
-The rows more or less rank different visual elements from most to least noticeable. Looking at the extremes, XY coordinates can convey both quantified and non-quantified order as well as whether two things are equal. at the other extreme, shape cannot tell you at all about order, it can just tell if you if two things are the same or different.-->
-<p>Free advice: don’t try to use all seven ways of encoding information in a single plot. It will inevitably be overload.</p>
-</section>
-<section id="more-depth-on-color-1" class="level2">
-<h2 class="anchored" data-anchor-id="more-depth-on-color-1">More depth on color</h2>
-<p>Language note: by <code>color</code>, we mean both brightness (which Bertin calls “value”) and hue (which Bertin calls “color”)</p>
-<p>Why choose color deliberately?</p>
-<ul>
-<li>Using any software’s default color palette is kind of like using comic sans font on a resume</li>
-<li>Choosing the “right” colors will make it easier for you to convey meaning</li>
-</ul>
-</section>
-<section id="color-palettes-and-their-use-cases-1" class="level2">
-<h2 class="anchored" data-anchor-id="color-palettes-and-their-use-cases-1">Color palettes and their use cases</h2>
-<p>Toggle back and forth to the <a href="https://vega.github.io/vega/docs/schemes/">schemes</a> page:</p>
-<p><strong><em>step 1</em></strong> Am I working with <code>N</code>ominal, unordered data or with ordered data (either <code>O</code>rdinal or <code>Q</code>uantitative)?</p>
-<p>If <code>N</code>ominal, unordered data, use categorical palettes. Otherwise, proceed.</p>
-<p><strong><em>step 2</em></strong></p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Palette type</th>
-<th>Use case</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Sequential Single-Hue</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Sequential Multi-Hue</td>
-<td>Use for higher contrast, but harder to judge quantitative proximity</td>
-</tr>
-<tr class="odd">
-<td>Diverging</td>
-<td>Use if there is a midpoint (e.g.&nbsp;voting for <code>redblue</code>)</td>
-</tr>
-<tr class="even">
-<td>Cyclical</td>
-<td>Use if circular (e.g.&nbsp;time of day, month)</td>
-</tr>
-</tbody>
-</table>
-<!-- ZZZ flip back and forth between each of these palette types and the examples on the website. Be sure to click "View discrete" as well-->
-</section>
-<section id="more-advice-on-color-choices-1" class="level2">
-<h2 class="anchored" data-anchor-id="more-advice-on-color-choices-1">More advice on color choices</h2>
-<ul>
-<li>Use <a href="https://colorbrewer2.org">colorbrewer2.org</a> to choose your color palettes. Click through to site. Options include subsetting to colors that are
-<ul>
-<li>colorblind safe</li>
-<li>black and white printer (aka photocopy) safe</li>
-</ul></li>
-<li>Harmonization
-<ul>
-<li><em>Within reports</em> You rarely produce a single plot in isolation. You usually produce several plots as part of a memo, a website, etc. Use consistent colors across plots.</li>
-<li><em>Across reports</em> Many organizations have official palettes and plot templates. Good to ask if you are working for a big org if they have one.</li>
-</ul></li>
-</ul>
-</section>
-<section id="visual-encoding-summary-1" class="level2">
-<h2 class="anchored" data-anchor-id="visual-encoding-summary-1">Visual encoding: summary</h2>
-<ul>
-<li>Bertin proposes seven different ways to encode visual information. His chart is a handy reference to what visual elements can encode different types of information.</li>
-<li>Color is one of the easiest ways to convey meaning. Choose your palette based on whether you want to convey unordered or ordered data, whether you have a midpoint, and whether your ordered series is cyclical</li>
-</ul>
-</section>
-</section>
 <section id="encoding-channels" class="level1">
 <h1>Encoding channels</h1>
 <section id="encoding-channels-roadmap" class="level2">
@@ -833,7 +716,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="x" class="level2">
 <h2 class="anchored" data-anchor-id="x">X</h2>
-<div id="26f580fc" class="cell" data-execution_count="9">
+<div id="f56c92ab" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data2000 <span class="op">=</span> data.loc[data[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2000</span>] <span class="co">#one year is more manageable</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>)</span>
@@ -841,23 +724,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <style>
-  #altair-viz-74a055dfbb7444ca8365626c276f145e.vega-embed {
+  #altair-viz-e40b75c432344f1b8c93365571e45f15.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-74a055dfbb7444ca8365626c276f145e.vega-embed details,
-  #altair-viz-74a055dfbb7444ca8365626c276f145e.vega-embed details summary {
+  #altair-viz-e40b75c432344f1b8c93365571e45f15.vega-embed details,
+  #altair-viz-e40b75c432344f1b8c93365571e45f15.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-74a055dfbb7444ca8365626c276f145e"></div>
+<div id="altair-viz-e40b75c432344f1b8c93365571e45f15"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-74a055dfbb7444ca8365626c276f145e") {
-      outputDiv = document.getElementById("altair-viz-74a055dfbb7444ca8365626c276f145e");
+    if (outputDiv.id !== "altair-viz-e40b75c432344f1b8c93365571e45f15") {
+      outputDiv = document.getElementById("altair-viz-e40b75c432344f1b8c93365571e45f15");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -910,7 +793,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="y" class="level2">
 <h2 class="anchored" data-anchor-id="y">Y</h2>
-<div id="70a1f96a" class="cell" data-execution_count="10">
+<div id="ddb3e708" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:O'</span>)</span>
@@ -918,23 +801,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 <style>
-  #altair-viz-05927d84e45f47079c2099159fd89cbc.vega-embed {
+  #altair-viz-1514c94756fa436fbfdf893f9232dde8.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-05927d84e45f47079c2099159fd89cbc.vega-embed details,
-  #altair-viz-05927d84e45f47079c2099159fd89cbc.vega-embed details summary {
+  #altair-viz-1514c94756fa436fbfdf893f9232dde8.vega-embed details,
+  #altair-viz-1514c94756fa436fbfdf893f9232dde8.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-05927d84e45f47079c2099159fd89cbc"></div>
+<div id="altair-viz-1514c94756fa436fbfdf893f9232dde8"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-05927d84e45f47079c2099159fd89cbc") {
-      outputDiv = document.getElementById("altair-viz-05927d84e45f47079c2099159fd89cbc");
+    if (outputDiv.id !== "altair-viz-1514c94756fa436fbfdf893f9232dde8") {
+      outputDiv = document.getElementById("altair-viz-1514c94756fa436fbfdf893f9232dde8");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -987,7 +870,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="do-not-require-zero-on-axis-range" class="level2">
 <h2 class="anchored" data-anchor-id="do-not-require-zero-on-axis-range">Do not require zero on axis range</h2>
-<div id="45a87bf3" class="cell" data-execution_count="11">
+<div id="1ff48e9d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>zero_included <span class="op">=</span> alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>)</span>
@@ -1000,23 +883,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-  #altair-viz-3922825be6c946b99a30fff518c3a6a4.vega-embed {
+  #altair-viz-e1317e6015ca4fa5a754acb2811e2268.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-3922825be6c946b99a30fff518c3a6a4.vega-embed details,
-  #altair-viz-3922825be6c946b99a30fff518c3a6a4.vega-embed details summary {
+  #altair-viz-e1317e6015ca4fa5a754acb2811e2268.vega-embed details,
+  #altair-viz-e1317e6015ca4fa5a754acb2811e2268.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-3922825be6c946b99a30fff518c3a6a4"></div>
+<div id="altair-viz-e1317e6015ca4fa5a754acb2811e2268"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3922825be6c946b99a30fff518c3a6a4") {
-      outputDiv = document.getElementById("altair-viz-3922825be6c946b99a30fff518c3a6a4");
+    if (outputDiv.id !== "altair-viz-e1317e6015ca4fa5a754acb2811e2268") {
+      outputDiv = document.getElementById("altair-viz-e1317e6015ca4fa5a754acb2811e2268");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1079,7 +962,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="size" class="level2">
 <h2 class="anchored" data-anchor-id="size"><code>size</code></h2>
-<div id="5bd1b1f7" class="cell" data-execution_count="12">
+<div id="ffb4369a" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1088,23 +971,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="11">
 
 <style>
-  #altair-viz-6d50f671f3ef47d89521646cc13d136d.vega-embed {
+  #altair-viz-5e46fac9b96a4752b187113a1535d4e7.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6d50f671f3ef47d89521646cc13d136d.vega-embed details,
-  #altair-viz-6d50f671f3ef47d89521646cc13d136d.vega-embed details summary {
+  #altair-viz-5e46fac9b96a4752b187113a1535d4e7.vega-embed details,
+  #altair-viz-5e46fac9b96a4752b187113a1535d4e7.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6d50f671f3ef47d89521646cc13d136d"></div>
+<div id="altair-viz-5e46fac9b96a4752b187113a1535d4e7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6d50f671f3ef47d89521646cc13d136d") {
-      outputDiv = document.getElementById("altair-viz-6d50f671f3ef47d89521646cc13d136d");
+    if (outputDiv.id !== "altair-viz-5e46fac9b96a4752b187113a1535d4e7") {
+      outputDiv = document.getElementById("altair-viz-5e46fac9b96a4752b187113a1535d4e7");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1157,7 +1040,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="add-color-and-size-with-filledtrue-and-range01000" class="level2">
 <h2 class="anchored" data-anchor-id="add-color-and-size-with-filledtrue-and-range01000">add <code>color</code> and <code>size</code> with <code>filled=True</code> and <code>range=[0,1000]</code></h2>
-<div id="eac43274" class="cell" data-execution_count="13">
+<div id="b8f7cb92" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1167,23 +1050,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="12">
 
 <style>
-  #altair-viz-c8c955e40a754be7bd0b0521af60e9a6.vega-embed {
+  #altair-viz-a32150a6310447dab0764163769cef55.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c8c955e40a754be7bd0b0521af60e9a6.vega-embed details,
-  #altair-viz-c8c955e40a754be7bd0b0521af60e9a6.vega-embed details summary {
+  #altair-viz-a32150a6310447dab0764163769cef55.vega-embed details,
+  #altair-viz-a32150a6310447dab0764163769cef55.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c8c955e40a754be7bd0b0521af60e9a6"></div>
+<div id="altair-viz-a32150a6310447dab0764163769cef55"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c8c955e40a754be7bd0b0521af60e9a6") {
-      outputDiv = document.getElementById("altair-viz-c8c955e40a754be7bd0b0521af60e9a6");
+    if (outputDiv.id !== "altair-viz-a32150a6310447dab0764163769cef55") {
+      outputDiv = document.getElementById("altair-viz-a32150a6310447dab0764163769cef55");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1236,7 +1119,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="opacity" class="level2">
 <h2 class="anchored" data-anchor-id="opacity"><code>opacity</code></h2>
-<div id="92eabeed" class="cell" data-execution_count="14">
+<div id="f5293548" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1247,23 +1130,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="13">
 
 <style>
-  #altair-viz-7e2a42768d1b4dfdb8638e89272d8eb9.vega-embed {
+  #altair-viz-7db3d20b1ac9407c9041725b11dbc3bd.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7e2a42768d1b4dfdb8638e89272d8eb9.vega-embed details,
-  #altair-viz-7e2a42768d1b4dfdb8638e89272d8eb9.vega-embed details summary {
+  #altair-viz-7db3d20b1ac9407c9041725b11dbc3bd.vega-embed details,
+  #altair-viz-7db3d20b1ac9407c9041725b11dbc3bd.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7e2a42768d1b4dfdb8638e89272d8eb9"></div>
+<div id="altair-viz-7db3d20b1ac9407c9041725b11dbc3bd"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7e2a42768d1b4dfdb8638e89272d8eb9") {
-      outputDiv = document.getElementById("altair-viz-7e2a42768d1b4dfdb8638e89272d8eb9");
+    if (outputDiv.id !== "altair-viz-7db3d20b1ac9407c9041725b11dbc3bd") {
+      outputDiv = document.getElementById("altair-viz-7db3d20b1ac9407c9041725b11dbc3bd");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1316,7 +1199,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="column" class="level2">
 <h2 class="anchored" data-anchor-id="column"><code>column</code></h2>
-<div id="3ff5e96d" class="cell" data-execution_count="15">
+<div id="7b8c5cf2" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1329,23 +1212,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="14">
 
 <style>
-  #altair-viz-ba2912e09bed44ba8622b428e7bb6246.vega-embed {
+  #altair-viz-be543514e1104f8a9e7a7e03b42f34b3.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-ba2912e09bed44ba8622b428e7bb6246.vega-embed details,
-  #altair-viz-ba2912e09bed44ba8622b428e7bb6246.vega-embed details summary {
+  #altair-viz-be543514e1104f8a9e7a7e03b42f34b3.vega-embed details,
+  #altair-viz-be543514e1104f8a9e7a7e03b42f34b3.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-ba2912e09bed44ba8622b428e7bb6246"></div>
+<div id="altair-viz-be543514e1104f8a9e7a7e03b42f34b3"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ba2912e09bed44ba8622b428e7bb6246") {
-      outputDiv = document.getElementById("altair-viz-ba2912e09bed44ba8622b428e7bb6246");
+    if (outputDiv.id !== "altair-viz-be543514e1104f8a9e7a7e03b42f34b3") {
+      outputDiv = document.getElementById("altair-viz-be543514e1104f8a9e7a7e03b42f34b3");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1398,7 +1281,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="adjust-aspect-ratio-move-pop-legend-remove-color-legend" class="level2">
 <h2 class="anchored" data-anchor-id="adjust-aspect-ratio-move-pop-legend-remove-color-legend">adjust aspect ratio, move pop legend, remove color legend</h2>
-<div id="2825fc77" class="cell" data-execution_count="16">
+<div id="078dc2f9" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1412,23 +1295,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="15">
 
 <style>
-  #altair-viz-5818a2ea690f4110a86247950d28e958.vega-embed {
+  #altair-viz-20620172940540c99a1bdf8077f76ead.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-5818a2ea690f4110a86247950d28e958.vega-embed details,
-  #altair-viz-5818a2ea690f4110a86247950d28e958.vega-embed details summary {
+  #altair-viz-20620172940540c99a1bdf8077f76ead.vega-embed details,
+  #altair-viz-20620172940540c99a1bdf8077f76ead.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-5818a2ea690f4110a86247950d28e958"></div>
+<div id="altair-viz-20620172940540c99a1bdf8077f76ead"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-5818a2ea690f4110a86247950d28e958") {
-      outputDiv = document.getElementById("altair-viz-5818a2ea690f4110a86247950d28e958");
+    if (outputDiv.id !== "altair-viz-20620172940540c99a1bdf8077f76ead") {
+      outputDiv = document.getElementById("altair-viz-20620172940540c99a1bdf8077f76ead");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1491,7 +1374,7 @@ The rows more or less rank different visual elements from most to least noticeab
 <li>substitute <code>Row</code> for <code>Column</code></li>
 <li>delete <code>orient='bottom'</code></li>
 </ul>
-<div id="8e1c07af" class="cell" data-execution_count="17">
+<div id="3f306451" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>).encode(</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>),</span>
@@ -1505,23 +1388,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="16">
 
 <style>
-  #altair-viz-ed86fa06999b46aea4f2e1d093446700.vega-embed {
+  #altair-viz-faaf1948ecb147cab3d49f59cf805e73.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-ed86fa06999b46aea4f2e1d093446700.vega-embed details,
-  #altair-viz-ed86fa06999b46aea4f2e1d093446700.vega-embed details summary {
+  #altair-viz-faaf1948ecb147cab3d49f59cf805e73.vega-embed details,
+  #altair-viz-faaf1948ecb147cab3d49f59cf805e73.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-ed86fa06999b46aea4f2e1d093446700"></div>
+<div id="altair-viz-faaf1948ecb147cab3d49f59cf805e73"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ed86fa06999b46aea4f2e1d093446700") {
-      outputDiv = document.getElementById("altair-viz-ed86fa06999b46aea4f2e1d093446700");
+    if (outputDiv.id !== "altair-viz-faaf1948ecb147cab3d49f59cf805e73") {
+      outputDiv = document.getElementById("altair-viz-faaf1948ecb147cab3d49f59cf805e73");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1606,7 +1489,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_point-add-information-using-alt.shape" class="level2">
 <h2 class="anchored" data-anchor-id="mark_point-add-information-using-alt.shape"><code>mark_point()</code>: add information using <code>alt.Shape()</code></h2>
-<div id="4a1dd463" class="cell" data-execution_count="18">
+<div id="8f004da2" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point().encode(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
@@ -1615,23 +1498,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="17">
 
 <style>
-  #altair-viz-7a0afc22cbfc47178371c26bdc06041f.vega-embed {
+  #altair-viz-734cae3c91974befabbf1c4bd3b73f90.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-7a0afc22cbfc47178371c26bdc06041f.vega-embed details,
-  #altair-viz-7a0afc22cbfc47178371c26bdc06041f.vega-embed details summary {
+  #altair-viz-734cae3c91974befabbf1c4bd3b73f90.vega-embed details,
+  #altair-viz-734cae3c91974befabbf1c4bd3b73f90.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-7a0afc22cbfc47178371c26bdc06041f"></div>
+<div id="altair-viz-734cae3c91974befabbf1c4bd3b73f90"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7a0afc22cbfc47178371c26bdc06041f") {
-      outputDiv = document.getElementById("altair-viz-7a0afc22cbfc47178371c26bdc06041f");
+    if (outputDiv.id !== "altair-viz-734cae3c91974befabbf1c4bd3b73f90") {
+      outputDiv = document.getElementById("altair-viz-734cae3c91974befabbf1c4bd3b73f90");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1684,7 +1567,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_point-format-points-using-arguments" class="level2">
 <h2 class="anchored" data-anchor-id="mark_point-format-points-using-arguments"><code>mark_point()</code>: format points using arguments</h2>
-<div id="8ea5eadf" class="cell" data-execution_count="19">
+<div id="8a5d1b9e" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_point(filled<span class="op">=</span><span class="va">True</span>, size<span class="op">=</span><span class="dv">100</span>).encode(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
@@ -1693,23 +1576,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="18">
 
 <style>
-  #altair-viz-0e22941296b343179245bf481f93c60c.vega-embed {
+  #altair-viz-d29f2a7e35eb4d029fe290de93ffd85a.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0e22941296b343179245bf481f93c60c.vega-embed details,
-  #altair-viz-0e22941296b343179245bf481f93c60c.vega-embed details summary {
+  #altair-viz-d29f2a7e35eb4d029fe290de93ffd85a.vega-embed details,
+  #altair-viz-d29f2a7e35eb4d029fe290de93ffd85a.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0e22941296b343179245bf481f93c60c"></div>
+<div id="altair-viz-d29f2a7e35eb4d029fe290de93ffd85a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0e22941296b343179245bf481f93c60c") {
-      outputDiv = document.getElementById("altair-viz-0e22941296b343179245bf481f93c60c");
+    if (outputDiv.id !== "altair-viz-d29f2a7e35eb4d029fe290de93ffd85a") {
+      outputDiv = document.getElementById("altair-viz-d29f2a7e35eb4d029fe290de93ffd85a");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1762,7 +1645,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_square" class="level2">
 <h2 class="anchored" data-anchor-id="mark_square"><code>mark_square()</code></h2>
-<div id="453b83ed" class="cell" data-execution_count="20">
+<div id="35c09439" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_square(size<span class="op">=</span><span class="dv">100</span>).encode(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'life_expect:Q'</span>, scale<span class="op">=</span>alt.Scale(zero<span class="op">=</span><span class="va">False</span>)),</span>
@@ -1771,23 +1654,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="19">
 
 <style>
-  #altair-viz-f3cbab3cbea3478e9156e8b0e0095c54.vega-embed {
+  #altair-viz-23c888927d2247a584036c7ac91afdc7.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f3cbab3cbea3478e9156e8b0e0095c54.vega-embed details,
-  #altair-viz-f3cbab3cbea3478e9156e8b0e0095c54.vega-embed details summary {
+  #altair-viz-23c888927d2247a584036c7ac91afdc7.vega-embed details,
+  #altair-viz-23c888927d2247a584036c7ac91afdc7.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f3cbab3cbea3478e9156e8b0e0095c54"></div>
+<div id="altair-viz-23c888927d2247a584036c7ac91afdc7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f3cbab3cbea3478e9156e8b0e0095c54") {
-      outputDiv = document.getElementById("altair-viz-f3cbab3cbea3478e9156e8b0e0095c54");
+    if (outputDiv.id !== "altair-viz-23c888927d2247a584036c7ac91afdc7") {
+      outputDiv = document.getElementById("altair-viz-23c888927d2247a584036c7ac91afdc7");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1844,7 +1727,7 @@ The rows more or less rank different visual elements from most to least noticeab
 <li>Useful for comparing values along a single dimension with minimal overlap.</li>
 <li>A <em>dot plot</em> drawn with tick marks is sometimes referred to as a <em>strip plot</em>.</li>
 </ul>
-<div id="444305e4" class="cell" data-execution_count="21">
+<div id="947975c8" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_tick().encode(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'fertility:Q'</span>),</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'cluster:N'</span>)</span>
@@ -1852,23 +1735,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="20">
 
 <style>
-  #altair-viz-fa40b856c22a4683aa9e7c2491736bf9.vega-embed {
+  #altair-viz-6063ea152d394664b1902a9002c3694b.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-fa40b856c22a4683aa9e7c2491736bf9.vega-embed details,
-  #altair-viz-fa40b856c22a4683aa9e7c2491736bf9.vega-embed details summary {
+  #altair-viz-6063ea152d394664b1902a9002c3694b.vega-embed details,
+  #altair-viz-6063ea152d394664b1902a9002c3694b.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-fa40b856c22a4683aa9e7c2491736bf9"></div>
+<div id="altair-viz-6063ea152d394664b1902a9002c3694b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fa40b856c22a4683aa9e7c2491736bf9") {
-      outputDiv = document.getElementById("altair-viz-fa40b856c22a4683aa9e7c2491736bf9");
+    if (outputDiv.id !== "altair-viz-6063ea152d394664b1902a9002c3694b") {
+      outputDiv = document.getElementById("altair-viz-6063ea152d394664b1902a9002c3694b");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1922,7 +1805,7 @@ The rows more or less rank different visual elements from most to least noticeab
 <section id="mark_bar" class="level2">
 <h2 class="anchored" data-anchor-id="mark_bar"><code>mark_bar()</code></h2>
 <p>You know how to do this already! This is just a prelude to the next slide.</p>
-<div id="949932db" class="cell" data-execution_count="22">
+<div id="8008511e" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'country:N'</span>),</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>)</span>
@@ -1930,23 +1813,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="21">
 
 <style>
-  #altair-viz-24996257e28341a19e90b44cc68aa462.vega-embed {
+  #altair-viz-f2f111913e8143eb8b9e4aba93e9ea5e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-24996257e28341a19e90b44cc68aa462.vega-embed details,
-  #altair-viz-24996257e28341a19e90b44cc68aa462.vega-embed details summary {
+  #altair-viz-f2f111913e8143eb8b9e4aba93e9ea5e.vega-embed details,
+  #altair-viz-f2f111913e8143eb8b9e4aba93e9ea5e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-24996257e28341a19e90b44cc68aa462"></div>
+<div id="altair-viz-f2f111913e8143eb8b9e4aba93e9ea5e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-24996257e28341a19e90b44cc68aa462") {
-      outputDiv = document.getElementById("altair-viz-24996257e28341a19e90b44cc68aa462");
+    if (outputDiv.id !== "altair-viz-f2f111913e8143eb8b9e4aba93e9ea5e") {
+      outputDiv = document.getElementById("altair-viz-f2f111913e8143eb8b9e4aba93e9ea5e");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -1999,7 +1882,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="use-alt.color-for-a-stacked-bar-plot" class="level2">
 <h2 class="anchored" data-anchor-id="use-alt.color-for-a-stacked-bar-plot">use <code>alt.Color()</code> for a stacked bar plot</h2>
-<div id="ac170df7" class="cell" data-execution_count="23">
+<div id="897cd5ee" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'cluster:N'</span>),</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>),</span>
@@ -2008,23 +1891,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="22">
 
 <style>
-  #altair-viz-c4b244ac393345259121dc0468abc5b0.vega-embed {
+  #altair-viz-73c2b66b19334617b2899c876d084034.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c4b244ac393345259121dc0468abc5b0.vega-embed details,
-  #altair-viz-c4b244ac393345259121dc0468abc5b0.vega-embed details summary {
+  #altair-viz-73c2b66b19334617b2899c876d084034.vega-embed details,
+  #altair-viz-73c2b66b19334617b2899c876d084034.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c4b244ac393345259121dc0468abc5b0"></div>
+<div id="altair-viz-73c2b66b19334617b2899c876d084034"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c4b244ac393345259121dc0468abc5b0") {
-      outputDiv = document.getElementById("altair-viz-c4b244ac393345259121dc0468abc5b0");
+    if (outputDiv.id !== "altair-viz-73c2b66b19334617b2899c876d084034") {
+      outputDiv = document.getElementById("altair-viz-73c2b66b19334617b2899c876d084034");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2078,7 +1961,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="x2-to-show-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="x2-to-show-intervals"><code>X2()</code> to show intervals</h2>
-<div id="90a35822" class="cell" data-execution_count="24">
+<div id="01f7a5c8" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data2000).mark_bar().encode(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'min(life_expect):Q'</span>),</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    alt.X2(<span class="st">'max(life_expect):Q'</span>),</span>
@@ -2087,23 +1970,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="23">
 
 <style>
-  #altair-viz-cbe9dc8f93754eac9875ed543b724921.vega-embed {
+  #altair-viz-99fad4bd28754b84af9d0761aa2f7a85.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-cbe9dc8f93754eac9875ed543b724921.vega-embed details,
-  #altair-viz-cbe9dc8f93754eac9875ed543b724921.vega-embed details summary {
+  #altair-viz-99fad4bd28754b84af9d0761aa2f7a85.vega-embed details,
+  #altair-viz-99fad4bd28754b84af9d0761aa2f7a85.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-cbe9dc8f93754eac9875ed543b724921"></div>
+<div id="altair-viz-99fad4bd28754b84af9d0761aa2f7a85"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-cbe9dc8f93754eac9875ed543b724921") {
-      outputDiv = document.getElementById("altair-viz-cbe9dc8f93754eac9875ed543b724921");
+    if (outputDiv.id !== "altair-viz-99fad4bd28754b84af9d0761aa2f7a85") {
+      outputDiv = document.getElementById("altair-viz-99fad4bd28754b84af9d0761aa2f7a85");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2156,7 +2039,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_line" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line"><code>mark_line()</code></h2>
-<div id="bcf116bd" class="cell" data-execution_count="25">
+<div id="32845344" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data_c2 <span class="op">=</span> data.loc[data[<span class="st">'cluster'</span>] <span class="op">==</span> <span class="dv">2</span>] <span class="co">#one cluster is more manageable</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_c2).mark_line().encode(</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
@@ -2168,23 +2051,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="24">
 
 <style>
-  #altair-viz-911c9a268f64489fa34007beca9ca6d8.vega-embed {
+  #altair-viz-1e316a66dc1d4eb3aa57229491ec3683.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-911c9a268f64489fa34007beca9ca6d8.vega-embed details,
-  #altair-viz-911c9a268f64489fa34007beca9ca6d8.vega-embed details summary {
+  #altair-viz-1e316a66dc1d4eb3aa57229491ec3683.vega-embed details,
+  #altair-viz-1e316a66dc1d4eb3aa57229491ec3683.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-911c9a268f64489fa34007beca9ca6d8"></div>
+<div id="altair-viz-1e316a66dc1d4eb3aa57229491ec3683"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-911c9a268f64489fa34007beca9ca6d8") {
-      outputDiv = document.getElementById("altair-viz-911c9a268f64489fa34007beca9ca6d8");
+    if (outputDiv.id !== "altair-viz-1e316a66dc1d4eb3aa57229491ec3683") {
+      outputDiv = document.getElementById("altair-viz-1e316a66dc1d4eb3aa57229491ec3683");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2234,7 +2117,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </script>
 </div>
 </div>
-<div id="7569dc17" class="cell" data-execution_count="26">
+<div id="7854701c" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data).mark_line().encode(</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'fertility:Q'</span>),</span>
@@ -2246,23 +2129,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="25">
 
 <style>
-  #altair-viz-5ae7151abcf14078a243dc5fb3e03c07.vega-embed {
+  #altair-viz-b15216e4c9274c2098769d2984e67034.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-5ae7151abcf14078a243dc5fb3e03c07.vega-embed details,
-  #altair-viz-5ae7151abcf14078a243dc5fb3e03c07.vega-embed details summary {
+  #altair-viz-b15216e4c9274c2098769d2984e67034.vega-embed details,
+  #altair-viz-b15216e4c9274c2098769d2984e67034.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-5ae7151abcf14078a243dc5fb3e03c07"></div>
+<div id="altair-viz-b15216e4c9274c2098769d2984e67034"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-5ae7151abcf14078a243dc5fb3e03c07") {
-      outputDiv = document.getElementById("altair-viz-5ae7151abcf14078a243dc5fb3e03c07");
+    if (outputDiv.id !== "altair-viz-b15216e4c9274c2098769d2984e67034") {
+      outputDiv = document.getElementById("altair-viz-b15216e4c9274c2098769d2984e67034");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2315,7 +2198,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_line-with-cosmetic-adjustments" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line-with-cosmetic-adjustments"><code>mark_line()</code> with cosmetic adjustments</h2>
-<div id="29d6b93a" class="cell" data-execution_count="27">
+<div id="0fe50044" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_c2).mark_line(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    strokeWidth<span class="op">=</span><span class="dv">3</span>,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
@@ -2330,23 +2213,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="26">
 
 <style>
-  #altair-viz-2b6dcd8ae6e0487283eaa5228e0fb847.vega-embed {
+  #altair-viz-fd46e60c1c1645378b9c7ce403ddc119.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2b6dcd8ae6e0487283eaa5228e0fb847.vega-embed details,
-  #altair-viz-2b6dcd8ae6e0487283eaa5228e0fb847.vega-embed details summary {
+  #altair-viz-fd46e60c1c1645378b9c7ce403ddc119.vega-embed details,
+  #altair-viz-fd46e60c1c1645378b9c7ce403ddc119.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2b6dcd8ae6e0487283eaa5228e0fb847"></div>
+<div id="altair-viz-fd46e60c1c1645378b9c7ce403ddc119"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2b6dcd8ae6e0487283eaa5228e0fb847") {
-      outputDiv = document.getElementById("altair-viz-2b6dcd8ae6e0487283eaa5228e0fb847");
+    if (outputDiv.id !== "altair-viz-fd46e60c1c1645378b9c7ce403ddc119") {
+      outputDiv = document.getElementById("altair-viz-fd46e60c1c1645378b9c7ce403ddc119");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2399,7 +2282,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_line-with-cosmetic-adjustments-1" class="level2">
 <h2 class="anchored" data-anchor-id="mark_line-with-cosmetic-adjustments-1"><code>mark_line()</code> with cosmetic adjustments</h2>
-<div id="e2a9b89e" class="cell" data-execution_count="28">
+<div id="93df59f0" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data_c2_2y <span class="op">=</span> data_c2[data_c2[<span class="st">'year'</span>].isin([<span class="dv">1955</span>, <span class="dv">2005</span>])]</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(data_c2_2y).mark_line().encode(</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
@@ -2411,23 +2294,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="27">
 
 <style>
-  #altair-viz-54ce162561a24b13bac065ce436398fd.vega-embed {
+  #altair-viz-894bda1c4c3444e795ee46b94dacd8dc.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-54ce162561a24b13bac065ce436398fd.vega-embed details,
-  #altair-viz-54ce162561a24b13bac065ce436398fd.vega-embed details summary {
+  #altair-viz-894bda1c4c3444e795ee46b94dacd8dc.vega-embed details,
+  #altair-viz-894bda1c4c3444e795ee46b94dacd8dc.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-54ce162561a24b13bac065ce436398fd"></div>
+<div id="altair-viz-894bda1c4c3444e795ee46b94dacd8dc"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-54ce162561a24b13bac065ce436398fd") {
-      outputDiv = document.getElementById("altair-viz-54ce162561a24b13bac065ce436398fd");
+    if (outputDiv.id !== "altair-viz-894bda1c4c3444e795ee46b94dacd8dc") {
+      outputDiv = document.getElementById("altair-viz-894bda1c4c3444e795ee46b94dacd8dc");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2480,7 +2363,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_area" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area"><code>mark_area()</code></h2>
-<div id="ef6f0c79" class="cell" data-execution_count="29">
+<div id="dacd73da" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dataUS <span class="op">=</span> data.loc[data[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'United States'</span>]</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataUS).mark_area().encode(</span>
@@ -2490,23 +2373,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="28">
 
 <style>
-  #altair-viz-18dc9be66d48466d81ce55a74b7d554d.vega-embed {
+  #altair-viz-602064d93a954fb990e4ae28aea9ef98.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-18dc9be66d48466d81ce55a74b7d554d.vega-embed details,
-  #altair-viz-18dc9be66d48466d81ce55a74b7d554d.vega-embed details summary {
+  #altair-viz-602064d93a954fb990e4ae28aea9ef98.vega-embed details,
+  #altair-viz-602064d93a954fb990e4ae28aea9ef98.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-18dc9be66d48466d81ce55a74b7d554d"></div>
+<div id="altair-viz-602064d93a954fb990e4ae28aea9ef98"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-18dc9be66d48466d81ce55a74b7d554d") {
-      outputDiv = document.getElementById("altair-viz-18dc9be66d48466d81ce55a74b7d554d");
+    if (outputDiv.id !== "altair-viz-602064d93a954fb990e4ae28aea9ef98") {
+      outputDiv = document.getElementById("altair-viz-602064d93a954fb990e4ae28aea9ef98");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2559,7 +2442,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_area-with-stacking" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-with-stacking"><code>mark_area()</code> with stacking</h2>
-<div id="24d48649" class="cell" data-execution_count="30">
+<div id="43ed5c0b" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dataNA <span class="op">=</span> data[data[<span class="st">'country'</span>].isin([<span class="st">'United States'</span>, <span class="st">'Mexico'</span>, <span class="st">'Canada'</span>])]</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
@@ -2569,23 +2452,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="29">
 
 <style>
-  #altair-viz-9e55dd4861104647a817d9e800c22528.vega-embed {
+  #altair-viz-623f751ef66a4e8f9260b445f01a750f.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-9e55dd4861104647a817d9e800c22528.vega-embed details,
-  #altair-viz-9e55dd4861104647a817d9e800c22528.vega-embed details summary {
+  #altair-viz-623f751ef66a4e8f9260b445f01a750f.vega-embed details,
+  #altair-viz-623f751ef66a4e8f9260b445f01a750f.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-9e55dd4861104647a817d9e800c22528"></div>
+<div id="altair-viz-623f751ef66a4e8f9260b445f01a750f"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-9e55dd4861104647a817d9e800c22528") {
-      outputDiv = document.getElementById("altair-viz-9e55dd4861104647a817d9e800c22528");
+    if (outputDiv.id !== "altair-viz-623f751ef66a4e8f9260b445f01a750f") {
+      outputDiv = document.getElementById("altair-viz-623f751ef66a4e8f9260b445f01a750f");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2638,7 +2521,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_area-with-no-stacking-and-opacity" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-with-no-stacking-and-opacity"><code>mark_area()</code> with no stacking and opacity</h2>
-<div id="1d8dfbc5" class="cell" data-execution_count="31">
+<div id="3befb529" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area(opacity<span class="op">=</span><span class="fl">0.5</span>).encode(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'pop:Q'</span>, stack<span class="op">=</span><span class="va">None</span>),</span>
@@ -2647,23 +2530,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="30">
 
 <style>
-  #altair-viz-cfe044e07fc54b639eddd8a654734db0.vega-embed {
+  #altair-viz-7f5029c51e884ffc8de67bdd9fa264bb.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-cfe044e07fc54b639eddd8a654734db0.vega-embed details,
-  #altair-viz-cfe044e07fc54b639eddd8a654734db0.vega-embed details summary {
+  #altair-viz-7f5029c51e884ffc8de67bdd9fa264bb.vega-embed details,
+  #altair-viz-7f5029c51e884ffc8de67bdd9fa264bb.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-cfe044e07fc54b639eddd8a654734db0"></div>
+<div id="altair-viz-7f5029c51e884ffc8de67bdd9fa264bb"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-cfe044e07fc54b639eddd8a654734db0") {
-      outputDiv = document.getElementById("altair-viz-cfe044e07fc54b639eddd8a654734db0");
+    if (outputDiv.id !== "altair-viz-7f5029c51e884ffc8de67bdd9fa264bb") {
+      outputDiv = document.getElementById("altair-viz-7f5029c51e884ffc8de67bdd9fa264bb");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2716,7 +2599,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="mark_area-to-show-range" class="level2">
 <h2 class="anchored" data-anchor-id="mark_area-to-show-range"><code>mark_area()</code> to show range</h2>
-<div id="9fb38f54" class="cell" data-execution_count="32">
+<div id="42a23e30" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'year:O'</span>),</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'min(fertility):Q'</span>),</span>
@@ -2727,23 +2610,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="31">
 
 <style>
-  #altair-viz-6e0a3dadc69f44c69082de06205d7d01.vega-embed {
+  #altair-viz-a25a3ec564154f33ba6a7c8926f2a919.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6e0a3dadc69f44c69082de06205d7d01.vega-embed details,
-  #altair-viz-6e0a3dadc69f44c69082de06205d7d01.vega-embed details summary {
+  #altair-viz-a25a3ec564154f33ba6a7c8926f2a919.vega-embed details,
+  #altair-viz-a25a3ec564154f33ba6a7c8926f2a919.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6e0a3dadc69f44c69082de06205d7d01"></div>
+<div id="altair-viz-a25a3ec564154f33ba6a7c8926f2a919"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6e0a3dadc69f44c69082de06205d7d01") {
-      outputDiv = document.getElementById("altair-viz-6e0a3dadc69f44c69082de06205d7d01");
+    if (outputDiv.id !== "altair-viz-a25a3ec564154f33ba6a7c8926f2a919") {
+      outputDiv = document.getElementById("altair-viz-a25a3ec564154f33ba6a7c8926f2a919");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -2797,7 +2680,7 @@ The rows more or less rank different visual elements from most to least noticeab
 </section>
 <section id="syntax-mark_area-swap-axes" class="level2">
 <h2 class="anchored" data-anchor-id="syntax-mark_area-swap-axes">Syntax: <code>mark_area()</code> swap axes</h2>
-<div id="874c78e4" class="cell" data-execution_count="33">
+<div id="bd224e71" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(dataNA).mark_area().encode(</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'year:O'</span>),</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'min(fertility):Q'</span>),</span>
@@ -2808,23 +2691,23 @@ The rows more or less rank different visual elements from most to least noticeab
 <div class="cell-output cell-output-display" data-execution_count="32">
 
 <style>
-  #altair-viz-eed23102cdf84f04aef602395767a2f0.vega-embed {
+  #altair-viz-6d526239d475495eafaab59878473843.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-eed23102cdf84f04aef602395767a2f0.vega-embed details,
-  #altair-viz-eed23102cdf84f04aef602395767a2f0.vega-embed details summary {
+  #altair-viz-6d526239d475495eafaab59878473843.vega-embed details,
+  #altair-viz-6d526239d475495eafaab59878473843.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-eed23102cdf84f04aef602395767a2f0"></div>
+<div id="altair-viz-6d526239d475495eafaab59878473843"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-eed23102cdf84f04aef602395767a2f0") {
-      outputDiv = document.getElementById("altair-viz-eed23102cdf84f04aef602395767a2f0");
+    if (outputDiv.id !== "altair-viz-6d526239d475495eafaab59878473843") {
+      outputDiv = document.getElementById("altair-viz-6d526239d475495eafaab59878473843");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
