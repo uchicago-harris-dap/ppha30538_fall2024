@@ -6,7 +6,7 @@ date-format: long
 format: 
     html:
         echo: true
-        toc: true
+        #toc: true
    
 ---
 <!--
@@ -40,7 +40,6 @@ Let's first load the dataset from the [vega-datasets](https://github.com/vega/ve
 ```{python}
 import altair as alt
 from vega_datasets import data as vega_data
-alt.renderers.enable('png')
 ```
 
 ```{python}
@@ -228,7 +227,7 @@ alt.Chart(seattle).mark_bar().encode(
 Answer: 
 
 * When `month(date)` is `O`rdinal we had a bar graph with 12 categories. The label is in the middle of each bar.
-* When `month(date)` is `T`rdinal we had a bar graph which marks dates for the beginning of each month. The labels are at the tick marks. We have 13 labels because we also pick up an extra "Jan" at the end
+* When `month(date)` is `T`emporal we had a bar graph which marks dates for the beginning of each month. The labels are at the tick marks. We have 13 labels because we also pick up an extra "Jan" at the end
 
 <!-- ZZZ end deletion before posting QMD-->
 
@@ -343,14 +342,14 @@ If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
 
 We now are going to learn how to implement Bertin's vision in Altair.
 
-- `x`
-- `y`
-- `size`
-- `color`
-- `opacity`
-- `shape`
-- `column`
-- `row`
+- x
+- y
+- size
+- color
+- opacity
+- shape
+- column
+- row
 
 ## X
 
@@ -416,20 +415,6 @@ alt.Chart(data2000).mark_point().encode(
 )
 ```
 
-## `size` with 1000 pixels for largest dot
-```{python}
-alt.Chart(data2000).mark_point().encode(
-    alt.X('fertility:Q'),
-    alt.Y('life_expect:Q'),
-    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000]))
-)
-```
-
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-alt.Scale(range=[0,1000]) indicates that the visual size of the marks, and is not in reference to anything in the underlying data 
-:::
-
 
 
 ## add `color` and `size` with `filled=True`
@@ -441,6 +426,7 @@ alt.Chart(data2000).mark_point(filled=True).encode(
     alt.Color('cluster:N')
 )
 ```
+`alt.Scale` defines the scale of the legend, and is not in reference to anything in the data
 
 ## `opacity`
 ```{python}
@@ -449,7 +435,7 @@ alt.Chart(data2000).mark_point(filled=True).encode(
     alt.Y('life_expect:Q'),
     alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
     alt.Color('cluster:N'),
-    alt.OpacityValue(0.2)
+    alt.OpacityValue(0.5)
 )
 ```
 
@@ -461,7 +447,6 @@ alt.Chart(data2000).mark_point(filled=True).encode(
     alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
     alt.Color('cluster:N'),
     alt.OpacityValue(0.5),
-    alt.Tooltip('country:N'),
     alt.Column('cluster:N')
 )
 ```
@@ -475,7 +460,6 @@ alt.Chart(data2000).mark_point(filled=True).encode(
              legend=alt.Legend(orient='bottom', titleOrient='left')),
     alt.Color('cluster:N', legend=None),
     alt.OpacityValue(0.5),
-    alt.Tooltip('country:N'),
     alt.Column('cluster:N')
 ).properties(width=135, height=135)
 ```
@@ -491,7 +475,6 @@ Bonus: It still looks bad. What further change is needed?
 
 ##  in-class exercise: solution
 
-
 * substitute `Row` for `Column`
 *  delete `orient='bottom'`
 
@@ -500,10 +483,9 @@ alt.Chart(data2000).mark_point(filled=True).encode(
     alt.X('fertility:Q'),
     alt.Y('life_expect:Q'),
     alt.Size('pop:Q', scale=alt.Scale(range=[0,1000]),
-             legend=alt.Legend(orient='bottom', titleOrient='left')),
+             legend=alt.Legend(titleOrient='left')),
     alt.Color('cluster:N', legend=None),
     alt.OpacityValue(0.5),
-    alt.Tooltip('country:N'),
     alt.Row('cluster:N')
 ).properties(width=135, height=135)
 ```
@@ -512,14 +494,14 @@ alt.Chart(data2000).mark_point(filled=True).encode(
 
 ## Encoding channels: summary
 
-- `x`: Horizontal (x-axis) position of the mark.
-- `y`: Vertical (y-axis) position of the mark.
-- `size`: Size of the mark. May correspond to area or length, depending on the mark type.
-- `color`: Mark color, specified as a [legal CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-- `opacity`: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque).
-- `shape`: Plotting symbol shape for `point` marks.
-- `column`: Facet the data into horizontally-aligned subplots.
-- `row`: Facet the data into vertically-aligned subplots.
+- `alt.X`: Horizontal (x-axis) position of the mark.
+- `alt.Y`: Vertical (y-axis) position of the mark.
+- `alt.Size`: Size of the mark. May correspond to area or length, depending on the mark type.
+- `alt.Color`: Mark color, specified as a [legal CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
+- `alt.Opacity`: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque).
+- `alt.Shape`: Plotting symbol shape for `point` marks.
+- `alt.Column`: Facet the data into horizontally-aligned subplots.
+- `alt.Row`: Facet the data into vertically-aligned subplots.
 
 # Graphical marks
 
@@ -609,7 +591,6 @@ alt.Chart(data2000).mark_bar().encode(
 )
 ```
 
-Note: if we had instead set `alt.Y('pop:Q', stack=None)`, bars would have been overlapped with each other
 
 ## `X2()` to show intervals
 
