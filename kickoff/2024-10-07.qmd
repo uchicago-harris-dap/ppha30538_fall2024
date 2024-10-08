@@ -14,17 +14,18 @@ format:
             \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
 ---
 
-### Pulling this week's material -- `main` branch
+### Pulling this week's material (Github Desktop) -- `main` branch
 
-![Sync fork](pictures/sync_main.png)
+![](pictures/githubdesktop1.png){width=60%}
+![](pictures/githubdesktop2.png){width=60%}
 
-### Pulling this week's material -- `after_lecture` branch
+### Pulling this week's material (Github Desktop) -- `after_lecture` branch
 
-![Switch branches](pictures/switch_branches.png)
+![](pictures/githubdesktop3.png){width=80%}
 
-Then hit "sync fork again"
+Then hit "Fetch Origin" again
 
-Finally, pull the changes from the remote repo to your local repo ("pull" is git jargon which we will cover in detail in a few more weeks. in github desktop this is called "sync"ing)
+<!-- Finally, pull the changes from the remote repo to your local repo ("pull" is git jargon which we will cover in detail in a few more weeks. in github desktop this is called "sync"ing) -->
 
 ### MUD cards: about you professional (Professor Ganong)
 
@@ -42,29 +43,11 @@ Finally, pull the changes from the remote repo to your local repo ("pull" is git
 ### MUD cards: about you personal (Professor Ganong)
 
 - Violinist in the University Symphony Orchestra
-
-. . .
-
 - Has two kids
-
-. . .
-
 - Mechanical pencil collection
-
-. . .
-
 - Semi-professional Chinese dancer
-
-. . .
-
 - Singers: jazz, hip-hop
-
-. . .
-
 - Once got a concussion from getting hit in the head by a fish
-
-. . .
-
 - One of you claims to have lived here for a winter and still says that they love the weather in Chicago
 
 
@@ -106,6 +89,7 @@ Finally, pull the changes from the remote repo to your local repo ("pull" is git
     - Terminal output
     - In log file: use `quarto preview my-file.qmd --debug` to create `my-file.log`
 - Isolate the error: if a Quarto document fails to compile, comment out sections of the document until you isolate which part is causing the issue
+\vspace{2ex}
     - Sometimes commenting out doesn't work -- try removing it outright
     
     
@@ -119,12 +103,14 @@ Finally, pull the changes from the remote repo to your local repo ("pull" is git
 ### Other Admin Announcements
 \vspace{2ex}
 - Lab quizzes are based directly on lecture
+\vspace{2ex}
     - Pay attention to lecture and engage with in-class exercises
     - Know how to read and interpret Python functions relevant to lecture
     - You won't be asked to memorize syntax, but rather look at a chunk of code and explain what it does or find a bug in it
 - Final project parameters will be released some time this week
 - Problem set 1 solutions are live
 - Problem set 2 is live and due at end of *next* week (Sat Oct 19)
+\vspace{2ex}
     - It is on visualization and altair
     - Give yourself time to do it -- longer than PS1
 
