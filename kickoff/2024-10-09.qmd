@@ -22,6 +22,8 @@ format:
 
 * PG remark on professionalism: be on time. it is particularly awkward to get mud cards saying that something is unclear from someone who was late and missed the part of class where some material is covered. 
 
+* Relatedly: lab quizzes will now close after the first 10 minutes of lab. 
+
 ## Sumner "Why are we switching to VSCode?"
 
 Joaquin (TA): "It's much much better"
