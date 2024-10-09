@@ -6,8 +6,20 @@ date-format: long
 format: 
     html:
         echo: true
-        toc: true
+   
 ---
+<!--
+ beamer:
+        fig-width: 5
+        fig-height: 3.5
+        aspectratio: 169
+        theme: default
+        header-includes: \renewcommand{\tightlist}{\setlength{\itemsep}{3ex}\setlength{\parskip}{0pt}}
+            \setbeamertemplate{footline}[frame number]
+            \usepackage{fvextra}
+            \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+            \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+        -->
 
 # Global Health Data
 
@@ -27,6 +39,7 @@ Let's first load the dataset from the [vega-datasets](https://github.com/vega/ve
 ```{python}
 import altair as alt
 from vega_datasets import data as vega_data
+#alt.renderers.enable('png')
 ```
 
 ```{python}
@@ -34,9 +47,6 @@ from vega_datasets import data as vega_data
 data = vega_data.gapminder()
 ```
  
-<!-- Remark: I (Peter) couldn't get the command 
-data = vega_data.gapminder()
-to work. instead, I saved the data to local and I read it in from local. The code chunk which does this is set to echo false so it won't show up in the lecture notes-->
 
 ```{python}
 #| echo: false
@@ -56,9 +66,13 @@ data.head(5)
 
 For each `country` and `year` (in 5-year intervals), we have
 
+\vspace{-0.5ex}
 * fertility in terms of the number of children per woman (`fertility`)
+\vspace{-0.5ex}
 * life expectancy in years (`life_expect`)
+\vspace{-0.5ex}
 * total population (`pop`)
+\vspace{-0.5ex}
 * mysterious `cluster` -- what might this represent? We'll try and solve this mystery as we visualize the data!
 
 
@@ -99,6 +113,7 @@ Pandas data frames come with types. When loading data not from pandas, explicitl
     * With *ratio* data can also ask:
         * *how many are there of value A?* supporting statements such as "how many babies per parent?"
         * *value A is what proportion of value B? (A / B)*, supporting statements such as “A is 10% of B” or “B is 7 times larger than A”. 
+    * In the dataset above, `year` is a quantitative interval field (depending on whose history of the world you prefer, there are many choices for the year "zero"), whereas `fertility` and `life_expect` are quantitative ratio fields (zero is meaningful for calculating proportions).
 * Vega-Lite represents quantitative data, but does not make a distinction between interval and ratio types.
 * Quantitative values can be visualized using position, size, or color value, among other channels. 
 
@@ -112,12 +127,6 @@ Pandas data frames come with types. When loading data not from pandas, explicitl
     * `fertility` and `life_expect` are quantitative ratio fields: zero is meaningful for calculating proportions
 * Discussion question -- Why is it so important to include zeros for ratio data? Can you give an example where omitting zeros on the plot would lead the reader to misleading conclusions? 
 
-
-## Example of a potentially misleading plot by omitting zeros
-
-![USAToday](pictures/usa-today.jpg)
-
-via [Statistics How To](https://www.statisticshowto.com/probability-and-statistics/descriptive-statistics/misleading-graphs/)
 
 ## Temporal (T)
 
@@ -168,6 +177,7 @@ What happens when...
 * Revert. then make `date` temporal. There's a consequential but subtle change relative to the original plot. What is it?
 
 
+
 ## data types: summary
 
 A single data series can have multiple meanings depending on data type
@@ -187,27 +197,13 @@ Explicitly specify the data type so that Altair/Vega know how to interpret it. I
 * Seven types of visual encoding
 * More on color
 
-## Seven ways of visual encoding
-
-> Within the plane a mark can be at the top or the bottom, to the right or the left. The eye perceives two independent dimensions along X and Y, which are distinguished orthogonally. A variation in light energy produces a third dimension in Z, which is independent of X and Y…
-
-> The eye is sensitive, along the Z dimension, to 6 independent visual variables, which can be superimposed on the planar figures: 
-
-> * the size of the marks
-* their value [brightness]
-* texture
-* color [hue]
-* orientation
-* shape. 
-
-> They can represent differences (≠), similarities (≡), a quantified order (Q), or a nonquantified order (O), and can express groups, hierarchies, or vertical movements.
-
-Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://medium.com/@mbostock/introducing-d3-scale-61980c51545f)
-
 
 ## Seven ways of visual encoding in one image
 
-![Visual encoding](pictures/visual_encoding.jpg)
+![Visual encoding](pictures/visual_encoding.jpg){height="85%"}
+
+Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://medium.com/@mbostock/introducing-d3-scale-61980c51545f)
+
 
 
 Free advice: don't try to use all seven ways of encoding information in a single plot. It will inevitably be overload.
@@ -239,6 +235,7 @@ If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
 | Cyclical | Use if circular (e.g. time of day, month) |
 
 
+
 ## More advice on color choices
 
 * Use [colorbrewer2.org](https://colorbrewer2.org) to choose your color palettes. Click through to site. Options include subsetting to colors that are
@@ -259,19 +256,15 @@ If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
 
 ## Encoding channels: roadmap
 
+We now are going to learn how to implement Bertin's vision in Altair.
+
 - `x`
 - `y`
 - `size`
 - `color`
 - `opacity`
-- `shape`
 - `column`
 - `row`
-
-Caveats: 
-
-* there are a ton of slides in this section.
-* but each slide is simple. focus is on software. most discussion of principles deferred for the "Graphics Theory" section.
 
 ## X
 
@@ -289,8 +282,6 @@ alt.Chart(data2000).mark_point().encode(
     alt.Y('cluster:O')
 )
 ```
-
-In-class exercise: what happens if you swap the Q and the O types?
 
 
 
@@ -311,14 +302,6 @@ Discussion question: which plot do you prefer (and why?)
 
 
 
-## Observations about whether to include zero
-
-* If you include zero, there is a lot of wasted white space. The data are compressed into a small area. This is best if the message you want to send is that fertility varies by a factor of nearly 8 from the highest to lowest while life expectancy varies much less (from 80 to 50)
-* If you exclude zero, it is much easier to see the negative relationship between life expectancy and fertility. This is best if that is the message you want to send.
-
-
-
-
 ## `size`
 ```{python}
 alt.Chart(data2000).mark_point().encode(
@@ -328,17 +311,9 @@ alt.Chart(data2000).mark_point().encode(
 )
 ```
 
-## `size` with 1000 pixels for largest dot
-```{python}
-alt.Chart(data2000).mark_point().encode(
-    alt.X('fertility:Q'),
-    alt.Y('life_expect:Q'),
-    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000]))
-)
-```
 
 
-## add `color` and `size` with `filled=True`
+## add `color` and `size` with `filled=True` and `range=[0,1000]`
 ```{python}
 alt.Chart(data2000).mark_point(filled=True).encode(
     alt.X('fertility:Q'),
@@ -355,7 +330,7 @@ alt.Chart(data2000).mark_point(filled=True).encode(
     alt.Y('life_expect:Q'),
     alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
     alt.Color('cluster:N'),
-    alt.OpacityValue(0.2)
+    alt.OpacityValue(0.5)
 )
 ```
 
@@ -400,8 +375,7 @@ Bonus: It still looks bad. What further change is needed?
 - `y`: Vertical (y-axis) position of the mark.
 - `size`: Size of the mark. May correspond to area or length, depending on the mark type.
 - `color`: Mark color, specified as a [legal CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-- `opacity`: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque).
-- `shape`: Plotting symbol shape for `point` marks.
+- `opacity`: Mark opacity, ranging from 0 (fully transparent) to 1 (fully opaque)
 - `column`: Facet the data into horizontally-aligned subplots.
 - `row`: Facet the data into vertically-aligned subplots.
 
@@ -412,18 +386,13 @@ Bonus: It still looks bad. What further change is needed?
 Prior section used only `mark_point()`. Now will cover
 
 - `mark_point()`
-    - `mark_circle()`	
     - `mark_square()` 
     - `mark_tick()` 
 - `mark_bar()`
 - `mark_line()`  
 - `mark_area()` 
 
-
-Caveats: 
-
-* there are a ton of slides in this section.
-* but each slide is simple. focus is on software. most discussion of principles deferred for the "Graphics Theory" section.
+Warning: there are a ton of slides in this section. B2ut each slide is simple. focus is on software. 
 
 ## `mark_point()`: add information using `alt.Shape()` 
 ```{python}
@@ -437,16 +406,6 @@ alt.Chart(data2000).mark_point().encode(
 ## `mark_point()`: format points using arguments
 ```{python}
 alt.Chart(data2000).mark_point(filled=True, size=100).encode(
-    alt.X('fertility:Q'),
-    alt.Y('life_expect:Q', scale=alt.Scale(zero=False)),
-    alt.Shape('cluster:N')
-)
-```
-
-## `mark_circle()` wrapper for `mark_point(filled=True)`
-```{python}
-#| eval: false
-alt.Chart(data2000).mark_circle(size=100).encode(
     alt.X('fertility:Q'),
     alt.Y('life_expect:Q', scale=alt.Scale(zero=False)),
     alt.Shape('cluster:N')
@@ -476,6 +435,8 @@ alt.Chart(data2000).mark_tick().encode(
 ```
 
 ## `mark_bar()`
+
+You know how to do this already! This is just a prelude to the next slide.
 
 ```{python}
 alt.Chart(data2000).mark_bar().encode(
@@ -509,8 +470,8 @@ alt.Chart(data2000).mark_bar().encode(
 
 ## `mark_line()` 
 ```{python}
-data_4a = data.loc[data['cluster'] == 2] #one cluster is more manageable
-alt.Chart(data_4a).mark_line().encode(
+data_c2 = data.loc[data['cluster'] == 2] #one cluster is more manageable
+alt.Chart(data_c2).mark_line().encode(
     alt.X('year:O'),
     alt.Y('fertility:Q'),
     alt.Color('country:N')
@@ -518,12 +479,6 @@ alt.Chart(data_4a).mark_line().encode(
     width=400
 )
 ```
-
-## how many lines? `Tooltip` instead of `legend`
-
-textbook advocates for having a plot with many more lines, no legend, and instead using `alt.Tooltip('country:N')`. This is technologically feasible but a bad idea. (Discuss: why?)
-
-
 
 ```{python}
 alt.Chart(data).mark_line().encode(
@@ -539,7 +494,7 @@ alt.Chart(data).mark_line().encode(
 
 ## `mark_line()` with cosmetic adjustments
 ```{python}
-alt.Chart(data_4a).mark_line(
+alt.Chart(data_c2).mark_line(
     strokeWidth=3,
     opacity=0.5,
     interpolate='monotone'
@@ -555,8 +510,8 @@ alt.Chart(data_4a).mark_line(
 
 ## `mark_line()` with cosmetic adjustments
 ```{python}
-data_4a_2y = data_4a[data_4a['year'].isin([1955, 2005])]
-alt.Chart(data_4a_2y).mark_line().encode(
+data_c2_2y = data_c2[data_c2['year'].isin([1955, 2005])]
+alt.Chart(data_c2_2y).mark_line().encode(
     alt.X('year:O'),
     alt.Y('fertility:Q'),
     alt.Color('country:N')
@@ -571,15 +526,6 @@ alt.Chart(data_4a_2y).mark_line().encode(
 dataUS = data.loc[data['country'] == 'United States']
 
 alt.Chart(dataUS).mark_area().encode(
-    alt.X('year:O'),
-    alt.Y('fertility:Q')
-)
-```
-
-## `mark_area()` with `interpolate='monotone'`
-
-```{python}
-alt.Chart(dataUS).mark_area(interpolate='monotone').encode(
     alt.X('year:O'),
     alt.Y('fertility:Q')
 )
@@ -652,129 +598,3 @@ Not covered in lecture
 - `mark_text()` - Scatter plot points represented by text.
 
 For a complete list, and links to examples, see the [Altair marks documentation](https://altair-viz.github.io/user_guide/marks/index.html).
-
-
-# Interactivity and publishing
-
-## Interactivity and publishing: roadmap
-
-* interactivity example
-* production quality
-* publishing
-
-
-##  `tooltip` I 
-- `tooltip`: Tooltip text to display upon mouse hover over the mark.
-- `order`: Mark ordering, determines line/area point order and drawing order.
-
-```{python}
-alt.Chart(data2000).mark_point(filled=True).encode(
-    alt.X('fertility:Q'),
-    alt.Y('life_expect:Q'),
-    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
-    alt.Color('cluster:N'),
-    alt.OpacityValue(0.5),
-    alt.Tooltip('country:N')
-)
-```
-
-As you mouse around you may notice that you can not select some of the points. For example, what happens when you try to select the country underneath India? To fix this problem, we can use the `order` encoding channel.
-
-##  `tooltip` II
-```{python}
-alt.Chart(data2000).mark_point(filled=True).encode(
-    alt.X('fertility:Q'),
-    alt.Y('life_expect:Q'),
-    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
-    alt.Color('cluster:N'),
-    alt.OpacityValue(0.5),
-    alt.Tooltip('country:N'),
-    alt.Order('pop:Q', sort='descending')
-)
-```
-
-
-## `tooltip` III 
-```{python}
-final_chart = alt.Chart(data2000).mark_point(filled=True).encode(
-    alt.X('fertility:Q'),
-    alt.Y('life_expect:Q'),
-    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000])),
-    alt.Color('cluster:N'),
-    alt.OpacityValue(0.5),
-    alt.Order('pop:Q', sort='descending'),
-    tooltip = [
-        alt.Tooltip('country:N'),
-        alt.Tooltip('fertility:Q'),
-        alt.Tooltip('life_expect:Q')
-    ]   
-)
-final_chart
-```
-
-Discussion question -- using your newfound `tooltip` expertise, what does each cluster correspond to?
-
-
-## Production-quality interactive plot
-(no need to understand all the details)
-```{python}
-cars = vega_data.cars() 
-
-# create an interval selection over an x-axis encoding
-brush = alt.selection_interval(encodings=['x'])
-
-# determine opacity based on brush
-opacity = alt.condition(brush, alt.value(0.9), alt.value(0.1))
-
-# an overview histogram of cars per year
-# add the interval brush to select cars over time
-overview = alt.Chart(cars).mark_bar().encode(
-    alt.X('Year:O', timeUnit='year', # extract year unit, treat as ordinal
-      axis=alt.Axis(title=None, labelAngle=0) # no title, no label angle
-    ),
-    alt.Y('count()', title=None), # counts, no axis title
-    opacity=opacity
-).add_params(
-    brush      # add interval brush selection to the chart
-).properties(
-    width=400, # set the chart width to 400 pixels
-    height=50  # set the chart height to 50 pixels
-)
-
-# a detail scatterplot of horsepower vs. mileage
-# modulate point opacity based on the brush selection
-detail = alt.Chart(cars).mark_point().encode(
-    alt.X('Horsepower'),
-    alt.Y('Miles_per_Gallon'),
-    # set opacity based on brush selection
-    opacity=opacity
-).properties(width=400) # set chart width to match the first chart
-
-# vertically concatenate (vconcat) charts using the '&' operator
-overview & detail
-```
-
-
-## Publishing
-
-```{python}
-final_chart
-final_chart.save('output/chart.html')
-```
-```{python}
-#| eval: false
-final_chart.save('output/chart.png')
-```
-
-Remark: `chart.save()` is important for anything where you want your output to be reproducible in the future.
-
-Discussion q -- What is difference between "View Source" and "View Compiled Vega"?
-
-
-
-## Interactivity and publishing: summary
-
-* Altair can make some nice interactive plots! 
-* Especially useful for data exploration.
-* If you want to learn more about interactive plots in Altair, see chapter 6 in the textbook. However, we actually are going to use a different package (Shiny) to teach about how to make interactive plots.
-* Use `chart.save()` to write a plot to disk
