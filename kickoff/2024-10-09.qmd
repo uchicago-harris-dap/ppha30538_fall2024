@@ -1,0 +1,73 @@
+---
+title: "Kickoff "
+author: "Peter Ganong and Maggie Shi"
+date: October 9-10, 2024
+date-format: long
+format: 
+    beamer:
+        aspectratio: 169
+        theme: default
+        header-includes: \renewcommand{\tightlist}{\setlength{\itemsep}{3ex}\setlength{\parskip}{0pt}}
+            \setbeamertemplate{footline}[frame number]
+            \usepackage{fvextra}
+            \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+            \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+---
+
+## MUD cards
+
+* questions about getting lecture notes before class and/or solutions in `after_lecture` -- all of this is posted. if you aren't sure how to get them, ask a peer.
+    
+* questions about git -- at the moment, continue to muddle through. Will have a lecture and a problem set on this later in the course.
+
+* PG remark on professionalism: be on time. it is particularly awkward to get mud cards saying that something is unclear from someone who was late and missed the part of class where some material is covered. 
+
+## Sumner "Why are we switching to VSCode?"
+
+Joaquin (TA): "It's much much better"
+
+Some strengths we have noticed
+
+* Software of choice for developing in many languages (not just Python)
+* Supports `qmd`
+* Elegant integration with `git` and virtual environments (coming soon)
+* Github Copilot (discouraged for this course, but super useful down the road)
+
+## Knitting to pdf I
+
+We finally have a solution for this! (also MUD) Can see Peter's issue ticket *[here](https://github.com/vega/vl-convert/issues/183)*
+
+**1. terminal**
+```{}
+pip install vl-convert-python --upgrade
+```
+
+**2. python kernel**
+```{python}
+import altair as alt
+alt.renderers.enable("png")
+```
+
+**3. qmd header**
+```{}
+---
+title: "My Pset"
+format: pdf
+---
+```
+
+## Knitting to pdf II
+
+Five instructors tested this solution on a variety of machines (thank you!!!). 
+
+* Only run `alt.renderers.enable("png")` if you want to make `.pdf`. If you want to make `.html`, no need to include this (and it might lead to errors)
+* One also found that they needed to run `pip install ipykernel`
+
+As usual, we don't know what will work on your computer, so please report bugs and issues!
+
+## Announcements on homepage
+
+* minilesson recordings on homepage. Will continue to record but will not send separate announcements
+* Upcoming career panels on Nov 8 and Nov 15. RSVP link on homepage.
+
+## Debrief (TBD)
