@@ -137,6 +137,7 @@ What are examples of variables that are
 Let's try to come up with at least three examples of each. For each example, state the comparison in a sentence.
 
 
+
 ## Discussion question II
 
 Suppose we have a dataset of ages (10 years old, 20 years old, 10 years old, 30 years old). What would it mean for these data to be
@@ -166,6 +167,25 @@ What happens when...
 
 * Make `precipitation` ordinal
 * Revert. then make `date` temporal. There's a consequential but subtle change relative to the original plot. What is it?
+
+```{python}
+seattle = vega_data.seattle_weather()
+alt.Chart(seattle).mark_bar().encode(
+    x = 'month(date):O',
+    y = 'average(precipitation):O'
+)
+```
+
+
+
+```{python}
+seattle = vega_data.seattle_weather()
+alt.Chart(seattle).mark_bar().encode(
+    x = 'month(date):T',
+    y = 'average(precipitation):Q'
+)
+```
+
 
 
 ## data types: summary
@@ -212,6 +232,7 @@ Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://me
 
 Free advice: don't try to use all seven ways of encoding information in a single plot. It will inevitably be overload.
 
+
 ## More depth on color
 
 Language note: by `color`, we mean both brightness (which Bertin calls "value") and hue (which Bertin calls "color")
@@ -255,6 +276,8 @@ If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
 * Bertin proposes seven different ways to encode visual information. His chart is a handy reference to what visual elements can encode different types of information.
 * Color is one of the easiest ways to convey meaning. Choose your palette based on whether you want to convey unordered or ordered data, whether you have a midpoint, and whether your ordered series is cyclical
 
+Think about the kind of data that you are working with and the ways that color can help convey that information. 
+
 # Encoding channels
 
 ## Encoding channels: roadmap
@@ -296,11 +319,11 @@ In-class exercise: what happens if you swap the Q and the O types?
 
 ## Do not require zero on axis range 
 ```{python}
-zero_included = alt.Chart(data2000).mark_point().encode(
+zero_excluded = alt.Chart(data2000).mark_point().encode(
     alt.X('fertility:Q', scale=alt.Scale(zero=False)),
     alt.Y('life_expect:Q', scale=alt.Scale(zero=False))
 )
-zero_excluded = alt.Chart(data2000).mark_point().encode(
+zero_included = alt.Chart(data2000).mark_point().encode(
     alt.X('fertility:Q'),
     alt.Y('life_expect:Q')
 )
@@ -308,6 +331,8 @@ zero_included | zero_excluded
 ```
 
 Discussion question: which plot do you prefer (and why?)
+
+
 
 
 
@@ -328,6 +353,7 @@ alt.Chart(data2000).mark_point().encode(
 )
 ```
 
+
 ## `size` with 1000 pixels for largest dot
 ```{python}
 alt.Chart(data2000).mark_point().encode(
@@ -347,6 +373,8 @@ alt.Chart(data2000).mark_point(filled=True).encode(
     alt.Color('cluster:N')
 )
 ```
+
+
 
 ## `opacity`
 ```{python}
@@ -372,6 +400,7 @@ alt.Chart(data2000).mark_point(filled=True).encode(
 )
 ```
 
+
 ## adjust aspect ratio, move pop legend, remove color legend
 ```{python}
 alt.Chart(data2000).mark_point(filled=True).encode(
@@ -387,9 +416,24 @@ alt.Chart(data2000).mark_point(filled=True).encode(
 ```
 
 
+
 ## in-class exercise
 
 The plot faceted by column doesn't fit on the page. Redo it instead faceted by row.
+
+```{python}
+
+alt.Chart(data2000).mark_point(filled=True).encode(
+    alt.X('fertility:Q'),
+    alt.Y('life_expect:Q'),
+    alt.Size('pop:Q', scale=alt.Scale(range=[0,1000]),
+             legend=alt.Legend(orient='right', titleOrient='left')),
+    alt.Color('cluster:N', legend=None),
+    alt.OpacityValue(0.5),
+    alt.Tooltip('country:N'),
+    alt.Row('cluster:N')
+).properties(width=135, height=135)
+```
 
 Bonus: It still looks bad. What further change is needed?
 
