@@ -18,7 +18,10 @@ format:
             \setbeamertemplate{footline}[frame number] 
             -->
 
-
+Notes: 
+- You have to write print() in the code chunks for your code to be printed 
+- Write your analysis in the text outside of the code chunks 
+- Be sure to write out the answer to every element of the question 
 
 # introduction
 
@@ -102,6 +105,9 @@ alt.Chart(movies_url).mark_circle().encode(
 )
 ```
 
+Bin = True is just creating an automatic bin structure that is not prescribed. It has created 10 bins (groups). 
+
+
 ## scatter plot -- 20 bins
 ```{python}
 alt.Chart(movies_url).mark_circle().encode(
@@ -136,6 +142,9 @@ This plot is fine, but hard to interpret takeaways quickly
 
 What should we do? Sort the bars. What's the best way to figure out how? Ask [ChatGPT](https://chatgpt.com/share/67027f83-5c0c-800a-8253-3c4b4f074dce).
 
+
+
+
 ## `average()` with `sort(...)`
 
 Now it's clear which movie types are most and least popular
@@ -158,6 +167,8 @@ alt.Chart(movies_url).mark_bar().encode(
 
 Discussion question -- Why is "how to sorting the order of bars" such a great problem to submit to ChatGPT?
 
+- This is great because you know what you want to do and the computer can speed you up. Use this as a reference for how you should be using ChatGPT in your problem set. 
+
 
 ## Interquartile range
 
@@ -170,6 +181,11 @@ alt.Chart(movies_url).mark_bar().encode(
     )
 )
 ```
+
+
+The difference here between the two graphs: 
+- this graph shows where the majority of the distribution of the reviews are located (25% to 75% percentiles) 
+- for the documentary movie there is more agreement among critics that the very bad one is still very good! but can't say the same for horror
 
 
 ## Case study: when are the highest grossing films?
@@ -193,6 +209,10 @@ alt.Chart(movies_url).mark_point().encode(
 )
 ```
 
+Some of the issues: 
+- Can see the inflation so that yes will always increase 
+- Can also see where the dataset ends 
+
 
 ## do-pair-share 
 
@@ -205,6 +225,19 @@ Hint: if you aren't sure how to aggregate the x-variable, go back to the first v
 2. *Pair* -- compare your results with person next to you
 
 3. *Share* -- discuss results as a class
+
+
+```{python}
+
+alt.Chart(movies_url).mark_point().encode(
+    alt.X('month(Release_Date):T'),
+    alt.Y('average(US_Gross):Q')
+)
+```
+
+You could also use the median or the max or average for the value when it comes to US Gross. The median is not sensitive to outliers. 
+
+
 
 
 ## Aggregation: summary
