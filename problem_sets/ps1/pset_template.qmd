@@ -1,0 +1,190 @@
+---
+title: "Problem Set 1"
+author: "Akbar Saputra"
+date: "2024-10-04"
+format: 
+    html:
+        code-overflow: wrap 
+execute:
+  eval: true
+  echo: true
+---
+
+```{python}
+# the following code will turn off any Python warnings in your code output
+import warnings
+warnings.filterwarnings("ignore")
+```
+
+1. **PS1:** Due Sat Oct 5 at 5:00PM Central. Worth 50 points. 
+
+We use (`*`) to indicate a problem that we think might be time consuming. 
+
+Steps to submit (5 points on PS1)
+
+1. "This submission is my work alone and complies with the 30538 integrity
+policy." Add your initials to indicate your agreement: \*\*\_\_\*\*
+2. "I have uploaded the names of anyone I worked with on the problem set **[here](https://docs.google.com/forms/d/1-zzHx762odGlpVWtgdIC55vqF-j3gqdAp6Pno1rIGK0/edit)**"  \*\*\_\_\*\* (1 point)
+3. Late coins used this pset: \*\*\_\_\*\* Late coins left after submission: \*\*\_\_\*\*
+4. Knit your `ps1.qmd` 
+    * The PDF should not be more than 25 pages. Use `head()` and re-size figures when appropriate. 
+6. Submit to Gradescope (4 points) 
+7. Tag your submission in Gradescope
+
+## Read in one percent sample (15 Points)
+
+1.  
+1. 
+
+1.  
+
+## Cleaning the data and benchmarking (15 Points)
+
+1.  
+
+1.  
+
+## Visual Encoding (15 Points)
+
+1. 
+1. 
+1. 
+1. 
+1. 
+1. 
+1. 
+
+# Q1
+
+## (1)
+
+```{python}
+import pandas as pd
+import time
+
+csv_file = "data/parking_tickets_one_percent.csv"
+
+start_time = time.time()
+
+df = pd.read_csv(csv_file)
+
+end_time = time.time()
+
+elapsed_time = end_time - start_time
+print(f"Time taken to read the file: {elapsed_time} seconds")
+
+assert len(df) == 287458
+print(f"Number of rows is {len(df)}, expected 287458")
+```
+
+## (2)
+
+```{python}
+import os
+
+file_size = os.path.getsize(csv_file) / 1024 / 1024
+
+print(f"The size of the CSV file is {file_size:.2f} MB")
+
+# Since the CSV file contains 1% sample, the full dataset will be 100 times of it
+full_dataset_size = file_size * 100
+print(f"The estimated size of the full dataset is {full_dataset_size:.2f} MB")
+```
+
+## (3)
+
+```{python}
+from datetime import datetime
+
+df_sub = df.loc[0:499]
+for col in df_sub.columns:
+    old_entry = df_sub[col][0]
+    sorted = True
+    for row in range(1, 500):
+        new_entry = df_sub[col][row]
+        if type(new_entry) != type(old_entry):
+            old_entry = str(old_entry)
+            new_entry = str(new_entry)
+        if new_entry >= old_entry:
+            old_entry = new_entry
+        else: 
+            sorted = False 
+            break
+    if sorted:
+        print(f"{col} is sorted")
+    else: 
+        print(f"{col} is not sorted at row {row}")
+```
+
+NOTE: I think the question's wording can be improved. Here, it seems like students are expected to find the sorted column by eyeballing the dataset,  then subset the dataset and write a function to find sorted columns in the subset. It's like they're two separate process. 
+
+# Q2
+
+## (1)
+
+```{python}
+df["issue_year"] = pd.to_numeric(df["issue_date"].str[:4])
+tickets_in_2017 = len(df[df["issue_year"] == 2017])
+print(f"In this dataset, {tickets_in_2017} tickets are issued in 2017")
+
+print(f"Thus, it is estimated that {tickets_in_2017 * 100} /sers/akbar/Documents/Study/FundamentalsofDeepLearning/PS_1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf1fsfsdfsdfdsfdsfsdf")
+
+summary = df.groupby("issue_year").size()
+print(summary.reset_index(name="count"))
+```
+
+## (2)
+
+```{python}
+violation_summary = df.groupby("violation_code").size()
+violation_summary = violation_summary.sort_values(ascending=False)
+top_20 = violation_summary.head(20)
+print(top_20)
+print(top_20.reset_index(name="count"))
+
+import altair as alt
+
+violation_summary = df.groupby("violation_description").size()
+violation_summary = violation_summary.sort_values(ascending=False)
+violation_summary = violation_summary.reset_index(name="count")
+violation_summary = violation_summary.head(20)
+
+print(violation_summary)
+
+alt.Chart(violation_summary).mark_bar().encode(
+    alt.X('violation_description:N', sort='-y', title="Violation Description",
+            axis=alt.Axis(
+                    labelAngle=45,
+                    labelAlign='left',
+                    labelLimit=300
+            )
+    ),
+    alt.Y('count:Q', title="Frequency")
+)
+```
+
+# Q3
+
+## (2)
+
+```{python}
+print(df.head(20))
+df['is_paid'] = df['ticket_queue'].apply(lambda x: 1 if x == 'Paid' else 0)
+paid_summary = df.groupby(['vehicle_make','is_paid']).size().reset_index()
+paid_summary.columns = ['vehicle_make', 'is_paid', 'count']
+
+paid_count = paid_summary.groupby('vehicle_make').agg(
+    total_tickets=('count', 'sum'),  # Total tickets for each vehicle make
+    paid_tickets=('is_paid', lambda x: (x == 1).sum())  # Count of tickets marked as paid
+)
+
+paid_count['fraction_paid'] = paid_count['paid_tickets'] / paid_count['total_tickets']
+
+# Display the result
+print(paid_count[['total_tickets', 'paid_tickets', 'fraction_paid']])
+
+
+# paid_summary['fraction_paid'] = summary['sum'] / summary['count']
+# paid_summary = df.groupby("vehicle_make","ticket_queue").size()
+# print(paid_summary)
+```
