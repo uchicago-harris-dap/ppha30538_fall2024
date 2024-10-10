@@ -413,7 +413,6 @@ Steven Spielberg has been quite successful in his career! However, showing sums 
 
 What happens if we change the choice of aggregate operation? Who is the most successful director in terms of  `average` gross per film? Modify the aggregate transform above!
 
-*solution: get David Yates (last four Harry Potter movies) and also James Cameron (titanic, avatar)*
 
 
 
