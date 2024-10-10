@@ -544,33 +544,10 @@ alt.Chart(movies_url).mark_bar().transform_filter(
 ```
 
 
-
+*solution: get David Yates (last four Harry Potter movies) and also James Cameron (titanic, avatar)*
 <!-- end ZZZ -->
 
-*solution: get David Yates (last four Harry Potter movies) and also James Cameron (titanic, avatar)*
 
-<!-- 
-
-MS TO GGG: I wasn't sure what the following code chunk was in reference to, so I removed for now
-
-## `transform_window`: cumulative distribution function of running time
-```{python}
-alt.Chart(movies_url).mark_line(
-  interpolate='step-before'
-).transform_filter(
-    'datum.Running_Time_min != null'
-).transform_aggregate(
-    groupby=['Running_Time_min'],
-    Count='count()',
-).transform_window(
-    Cumulative_Sum='sum(Count)',
-    sort=[alt.SortField('Running_Time_min', order='ascending')]
-).encode(
-    alt.X('Running_Time_min:Q', axis=alt.Axis(title='Duration (min)')),
-    alt.Y('Cumulative_Sum:Q', axis=alt.Axis(title='Cumulative Count of Films'))
-)
-```
- -->
 
 
 
