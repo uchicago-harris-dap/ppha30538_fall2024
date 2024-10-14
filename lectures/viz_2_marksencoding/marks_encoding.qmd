@@ -6,7 +6,6 @@ date-format: long
 format: 
     html:
         echo: true
-        toc: true
    
 ---
 <!--
@@ -40,7 +39,7 @@ Let's first load the dataset from the [vega-datasets](https://github.com/vega/ve
 ```{python}
 import altair as alt
 from vega_datasets import data as vega_data
-alt.renderers.enable('png')
+#alt.renderers.enable('png')
 ```
 
 ```{python}
@@ -48,9 +47,6 @@ alt.renderers.enable('png')
 data = vega_data.gapminder()
 ```
  
-<!-- Remark: I (Peter) couldn't get the command 
-data = vega_data.gapminder()
-to work. instead, I saved the data to local and I read it in from local. The code chunk which does this is set to echo false so it won't show up in the lecture notes-->
 
 ```{python}
 #| echo: false
@@ -98,7 +94,9 @@ Pandas data frames come with types. When loading data not from pandas, explicitl
 * Ask *is value A the same or different than value B? (A = B)*, supporting statements like “A is equal to B” or “A is not equal to B”.
     * In the dataset above, the `country` field is `N`ominal.
 * When visualizing nominal data we should readily be able to see if values are the same or different: position, color hue (blue, red, green), and shape can help. 
-    * Remark: using a `size` channel to encode nominal data might mislead us, suggesting rank-order or magnitude differences among values that do not exist!
+
+<!--PG to GGG/SSS This comment doesn't make sense here because we haven't even covered what the size channel is yet
+    * Remark: using a `size` channel to encode nominal data might mislead us, suggesting rank-order or magnitude differences among values that do not exist!-->
 
 ## Ordinal (O)
 
@@ -116,19 +114,18 @@ Pandas data frames come with types. When loading data not from pandas, explicitl
         * *how many are there of value A?* supporting statements such as "how many babies per parent?"
         * *value A is what proportion of value B? (A / B)*, supporting statements such as “A is 10% of B” or “B is 7 times larger than A”. 
     * In the dataset above, `year` is a quantitative interval field (depending on whose history of the world you prefer, there are many choices for the year "zero"), whereas `fertility` and `life_expect` are quantitative ratio fields (zero is meaningful for calculating proportions).
-\vspace{-2ex}
 * Vega-Lite represents quantitative data, but does not make a distinction between interval and ratio types.
 * Quantitative values can be visualized using position, size, or color value, among other channels. 
 
 
-## Quantitative (Q), continued
-* recap
-    * with *interval* data ask: *what is the distance to value A from value B? (A - B)*
-    * With *ratio* data can also ask:
-        * *how many are there of value A?* 
-        * *value A is what proportion of value B? (A / B)*,
+## Quantitative (Q) and zeros
+* One way to check if you're working with *ratio* and *interval* data: **does zero mean anything?**
 * Textbook: "An axis with a zero baseline is essential for proportional comparisons of ratio values, but can be safely omitted for interval comparisons."
-* Discussion question -- Why is it so important to include zeros for ratio data? Can you give a counter-example where omitting zeros on the plot would lead the reader to misleading conclusions? 
+* In the dataset above:
+    * `year` is a quantitative interval field: depending on whose history of the world you prefer, there are many choices for the year "zero"
+        * We're either in year 2024 (Gregorian), 5784 (Hebrew), or 1445 (Islamic calendar)
+    * `fertility` and `life_expect` are quantitative ratio fields: zero is meaningful for calculating proportions
+* Discussion question -- Why is it so important to include zeros for ratio data? Can you give an example where omitting zeros on the plot would lead the reader to misleading conclusions? 
 
 <!-- ZZZ delete before posting -->
 ## Example of a potentially misleading plot by omitting zeros
@@ -154,17 +151,6 @@ What are examples of variables that are
 
 Let's try to come up with at least three examples of each. For each example, state the comparison in a sentence.
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-Solution: the hard one here is nominal. 
-
-examples can be 
-* geographic units
-* different types of health services
-* different types of housing
-:::
-
-
 
 ## Discussion question II
 
@@ -176,14 +162,6 @@ Suppose we have a dataset of ages (10 years old, 20 years old, 10 years old, 30 
 
 What comparisons are feasible with each data type?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-solution: Just because a data field is represented using a number doesn't mean we have to treat it as a quantitative type! For example, we might interpret a set of ages (10 years old, 20 years old, etc) as 
-
-* nominal (underage or overage), 
-* ordinal (grouped by year), 
-* quantitative (calculate average age).
-:::
 
 
 ## Revisit plot from beginning of prior lecture
@@ -258,6 +236,7 @@ Explicitly specify the data type so that Altair/Vega know how to interpret it. I
 ![Visual encoding](pictures/visual_encoding.jpg){height="85%"}
 
 Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://medium.com/@mbostock/introducing-d3-scale-61980c51545f)
+<<<<<<< HEAD
 
 
 ::: {.notes .content-visible when-profile="speaker"}
@@ -279,9 +258,9 @@ Source:  Jacques Bertin in Semiology of Graphics (1967), via [source](https://me
 **speaker notes**
 
 *talk through a few aspects of this image. The examples are a bit gratuitous. Most of the information content is in the boxes in the first two columns
+=======
+>>>>>>> b31a24ff9f98269de88e95d5e08d1ef28309b049
 
-The rows more or less rank different visual elements from most to least noticeable. Looking at the extremes, XY coordinates can convey both quantified and non-quantified order as well as whether two things are equal. at the other extreme, shape cannot tell you at all about order, it can just tell if you if two things are the same or different.*
-:::
 
 
 Free advice: don't try to use all seven ways of encoding information in a single plot. It will inevitably be overload.
@@ -312,10 +291,6 @@ If `N`ominal, unordered data, use categorical palettes. Otherwise, proceed.
 | Diverging | Use if there is a midpoint (e.g. voting for `redblue`) |
 | Cyclical | Use if circular (e.g. time of day, month) |
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*flip back and forth between each of these palette types and the examples on the website. Be sure to click "View discrete" as well*
-:::
 
 
 ## More advice on color choices
@@ -365,6 +340,7 @@ alt.Chart(data2000).mark_point().encode(
 )
 ```
 
+<<<<<<< HEAD
 
 ::: {.notes .content-visible when-profile="speaker"}
 **NOTES:**
@@ -380,6 +356,8 @@ category on the x-axis for every single value of fertility
 * treating cluster as a quantitative variable means you get extra grid marks
 :::
 
+=======
+>>>>>>> b31a24ff9f98269de88e95d5e08d1ef28309b049
 
 
 ## Do not require zero on axis range 
