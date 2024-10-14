@@ -50,7 +50,7 @@ How do the modes differ?
 * When you are in exploration mode, you will look at lots of patterns and your brain filters out the noise
 * Production mode is like putting a cone on your dog. You are deliberately limiting the reader's field of vision such that they see the key messages from the plot *and avoid too many distractions*
 
-The next two lectures are almost entirely about **exploration**. Then, in lecture 6, we will talk more about making graphics for production.
+The next two lectures are almost entirely about **exploration**. Then, at the end of lecture 5, we will transition to thinking about graphics for production. Lecture 6 will similarly about graphics for production.
 
 Caveat: these modes make the most sense when thinking about *static* visualization. Later on in the course, when we talk about dashboards, this is closer to making interfaces to help readers who don't code explore the data. 
 
@@ -70,6 +70,20 @@ from plotnine.data import diamonds, mpg
 diamonds
 ```
 
+## `diamonds` data dictionary
+(Accessed by running `?diamonds` in R)
+A data frame with 53940 rows and 10 variables:
+
+* `price` - price in US dollars ($326–$18,823)
+* `carat`- weight of the diamond (0.2–5.01)
+* `cut` - quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+* `color` - diamond colour, from D (best) to J (worst)
+* `clarity` - a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
+* `x` -- length in mm (0–10.74)
+* `y` -- width in mm (0–58.9)
+* `z` -- depth in mm (0–31.8)
+* `depth` -- total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43–79)
+* `table` -- width of top of diamond relative to widest point (43–95)
 
 ##  `diamonds` 
 ```{python}
@@ -130,6 +144,8 @@ alt.Chart(movies_url).mark_circle().encode(
 )
 ```
 
+One question which came up (which is hard to tell from this scatter plot, even with bins) is how many observations are there in each bin
+
 ## scatter plot -- N movies per bin
 ```{python}
 alt.Chart(movies_url).mark_circle().encode(
@@ -157,6 +173,14 @@ hist_rt
 
 Discussion question: how would you describe the distribution of rotten tomatoes ratings?
 
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*solution: 
+main answer: close to uniform.
+two additional details are also notable
+1) the bottom bin out of 20 has very few movies 
+2) there's a gentle shift/trend upward so higher-rated movies are a bit more common than lower-rated movies*
+:::
 
 
 ## histogram of IMDB ratings
@@ -171,6 +195,10 @@ hist_imdb
 ## Side-by-side
 Discussion question -- compare the two ratings distributions. which is more informative?
 
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*solution: rotten tomatoes. IMDB is too compressed.*
+:::
 
 ```{python}
 hist_rt | hist_imdb
@@ -216,6 +244,14 @@ plot1 & plot2 & plot3
 
 
 Discussion q -- what message comes from each `binwidth` choice?
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*solution 
+the middle plot is by far the easiest to interpret. The top plot shows the bins in such a thin way that it is hard to see much of anything. 
+
+FYI, this deliberately intended to be a setup for the diamonds density plot coming up in the next subsection because there adding narrower bins is actually quite revealing*
+:::
 
 ## numeric variable: `transform_density()` 
 ```{python}
@@ -273,10 +309,25 @@ Discussion questions
 1. What lessons does this plot teach?
 2. What questions does it raise?
 
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*
+1. there's a ton of missing mass.
+2. Are diamonds being cut down to exact sizes? Are diamond weights being fraudulently inflated? Why are some diamonds cut and not others?*
+
+*ask class how many have been to the Art Institute and see this painting*
+:::
 
 ## Aside: "A Sunday on La Grande Jatte" by Seurat
 
 ![](pictures/seurat.jpg)
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*for those of you who have not seen the painting (and perhaps some of you who have seen it), you noticed that it's actually made up of millions of little dots. This is a style known as pointillism. Sort of like pixels before we had computer screens. It's a good example of how you can notice more detail and more interesting detail by looking closely at a painting or a plot.
+
+In addition, there's something else (flip back) that you notice by looking closely which is that none of the people in the painting are looking at each other. They are all in their own worlds, isolated from and not interacting with one another. Obviously this is not an art course, our main point is just that there's huge value to looking closely at the plots that you make*
+:::
 
 
 ## Aside: "A Sunday on La Grande Jatte" by Seurat
@@ -349,18 +400,10 @@ diamonds
 
 When is this useful? Income data, test scores, stock returns. Important when you are using procedures where the estimates are sensitive to outliers like computing a mean or running a regression
 
-
-
 ## how do I know which option to choose?
 
 * make an educated guess by looking at the data as many ways as possible
 * you often can ask your data provider... but they will quickly grow impatient so try to answer as many questions as possible yourself
-
-
-## Diamonds: what do we know about diamonds with outlier `y` values?
-* depths look plausible, perhaps a bit in the tails
-* carats are high but plausible
-* prices are high, this would be a red flag but for the fact that carats are high too
 
 ## Diamonds: what should we actually do?
 
