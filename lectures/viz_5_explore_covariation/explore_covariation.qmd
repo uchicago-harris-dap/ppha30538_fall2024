@@ -1,0 +1,344 @@
+---
+title: "Visualization (Exploring Co-variation)"
+author: "Peter Ganong and Maggie Shi"
+date: today
+date-format: long
+format: 
+    html:
+        echo: true
+        code: true
+        toc: true
+        output: true
+engine: jupyter
+---
+
+
+```{python}
+#| echo: false
+#| message: false
+#| warning: false
+import altair as alt
+from vega_datasets import data
+from palmerpenguins import load_penguins
+penguins = load_penguins()
+from plotnine import *
+from plotnine.data import diamonds, mpg
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+alt.data_transformers.disable_max_rows() # Needed because len(df) > 5000
+```
+
+## Table of contents
+1. Categorical variable and a continuous variable
+2. Two categorical variables
+3. Two continuous variables
+4. Graphics for production
+
+
+
+# Categorical variable and continuous variable
+<!-- source material (lecture 1, slides 33-36) -->
+
+<!-- source: Lecture 5, slides 45-65)-->
+
+
+
+```{python}
+from palmerpenguins import load_penguins
+penguins = load_penguins()
+display(penguins)
+```
+
+
+## numeric & categorical: box plot
+
+![](pictures/EDA-boxplot.png)
+
+## numeric & categorical: `mark_boxplot()` 
+```{python}
+alt.Chart(penguins).mark_boxplot().encode(
+    x=alt.X('species:N', title="Species"), 
+    y=alt.Y('body_mass_g:Q', title="Body Mass (g)"),
+).properties(
+    width=400,
+    height=300
+)
+```
+
+## numeric & categorical: `transform_density()` 
+```{python}
+alt.Chart(penguins).transform_density(
+    'body_mass_g',
+        groupby=['species'], 
+        as_=['body_mass_g', 'density']
+    ).mark_line().encode(
+        alt.X('body_mass_g:Q'),
+        alt.Y('density:Q', stack=None), 
+        alt.Color('species:N')
+    ).properties(width=400,height=300)
+```
+
+
+## numeric & categorical: `transform_density()` 
+
+Discussion q -- What if we required the x-axis range to include zero? Would that improve or reduce clarity? How come? 
+```{python}
+alt.Chart(penguins).transform_density(
+    'body_mass_g',
+        groupby=['species'],  
+        as_=['body_mass_g', 'density']
+    ).mark_line().encode(
+        alt.X('body_mass_g:Q', scale=alt.Scale(zero=True)),
+        alt.Y('density:Q', stack=None), 
+        alt.Color('species:N')
+    ).properties(width=400,height=300)
+```
+
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+When the x-axis range is from 0 to 6500, it will be harder to see the differences in weight across the 3 species and there will be a lot of wasted space in the left part of the graph. But then when the x-axis range is restricted to 2,500 to 6,500, as in the example below, it's easier to visualize that differences. So, in this case, including the 0 would likely not be the right choice for highlighting the difference in body mass across the 3 species.
+:::
+
+
+
+## numeric & categorical: `transform_density()` filled in
+
+`opacity=0.3` makes no difference in content; maybe a bit more elegant
+```{python}
+alt.Chart(penguins).transform_density(
+    'body_mass_g',
+        groupby=['species'],  # Group by species for different density curves
+        as_=['body_mass_g', 'density']
+    ).mark_area(opacity=0.3).encode(
+        alt.X('body_mass_g:Q'),
+        alt.Y('density:Q', stack=None), 
+        alt.Color('species:N')
+    ).properties(width=400,height=300)
+``` 
+
+
+
+
+# Two categorical variables
+
+## Question: How is cut related to color? 2 categorical vars
+```{python}
+#| warning: false
+diamonds_grouped = diamonds.groupby(['color','cut']).size().reset_index().rename(columns={0:'N'})
+diamonds_grouped
+```
+
+
+
+## Question: How is cut related to color? 2 categorical vars
+```{python}
+alt.Chart(diamonds_grouped).mark_circle().encode(
+    x = 'color:N',
+    y = 'cut:N',
+    size='N:Q')
+```
+
+## Question: How is cut related to color? 2 categorical vars
+```{python}
+alt.Chart(diamonds_grouped).mark_rect().encode(
+    x = 'color:N',
+    y = 'cut:N',
+    color='N:Q')
+```
+
+Discussion question: what diamond types are most common?
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*solution 
+Better cuts are more common. 
+The color G is most common*
+:::
+
+# Two continuous variables
+
+## Two continuous variables: roadmap
+
+* `movies` ratings from Rotten Tomatoes and IMDB 
+* `diamonds`: `carat` vs `price`
+
+## movies dataset
+```{python}
+movies_url = 'https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json'
+```
+```{python}
+#| eval: false
+movies = pd.read_json(movies_url)
+```
+
+```{python}
+#| echo: false
+movies = pd.read_json('data/movies.json')
+```
+
+## Covariation: a first binned scatter plot
+```{python}
+alt.Chart(movies_url).mark_circle().encode(
+    alt.X('Rotten_Tomatoes_Rating:Q', bin=alt.BinParams(maxbins=20)),
+    alt.Y('IMDB_Rating:Q', bin=alt.BinParams(maxbins=20)),
+)
+```
+Suffers from overplotting!
+
+
+## use `alt.Size('count()')` to address overplotting
+```{python}
+xy_size = alt.Chart(movies_url).mark_circle().encode(
+    alt.X('Rotten_Tomatoes_Rating:Q', bin=alt.BinParams(maxbins=20)),
+    alt.Y('IMDB_Rating:Q', bin=alt.BinParams(maxbins=20)),
+    alt.Size('count()')
+)
+xy_size
+```
+
+## use `alt.Color('count()')` to address overplotting
+```{python}
+xy_color = alt.Chart(movies_url).mark_bar().encode(
+    alt.X('Rotten_Tomatoes_Rating:Q', bin=alt.BinParams(maxbins=20)),
+    alt.Y('IMDB_Rating:Q', bin=alt.BinParams(maxbins=20)),
+    alt.Color('count()')
+) 
+xy_color
+```
+
+
+## Discussion question
+```{python}
+xy_size | xy_color
+```
+
+Compare the *size* and *color*-based 2D histograms above. Which encoding do you think should be preferred? Why?
+
+::: {.notes .content-visible when-profile="speaker"}
+**NOTES:**
+*solution
+range of reasonable answers...
+it is more easy (at least for me) to compare magnitudes between two cells using the color plot
+it is more easy to quickly see where the most common ratings are by looking at the size plot (this is because when there is only one movie the dot is tiny in the size plot whereas the whole square is filled in in the color plot)
+you CAN get all the answers from either plot with enough time *
+:::
+
+
+## Question: How is carat related to price? 2 continuous vars
+```{python}
+alt.Chart(diamonds).mark_point().encode(
+    x = 'carat:Q',
+    y = 'price:Q'
+)
+```
+
+## Question: How is carat related to price? 2 continuous vars
+```{python}
+alt.Chart(diamonds).mark_rect().encode(
+    alt.X('carat:Q', bin=alt.Bin(maxbins=70)), 
+    alt.Y('price:Q', bin=alt.Bin(maxbins=70)),
+    alt.Color('count()', scale=alt.Scale(scheme='blues')))
+```
+
+## Question: How is carat related to price? 2 continuous vars
+```{python}
+alt.Chart(diamonds).mark_boxplot().encode(
+    alt.X('carat:Q', bin=alt.Bin(maxbins=10)), 
+    alt.Y('price:Q'))
+```
+
+## Question: How is carat related to price? 2 continuous vars
+
+```{python}
+df = diamonds
+df['carat_bin'] = pd.qcut(df['carat'], q=20, labels=(np.arange(1, 21, 1)))
+
+df = df.groupby('carat_bin').agg(
+    carat = ('carat', 'mean'),
+    price = ('price', 'mean')).reset_index()
+
+alt.Chart(df).mark_point().encode(
+   x = 'carat:Q',
+   y = 'price:Q'
+)
+```
+
+* What it does:
+    1. Computes bins using quantiles of x
+    1. Computes means of y within each bin
+    
+* Called `binscatter` in stata and `binsreg` in R. Doesn't exist yet for Altair, but easy to code up yourself
+
+## Discussion question -- "How is carat related to price?" 
+
+Review the `mark_rect()`, `mark_boxplot()`, and `binscatter` plots
+
+* headline? (aka the main message)
+* sub-messages? (other information one can learn beyond the main message)
+
+::: {.notes .content-visible when-profile="speaker"}
+**at the whiteboard, make three columns. write down student answers for headline and sub-message**
+
+*solution 
+tile plot
+
+1. emphasizes the y variable distribution. distribution fans out as carats get higher. 
+2. makes it easy to see a fact we already knew, which is that most diamonds in this dataset have a small number of carats. 
+3. finally, if you squint you can even see the bunching at round carat amounts
+
+boxplot
+
+1. easier to see the range (e.g. p25 vs p75) here than in the tile or binscatter.
+2. but generally visually unappealing
+3. in particular, there are too many datapoints, would need to adjust the setting which controls how many dots are shown. can adjust this by setting extent = 2.5
+
+binscatter 
+
+1. emphasizes the average relationship. 
+2. Looks close to linear, maybe a little bit quadratic or exponential. 
+3. you also can back out that most diamonds have small carats, but it doesn't jump out as immediately.*
+
+:::
+
+## Summary: Exploring covariation
+
+
+
+| Scenario | Functions |
+| ------- | --------- |
+| Categorical and continuous variable | `mark_boxplot()` |
+| | `transform_density()` |
+| |     |
+| Two categorical variables | `size` |
+| | `color` |
+| |       | 
+| Two continuous variables | `alt.Size('count()')` |
+| |  `alt.Color('count()')` |
+| | `mark_boxplot()` |
+| | binscatter |
+
+
+<!--(lecture 1 slide 47 + lecture 6, slide 26-28 w/solution)-->
+
+## Do-pair-share
+
+We are now going to transition from making plots to teach **ourselves** to making plots for an audience.
+
+Are penguins getting heavier (`body_mass_g`) over time? 
+
+Bonus: what is the headline of your plot and what are the sub-messages?
+
+
+## Meta comment: iterating on plot design
+
+"Make dozens of plots" -- Quoctrung Bui, former 30535 guest lecturer and former Harris data viz instructor
+
+What does he mean?
+
+* The first plot you make will never be the one you should show
+* As a rule of thumb, you should try out at least three different plotting concepts (`mark`s)
+* Within each concept, you will need to try out several different encodings
+
