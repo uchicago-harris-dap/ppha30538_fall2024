@@ -66,6 +66,8 @@ alt.Chart(penguins).mark_boxplot().encode(
     height=300
 )
 ```
+Discussion question: what do you notice from this graph? 
+
 
 ## numeric & categorical: `transform_density()` 
 ```{python}
@@ -97,10 +99,6 @@ alt.Chart(penguins).transform_density(
 ```
 
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-When the x-axis range is from 0 to 6500, it will be harder to see the differences in weight across the 3 species and there will be a lot of wasted space in the left part of the graph. But then when the x-axis range is restricted to 2,500 to 6,500, as in the example below, it's easier to visualize that differences. So, in this case, including the 0 would likely not be the right choice for highlighting the difference in body mass across the 3 species.
-:::
 
 
 
@@ -151,12 +149,7 @@ alt.Chart(diamonds_grouped).mark_rect().encode(
 
 Discussion question: what diamond types are most common?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*solution 
-Better cuts are more common. 
-The color G is most common*
-:::
+
 
 # Two continuous variables
 
@@ -217,14 +210,6 @@ xy_size | xy_color
 
 Compare the *size* and *color*-based 2D histograms above. Which encoding do you think should be preferred? Why?
 
-::: {.notes .content-visible when-profile="speaker"}
-**NOTES:**
-*solution
-range of reasonable answers...
-it is more easy (at least for me) to compare magnitudes between two cells using the color plot
-it is more easy to quickly see where the most common ratings are by looking at the size plot (this is because when there is only one movie the dot is tiny in the size plot whereas the whole square is filled in in the color plot)
-you CAN get all the answers from either plot with enough time *
-:::
 
 
 ## Question: How is carat related to price? 2 continuous vars
@@ -279,29 +264,6 @@ Review the `mark_rect()`, `mark_boxplot()`, and `binscatter` plots
 * headline? (aka the main message)
 * sub-messages? (other information one can learn beyond the main message)
 
-::: {.notes .content-visible when-profile="speaker"}
-**at the whiteboard, make three columns. write down student answers for headline and sub-message**
-
-*solution 
-tile plot
-
-1. emphasizes the y variable distribution. distribution fans out as carats get higher. 
-2. makes it easy to see a fact we already knew, which is that most diamonds in this dataset have a small number of carats. 
-3. finally, if you squint you can even see the bunching at round carat amounts
-
-boxplot
-
-1. easier to see the range (e.g. p25 vs p75) here than in the tile or binscatter.
-2. but generally visually unappealing
-3. in particular, there are too many datapoints, would need to adjust the setting which controls how many dots are shown. can adjust this by setting extent = 2.5
-
-binscatter 
-
-1. emphasizes the average relationship. 
-2. Looks close to linear, maybe a little bit quadratic or exponential. 
-3. you also can back out that most diamonds have small carats, but it doesn't jump out as immediately.*
-
-:::
 
 ## Summary: Exploring covariation
 
@@ -331,6 +293,40 @@ Are penguins getting heavier (`body_mass_g`) over time?
 
 Bonus: what is the headline of your plot and what are the sub-messages?
 
+<!-- ZZZ delete before posting -->
+## Do-pair-share solution I
+
+```{python}
+alt.Chart(penguins).mark_bar().encode(
+  alt.Y('average(body_mass_g):Q',  scale=alt.Scale(zero=False)),
+  alt.X('year:N'),
+  alt.Color('year:N')
+)
+```
+
+This does answers the question, albeit in the most simple/boring way possible.
+
+## Do-pair-share solution II
+```{python}
+alt.Chart(penguins).transform_density(
+   'body_mass_g',
+    groupby=['year'],
+    as_= ['body_mass_g', 'density']
+).mark_line().encode(
+    x = 'body_mass_g:Q',
+    y = 'density:Q',
+    color='year:N'
+)
+```
+
+* Headline: 2007 is lightest, 2008 is heaviest
+
+* Sub-messages
+
+    1. Similar shares of penguins above 5,000 grams in 2008 and 2009
+    1. Average weight is higher in 2008 because 2009 has more lightweight penguins
+
+<!-- ZZZ end deletion before posting -->
 
 ## Meta comment: iterating on plot design
 
