@@ -25,6 +25,8 @@ format:
 
 ## MUD other
 * Will we require that you transform your dataset in `altair` or `pandas`? _Answer: no, use what works best for you_
+* Can `altair` functions (e.g., `transform_filter()`) be used outside of `altair`? _Answer: no, altair only transforms within the plot it's making_
+* Final project: why just one member present? _Answer: presentation slots are 8 minutes and we want to reduce transition time. _
 * Challenges debugging -- we will do a mini-lesson on this next week
 * Good questions we will have answers to by Monday (but don't have yet, sorry!)
     * What is a concrete example of a time/setting when winsorizing would be the best path for handling outliers
