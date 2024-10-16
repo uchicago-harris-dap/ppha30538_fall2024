@@ -1,3 +1,6 @@
+# NOTE: THIS REPO IS NOW ARCHIVED AND WILL NOT BE UPDATED AFTER 10/16. PLEASE CLONE THE NEW STUDENT REPO: https://github.com/uchicago-harris-dap/student30538
+
+
 # PPHA 30538: Data and Programming in Python
 ## Fall 2024
 ## University of Chicago Harris School of Public Policy
