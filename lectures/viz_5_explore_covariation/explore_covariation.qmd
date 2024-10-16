@@ -293,41 +293,6 @@ Are penguins getting heavier (`body_mass_g`) over time?
 
 Bonus: what is the headline of your plot and what are the sub-messages?
 
-<!-- ZZZ delete before posting -->
-## Do-pair-share solution I
-
-```{python}
-alt.Chart(penguins).mark_bar().encode(
-  alt.Y('average(body_mass_g):Q',  scale=alt.Scale(zero=False)),
-  alt.X('year:N'),
-  alt.Color('year:N')
-)
-```
-
-This does answers the question, albeit in the most simple/boring way possible.
-
-## Do-pair-share solution II
-```{python}
-alt.Chart(penguins).transform_density(
-   'body_mass_g',
-    groupby=['year'],
-    as_= ['body_mass_g', 'density']
-).mark_line().encode(
-    x = 'body_mass_g:Q',
-    y = 'density:Q',
-    color='year:N'
-)
-```
-
-* Headline: 2007 is lightest, 2008 is heaviest
-
-* Sub-messages
-
-    1. Similar shares of penguins above 5,000 grams in 2008 and 2009
-    1. Average weight is higher in 2008 because 2009 has more lightweight penguins
-
-<!-- ZZZ end deletion before posting -->
-
 ## Meta comment: iterating on plot design
 
 "Make dozens of plots" -- Quoctrung Bui, former 30535 guest lecturer and former Harris data viz instructor

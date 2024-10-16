@@ -1,0 +1,36 @@
+---
+title: "Kickoff "
+author: "Peter Ganong and Maggie Shi"
+date: October 16, 2024
+date-format: long
+format: 
+    beamer:
+        aspectratio: 169
+        theme: default
+        header-includes: \renewcommand{\tightlist}{\setlength{\itemsep}{3ex}\setlength{\parskip}{0pt}}
+            \setbeamertemplate{footline}[frame number]
+            \usepackage{fvextra}
+            \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+            \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+---
+
+
+## MUD concerns about workload
+* We removed a section from PS2. Revised version is in student repo.
+* We are adding office hours this week
+    * Akbar over zoom on Friday
+    * Joaquin in person Thursday
+    * Please post in office hours questions thread on Ed before you come.
+* Looking forward, PS3 is shorter than PS1 or PS2 as best as we can tell
+
+## MUD other
+* Will we require that you transform your dataset in `altair` or `pandas`? _Answer: no, use what works best for you_
+* Challenges debugging -- we will do a mini-lesson on this next week
+* Good questions we will have answers to by Monday (but don't have yet, sorry!)
+    * What is a concrete example of a time/setting when winsorizing would be the best path for handling outliers
+    * Adding better axis labels (motivated by the `diamonds` histogram for `carat`)
+
+## Final Project Optional Meetings
+* Preferred but not required: send questions in advance via private Ed post tagged "Final project Ganong"
+* Ganong's sections: Next week *during* lab in room 0049. Will have a signup at the start of lab.
+* Shi's sections: office hours.
