@@ -37,6 +37,7 @@ Most of our visualization lectures are based on the University of Washington tex
 * `diamonds` is from "Exploratory Data Analysis"
 * `movies` is from the UW textbook 
 * `penguins` is from "Data Visualization" 
+* `mpg`
 
 ## What is exploratory data analysis?
 
@@ -50,7 +51,7 @@ How do the modes differ?
 * When you are in exploration mode, you will look at lots of patterns and your brain filters out the noise
 * Production mode is like putting a cone on your dog. You are deliberately limiting the reader's field of vision such that they see the key messages from the plot *and avoid too many distractions*
 
-The next two lectures are almost entirely about **exploration**. Then, in lecture 6, we will talk more about making graphics for production.
+The next two lectures are almost entirely about **exploration**. Then, at the end of lecture 5, we will transition to thinking about graphics for production. Lecture 6 will similarly about graphics for production.
 
 Caveat: these modes make the most sense when thinking about *static* visualization. Later on in the course, when we talk about dashboards, this is closer to making interfaces to help readers who don't code explore the data. 
 
@@ -65,11 +66,24 @@ Caveat: these modes make the most sense when thinking about *static* visualizati
 
 ## introduce dataset `diamonds`
 ```{python}
-from plotnine import *
 from plotnine.data import diamonds, mpg
 diamonds
 ```
 
+## `diamonds` data dictionary
+(Accessed by running `?diamonds` in R)
+A data frame with 53940 rows and 10 variables:
+
+* `price` - price in US dollars ($326–$18,823)
+* `carat`- weight of the diamond (0.2–5.01)
+* `cut` - quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+* `color` - diamond colour, from D (best) to J (worst)
+* `clarity` - a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
+* `x` -- length in mm (0–10.74)
+* `y` -- width in mm (0–58.9)
+* `z` -- depth in mm (0–31.8)
+* `depth` -- total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43–79)
+* `table` -- width of top of diamond relative to widest point (43–95)
 
 ##  `diamonds` 
 ```{python}
@@ -130,6 +144,8 @@ alt.Chart(movies_url).mark_circle().encode(
 )
 ```
 
+One question which came up (which is hard to tell from this scatter plot, even with bins) is how many observations are there in each bin
+
 ## scatter plot -- N movies per bin
 ```{python}
 alt.Chart(movies_url).mark_circle().encode(
@@ -169,7 +185,8 @@ hist_imdb
 ```
 
 ## Side-by-side
-Discussion question -- compare the two ratings distributions. which is more informative?
+Discussion question -- compare the two ratings distributions. If _your goal is to differentiate between good and bad movies_, which is more informative?
+
 
 
 ```{python}
@@ -194,7 +211,7 @@ alt.Chart(penguins).mark_bar().encode(
 
 ## histogram `step` parameter
 
-20 vs 200 vs 200
+20 vs 200 vs 2000
 
 ```{python}
 #| echo: false
@@ -215,7 +232,8 @@ plot1 & plot2 & plot3
 ```
 
 
-Discussion q -- what message comes from each `binwidth` choice?
+Discussion q -- what message comes from each `binwidth` choice? Which do you prefer?
+
 
 ## numeric variable: `transform_density()` 
 ```{python}
@@ -279,6 +297,7 @@ Discussion questions
 ![](pictures/seurat.jpg)
 
 
+
 ## Aside: "A Sunday on La Grande Jatte" by Seurat
 ![](pictures/seurat_zoomed.jpg)
 
@@ -286,13 +305,12 @@ Discussion questions
 
 # Unusual numeric values (`diamonds`)
 <!-- source: Lecture 5, slides 26-44 -->
-
+ 
 ## roadmap
 
-* case study 1: `y` dimension in diamonds
+* case study: `y` dimension in diamonds
     * explore some unusual  values
     * three options for handling unusual values
-* case study 2 (next section): cars' gas mileage
 
 ## Diamonds: examine unusual values
 
@@ -324,12 +342,16 @@ diamonds_clean
 ## Diamonds: option 2 for unusual values: missing
 ```{python}
 diamonds['y'] = np.where((diamonds['y'] < 3) | (diamonds['y'] > 20), np.nan, diamonds['y'])
-diamonds_clean = diamonds.dropna()
-diamonds_clean
+rows_with_na_y = diamonds[diamonds['y'].isna()]
+print(rows_with_na_y)
 ```
 
 
 ## Diamonds: option 3 for unusual values: winsorize
+Winsorizing re-codes outliers, keeping them in the data. To winsorize at 1 percent:
+* Replace anything less than the 1st percentile with the 1st percentile
+* Replace anything more than the 99th percentile with the 99th percentile
+
 ```{python}
 pctile01 = diamonds['y'].quantile(0.01)
 pctile99 = diamonds['y'].quantile(0.99)
@@ -349,21 +371,16 @@ diamonds
 
 When is this useful? Income data, test scores, stock returns. Important when you are using procedures where the estimates are sensitive to outliers like computing a mean or running a regression
 
-
-
 ## how do I know which option to choose?
 
 * make an educated guess by looking at the data as many ways as possible
 * you often can ask your data provider... but they will quickly grow impatient so try to answer as many questions as possible yourself
 
-
-## Diamonds: what do we know about diamonds with outlier `y` values?
-* depths look plausible, perhaps a bit in the tails
-* carats are high but plausible
-* prices are high, this would be a red flag but for the fact that carats are high too
+## Diamonds: what would you do?
+* What would you do where `x`, `y`, and `z`?
+* What would you do where `y > 20`? 
 
 ## Diamonds: what should we actually do?
-
 My take (there is often not a ``right'' answer or you won't know the answer without talking to a data provider)
 
 * Rows where `x`, `y`, and `z` are all zero: set to `NA`
@@ -380,85 +397,3 @@ How do I decide which problem I have? Examine unusual values in context of other
 
 How do I decide whether to set to NA or winsorize? Ideally, ask your data provider what's going on with these values. 
 
-
-
-
-# Unusual values case study
-
-## Introducing the `mpg` dataset
-
-```{python}
-mpg
-```
-## Q: Why do some cars have better than typical mileage?
-
-```{python}
-potential_outliers = mpg.loc[(mpg["hwy"] > 40) | ((mpg["hwy"] > 20) & (mpg["displ"] > 5))]
-potential_outliers
-```
-
-Note: calling `geom_point()` more than once!
-
-## Q: Why do some cars have better than typical mileage?
-
-```{python}
-base = alt.Chart(mpg).mark_point().encode(
-         alt.X('displ:Q', title = "Engine size (displ)"),
-         alt.Y('hwy:Q', title = "Gas mileage")
-    ).properties(
-        width=600, 
-        height=400 )
-
-outliers = alt.Chart(potential_outliers).mark_point(
-    color='red',
-    size=100,
-    shape='circle'
-    ).encode(
-        x='displ:Q',
-        y='hwy:Q'
-    ).properties(
-        width=600, 
-        height=400)
-plot = base + outliers
-plot
-```
-
-
-## Q: Why do some cars have better than typical mileage?
-
-```{python}
-labels = alt.Chart(potential_outliers).mark_text(
-    align='left',
-    dx=10,  # Adjust horizontal distance of text from the point
-    dy=-5   # Adjust vertical distance of text from the point
-).encode(
-    alt.X('displ:Q', title = "Engine size (displ)"),
-    alt.Y('hwy:Q', title = "Gas mileage"),
-    text='model:N'  # Display car_model as the label
-).properties(
-    width=600, 
-    height=400)
-
-plot = base + outliers + labels
-plot
-```
-
-
-## Q: How are there big engines and good mileage? `color`
-```{python}
-alt.Chart(mpg).mark_point(size=100).encode(
-    x='displ:Q',  # Quantitative variable for displacement
-    y='hwy:Q',    # Quantitative variable for highway mpg
-    color='class:N',  # Categorical variable for class
-    tooltip=['displ', 'hwy', 'class']  # Optional: tooltip to display values on hover
-)
-```
-
-## gas mileage summary
-
-* Question: Why do some cars have better than typical mileage? *(What's going on with these outliers?)*
-    * Tools: 
-        * identify outliers 
-        * `color = class`  
-    * Answer: 2-seaters & subcompact 
-  

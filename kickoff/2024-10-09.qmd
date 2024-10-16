@@ -24,7 +24,7 @@ format:
 
 * Relatedly: lab quizzes will now close after the first 10 minutes of lab. 
 
-## Sumner "Why are we switching to VSCode?"
+## "Why are we switching to VSCode?"
 
 Joaquin (TA): "It's much much better"
 
@@ -65,6 +65,8 @@ format: pdf
 Five instructors tested this solution on a variety of machines (thank you!!!). 
 
 * You also need to have a `tex` compiler installed to write to PDF. Most people already do, but some might not. Post in Ed if you are finding issues related to this
+\vspace{2ex}
+    * Shoutout: Ralph Valiere posted a useful tip on Ed for PC users!
 * Only run `alt.renderers.enable("png")` if you want to make `.pdf`. If you want to make `.html`, no need to include this (and it might lead to errors)
 * One also found that they needed to run `pip install ipykernel`
 
@@ -75,7 +77,7 @@ As usual, we don't know what will work on your computer, so please report bugs a
 * minilesson recordings on homepage. Will continue to record but will not send separate announcements
 * Upcoming career panels on Nov 8 and Nov 15. RSVP link on homepage.
 
-## Debrief 
+## PS1 Debrief 
 
 *  Not many "coding errors" or technical issues. The main issue was students not reading the questions. 
 \vspace{2ex}
@@ -89,10 +91,11 @@ As usual, we don't know what will work on your computer, so please report bugs a
 *The rows on the dataset are ordered or sorted by a certain column by default. Which column? Then, subset the dataset to the first 500 rows and write a function that tests if the column is ordered.*
 
 - Most students only checked the index column ("Unnamed: 0"), but didn't check other column like "issue_date", which is actually ordered
+\vspace{2ex}
     - This is because no `head()` or `print()` function used to visually inspect the columns
 
 
-## Debrief questions 3.4-3.7
+## Debrief questions 3.4
 
 *3.4: Make a plot for the number of tickets issued by month and day by adapting the [Annual Weather Heatmap](https://altair-viz.github.io/gallery/annual_weather_heatmap.html) example online. What visual encoding channel or channels does this use?*
 
@@ -107,3 +110,10 @@ This is outside the code chunk
 #| echo: true
 alt.Chart(...)
 ```
+
+## Debrief questions 3.7
+
+*3.7: Suppose the lesson you want a read to take away is that the enforcement of violations is not evenly distributed over time? Which plot is best and why?*
+
+- Some students printed long responses as strings/comments, making it hard to view the text
+- Double-check your work after you compile
